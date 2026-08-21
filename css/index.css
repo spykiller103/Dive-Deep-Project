@@ -10,6 +10,7 @@ body
     min-height: 800px;
     margin: 0;
     max-width: 100%;
+    background-color: #F8FAFC;
 }
 
 #banner
@@ -29,9 +30,13 @@ body
 .button {
     font-weight: bold;
     font-size: 35px;
-    color: white;
-    background-color: black;
+    color: #FEF3C7;
+    background-color: #1E3A8A;
     border-radius: 10px;
     padding: 10px 100px;
     cursor: pointer;
+}
+.button:hover
+{
+    background-color: #2951BC;
 }
