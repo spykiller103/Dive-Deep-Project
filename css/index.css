@@ -1,0 +1,37 @@
+*
+{
+    font-family: 'arial';
+}
+
+body
+{
+    display: grid;
+    place-items: center;
+    min-height: 800px;
+    margin: 0;
+    max-width: 100%;
+}
+
+#banner
+{
+    width: 1230px;
+    height: 430px;
+    display: flex;
+    margin: auto;
+}
+
+.buttons {
+    width: 1230px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    font-weight: bold;
+    font-size: 35px;
+    color: white;
+    background-color: black;
+    border-radius: 10px;
+    padding: 10px 100px;
+    cursor: pointer;
+}
