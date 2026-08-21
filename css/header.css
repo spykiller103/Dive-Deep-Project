@@ -12,20 +12,20 @@ label{
     float:right;
     padding: 20px;
     font-size: 15px;
-    bordeR:none;
+    border:none;
+    width: 250px;
+
 
 
 }
 
 ul {
-  list-style-type: none;
-  margin: 0;
+  margin: -12px;
   padding: 0;
-  overflow: hidden;
   background-color:darkblue;
-  width: 100%;
-  height: 100%;
   display: flex;
+  border: 1px solid #e7e7e7;
+
 }
 
 ul li {
