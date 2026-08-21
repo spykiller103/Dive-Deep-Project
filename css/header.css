@@ -7,17 +7,25 @@ label{
     color:white
 }
 
-.SearchBar
+.SearchBar input[type="text"]
 {
     float:right;
+    padding: 20px;
+    font-size: 15px;
+    border:none;
+    width: 250px;
+
+
+
 }
 
 ul {
-  list-style-type: none;
-  margin: 0;
+  margin: -12px;
   padding: 0;
-  overflow: hidden;
-  background-color: #333333;
+  background-color:darkblue;
+  display: flex;
+  border: 1px solid #e7e7e7;
+
 }
 
 ul li {
@@ -30,6 +38,8 @@ ul li a {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  font-size: 25px;
+  font-family: Arial;
 }
 
 ul li a:hover {
