@@ -39,7 +39,12 @@ body
     background-color: #1E3A8A; 
     border-radius: 10px; 
     padding: 10px 20px; 
-    cursor: pointer; 
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid #6B7280;
+    box-sizing: border-box;
 } 
 
 .button:hover 
