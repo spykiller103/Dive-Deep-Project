@@ -1,0 +1,27 @@
+* {
+    font-family: Arial;
+}
+
+#contact {
+    font-weight: bold;
+    margin-bottom: 30px;
+
+}
+
+#contacttext {
+    font-style: italic;
+    color: gray;
+    margin-bottom: 20px;
+}
+
+#contactformula {
+    font-weight: bold;
+}
+
+#emailContainer {
+    padding-top: 60px;
+}
+
+.emailField{
+    padding-bottom: 20px;
+}
