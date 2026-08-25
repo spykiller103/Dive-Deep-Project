@@ -1,29 +1,43 @@
-.Logo{
-    width: 150px;
-    top: 150px;
+* {
+  font-family: Arial;
 }
 
-label{
-    color:white
+.Logo {
+  width: 150px;
+  top: 150px;
 }
 
-.SearchBar input[type="text"]
-{
-    float:right;
-    padding: 20px;
-    font-size: 15px;
-    border:none;
-    width: 250px;
-
-
-
+label {
+  color: white
 }
+
+.SearchBar input[type="text"] {
+  float: right;
+  padding: 20px;
+  font-size: 15px;
+  border: none;
+  width: 250px;
+}
+.Cart{
+margin-left: auto;
+font-size: 25px;
+}
+
+
+.Login {
+  color: white;
+  font-size: 23px;
+}
+
+
+
+
 
 ul {
-    list-style-type: none;
-  margin: -12px;
+  list-style-type: none;
+  margin: -8px;
   padding: 0;
-  background-color:darkblue;
+  background-color: darkblue;
   display: flex;
   border: 1px solid #e7e7e7;
 
