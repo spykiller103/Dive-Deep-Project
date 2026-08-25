@@ -25,7 +25,6 @@
   object-fit: contain;
 }
 
-/* Clearfix (clear floats) */
 .row::after {
   content: "";
   clear: both;
