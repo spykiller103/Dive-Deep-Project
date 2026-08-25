@@ -1,0 +1,35 @@
+*{
+    font-family: arial;
+}
+
+.column{
+    float: left;
+    width: 32%;
+    padding: 5px;
+    text-align: center;
+}
+
+.row::after{
+    content: "";
+    clear: both;
+    display: table;
+}
+
+#description{
+    width: 100%;
+    font-weight: bold;
+}
+
+.buttons{
+    width: 200px;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.selector{
+    width: 200px;
+    font-size: 20px;
+    border-radius: 5px;
+    text-align: center;
+}

@@ -1,0 +1,32 @@
+* {
+  font-family: Arial;
+}
+
+* {
+  box-sizing: border-box;
+}
+.buttons{
+    width: 200px;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.column{
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+.column img {
+  display: block;
+  margin-top: 125px;
+  width: 80%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
