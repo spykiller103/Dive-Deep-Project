@@ -1,32 +1,41 @@
-.Logo{
-    width: 150px;
-    top: 150px;
+.Logo {
+  width: 150px;
+  top: 150px;
 }
 
-label{
-    color:white
+label {
+  color: white
 }
 
-.SearchBar input[type="text"]
-{
-    float:right;
-    padding: 20px;
-    font-size: 15px;
-    border:none;
-    width: 250px;
+.SearchBar input[type="text"] {
+  float: right;
+  padding: 20px;
+  font-size: 15px;
+  border: none;
+  width: 250px;
+}
 
-.Cart{
-    float:right;
-    width: 100%;
-  }
+.image-container {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: 5px;
+}
 
+.image-container img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
 ul {
-    list-style-type: none;
-  margin: -12px;
+  list-style-type: none;
+  margin: -8px;
   padding: 0;
-  background-color:darkblue;
+  background-color: darkblue;
   display: flex;
   border: 1px solid #e7e7e7;
 
