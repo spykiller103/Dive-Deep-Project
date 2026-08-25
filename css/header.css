@@ -1,3 +1,7 @@
+* {
+  font-family: Arial;
+}
+
 .Logo {
   width: 150px;
   top: 150px;
@@ -18,6 +22,15 @@ label {
 margin-left: auto;
 font-size: 25px;
 }
+
+
+.Login {
+  color: white;
+  font-size: 23px;
+}
+
+
+
 
 
 ul {
