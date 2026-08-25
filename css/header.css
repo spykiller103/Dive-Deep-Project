@@ -15,7 +15,10 @@ label{
     border:none;
     width: 250px;
 
-
+.Cart{
+    float:right;
+    width: 100%;
+  }
 
 }
 
