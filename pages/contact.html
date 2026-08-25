@@ -12,30 +12,45 @@
 </head>
 
 <body>
-    <h1 id="contact">Kontakt</h1>
-    <p id="contacttext">Kontakt os via denne kontaktformular</p>
 
-    <h2 id="contactformula">Kort kontaktformular</h2>
+    <div id="contactContainer">
 
-    <div id="emailContainer">
+        <div id="contactForm">
 
-        <div class="emailField">
-            <label for="emialInput">Email</label>
-            <input type="email" class="form-control" id="emialInput" placeholder="name@example.com">
+            <h1 id="contact">Kontakt</h1>
+            <p id="contacttext">Kontakt os via denne kontaktformular</p>
+
+            <h2 id="contactformula">Kort kontaktformular</h2>
+
+            <div>
+                <div class="formularField">
+                    <label for="nameInput">Navn</label>
+                    <input type="text" class="form-control" id="nameInput">
+                </div>
+
+                <div class="formularField">
+                    <label for="telephoneInput">Telefon</label>
+                    <input type="tel" class="form-control" id="telephoneInput">
+                </div>
+
+                <div class="formularField">
+                    <label for="emialInput">Email</label>
+                    <input type="email" class="form-control" id="emialInput" placeholder="name@example.com">
+                </div>
+            </div>
+
+            <div id="messageField" class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Besked</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+
+            <button type="button" class="btn btn-primary">Kontakt os</button>
+
         </div>
 
-        <div class="emailField">
-            <label for="confirmEmail">Confirm Email</label>
-            <input type="email" class="form-control" id="confirmEmail">
-        </div>
+        <img id="picture" src="/images/kontakUs.jpg">
 
     </div>
-    <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Besked</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
-
-    <button type="button" class="btn btn-primary">Kontakts os</button>
 
 </body>
 
