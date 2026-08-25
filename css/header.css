@@ -14,22 +14,11 @@ label {
   border: none;
   width: 250px;
 }
-
-.image-container {
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: auto;
-  margin-right: 5px;
+.Cart{
+margin-left: auto;
+font-size: 25px;
 }
 
-.image-container img {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-}
 
 ul {
   list-style-type: none;
