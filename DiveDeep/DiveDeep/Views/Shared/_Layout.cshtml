@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DiveDeep.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <nav class="navbar bg-primary" data-bs-theme="dark">
         <div class="container-fluid">
             <div class="d-flex align-items-center">
@@ -24,13 +24,13 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container flex-grow-1">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <div class="container-fluid p-0" style="background:rgb(17, 21, 29);">
+    <div class="container-fluid p-0 mt-auto" style="background:rgb(17, 21, 29);">
         <footer class="row row-cols-1 row-cols-md-4 justify-content-evenly text-center py-5 m-0 border-top">
             
 
