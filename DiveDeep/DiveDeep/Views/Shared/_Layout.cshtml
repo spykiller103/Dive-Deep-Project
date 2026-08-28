@@ -1,62 +1,77 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"] - DiveDeep</title>
-	<script type="importmap"></script>
-	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-	<link rel="stylesheet" href="~/DiveDeep.styles.css" asp-append-version="true" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DiveDeep</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DiveDeep.styles.css" asp-append-version="true" />
 </head>
+
 <body>
-	<nav class="navbar" data-bs-theme="dark">
-		<div class="container-fluid">
-			<div class="d-flex align-items-center">
-				<a href="/" class="navbar-brand">
-					<img src="/Content/Images/DiveDeepLogo.png" class="logo" />
-				</a>
-
-				<form class="d-flex" role="search">
-					<input class="form-control ms-2" type="search" placeholder="Search" aria-label="Search" />
-				</form>
-				<div class="navbarHeader navbar navbar-expand-lg">
-					<div class="navbarHeader container-fluid">
-						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="borderBoxItems">
-							<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-								<div class="navbarHeader navbar-nav">
-									<a class="nav-link active" aria-current="page" href="#">Pakker</a>
-									<a class="nav-link" href="#">Udstyr</a>
-									<a class="nav-link" href="#">Om os</a>
-									<a class="nav-link" href="#">Kontakt</a>
-								</div>
-							</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</nav>
+    <nav class="navbar" data-bs-theme="dark">
+        <div class="container-fluid justify-content-center">
 
 
+            <div class="d-flex align-items-center justify-content-center flex-wrap gap-3">
+                <!-- Logo -->
+                <a href="/" class="navbar-brand m-0">
+                    <img src="/Content/Images/DiveDeepLogo.png" class="logo" alt="DiveDeep Logo" />
+                </a>
 
-		<div class="container">
-			<main role="main" class="pb-3">
-				@RenderBody()
-			</main>
-		</div>
+                <!-- SearchBar -->
+                <form class="d-flex" role="search">
+                    <input class="searchBar form-control" type="search" placeholder="Søg udstyr og pakker ..." aria-label="Search" />
+                </form>
 
-		<footer class="border-top footer text-muted">
-			<div class="container">
-				&copy; 2026 - DiveDeep - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-			</div>
-		</footer>
-		<script src="~/lib/jquery/dist/jquery.min.js"></script>
-		<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-		<script src="~/js/site.js" asp-append-version="true"></script>
-		@await RenderSectionAsync("Scripts", required: false)
-	</body>
+                <!-- MenuBox 1 -->
+                <div class="borderBoxItems">
+                    <div class="navbarHeader navbar-nav d-flex flex-row gap-3">
+                        <a class="nav-link active" aria-current="page" href="#">Pakker</a>
+                        <a class="nav-link" href="#">Udstyr</a>
+                        <a class="nav-link" href="#">Om os</a>
+                        <a class="nav-link" href="#">Kontakt</a>
+                    </div>
+                </div>
+
+                <!-- Login -->
+                <div class="borderBoxItems login">
+                    <div class="navbarHeader navbar-nav">
+                        <a class="nav-link" href="#">Log ind</a>
+                    </div>
+                </div>
+
+                <!-- ShoppingCart -->
+                <div class="borderBoxItems cartBox">
+                    <div class="navbarHeader navbar-nav">
+                        <a href="/" class="navbar-brand m-0 p-0 d-flex align-items-center">
+                            <img src="/Content/Images/ShoppingCart.png" class="shoppingCart" alt="Cart" />
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2026 - DiveDeep - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
 </html>

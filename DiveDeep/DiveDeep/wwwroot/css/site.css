@@ -33,10 +33,8 @@ body {
 
 
 
-/*
-    Header
-*/
 
+/* Header */
 .navbar {
     background: rgb(17, 21, 29);
     backdrop-filter: blur(20px);
@@ -49,7 +47,14 @@ body {
     width: auto;
 }
 
+.searchBar {
+    width: 270px;
+}
 
+    .searchBar::placeholder {
+        color: gray;
+        opacity: 0.7;
+    }
 
 .navbarHeader .nav-link,
 .navbarHeader .nav-link:link,
@@ -73,4 +78,17 @@ body {
 
 .borderBoxItems-border {
     opacity: 0.2;
+}
+
+.login {
+    margin-left: 20px;
+}
+
+.cartBox {
+    padding: 10px;
+}
+
+.shoppingCart {
+    height: 60px;
+    margin-left: 10px;
 }
