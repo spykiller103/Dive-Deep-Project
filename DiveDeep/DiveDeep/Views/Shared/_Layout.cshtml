@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DiveDeep.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <nav class="navbar bg-primary" data-bs-theme="dark">
         <div class="container-fluid">
             <div class="d-flex align-items-center">
@@ -24,17 +24,56 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container flex-grow-1">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - DiveDeep - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    <div class="container-fluid p-0 flex-shrink-0" style="background:rgb(17, 21, 29);">
+        <footer class="row row-cols-1 row-cols-md-4 justify-content-evenly text-center py-5 m-0 border-top">
+
+
+            <div class="col mb-3 custom-footer-text2">
+                <h5>Navigation</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-footer-text">Forside</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-footer-text">Pakker</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-footer-text">Udstyr</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-footer-text">Om Os</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-footer-text">Kontakt</a></li>
+                </ul>
+            </div>
+
+            <div class="col mb-3 custom-footer-text2">
+                <h5>Konto</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-footer-text">Log Ind</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-footer-text">Opret Konto</a></li>
+                </ul>
+            </div>
+
+            <div class="col mb-3 custom-footer-text2">
+                <h5>Åbningstider</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2 custom-footer-text2">Mandag-fredag: 10.00 - 17.30</li>
+                    <li class="nav-item mb-2 custom-footer-text2">Lørdag: 10.00 - 14.00</li>
+                    <li class="nav-item mb-2 custom-footer-text2">Søndag: Lukket</li>
+                </ul>
+            </div>
+
+
+            <div class="col mb-3 custom-footer-text2">
+                <h5>Kontakt</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2 custom-footer-text2">Dykkervej 10, 5000 Odense C</li>
+                    <li class="nav-item mb-2 custom-footer-text2">CVR-nummer: 81828384</li>
+                    <li class="nav-item mb-2 custom-footer-text2">+45 60 70 80 90</li>
+                    <li class="nav-item mb-2 custom-footer-text2">info@divedeep.dk</li>
+                </ul>
+            </div>
+        </footer>
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
