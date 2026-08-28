@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\Content\Images\DiveDeepLogo.png" />
+  </ItemGroup>
+
 </Project>
