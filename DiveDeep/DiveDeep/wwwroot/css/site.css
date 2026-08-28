@@ -41,6 +41,7 @@ body {
     background: rgb(17, 21, 29);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: none !important;
 }
 
 .logo {
