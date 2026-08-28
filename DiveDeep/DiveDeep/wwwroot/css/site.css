@@ -45,9 +45,24 @@ body {
     width: auto;
 }
 
+.searchBar {
+    padding-left: 40px;
+    border-radius: 15px;
+    background: rgb(18, 26, 36);
+    outline: solid;
+    outline-width: 1.6px;
+    outline-color: rgba(27, 30, 39);
+    height: 45px;
+}
+
+    .searchBar::placeholder {
+        color: gray;
+        opacity: 0.7;
+    }
+
 .searchContainer {
     position: relative;
-    width: 300px
+    width: 300px;
 }
 
     .searchContainer .bi-search {
@@ -57,20 +72,6 @@ body {
         transform: translateY(-50%);
         z-index: 1;
         color: #94a3b8;
-    }
-
-.searchBar {
-    padding-left: 40px;
-    border-radius: 12px;
-    background: rgb(18, 26, 36);
-    outline: solid;
-    outline-width: 1.6px;
-    outline-color: rgba(27, 30, 39);
-}
-
-    .searchBar::placeholder {
-        color: gray;
-        opacity: 0.7;
     }
 
 .navbarHeader .nav-link,
