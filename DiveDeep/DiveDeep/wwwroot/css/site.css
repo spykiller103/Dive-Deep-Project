@@ -37,9 +37,6 @@ body {
 /* Header */
 .navbar {
     background: rgb(17, 21, 29);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    border-bottom: none !important;
 }
 
 .logo {
@@ -47,8 +44,27 @@ body {
     width: auto;
 }
 
+.searchContainer {
+    position: relative;
+    width: 400px
+}
+
+    .searchContainer .bi-search {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+        color: #94a3b8;
+    }
+
 .searchBar {
-    width: 270px;
+    padding-left: 40px;
+    border-radius: 12px;
+    background: rgb(18, 26, 36);
+    outline: solid;
+    outline-width: 1.6px;
+    outline-color: rgba(27, 30, 39);
 }
 
     .searchBar::placeholder {
@@ -70,13 +86,18 @@ body {
         text-decoration: underline;
     }
 
-.borderBoxItems {
+.borderBox {
     background: rgb(18, 26, 36);
-    border-radius: 20px;
-    padding: 10px;
+    border-radius: 30px;
+    padding: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+    outline: solid;
+    outline-width: 1.6px;
+    outline-color: rgba(27, 30, 39);
 }
 
-.borderBoxItems-border {
+.borderBox-border {
     opacity: 0.2;
 }
 

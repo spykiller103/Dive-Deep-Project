@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - DiveDeep</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DiveDeep.styles.css" asp-append-version="true" />
 </head>
@@ -22,13 +23,18 @@
                 </a>
 
                 <!-- SearchBar -->
-                <form class="d-flex" role="search">
-                    <input class="searchBar form-control" type="search" placeholder="Søg udstyr og pakker ..." aria-label="Search" />
-                </form>
+                <div class="searchContainer">
+                    <i class="bi bi-search"></i>
+
+                    <input class="searchBar form-control"
+                           type="search"
+                           placeholder="Søg udstyr og pakker ..."
+                           aria-label="Search" />
+                </div>
 
                 <!-- MenuBox 1 -->
-                <div class="borderBoxItems">
-                    <div class="navbarHeader navbar-nav d-flex flex-row gap-3">
+                <div class="borderBox">
+                    <div class="navbarHeader navbar-nav d-flex flex-row gap-5">
                         <a class="nav-link active" aria-current="page" href="#">Pakker</a>
                         <a class="nav-link" href="#">Udstyr</a>
                         <a class="nav-link" href="#">Om os</a>
@@ -37,14 +43,14 @@
                 </div>
 
                 <!-- Login -->
-                <div class="borderBoxItems login">
+                <div class="borderBox login">
                     <div class="navbarHeader navbar-nav">
                         <a class="nav-link" href="#">Log ind</a>
                     </div>
                 </div>
 
                 <!-- ShoppingCart -->
-                <div class="borderBoxItems cartBox">
+                <div class="borderBox cartBox">
                     <div class="navbarHeader navbar-nav">
                         <a href="/" class="navbar-brand m-0 p-0 d-flex align-items-center">
                             <img src="/Content/Images/ShoppingCart.png" class="shoppingCart" alt="Cart" />
