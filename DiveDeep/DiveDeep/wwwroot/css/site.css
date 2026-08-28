@@ -19,6 +19,8 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
+    background-color: black;
+    color: #475569;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -98,4 +100,23 @@ body {
 
 .custom-footer-text2 {
     color: #475569 !important;
+}
+
+.banner {
+    background-image: url("/Content/Images/FishPhoto.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 70vh;
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.4);
+
+    /* Tilføj disse linjer for at bryde ud af container-bredden: */
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+
+.special-text{
+    color: aqua;
+    font-style: italic;
 }
