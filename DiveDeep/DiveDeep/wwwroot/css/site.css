@@ -19,6 +19,7 @@ html {
 
 body {
     margin-bottom: 60px;
+    background-color: black;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -30,10 +31,23 @@ body {
     text-align: start;
 }
 
+
+
+/*
+    Header
+*/
+
+.navbar {
+    background: rgb(17, 21, 29);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
 .logo {
     height: 70px;
     width: auto;
 }
+
 
 
 .navbarHeader .nav-link,
@@ -42,10 +56,15 @@ body {
 .navbarHeader .nav-link.active,
 .navbarHeader .nav-link:focus,
 .navbarHeader .nav-link:hover {
-    color: black;
+    color: rgba(111,123,141);
 }
 
 .navbarHeader .nav-link:hover,
 .navbarHeader .nav-link:focus {
     text-decoration: underline;
+}
+
+.borderBoxItems {
+    background: rgb(25, 21, 29);
+    border-radius: 20px;
 }
