@@ -4,17 +4,22 @@
     @foreach (Package package in Model)
     {
         <div class="col">
-            <div class="card">
-                <img src="@package.Image" class="card-img-top" alt="...">
-                <div class="card-body">
-                    @* <p <span class="special-text">BEKLÆDNING</span></p> *@
-                    <p class="text-light">@package.Title</p>
-                    @foreach (string equipment in package.Equipment)
-                    {
-                        <p class="text-secondary">@equipment</p>
-                    }
-                    <p class="text-white">@package.Price<span class="text-info"> kr./dag</span></p>
-                    <div class="card text-end">
+            <div class="card h-100">
+                <img src="@package.Image" class="card-img-top package-img" alt="...">
+                <div class="card-body border-top border-dark d-flex flex-column justify-content-between">
+                    <div class="package-top">
+                        <p class="text-light mb-3">@package.Title</p>
+
+                        <div class="package-equipment">
+                            @foreach (string equipment in package.Equipment)
+                            {
+                                <p class="text-secondary mb-2">@equipment</p>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center package-footer">
+                        <div class="price text-white">@package.Price<span class="text-info"> kr./dag</span></div>
                         <button type="button" class="btn btn-info btn-rent">Lej</button>
                     </div>
                 </div>

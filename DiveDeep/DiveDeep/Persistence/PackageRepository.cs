@@ -11,17 +11,31 @@ namespace DiveDeep.Persistence
             {
                 Id=1,
                 Price = 90,
-                Image = "Hello",
-                Title = "TestTitle",
+                Image = "/Content/Images/Packages/Package1.png",
+                Title = "Komplet dykkersæt",
                 Equipment = new List<string>
                 {
                     "BCD",
-                    "dykkerdragt",
-                    "regulatorsæt",
-                    "tank",
-                    "finner",
-                    "maske",
-                    "snorke"
+                    "Dykkerdragt",
+                    "Regulatorsæt",
+                    "Tank",
+                    "Finner",
+                    "Maske",
+                    "Snorkel"
+                }
+            },
+
+            new Package
+            {
+                Id=1,
+                Price = 90,
+                Image = "/Content/Images/Packages/Package2.png",
+                Title = "Komplet snorkelsæt",
+                Equipment = new List<string>
+                {
+                    "Finner",
+                    "Maske",
+                    "Snorkel"
                 }
             }
         };
