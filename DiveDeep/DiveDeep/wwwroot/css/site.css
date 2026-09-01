@@ -168,7 +168,8 @@ body {
     height: 40px;
     border-radius: 5px;
 }
-.ContactUs{
+/*Brug denne til Jeres H1 på alle sider så det er den samme*/
+.SiteTitles{
     color: #ffffff;
     font-weight: bold;
     font-size: 60px;
@@ -180,7 +181,32 @@ body {
     padding: 24px;
     margin: 20px;
     max-width: 650px;
+    height: calc(100% - 40px); /* trækker margin fra, så den ikke bliver for høj */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
+
+    .ContactBox form,
+    .ContactBox > div:not(.row) {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+    .ContactBox .mb-3:has(textarea) {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ContactBox textarea {
+        flex: 1;
+        height: 400px;
+    }
+
+    .ContactBox > div:last-child {
+        margin-top: auto;
+    }
 .btn-primary {
     width: 100%;
     background: rgb(6, 182, 212);
