@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -8,6 +8,12 @@
 
   <ItemGroup>
     <None Include="wwwroot\Content\Images\DiveDeepLogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Content\Images\Divingsuits\Drysuits\" />
+    <Folder Include="wwwroot\Content\Images\Regulator\" />
+    <Folder Include="wwwroot\Content\Images\Tanks\" />
   </ItemGroup>
 
 </Project>
