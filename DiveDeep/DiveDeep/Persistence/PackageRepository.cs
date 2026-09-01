@@ -10,6 +10,7 @@ namespace DiveDeep.Persistence
             new Package
             {
                 Id=1,
+                Price = 90,
                 Image = "Hello",
                 Title = "TestTitle",
                 Equipment = new List<string>
