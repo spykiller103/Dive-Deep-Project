@@ -34,10 +34,10 @@
                 <!-- MenuBox 1 -->
                 <div class="borderBox">
                     <div class="navbarHeader navbar-nav d-flex flex-row gap-5">
-                        <a class="nav-link active" aria-current="page" href="#">Pakker</a>
+                        <a class="nav-link active" aria-current="page" asp-controller="Packages" asp-action="Index">Pakker</a>
                         <a class="nav-link" asp-controller="Equipment" asp-action="Index">Udstyr</a>
                         <a class="nav-link" asp-controller="AboutUs" asp-action="Index">Om os</a>
-                        <a class="nav-link" asp-controller="Contacs" asp-action="Index">Kontakt</a>
+                        <a class="nav-link" asp-controller="Contacts" asp-action="Index">Kontakt</a>
                     </div>
                 </div>
 
@@ -76,7 +76,7 @@
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-footer-text">Pakker</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-footer-text">Udstyr</a></li>
                     <li class="nav-item mb-2"><a class="nav-link p-0 custom-footer-text" asp-controller="AboutUs" asp-action="Index">Om Os</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-footer-text">Kontakt</a></li>
+                    <li class="nav-item mb-2"><a class="nav-link p-0 custom-footer-text" asp-controller="Contacts" asp-action="Index">Kontakt</a></li>
                 </ul>
             </div>
 
