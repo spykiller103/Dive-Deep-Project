@@ -191,17 +191,45 @@ body {
     background: rgb(6, 182, 212);
     Color: rgb(7, 11, 20);
 }
-.ContactBox1{
+.ContactBox1 {
     background-color: #0d1420;
     border-color: rgb(18, 26, 36);
     border-radius: 16px;
     max-width: 300px;
     margin: 20px;
     border: 1px solid #1f2a3a;
-    text-align: center;
+    text-align: left;
+    padding: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
 }
-.InfoTitle{
+
+.IconBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    background-color: #1b2a3a;
+    border-radius: 8px;
+}
+
+    .IconBox i {
+        color: rgb(6, 176, 205);
+        font-size: 18px;
+    }
+
+.InfoTextWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.InfoTitle {
     color: #ffffff;
+    margin: 0;
+    font-weight: 600;
 }
 .btn-rent {
     border-radius: 10px;
