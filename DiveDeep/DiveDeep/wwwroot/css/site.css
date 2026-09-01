@@ -204,3 +204,12 @@ body {
 .InfoTitle{
     color: #ffffff;
 }
+.btn-rent {
+    border-radius: 10px;
+    margin-left: 300px;
+    margin-top: -45px;
+}
+
+.card {
+    background-color: rgb(13, 18, 32);
+}
