@@ -19,7 +19,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    background-color: black;
+    background-color: #070b14;
     color: #475569;
 }
 
@@ -69,7 +69,6 @@ body {
 .searchContainer {
     position: relative;
     width: 300px;
-    background: rgb(18, 26, 36);
 }
 
     .searchContainer .bi-search {
@@ -160,7 +159,8 @@ body {
     color: gray;
     opacity: 0.7;
 }
-.ContactSelect{
+
+.ContactSelect {
     background-color: #070b14;
     color: #ffffff;
     border-color: rgb(18, 26, 36);
@@ -169,67 +169,90 @@ body {
     border-radius: 5px;
 }
 /*Brug denne til Jeres H1 på alle sider så det er den samme*/
-.SiteTitles{
+.SiteTitles {
     color: #ffffff;
     font-weight: bold;
     font-size: 60px;
 }
+
 .ContactBox {
     background-color: #0d1420;
     border: 1px solid #1f2a3a;
     border-radius: 16px;
     padding: 24px;
-    margin: 20px;
-    max-width: 650px;
-    height: calc(100% - 40px); /* trækker margin fra, så den ikke bliver for høj */
     box-sizing: border-box;
+    height: 100%;
+    max-width: none;
+    margin: 0;
     display: flex;
     flex-direction: column;
 }
 
-    .ContactBox form,
-    .ContactBox > div:not(.row) {
-        display: flex;
-        flex-direction: column;
+    .ContactBox textarea {
         flex: 1;
+        min-height: 0;
     }
+
     .ContactBox .mb-3:has(textarea) {
         flex: 1;
         display: flex;
         flex-direction: column;
     }
 
-    .ContactBox textarea {
-        flex: 1;
-        height: 400px;
-    }
-
     .ContactBox > div:last-child {
         margin-top: auto;
     }
-.btn-primary {
-    width: 100%;
-    background: rgb(6, 182, 212);
-    Color: rgb(7, 11, 20);
-    border-radius: calc(infinity * 1px);
-}
-.btn-primary:hover{
-    background: rgb(6, 182, 212);
-    Color: rgb(7, 11, 20);
-}
+
+
 .ContactBox1 {
     background-color: #0d1420;
-    border-color: rgb(18, 26, 36);
-    border-radius: 16px;
-    max-width: 300px;
-    margin: 20px;
     border: 1px solid #1f2a3a;
+    border-radius: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
+    margin: 0 0 20px 0;
     text-align: left;
     padding: 16px;
     display: flex;
     align-items: flex-start;
     gap: 12px;
 }
+
+    .ContactBox1:last-child {
+        margin-bottom: 0;
+    }
+
+.btn-primary {
+    width: 100%;
+    background: rgb(6, 182, 212);
+    Color: rgb(7, 11, 20);
+    border-radius: calc(infinity * 1px);
+}
+
+    .btn-primary:hover {
+        background: rgb(6, 182, 212);
+        Color: rgb(7, 11, 20);
+    }
+
+.ContactBox1 {
+    background-color: #0d1420;
+    border: 1px solid #1f2a3a;
+    border-radius: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
+    margin: 0 0 20px 0;
+    text-align: left;
+    padding: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+    .ContactBox1:last-child {
+        margin-bottom: 0;
+    }
 
 .IconBox {
     display: flex;
@@ -257,6 +280,7 @@ body {
     margin: 0;
     font-weight: 600;
 }
+
 .btn-rent {
     border-radius: 10px;
     padding: 6px 12px;

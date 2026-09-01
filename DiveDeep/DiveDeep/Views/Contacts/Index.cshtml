@@ -1,20 +1,31 @@
-﻿<h1 class="SiteTitles">Kontakt Os</h1>
-<p>Spørgsmål om udstyr, størrelser eller booking? Vi svarer inden for 24 timer.</p>
-<div class="row">
-    <div class="col-md-8">
+﻿@section Title {
+    <p class="mt-5"> <span class="special-text">VI HJÆLPER GERNE</span></p>
+    <h1 class="SiteTitles">Kontakt Os</h1>
+    <p class="mb-5">Spørgsmål om udstyr, størrelser eller booking? Vi svarer inden for 24 timer.</p>
+}
+
+<div class="row align-items-stretch g-5">
+
+    <!-- Contact formular -->
+    <div class="col-md-7">
         <div class="ContactBox">
+
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="navnInput" class="form-label">Navn</label>
                     <input type="text" class="form-control ContactInput" id="navnInput" placeholder="Anders Andersen">
                 </div>
+
                 <div class="col-md-6">
                     <label for="exampleFormControlInput1" class="form-label">Email address</label>
+
                     <input type="email" class="form-control ContactInput" id="exampleFormControlInput1" placeholder="name@example.com">
                 </div>
             </div>
+
             <div class="mb-3">
                 <label>Emne</label>
+
                 <select class="ContactSelect">
                     <option selected disabled hidden>Vælg emne...</option>
                     <option>Spørgsmål om pakker</option>
@@ -23,21 +34,29 @@
                     <option>Andet</option>
                 </select>
             </div>
-            <div class="mb-3">
+
+            <div class="mb-3 messageBox">
                 <label for="exampleFormControlTextarea1" class="form-label">Besked</label>
-                <textarea class="form-control ContactInput" id="exampleFormControlTextarea1" rows="8" placeholder="Skriv din besked her..."></textarea>
+
+                <textarea class="form-control ContactInput" id="exampleFormControlTextarea1" placeholder="Skriv din besked her..."></textarea>
             </div>
+
             <div>
                 <a class="btn btn-primary">Send besked</a>
             </div>
+
         </div>
     </div>
 
-    <div class="col-md-4">
+
+    <!-- Contact Info -->
+    <div class="col-md-5">
+
         <div class="ContactBox1">
             <div class="IconBox">
                 <i class="bi bi-geo-alt"></i>
             </div>
+
             <div class="InfoTextWrapper">
                 <p class="InfoTitle">Adresse</p>
                 <p class="InfoText">Dykkervej 10, 5000 Odense C</p>
@@ -48,6 +67,7 @@
             <div class="IconBox">
                 <i class="bi bi-telephone"></i>
             </div>
+
             <div class="InfoTextWrapper">
                 <p class="InfoTitle">Telefon</p>
                 <p class="InfoText">+45 60 70 80 90</p>
@@ -58,6 +78,7 @@
             <div class="IconBox">
                 <i class="bi bi-envelope"></i>
             </div>
+
             <div class="InfoTextWrapper">
                 <p class="InfoTitle">E-mail</p>
                 <p class="InfoText">info@divedeep.dk</p>
@@ -68,6 +89,7 @@
             <div class="IconBox">
                 <i class="bi bi-clock"></i>
             </div>
+
             <div class="InfoTextWrapper">
                 <p class="InfoTitle">Åbningstider</p>
                 <p class="InfoText">Man–fre: 10.00 - 17.30</p>
