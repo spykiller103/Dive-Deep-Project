@@ -1,0 +1,33 @@
+﻿@using DiveDeep.Models;
+@model List<Equipment>
+
+<body>
+	<br />
+	<br />
+	<p> <span class="special-text">LEJ PR DAG</span></p>
+	<h1>Enkelt udstyr</h1>
+	<p>Lej præcis det du mangler - fra maske til regulator</p>
+	<br>
+
+	<div class="row row-cols-1 row-cols-md-3 g-4 ">
+		@foreach (Equipment equipment in Model)
+		{
+			<div class="col">
+				<div class="card">
+					<img src="/Content/Images/DivingMask.png" class="card-img-top" alt="...">
+					<div class="card-body">
+						@* <p <span class="special-text">BEKLÆDNING</span></p> *@
+						<p> <span class="special-text">@equipment.Category</span></p>
+						<p class="text-light">@equipment.Title</p>
+						<p class="text-secondary">@equipment.Description</p>
+						<p class="text-white">@equipment.Price<span class="text-info"> kr./dag</span></p>
+						<div class="card text-end">
+							<button type="button" class="btn btn-info btn-rent">Lej</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		}       
+	</div>
+
+</body>

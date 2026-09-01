@@ -1,0 +1,24 @@
+﻿@model List<Package>
+
+<div class="row row-cols-1 row-cols-md-3 g-4 ">
+    @foreach (Package package in Model)
+    {
+        <div class="col">
+            <div class="card">
+                <img src="@package.Image" class="card-img-top" alt="...">
+                <div class="card-body">
+                    @* <p <span class="special-text">BEKLÆDNING</span></p> *@
+                    <p class="text-light">@package.Title</p>
+                    @foreach (string equipment in package.Equipment)
+                    {
+                        <p class="text-secondary">@equipment</p>
+                    }
+                    <p class="text-white">@package.Price<span class="text-info"> kr./dag</span></p>
+                    <div class="card text-end">
+                        <button type="button" class="btn btn-info btn-rent">Lej</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -38,9 +38,6 @@ body {
 /* Header */
 .navbar {
     background: rgb(17, 21, 29);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    border-bottom: none !important;
 }
 
 .logo {
@@ -49,12 +46,39 @@ body {
 }
 
 .searchBar {
-    width: 270px;
+    padding-left: 40px;
+    border-radius: 15px;
+    background: rgb(18, 26, 36);
+    outline: solid;
+    outline-width: 1.6px;
+    outline-color: rgba(27, 30, 39);
+    height: 45px;
 }
 
     .searchBar::placeholder {
         color: gray;
         opacity: 0.7;
+    }
+
+    .searchBar:focus {
+        background: rgb(18, 26, 36);
+        outline: none;
+        box-shadow: none;
+    }
+
+.searchContainer {
+    position: relative;
+    width: 300px;
+    background: rgb(18, 26, 36);
+}
+
+    .searchContainer .bi-search {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+        color: #94a3b8;
     }
 
 .navbarHeader .nav-link,
@@ -71,13 +95,18 @@ body {
         text-decoration: underline;
     }
 
-.borderBoxItems {
+.borderBox {
     background: rgb(18, 26, 36);
-    border-radius: 20px;
-    padding: 10px;
+    border-radius: 30px;
+    padding: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+    outline: solid;
+    outline-width: 1.6px;
+    outline-color: rgba(27, 30, 39);
 }
 
-.borderBoxItems-border {
+.borderBox-border {
     opacity: 0.2;
 }
 
