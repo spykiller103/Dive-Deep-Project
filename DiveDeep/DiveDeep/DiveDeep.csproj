@@ -12,8 +12,10 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Content\Images\Divingsuits\Drysuits\" />
+    <Folder Include="wwwroot\Content\Images\WithBackground\" />
     <Folder Include="wwwroot\Content\Images\Regulator\" />
     <Folder Include="wwwroot\Content\Images\Tanks\" />
+    <Folder Include="wwwroot\Content\Images\WithBackground\Withbackground\" />
   </ItemGroup>
 
 </Project>
