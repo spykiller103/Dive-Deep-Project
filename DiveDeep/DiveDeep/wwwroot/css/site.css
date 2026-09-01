@@ -131,6 +131,7 @@ body {
     color: #475569 !important;
 }
 
+/*About us site*/
 .banner {
     background-image: url("/Content/Images/FishPhoto.png");
     background-size: cover;
@@ -139,7 +140,6 @@ body {
     height: 70vh;
     background-blend-mode: overlay;
     background-color: rgba(0, 0, 0, 0.4);
-    /* Tilføj disse linjer for at bryde ud af container-bredden: */
     width: 100vw;
     margin-left: calc(-50vw + 50%);
 }

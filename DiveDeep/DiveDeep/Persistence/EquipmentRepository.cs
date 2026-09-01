@@ -9,6 +9,7 @@ namespace DiveDeep.Persistence
 
             new Equipment
             {
+                Image = "Test",
                 Category = "Beklædning",
                 Title = "Dykkermaske",
                 Description = "Silikone-maske med enkelt eller dobbelt linse. S/M/L",
@@ -17,6 +18,7 @@ namespace DiveDeep.Persistence
 
             new Equipment
             {
+                Image = "Test",
                 Category = "Beklædning",
                 Title = "Finner",
                 Description = "Åbenhæls og lukkethæls finner. Størrelse 38-47",
