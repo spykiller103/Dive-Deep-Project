@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -7,7 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Content\Images\WithBackground\**" />
+    <Content Remove="wwwroot\Content\Images\WithBackground\**" />
+    <EmbeddedResource Remove="wwwroot\Content\Images\WithBackground\**" />
+    <None Remove="wwwroot\Content\Images\WithBackground\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\Content\Images\DiveDeepLogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Content\Images\Equipment\Regulator\" />
+    <Folder Include="wwwroot\Content\Images\Equipment\Tanks\" />
   </ItemGroup>
 
 </Project>
