@@ -1,5 +1,4 @@
-﻿@using DiveDeep.Models;
-@model List<Equipment>
+﻿@model List<Equipment>
 
 <body>
 	<br />
@@ -8,7 +7,14 @@
 	<h1>Enkelt udstyr</h1>
 	<p>Lej præcis det du mangler - fra maske til regulator</p>
 	<br>
-
+	<div class="EquipmentButtonSite">
+		<button class="btn btn-primary btn-sm" type="submit">BCD</button>
+		<button class="btn btn-primary btn-sm" type="submit">Dykkerdragter</button>
+		<button class="btn btn-primary btn-sm" type="submit">Tanke</button>
+		<button class="btn btn-primary btn-sm" type="submit">Regulatorsæt</button>
+		<button class="btn btn-primary btn-sm" type="submit">Maske/Snorkel</button>
+		<button class="btn btn-primary btn-sm" type="submit">Finner</button>
+	</div>
 	<div class="row row-cols-1 row-cols-md-3 g-4 ">
 		@foreach (var equipment in Model)
 		{
