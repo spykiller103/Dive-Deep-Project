@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="~/DiveDeep.styles.css" asp-append-version="true" />
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <nav class="navbar" data-bs-theme="dark">
+    <nav class="custom-background" data-bs-theme="dark">
         <div class="container-fluid justify-content-center">
 
 
@@ -23,17 +23,17 @@
 
                 <!-- SearchBar -->
                 <div class="searchContainer">
-                    <i class="bi bi-search"></i>
+                    <i class="custom-text bi bi-search"></i>
 
-                    <input class="searchBar form-control"
+                    <input class="custom-background searchBar form-control"
                            type="search"
                            placeholder="Søg udstyr og pakker ..."
                            aria-label="Search" />
                 </div>
 
                 <!-- MenuBox 1 -->
-                <div class="borderBox">
-                    <div class="navbarHeader navbar-nav d-flex flex-row gap-5">
+                <div class="custom-background borderBox">
+                    <div class="custom-text navbar-nav d-flex flex-row gap-5">
                         <a class="nav-link active" aria-current="page" asp-controller="Packages" asp-action="Index">Pakker</a>
                         <a class="nav-link" asp-controller="Equipment" asp-action="Index">Udstyr</a>
                         <a class="nav-link" asp-controller="AboutUs" asp-action="Index">Om os</a>
@@ -42,15 +42,15 @@
                 </div>
 
                 <!-- Login -->
-                <div class="borderBox login">
-                    <div class="navbarHeader navbar-nav">
+                <div class="custom-background borderBox login">
+                    <div class="custom-text navbar-nav">
                         <a class="nav-link" href="#">Log ind</a>
                     </div>
                 </div>
 
                 <!-- ShoppingCart -->
-                <div class="borderBox cartBox">
-                    <div class="navbarHeader navbar-nav">
+                <div class="custom-background borderBox cartBox">
+                    <div class="custom-text navbar-nav">
                         <a href="/" class="navbar-brand m-0 p-0 d-flex align-items-center">
                             <img src="/Content/Images/ShoppingCart.png" class="shoppingCart" alt="Cart" />
                         </a>
@@ -76,19 +76,19 @@
             <div class="col mb-3 custom-footer-text2">
                 <h5>Navigation</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-footer-text">Forside</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-footer-text">Pakker</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-footer-text">Udstyr</a></li>
-                    <li class="nav-item mb-2"><a class="nav-link p-0 custom-footer-text" asp-controller="AboutUs" asp-action="Index">Om Os</a></li>
-                    <li class="nav-item mb-2"><a class="nav-link p-0 custom-footer-text" asp-controller="Contacts" asp-action="Index">Kontakt</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-text">Forside</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-text">Pakker</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-text">Udstyr</a></li>
+                    <li class="nav-item mb-2"><a class="nav-link p-0 custom-text" asp-controller="AboutUs" asp-action="Index">Om Os</a></li>
+                    <li class="nav-item mb-2"><a class="nav-link p-0 custom-text" asp-controller="Contacts" asp-action="Index">Kontakt</a></li>
                 </ul>
             </div>
 
             <div class="col mb-3 custom-footer-text2">
                 <h5>Konto</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-footer-text">Log Ind</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-footer-text">Opret Konto</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-text">Log Ind</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-text">Opret Konto</a></li>
                 </ul>
             </div>
 

@@ -1,11 +1,5 @@
 html {
-    font-size: 14px;
-}
-
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
+    font-size: 16px;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -32,14 +26,23 @@ body {
     text-align: start;
 }
 
+/*Design for every site*/
+.custom-text {
+    color: #94a3b8 !important;
+}
 
-
-
-/* Header */
-.navbar {
+.custom-background {
     background: rgb(17, 21, 29);
 }
 
+.SiteTitles {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 60px;
+}
+
+
+/* Header */
 .logo {
     height: 70px;
     width: auto;
@@ -48,7 +51,6 @@ body {
 .searchBar {
     padding-left: 40px;
     border-radius: 15px;
-    background: rgb(18, 26, 36);
     outline: solid;
     outline-width: 1.6px;
     outline-color: rgba(27, 30, 39);
@@ -77,25 +79,9 @@ body {
         top: 50%;
         transform: translateY(-50%);
         z-index: 1;
-        color: #94a3b8;
-    }
-
-.navbarHeader .nav-link,
-.navbarHeader .nav-link:link,
-.navbarHeader .nav-link:visited,
-.navbarHeader .nav-link.active,
-.navbarHeader .nav-link:focus,
-.navbarHeader .nav-link:hover {
-    color: #94a3b8;
-}
-
-    .navbarHeader .nav-link:hover,
-    .navbarHeader .nav-link:focus {
-        text-decoration: underline;
     }
 
 .borderBox {
-    background: rgb(18, 26, 36);
     border-radius: 30px;
     padding: 5px;
     padding-left: 25px;
@@ -122,13 +108,14 @@ body {
     margin-left: 10px;
 }
 
-.custom-footer-text {
-    color: #94a3b8 !important;
-}
 
+/*footer*/
 .custom-footer-text2 {
     color: #475569 !important;
 }
+
+/*Front page*/
+
 
 /*About us site*/
 .banner {
@@ -167,12 +154,6 @@ body {
     width: 100%;
     height: 40px;
     border-radius: 5px;
-}
-/*Brug denne til Jeres H1 på alle sider så det er den samme*/
-.SiteTitles {
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 60px;
 }
 
 .ContactBox {
