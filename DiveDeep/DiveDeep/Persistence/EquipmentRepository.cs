@@ -43,7 +43,7 @@ namespace DiveDeep.Persistence
 
             new Equipment
             {
-                ImageID = "/Content/Images/Equipment/Divingsuits/Definition.png",
+                ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
                 Description = "3 mm",
@@ -53,7 +53,7 @@ namespace DiveDeep.Persistence
 
             new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BDivingsuitsCD/Definition.png",
+                ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
                 Description = "5 mm",
@@ -61,7 +61,7 @@ namespace DiveDeep.Persistence
             },
              new Equipment
             {
-                ImageID = "/Content/Images/Equipment/Divingsuits/Definition.png",
+                ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
                 Description = "7 mm",
@@ -70,7 +70,7 @@ namespace DiveDeep.Persistence
 
               new Equipment
             {
-                ImageID = "/Content/Images/Equipment/Divingsuits/W5.png",
+                ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/W5.png",
                 Category = "Dykkerdragt",
                 Title = "Waterproof W5",
                 Description = "3.5 mm",
@@ -79,7 +79,7 @@ namespace DiveDeep.Persistence
 
                new Equipment
             {
-                ImageID = "/Content/Images/Equipment/Divingsuits/ProteusF.png",
+                ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/ProteusF.png",
                 Category = "Dykkerdragt",
                 Title = "Fourth Element Proteus",
                 Description = "5 mm",
@@ -88,7 +88,7 @@ namespace DiveDeep.Persistence
 
             new Equipment
             {
-                ImageID = "/Content/Images/Equipment/Divingsuits/Exodry4.png",
+                ImageID = "/Content/Images/Equipment/Divingsuits/Drysuits/Exodry4.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Exodry 4.0",
                 Description = "N/A",
@@ -96,7 +96,7 @@ namespace DiveDeep.Persistence
             },
              new Equipment
             {
-                ImageID = "/Content/Images/Equipment/Divingsuits/D7Evo.png",
+                ImageID = "/Content/Images/Equipment/Divingsuits/Drysuits/D7Evo.png",
                 Category = "Dykkerdragt",
                 Title = "Waterproof D7 Evo",
                 Description = "N/A",
@@ -105,7 +105,7 @@ namespace DiveDeep.Persistence
 
               new Equipment
             {
-                ImageID = "/Content/Images/Equipment/Divingsuits/ELitePlus.png",
+                ImageID = "/Content/Images/Equipment/Divingsuits/Drysuits/ELitePlus.png",
                 Category = "Dykkerdragt",
                 Title = "Santi E.Lite Plus",
                 Description = "N/A",
