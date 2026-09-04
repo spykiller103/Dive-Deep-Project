@@ -227,37 +227,6 @@ body {
         margin-bottom: 0;
     }
 
-.btn-primary {
-    width: 100%;
-    background: rgb(6, 182, 212);
-    Color: rgb(7, 11, 20);
-    border-radius: calc(infinity * 1px);
-}
-
-    .btn-primary:hover {
-        background: rgb(6, 182, 212);
-        Color: rgb(7, 11, 20);
-    }
-
-.ContactBox1 {
-    background-color: #0d1420;
-    border: 1px solid #1f2a3a;
-    border-radius: 16px;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: none;
-    margin: 0 0 20px 0;
-    text-align: left;
-    padding: 16px;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-}
-
-    .ContactBox1:last-child {
-        margin-bottom: 0;
-    }
-
 .IconBox {
     display: flex;
     align-items: center;
@@ -285,6 +254,7 @@ body {
     font-weight: 600;
 }
 
+/*Packeages and Equipment*/
 .btn-rent {
     border-radius: 10px;
     padding: 6px 12px;
@@ -313,4 +283,20 @@ body {
 
     .package-equipment p {
         line-height: 1.6;
+    }
+
+.BtnSize {
+    border-radius: 0 !important;
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    color: rgb(148, 163, 184) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 10px !important;
+}
+
+    .BtnSize:focus {
+        background-color: rgb(6, 182, 212) !important;
+        color: rgb(7, 11, 20) !important;
+        outline: none !important;
+        box-shadow: none !important;
     }
