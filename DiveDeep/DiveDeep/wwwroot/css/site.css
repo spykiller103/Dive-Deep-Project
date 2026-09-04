@@ -1,11 +1,5 @@
 html {
-    font-size: 14px;
-}
-
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
+    font-size: 16px;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -19,7 +13,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    background-color: black;
+    background-color: #070b14;
     color: #475569;
 }
 
@@ -32,19 +26,98 @@ body {
     text-align: start;
 }
 
+/*Design for every site*/
+.custom-text {
+    color: #94a3b8 !important;
+}
+
+.custom-background {
+    background: rgb(17, 21, 29);
+}
+
+.SiteTitles {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 60px;
+}
+
+
+/* Header */
 .logo {
     height: 70px;
     width: auto;
 }
 
-.custom-footer-text {
-    color: #94a3b8 !important;
+.searchBar {
+    padding-left: 40px;
+    border-radius: 15px;
+    outline: solid;
+    outline-width: 1.6px;
+    outline-color: rgba(27, 30, 39);
+    height: 45px;
 }
 
+    .searchBar::placeholder {
+        color: gray;
+        opacity: 0.7;
+    }
+
+    .searchBar:focus {
+        background: rgb(18, 26, 36);
+        outline: none;
+        box-shadow: none;
+    }
+
+.searchContainer {
+    position: relative;
+    width: 300px;
+}
+
+    .searchContainer .bi-search {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+    }
+
+.borderBox {
+    border-radius: 30px;
+    padding: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+    outline: solid;
+    outline-width: 1.6px;
+    outline-color: rgba(27, 30, 39);
+}
+
+.borderBox-border {
+    opacity: 0.2;
+}
+
+.login {
+    margin-left: 20px;
+}
+
+.cartBox {
+    padding: 10px;
+}
+
+.shoppingCart {
+    height: 60px;
+    margin-left: 10px;
+}
+
+
+/*footer*/
 .custom-footer-text2 {
     color: #475569 !important;
 }
 
+/*Front page*/
+
+
+/*About us site*/
 .banner {
     background-image: url("/Content/Images/FishPhoto.png");
     background-size: cover;
@@ -53,13 +126,168 @@ body {
     height: 70vh;
     background-blend-mode: overlay;
     background-color: rgba(0, 0, 0, 0.4);
-
-    /* Tilføj disse linjer for at bryde ud af container-bredden: */
     width: 100vw;
     margin-left: calc(-50vw + 50%);
 }
 
-.special-text{
+.special-text {
     color: aqua;
     font-style: italic;
 }
+
+.form-control,
+.form-control:focus {
+    background-color: #070b14;
+    color: #ffffff;
+    border-color: rgb(18, 26, 36);
+}
+
+.ContactInput::placeholder {
+    color: gray;
+    opacity: 0.7;
+}
+
+.ContactSelect {
+    background-color: #070b14;
+    color: #ffffff;
+    border-color: rgb(18, 26, 36);
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.ContactBox {
+    background-color: #0d1420;
+    border: 1px solid #1f2a3a;
+    border-radius: 16px;
+    padding: 24px;
+    box-sizing: border-box;
+    height: 100%;
+    max-width: none;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+    .ContactBox textarea {
+        flex: 1;
+        min-height: 0;
+    }
+
+    .ContactBox .mb-3:has(textarea) {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ContactBox > div:last-child {
+        margin-top: auto;
+    }
+
+
+.ContactBox1 {
+    background-color: #0d1420;
+    border: 1px solid #1f2a3a;
+    border-radius: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
+    margin: 0 0 20px 0;
+    text-align: left;
+    padding: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+    .ContactBox1:last-child {
+        margin-bottom: 0;
+    }
+
+.btn-primary {
+    width: 100%;
+    background: rgb(6, 182, 212);
+    Color: rgb(7, 11, 20);
+    border-radius: calc(infinity * 1px);
+}
+
+    .btn-primary:hover {
+        background: rgb(6, 182, 212);
+        Color: rgb(7, 11, 20);
+    }
+
+.ContactBox1 {
+    background-color: #0d1420;
+    border: 1px solid #1f2a3a;
+    border-radius: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
+    margin: 0 0 20px 0;
+    text-align: left;
+    padding: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+    .ContactBox1:last-child {
+        margin-bottom: 0;
+    }
+
+.IconBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    background-color: #1b2a3a;
+    border-radius: 8px;
+}
+
+    .IconBox i {
+        color: rgb(6, 176, 205);
+        font-size: 18px;
+    }
+
+.InfoTextWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.InfoTitle {
+    color: #ffffff;
+    margin: 0;
+    font-weight: 600;
+}
+
+.btn-rent {
+    border-radius: 10px;
+    padding: 6px 12px;
+}
+
+.card {
+    background-color: rgb(13, 18, 32);
+}
+
+.package-img {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    padding: 8px;
+    display: block;
+}
+
+.package-top {
+    display: flex;
+    flex-direction: column;
+}
+
+.package-equipment {
+    margin-top: 4px;
+}
+
+    .package-equipment p {
+        line-height: 1.6;
+    }

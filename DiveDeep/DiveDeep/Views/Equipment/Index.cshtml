@@ -1,0 +1,35 @@
+﻿@model List<Equipment>
+
+@section Title {
+    <p class="mt-5"> <span class="special-text">LEJ PR DAG</span></p>
+    <h1 class="SiteTitles">Enkelt udstyr</h1>
+    <p class="mb-5">Lej præcis det du mangler - fra maske til regulator</p>
+}
+
+
+<div class="row row-cols-1 row-cols-md-3 g-4 ">
+    @foreach (Equipment equipment in Model)
+    {
+        <div class="col">
+            <div class="card h-100">
+                <img src="@equipment.Image" class="card-img-top package-img" alt="...">
+                <div class="card-body border-top border-dark d-flex flex-column justify-content-between">
+                    <div class="package-top">
+                        <p> <span class="special-text">@equipment.Category</span></p>
+
+                        <p class="text-light mb-3">@equipment.Title</p>
+
+                        <div class="package-equipment">
+                            <p class="text-secondary">@equipment.Description</p>
+                        </div>
+                    </div>
+
+                    <div class="package-footer mt-auto border-top border-dark">
+                        <div class="price text-white mb-3">@equipment.Price<span class="text-info"> kr./dag</span></div>
+                        <button type="button" class="btn btn-info btn-rent w-100">Lej</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
