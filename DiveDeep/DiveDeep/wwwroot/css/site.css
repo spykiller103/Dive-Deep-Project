@@ -115,6 +115,29 @@ body {
 }
 
 /*Front page*/
+.front-page-btn {
+    width: 20% !important;
+    height: 55px !important;
+    font-weight: bolder;
+}
+
+    .front-page-btn:hover {
+        transform: scale(1.1);
+    }
+
+#front-page-package-btn {
+    box-shadow: rgba(6, 182, 212, 0.4) 0px 0px 30px;
+    background: rgb(6, 182, 212);
+    color: black;
+}
+
+#front-page-equipment-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgb(241, 245, 249);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    color: white;
+}
 
 
 /*About us site*/
