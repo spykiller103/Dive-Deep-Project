@@ -53,7 +53,7 @@ namespace DiveDeep.Persistence
 
             new Equipment
             {
-                ImageID = "/Content/Images/Divingsuits/BCD/Definition.png",
+                ImageID = "/Content/Images/Equipment/BDivingsuitsCD/Definition.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
                 Description = "5 mm",
@@ -61,7 +61,7 @@ namespace DiveDeep.Persistence
             },
              new Equipment
             {
-                ImageID = "/Content/Images/Divingsuits/BCD/Definition.png",
+                ImageID = "/Content/Images/Equipment/Divingsuits/Definition.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
                 Description = "7 mm",
@@ -70,7 +70,7 @@ namespace DiveDeep.Persistence
 
               new Equipment
             {
-                ImageID = "/Content/Images/Divingsuits/BCD/W5.png",
+                ImageID = "/Content/Images/Equipment/Divingsuits/W5.png",
                 Category = "Dykkerdragt",
                 Title = "Waterproof W5",
                 Description = "3.5 mm",
@@ -79,7 +79,7 @@ namespace DiveDeep.Persistence
 
                new Equipment
             {
-                ImageID = "/Content/Images/Divingsuits/BCD/ProteusF.png",
+                ImageID = "/Content/Images/Equipment/Divingsuits/ProteusF.png",
                 Category = "Dykkerdragt",
                 Title = "Fourth Element Proteus",
                 Description = "5 mm",
@@ -88,7 +88,7 @@ namespace DiveDeep.Persistence
 
             new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/Exodry4.png",
+                ImageID = "/Content/Images/Equipment/Divingsuits/Exodry4.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Exodry 4.0",
                 Description = "N/A",
@@ -96,7 +96,7 @@ namespace DiveDeep.Persistence
             },
              new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/D7Evo.png",
+                ImageID = "/Content/Images/Equipment/Divingsuits/D7Evo.png",
                 Category = "Dykkerdragt",
                 Title = "Waterproof D7 Evo",
                 Description = "N/A",
@@ -105,7 +105,7 @@ namespace DiveDeep.Persistence
 
               new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/ELitePlus.png",
+                ImageID = "/Content/Images/Equipment/Divingsuits/ELitePlus.png",
                 Category = "Dykkerdragt",
                 Title = "Santi E.Lite Plus",
                 Description = "N/A",
@@ -114,7 +114,7 @@ namespace DiveDeep.Persistence
 
              new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/Tank.png",
+                ImageID = "/Content/Images/Equipment/Tanks/Tank.png",
                 Category = "Tanke",
                 Title = "Scubapro 5 liter",
                 Description = "N/A",
@@ -122,7 +122,7 @@ namespace DiveDeep.Persistence
             },
               new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/Tank.png",
+                ImageID = "/Content/Images/Equipment/Tanks/Tank.png",
                 Category = "Tanke",
                 Title = "Scubapro 10 liter",
                 Description = "N/A",
@@ -130,7 +130,7 @@ namespace DiveDeep.Persistence
             },
              new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/Tank.png",
+                ImageID = "/Content/Images/Equipment/Tanks/Tank.png",
                 Category = "Tanke",
                 Title = "Scubapro 12 liter",
                 Description = "N/A",
@@ -138,7 +138,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/Tank.png",
+                ImageID = "/Content/Images/Equipment/Tanks/Tank.png",
                 Category = "Tanke",
                 Title = "Scubapro 15 liter",
                 Description = "N/A",
@@ -147,7 +147,7 @@ namespace DiveDeep.Persistence
 
             new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/MK25EVO.png",
+                ImageID = "/Content/Images/Equipment/Regulator/MK25EVO.png",
                 Category = "Regulatorsæt",
                 Title = "Scubapro Octopus R105/MK25EVO/S600",
                 Description = "N/A",
@@ -155,7 +155,7 @@ namespace DiveDeep.Persistence
             },
                new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/MK17.png",
+                ImageID = "/Content/Images/Equipment/Regulator/MK17.png",
                 Category = "Regulatorsæt",
                 Title = "Scubapro Octopus R095/MK17EVO/C370",
                 Description = "N/A",
@@ -163,7 +163,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/MK25EVObt.png",
+                ImageID = "/Content/Images/Equipment/Regulator/MK25EVObt.png",
                 Category = "Regulatorsæt",
                 Title = "Scubapro Octopus S270/MK25EVO BT/A700 Carbon BT",
                 Description = "N/A",
@@ -172,7 +172,7 @@ namespace DiveDeep.Persistence
 
              new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/Ghost.png",
+                ImageID = "/Content/Images/Equipment/Masks/Ghost.png",
                 Category = "Maske/Snorkel",
                 Title = "Scubapro Ghost",
                 Description = "N/A",
@@ -180,7 +180,7 @@ namespace DiveDeep.Persistence
             },
                 new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/DMask.png",
+                ImageID = "/Content/Images/Equipment/Masks/DMask.png",
                 Category = "Maske/Snorkel",
                 Title = "Scubapro D-Mask",
                 Description = "N/A",
@@ -188,7 +188,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/SpectraMini.png",
+                ImageID = "/Content/Images/Equipment/Masks/SpectraMini.png",
                 Category = "Maske/Snorkel",
                 Title = "Scubapro Spectra Mini",
                 Description = "N/A",
@@ -196,7 +196,7 @@ namespace DiveDeep.Persistence
             },
              new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/CrystalVu.png",
+                ImageID = "/Content/Images/Equipment/Masks/CrystalVu.png",
                 Category = "Maske/Snorkel",
                 Title = "Scubapro Crystal VU",
                 Description = "N/A",
@@ -204,7 +204,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/Scout.png",
+                ImageID = "/Content/Images/Equipment/Masks/Scout.png",
                 Category = "Maske/Snorkel",
                 Title = "Fourth Element Scout Kontrast",
                 Description = "N/A",
@@ -212,7 +212,7 @@ namespace DiveDeep.Persistence
             },
               new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/ScoutEnchance.png",
+                ImageID = "/Content/Images/Equipment/Masks/ScoutEnchance.png",
                 Category = "Maske/Snorkel",
                 Title = "Fourth Element Scout Enchance",
                 Description = "N/A",
@@ -220,7 +220,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/Element.png",
+                ImageID = "/Content/Images/Equipment/Masks/Element.png",
                 Category = "Maske/Snorkel",
                 Title = "Tusa Element",
                 Description = "N/A",
@@ -229,7 +229,7 @@ namespace DiveDeep.Persistence
 
               new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/JetFin.png",
+                ImageID = "/Content/Images/Equipment/Fins/JetFin.png",
                 Category = "Finner",
                 Title = "Scubapro Jet Fin",
                 Description = "N/A",
@@ -237,7 +237,7 @@ namespace DiveDeep.Persistence
             },
                  new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/TravelFins.png",
+                ImageID = "/Content/Images/Equipment/Fins/TravelFins.png",
                 Category = "Finner",
                 Title = "Scubapro GO travel",
                 Description = "N/A",
@@ -245,7 +245,7 @@ namespace DiveDeep.Persistence
             },
                new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/SeawingSupernova.png",
+                ImageID = "/Content/Images/Equipment/Fins/SeawingSupernova.png",
                 Category = "Finner",
                 Title = "Scubapro Seawing Supernova",
                 Description = "N/A",
@@ -253,7 +253,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/Propulsion.png",
+                ImageID = "/Content/Images/Equipment/Fins/Propulsion.png",
                 Category = "Finner",
                 Title = "Seac Propulsion",
                 Description = "N/A",
@@ -261,7 +261,7 @@ namespace DiveDeep.Persistence
             },
                new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/ALA.png",
+                ImageID = "/Content/Images/Equipment/Fins/ALA.png",
                 Category = "Finner",
                 Title = "Seac ALA",
                 Description = "N/A",
@@ -269,7 +269,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/TechFins.png",
+                ImageID = "/Content/Images/Equipment/Fins/TechFins.png",
                 Category = "Finner",
                 Title = "Fourth Element Tech",
                 Description = "N/A",
@@ -277,7 +277,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
-                ImageID = "/Content/Images/Equipment/BCD/RecFins.png",
+                ImageID = "/Content/Images/Equipment/Fins/RecFins.png",
                 Category = "Finner",
                 Title = "Fourth Element Rec Fin",
                 Description = "N/A",
