@@ -1,5 +1,11 @@
 ﻿@model List<Package>
 
+@section Title {
+    <p class="mt-5"> <span class="special-text">LEJ PR DAG</span></p>
+    <h1 class="SiteTitles">Dykker­pakker</h1>
+    <p class="mb-5">Lej præcis det du mangler - fra maske til regulator</p>
+}
+
 <div class="row row-cols-1 row-cols-md-3 g-4 ">
     @foreach (Package package in Model)
     {
@@ -18,9 +24,9 @@
                         </div>
                     </div>
 
-                    <div class="d-flex justify-content-between align-items-center package-footer">
-                        <div class="price text-white">@package.Price<span class="text-info"> kr./dag</span></div>
-                        <button type="button" class="btn btn-info btn-rent">Lej</button>
+                    <div class="package-footer mt-auto border-top border-dark">
+                        <div class="price text-white mb-3">@package.Price<span class="text-info"> kr./dag</span></div>
+                        <button type="button" class="btn btn-info btn-rent w-100">Lej</button>
                     </div>
                 </div>
             </div>
