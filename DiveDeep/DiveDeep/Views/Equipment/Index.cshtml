@@ -1,39 +1,42 @@
 ﻿@model List<Equipment>
 
-<body>
+@section Title {
 	<br />
 	<br />
 	<p> <span class="special-text">LEJ PR DAG</span></p>
 	<h1>Enkelt udstyr</h1>
 	<p>Lej præcis det du mangler - fra maske til regulator</p>
 	<br>
-	<div class="EquipmentButtonSite">
-		<button class="btn btn-primary btn-sm" type="submit">BCD</button>
-		<button class="btn btn-primary btn-sm" type="submit">Dykkerdragter</button>
-		<button class="btn btn-primary btn-sm" type="submit">Tanke</button>
-		<button class="btn btn-primary btn-sm" type="submit">Regulatorsæt</button>
-		<button class="btn btn-primary btn-sm" type="submit">Maske/Snorkel</button>
-		<button class="btn btn-primary btn-sm" type="submit">Finner</button>
-	</div>
-	<div class="row row-cols-1 row-cols-md-3 g-4 ">
-		@foreach (Equipment equipment in Model)
-		{
-			<div class="col">
-				<div class="card">
-					<img src="@equipment.ImageID" class="card-img-top" alt="...">
-					<div class="card-body">
-						@* <p <span class="special-text">BEKLÆDNING</span></p> *@
-						<p> <span class="special-text">@equipment.Category</span></p>
-						<p class="text-light">@equipment.Title</p>
-						<p class="text-secondary">@equipment.Description</p>
-						<p class="text-white">@equipment.Price<span class="text-info"> kr./dag</span></p>
-						<div class="card text-end">
-							<button type="button" class="btn btn-info btn-rent">Lej</button>
-						</div>
+}
+
+
+
+<div class="EquipmentButtonSite">
+	<button class="btn btn-primary btn-sm btn-equipment" type="submit">BCD</button>
+	<button class="btn btn-primary btn-sm btn-equipment" type="submit">Dykkerdragter</button>
+	<button class="btn btn-primary btn-sm btn-equipment" type="submit">Tanke</button>
+	<button class="btn btn-primary btn-sm btn-equipment" type="submit">Regulatorsæt</button>
+	<button class="btn btn-primary btn-sm btn-equipment" type="submit">Maske/Snorkel</button>
+	<button class="btn btn-primary btn-sm btn-equipment" type="submit">Finner</button>
+</div>
+<br />
+<div class="row row-cols-1 row-cols-md-3 g-4 ">
+	@foreach (Equipment equipment in Model)
+	{
+		<div class="col">
+			<div class="card">
+				<img src="@equipment.ImageID" class="card-img-top" alt="...">
+				<div class="card-body">
+					@* <p <span class="special-text">BEKLÆDNING</span></p> *@
+					<p> <span class="special-text">@equipment.Category</span></p>
+					<p class="text-light">@equipment.Title</p>
+					<p class="text-secondary">@equipment.Description</p>
+					<p class="text-white">@equipment.Price<span class="text-info"> kr./dag</span></p>
+					<div class="card text-end">
+						<button type="button" class="btn btn-info btn-rent">Lej</button>
 					</div>
 				</div>
 			</div>
-		}       
-	</div>
-
-</body>
+		</div>
+	}
+</div>

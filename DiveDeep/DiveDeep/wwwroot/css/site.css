@@ -272,6 +272,12 @@ body {
     padding: 6px 12px;
 }
 
+
+.btn-equipment {
+    background: rgb(6, 182, 212);
+    Color: rgb(7, 11, 20);
+}
+
 .card {
     background-color: rgb(13, 18, 32);
 }
