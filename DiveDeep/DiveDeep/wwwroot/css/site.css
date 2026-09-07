@@ -267,6 +267,7 @@ body {
     font-weight: 600;
 }
 
+/*Packeages and Equipment*/
 .btn-rent {
     border-radius: 10px;
     padding: 6px 12px;
@@ -309,4 +310,20 @@ body {
 
     .package-equipment p {
         line-height: 1.6;
+    }
+
+.BtnSize {
+    border-radius: 0 !important;
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    color: rgb(148, 163, 184) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 10px !important;
+}
+
+    .BtnSize:focus {
+        background-color: rgb(6, 182, 212) !important;
+        color: rgb(7, 11, 20) !important;
+        outline: none !important;
+        box-shadow: none !important;
     }
