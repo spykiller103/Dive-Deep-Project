@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DiveDeep.Models;
+using DiveDeep.Persistence;
+using DiveDeep.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DiveDeep.Controllers
 {
@@ -6,15 +9,16 @@ namespace DiveDeep.Controllers
     {
         public IActionResult Index()
         {
-            return View();
-        }
-        public IActionResult Login()
+            Profile profile = ProfileRepository.GetById(1);
+
+            ProfilePackageEquupmentViewData vm = new ProfilePackageEquupmentViewData
         {
-            return View();
-        }
-        public IActionResult SignUp()
-        {
-            return View();
+                Profile = profile,
+                Packages = new List<Package>(),
+                Equipments = new List<Equipment>()
+            };
+
+            return View(vm);
         }
     }
 }

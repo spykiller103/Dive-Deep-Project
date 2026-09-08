@@ -286,8 +286,8 @@ body {
 
 .employee-cards {
     width: 100%;
-    height: 250px; 
-    object-fit: cover; 
+    height: 250px;
+    object-fit: cover;
     display: block;
 }
 
@@ -312,6 +312,48 @@ body {
         line-height: 1.6;
     }
 
+.package-label {
+    background-color: #102c3d;
+    color: #00d9ff;
+    font-size: 14px;
+    font-weight: 600;
+}
+.package-box {
+    background-color: #0d1320;
+    border: 1px solid #202a3a;
+    border-radius: 22px;
+    padding: 30px;
+}
+.package-details {
+    color: #50627d;
+    font-size: 12px;
+    margin-top: 10px;
+}
+.package-title {
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 700;
+    margin-top: 14px;
+    margin-bottom: 8px;
+}
+.empty-cart {
+    color: #536684;
+    font-size: 16px;
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+    .empty-cart:hover {
+        color: #FF0000;
+    }
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
 .BtnSize {
     border-radius: 0 !important;
     margin: 10px;
@@ -327,3 +369,35 @@ body {
         outline: none !important;
         box-shadow: none !important;
     }
+
+/*Login Og Opret Konto*/
+.LoginBox {
+    background-color: #0d1420;
+    border: 1px solid #1f2a3a;
+    border-radius: 16px;
+    padding: 24px;
+    box-sizing: border-box;
+    height: 100%;
+    margin: 0;
+    width: 40%;
+}
+
+.BtnProfile {
+    width: 100%;
+    background: rgb(6, 182, 212);
+    Color: rgb(7, 11, 20);
+    border-radius: 30px;
+}
+
+    .BtnProfile:hover {
+        background: rgb(6, 182, 212);
+        Color: rgb(7, 11, 20)
+    }
+
+.profile-info {
+    background: rgba(6, 182, 212, 0.07);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    height: 100px;
+    width: 250px;
+    border-radius: 20px;
+}

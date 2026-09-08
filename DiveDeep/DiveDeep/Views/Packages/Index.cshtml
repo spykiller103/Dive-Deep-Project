@@ -37,7 +37,7 @@
                         <div class="align-items-center">
                             <div class="col-12">
                                 <label class="form-label text-white small mb-1">Lejeperiode</label>
-                                <div class="input-daterange input-group" id="datepicker">
+                                <div class="input-daterange input-group">
                                     <input type="text" class="input-sm form-control" name="start" />
                                     <span class="input-group-addon custom-text">to</span>
                                     <input type="text" class="input-sm form-control" name="end" />
@@ -59,7 +59,7 @@
     <script src="~/js/bootstrap-datepicker.min.js"></script>
     <script>
         $(function () {
-            $('#datepicker').datepicker({
+            $('.input-daterange').datepicker({
                 format: "dd/mm/yyyy",
                 startDate: new Date(),
                 autoclose: true,
