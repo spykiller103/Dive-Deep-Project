@@ -51,7 +51,7 @@ namespace DiveDeep.Persistence
                 ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
-                Description = "3 mm",
+                Description = "Våddragt, 3 mm",
                 Price = 95
             },
 
@@ -62,7 +62,7 @@ namespace DiveDeep.Persistence
                 ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
-                Description = "5 mm",
+                Description = "Våddragt, 5 mm",
                 Price = 95
             },
              new Equipment
@@ -71,7 +71,7 @@ namespace DiveDeep.Persistence
                 ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
-                Description = "7 mm",
+                Description = "Våddragt, 7 mm",
                 Price = 95
             },
 
@@ -81,7 +81,7 @@ namespace DiveDeep.Persistence
                 ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/W5.png",
                 Category = "Dykkerdragt",
                 Title = "Waterproof W5",
-                Description = "3.5 mm",
+                Description = "Våddragt, 3.5 mm",
                 Price = 95
             },
 
@@ -91,7 +91,7 @@ namespace DiveDeep.Persistence
                 ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/ProteusF.png",
                 Category = "Dykkerdragt",
                 Title = "Fourth Element Proteus",
-                Description = "5 mm",
+                Description = "Våddragt, 5 mm",
                 Price = 95
             },
 
@@ -101,7 +101,7 @@ namespace DiveDeep.Persistence
                 ImageID = "/Content/Images/Equipment/Divingsuits/Drysuits/Exodry4.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Exodry 4.0",
-                Description = "N/A",
+                Description = "Tørdragt",
                 Price = 95
             },
              new Equipment
@@ -110,7 +110,7 @@ namespace DiveDeep.Persistence
                 ImageID = "/Content/Images/Equipment/Divingsuits/Drysuits/D7Evo.png",
                 Category = "Dykkerdragt",
                 Title = "Waterproof D7 Evo",
-                Description = "N/A",
+                Description = "Tørdragt",
                 Price = 95
             },
 
@@ -120,7 +120,7 @@ namespace DiveDeep.Persistence
                 ImageID = "/Content/Images/Equipment/Divingsuits/Drysuits/ELitePlus.png",
                 Category = "Dykkerdragt",
                 Title = "Santi E.Lite Plus",
-                Description = "N/A",
+                Description = "Tørdragt",
                 Price = 95
             },
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using DiveDeep.Persistence;
+using DiveDeep.Models;
 
 namespace DiveDeep.Controllers
 {
@@ -10,5 +11,14 @@ namespace DiveDeep.Controllers
             var equipment = EquipmentRepository.GetAll();
             return View(equipment);
         }
+
+
+        [HttpPost]
+        public IActionResult Reload(int buttonID)
+        {
+            var equipment = EquipmentRepository.GetAll();
+            return View(equipment);
+        }
+
     }
 }
