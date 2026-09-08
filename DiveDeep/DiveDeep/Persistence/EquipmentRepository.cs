@@ -14,7 +14,7 @@ namespace DiveDeep.Persistence
                 Category = "BCD",
                 Title = "Scubapro Navigator Lite BCD",
                 Description = "TEMP",
-                Price = 95
+                Price = 125
             },
 
             new Equipment
@@ -24,7 +24,7 @@ namespace DiveDeep.Persistence
                 Category = "BCD",
                 Title = "Scubapro BCD Glide",
                 Description = "TEMP",
-                Price = 95
+                Price = 140
             },
             new Equipment
             {
@@ -33,7 +33,7 @@ namespace DiveDeep.Persistence
                 Category = "BCD",
                 Title = "Scubapro BCD Hydros Pro",
                 Description = "TEMP",
-                Price = 95
+                Price = 200
             },
             new Equipment
             {
@@ -42,7 +42,7 @@ namespace DiveDeep.Persistence
                 Category = "BCD",
                 Title = "Seac BCD Modular",
                 Description = "TEMP",
-                Price = 95
+                Price = 145
             },
 
             new Equipment
@@ -52,7 +52,7 @@ namespace DiveDeep.Persistence
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
                 Description = "Våddragt, 3 mm",
-                Price = 95
+                Price = 100
             },
 
 
@@ -63,7 +63,7 @@ namespace DiveDeep.Persistence
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
                 Description = "Våddragt, 5 mm",
-                Price = 95
+                Price = 100
             },
              new Equipment
             {
@@ -72,7 +72,7 @@ namespace DiveDeep.Persistence
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
                 Description = "Våddragt, 7 mm",
-                Price = 95
+                Price = 100
             },
 
               new Equipment
@@ -82,7 +82,7 @@ namespace DiveDeep.Persistence
                 Category = "Dykkerdragt",
                 Title = "Waterproof W5",
                 Description = "Våddragt, 3.5 mm",
-                Price = 95
+                Price = 100
             },
 
                new Equipment
@@ -92,7 +92,7 @@ namespace DiveDeep.Persistence
                 Category = "Dykkerdragt",
                 Title = "Fourth Element Proteus",
                 Description = "Våddragt, 5 mm",
-                Price = 95
+                Price = 120
             },
 
             new Equipment
@@ -102,7 +102,7 @@ namespace DiveDeep.Persistence
                 Category = "Dykkerdragt",
                 Title = "Scubapro Exodry 4.0",
                 Description = "Tørdragt",
-                Price = 95
+                Price = 300
             },
              new Equipment
             {
@@ -111,7 +111,7 @@ namespace DiveDeep.Persistence
                 Category = "Dykkerdragt",
                 Title = "Waterproof D7 Evo",
                 Description = "Tørdragt",
-                Price = 95
+                Price = 320
             },
 
               new Equipment
@@ -121,7 +121,7 @@ namespace DiveDeep.Persistence
                 Category = "Dykkerdragt",
                 Title = "Santi E.Lite Plus",
                 Description = "Tørdragt",
-                Price = 95
+                Price = 350
             },
 
              new Equipment
