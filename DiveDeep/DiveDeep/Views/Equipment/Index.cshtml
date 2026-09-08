@@ -12,12 +12,12 @@
 
 
 <div class="EquipmentButtonSite">
-    <a href="/categories/bcd" class="btn btn-primary btn-sm btn-equipment">BCD</a>
-    <a href="/categories/dykkerdragter" class="btn btn-primary btn-sm btn-equipment">Dykkervagter</a>
-    <a href="/categories/tanke" class="btn btn-primary btn-sm btn-equipment">Tanke</a>
-    <a href="/categories/regulatorsæt" class="btn btn-primary btn-sm btn-equipment">Regulatorsæt</a>
-    <a href="/categories/maske" class="btn btn-primary btn-sm btn-equipment">Maske/snorkel</a>
-    <a href="/categories/Finner" class="btn btn-primary btn-sm btn-equipment">Finner</a>
+	<a class="btn btn-primary btn-sm btn-equipment" asp-controller="Equipment" asp-action="reload">BCD</a>
+	<a href="/categories/dykkerdragter" class="btn btn-primary btn-sm btn-equipment">Dykkerdragter</a>
+	<a href="/categories/tanke" class="btn btn-primary btn-sm btn-equipment">Tanke</a>
+	<a href="/categories/regulatorsæt" class="btn btn-primary btn-sm btn-equipment">Regulatorsæt</a>
+	<a href="/categories/maske" class="btn btn-primary btn-sm btn-equipment">Maske/snorkel</a>
+	<a href="/categories/Finner" class="btn btn-primary btn-sm btn-equipment">Finner</a>
 </div>
 <br />
 <div class="row row-cols-1 row-cols-md-3 g-4 ">
@@ -33,7 +33,8 @@
                     <p> <span class="special-text">@equipment.Category</span></p>
                     <p class="text-light">@equipment.Title</p>
                     <p class="text-secondary">@equipment.Description</p>
-
+                    <form asp-controller="equipment" asp-action="rent" method="post">
+                  
                     <div class="package-footer mt-auto border-top border-dark">
                         <div class="align-items-center">
                             <div class="col-12">
@@ -42,7 +43,16 @@
                                     <input type="text" class="input-sm form-control" name="start" />
                                     <span class="input-group-addon custom-text">to</span>
                                     <input type="text" class="input-sm form-control" name="end" />
+
                                 </div>
+                                @{
+                                    int? key = equipment.Id;
+                                    var dateErrors = ViewData.ModelState[key.ToString()]?.Errors;
+                                    if (dateErrors != null && dateErrors.Count > 0)
+                                    {
+                                        <div class="text-danger small mt-1">@dateErrors[0].ErrorMessage</div>
+                                    }
+                                }
 
                             </div>
 
@@ -51,12 +61,13 @@
 
                         <p class="text-white">@equipment.Price<span class="text-info"> kr./dag</span></p>
                         <div class="card text-end">
-                            <form asp-controller="equipment" asp-action="rent" method="post">
                                 <input type="hidden" name="id" value="@equipment.Id" />
+
                                 <button type="submit" class="btn btn-info btn-rent">Lej</button>
-                            </form>
                         </div>
                     </div>
+                    </form>
+
                 </div>
             </div>
         </div>

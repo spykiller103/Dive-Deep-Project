@@ -32,7 +32,11 @@
             <p>@equipment.Title</p>
             <p>@equipment.Description</p>
             <p>@equipment.Category</p>
-            <p>@equipment.Price</p>
+            <p>Pris: @equipment.Price kr.</p>
+            @if (equipment.StartDate.HasValue && equipment.EndDate.HasValue)
+            {
+                <p>Periode: @equipment.StartDate.Value.ToString("dd/MM/yyyy") - @equipment.EndDate.Value.ToString("dd/MM/yyyy")</p>
+            }
             <p>@equipment.ImageID</p>
         }
 
