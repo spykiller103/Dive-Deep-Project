@@ -371,6 +371,10 @@ body {
         box-shadow: none !important;
     }
 
+.equipment-title {
+    min-height: 48px;
+}
+
 /*Login Og Opret Konto*/
 .LoginBox {
     background-color: #0d1420;
