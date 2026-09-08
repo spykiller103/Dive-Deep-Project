@@ -33,7 +33,8 @@
                     <p> <span class="special-text">@equipment.Category</span></p>
                     <p class="text-light">@equipment.Title</p>
                     <p class="text-secondary">@equipment.Description</p>
-
+                    <form asp-controller="equipment" asp-action="rent" method="post">
+                  
                     <div class="package-footer mt-auto border-top border-dark">
                         <div class="align-items-center">
                             <div class="col-12">
@@ -42,7 +43,16 @@
                                     <input type="text" class="input-sm form-control" name="start" />
                                     <span class="input-group-addon custom-text">to</span>
                                     <input type="text" class="input-sm form-control" name="end" />
+
                                 </div>
+                                @{
+                                    int? key = equipment.Id;
+                                    var dateErrors = ViewData.ModelState[key.ToString()]?.Errors;
+                                    if (dateErrors != null && dateErrors.Count > 0)
+                                    {
+                                        <div class="text-danger small mt-1">@dateErrors[0].ErrorMessage</div>
+                                    }
+                                }
 
                             </div>
 
@@ -51,12 +61,13 @@
 
                         <p class="text-white">@equipment.Price<span class="text-info"> kr./dag</span></p>
                         <div class="card text-end">
-                            <form asp-controller="equipment" asp-action="rent" method="post">
                                 <input type="hidden" name="id" value="@equipment.Id" />
+
                                 <button type="submit" class="btn btn-info btn-rent">Lej</button>
-                            </form>
                         </div>
                     </div>
+                    </form>
+
                 </div>
             </div>
         </div>

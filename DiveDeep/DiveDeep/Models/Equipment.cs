@@ -1,4 +1,6 @@
-﻿namespace DiveDeep.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DiveDeep.Models
 {
     public class Equipment
     {
@@ -8,6 +10,10 @@
         public string Title { get; set; }
         public string Description { get; set; }
         public int Price { get; set; }
+        [Required]
+        public DateTime? StartDate { get; set; }
+        [Required]
+        public DateTime? EndDate { get; set; }
     }
 
 
