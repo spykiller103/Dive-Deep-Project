@@ -47,7 +47,11 @@
 
                         </div>
                         <div class="price text-white mb-3">@package.Price<span class="text-info"> kr./dag</span></div>
-                        <button type="button" class="btn btn-info btn-rent w-100">Lej</button>
+                        
+                        <form asp-controller="packages" asp-action="rent" method="post">
+                            <input type="hidden" name="id" value="@package.Id" />
+                            <button type="submit" class="btn btn-info btn-rent">Lej</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -58,7 +62,7 @@
 @section Scripts {
     <script src="~/js/bootstrap-datepicker.min.js"></script>
     <script>
-        $(function () {
+        $(function() {
             $('.input-daterange').datepicker({
                 format: "dd/mm/yyyy",
                 startDate: new Date(),

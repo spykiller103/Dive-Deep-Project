@@ -11,5 +11,15 @@ namespace DiveDeep.Controllers
             List<Package> packeges = PackageRepository.GetAll();
             return View(packeges);
         }
+
+        [HttpPost]
+        public IActionResult Rent(int id)
+        {
+            Package packagesToBeAdded = PackageRepository.GetById(id);
+
+            CartRepository.AddPackage(packagesToBeAdded);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

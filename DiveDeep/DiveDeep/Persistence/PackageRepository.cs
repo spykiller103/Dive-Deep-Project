@@ -27,7 +27,7 @@ namespace DiveDeep.Persistence
 
             new Package
             {
-                Id=1,
+                Id=2,
                 Price = 90,
                 Image = "/Content/Images/Packages/Package2.png",
                 Title = "Komplet snorkelsæt",
@@ -61,16 +61,5 @@ namespace DiveDeep.Persistence
         {
             _packages.RemoveAll(x => x.Id == packageId);
         }
-
-        /*
-        public static void Update(int packageId, Package package)
-        {
-            var packageToUpdate = GetById(packageId);
-            if (packageToUpdate != null)
-            {
-                packageToUpdate.Title = package.Title;
-            }
-        }
-        */
     }
 }

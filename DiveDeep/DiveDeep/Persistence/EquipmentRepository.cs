@@ -4,11 +4,12 @@ namespace DiveDeep.Persistence
 {
     public static class EquipmentRepository
     {
-        private static List<Equipment> _equipment = new List<Equipment>
+        private static List<Equipment> _equipments = new List<Equipment>
         {
 
             new Equipment
             {
+                Id=1,
                 ImageID = "/Content/Images/Equipment/BCD/NavigatorLite.png",
                 Category = "BCD",
                 Title = "Scubapro Navigator Lite BCD",
@@ -18,6 +19,7 @@ namespace DiveDeep.Persistence
 
             new Equipment
             {
+                Id=2,
                 ImageID = "/Content/Images/Equipment/BCD/GlideBCD.png",
                 Category = "BCD",
                 Title = "Scubapro BCD Glide",
@@ -26,6 +28,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
+                Id=3,
                 ImageID = "/Content/Images/Equipment/BCD/HydrosPro.png",
                 Category = "BCD",
                 Title = "Scubapro BCD Hydros Pro",
@@ -34,6 +37,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
+                Id=4,
                 ImageID = "/Content/Images/Equipment/BCD/Modular.png",
                 Category = "BCD",
                 Title = "Seac BCD Modular",
@@ -43,6 +47,7 @@ namespace DiveDeep.Persistence
 
             new Equipment
             {
+                Id=5,
                 ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
@@ -53,6 +58,7 @@ namespace DiveDeep.Persistence
 
             new Equipment
             {
+                Id=6,
                 ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
@@ -61,6 +67,7 @@ namespace DiveDeep.Persistence
             },
              new Equipment
             {
+                Id=7,
                 ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
@@ -70,6 +77,7 @@ namespace DiveDeep.Persistence
 
               new Equipment
             {
+                Id=8,
                 ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/W5.png",
                 Category = "Dykkerdragt",
                 Title = "Waterproof W5",
@@ -79,6 +87,7 @@ namespace DiveDeep.Persistence
 
                new Equipment
             {
+                Id=9,
                 ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/ProteusF.png",
                 Category = "Dykkerdragt",
                 Title = "Fourth Element Proteus",
@@ -88,14 +97,16 @@ namespace DiveDeep.Persistence
 
             new Equipment
             {
+                Id=10,
                 ImageID = "/Content/Images/Equipment/Divingsuits/Drysuits/Exodry4.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Exodry 4.0",
                 Description = "N/A",
                 Price = 95
             },
-             new Equipment
+            new Equipment
             {
+                Id = 11,
                 ImageID = "/Content/Images/Equipment/Divingsuits/Drysuits/D7Evo.png",
                 Category = "Dykkerdragt",
                 Title = "Waterproof D7 Evo",
@@ -105,6 +116,7 @@ namespace DiveDeep.Persistence
 
               new Equipment
             {
+                Id = 12,
                 ImageID = "/Content/Images/Equipment/Divingsuits/Drysuits/ELitePlus.png",
                 Category = "Dykkerdragt",
                 Title = "Santi E.Lite Plus",
@@ -114,6 +126,7 @@ namespace DiveDeep.Persistence
 
              new Equipment
             {
+                Id = 13,
                 ImageID = "/Content/Images/Equipment/Tanks/Tank.png",
                 Category = "Tanke",
                 Title = "Scubapro 5 liter",
@@ -122,6 +135,7 @@ namespace DiveDeep.Persistence
             },
               new Equipment
             {
+                Id = 14,
                 ImageID = "/Content/Images/Equipment/Tanks/Tank.png",
                 Category = "Tanke",
                 Title = "Scubapro 10 liter",
@@ -130,6 +144,7 @@ namespace DiveDeep.Persistence
             },
              new Equipment
             {
+                Id = 15,
                 ImageID = "/Content/Images/Equipment/Tanks/Tank.png",
                 Category = "Tanke",
                 Title = "Scubapro 12 liter",
@@ -138,6 +153,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
+                Id = 16,
                 ImageID = "/Content/Images/Equipment/Tanks/Tank.png",
                 Category = "Tanke",
                 Title = "Scubapro 15 liter",
@@ -147,6 +163,7 @@ namespace DiveDeep.Persistence
 
             new Equipment
             {
+                Id = 17,
                 ImageID = "/Content/Images/Equipment/Regulator/MK25EVO.png",
                 Category = "Regulatorsæt",
                 Title = "Scubapro Octopus R105/MK25EVO/S600",
@@ -155,6 +172,7 @@ namespace DiveDeep.Persistence
             },
                new Equipment
             {
+                Id = 18,
                 ImageID = "/Content/Images/Equipment/Regulator/MK17.png",
                 Category = "Regulatorsæt",
                 Title = "Scubapro Octopus R095/MK17EVO/C370",
@@ -163,6 +181,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
+                Id = 19,
                 ImageID = "/Content/Images/Equipment/Regulator/MK25EVObt.png",
                 Category = "Regulatorsæt",
                 Title = "Scubapro Octopus S270/MK25EVO BT/A700 Carbon BT",
@@ -172,6 +191,7 @@ namespace DiveDeep.Persistence
 
              new Equipment
             {
+                Id = 20,
                 ImageID = "/Content/Images/Equipment/Masks/Ghost.png",
                 Category = "Maske/Snorkel",
                 Title = "Scubapro Ghost",
@@ -188,6 +208,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
+                Id = 22,
                 ImageID = "/Content/Images/Equipment/Masks/SpectraMini.png",
                 Category = "Maske/Snorkel",
                 Title = "Scubapro Spectra Mini",
@@ -196,6 +217,7 @@ namespace DiveDeep.Persistence
             },
              new Equipment
             {
+                Id = 23,
                 ImageID = "/Content/Images/Equipment/Masks/CrystalVu.png",
                 Category = "Maske/Snorkel",
                 Title = "Scubapro Crystal VU",
@@ -204,6 +226,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
+                Id = 24,
                 ImageID = "/Content/Images/Equipment/Masks/Scout.png",
                 Category = "Maske/Snorkel",
                 Title = "Fourth Element Scout Kontrast",
@@ -212,6 +235,7 @@ namespace DiveDeep.Persistence
             },
               new Equipment
             {
+                Id = 25,
                 ImageID = "/Content/Images/Equipment/Masks/ScoutEnchance.png",
                 Category = "Maske/Snorkel",
                 Title = "Fourth Element Scout Enchance",
@@ -220,6 +244,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
+                Id = 26,
                 ImageID = "/Content/Images/Equipment/Masks/Element.png",
                 Category = "Maske/Snorkel",
                 Title = "Tusa Element",
@@ -229,6 +254,7 @@ namespace DiveDeep.Persistence
 
               new Equipment
             {
+                Id = 27,
                 ImageID = "/Content/Images/Equipment/Fins/JetFin.png",
                 Category = "Finner",
                 Title = "Scubapro Jet Fin",
@@ -237,6 +263,7 @@ namespace DiveDeep.Persistence
             },
                  new Equipment
             {
+                Id = 28,
                 ImageID = "/Content/Images/Equipment/Fins/TravelFins.png",
                 Category = "Finner",
                 Title = "Scubapro GO travel",
@@ -245,6 +272,7 @@ namespace DiveDeep.Persistence
             },
                new Equipment
             {
+                Id = 29,
                 ImageID = "/Content/Images/Equipment/Fins/SeawingSupernova.png",
                 Category = "Finner",
                 Title = "Scubapro Seawing Supernova",
@@ -253,6 +281,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
+                Id = 30,
                 ImageID = "/Content/Images/Equipment/Fins/Propulsion.png",
                 Category = "Finner",
                 Title = "Seac Propulsion",
@@ -261,6 +290,7 @@ namespace DiveDeep.Persistence
             },
                new Equipment
             {
+                Id = 31,
                 ImageID = "/Content/Images/Equipment/Fins/ALA.png",
                 Category = "Finner",
                 Title = "Seac ALA",
@@ -269,6 +299,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
+                Id = 32,
                 ImageID = "/Content/Images/Equipment/Fins/TechFins.png",
                 Category = "Finner",
                 Title = "Fourth Element Tech",
@@ -277,6 +308,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
+                Id = 33,
                 ImageID = "/Content/Images/Equipment/Fins/RecFins.png",
                 Category = "Finner",
                 Title = "Fourth Element Rec Fin",
@@ -290,7 +322,25 @@ namespace DiveDeep.Persistence
 
         public static List<Equipment> GetAll()
         {
-            return _equipment;
+            return _equipments;
+        }
+
+        public static Equipment? GetById(int id)
+        {
+            return _equipments.FirstOrDefault(x => x.Id == id);
+        }
+        public static void Add(Equipment equipment)
+        {
+            if (equipment == null) return;
+
+            equipment.Id = _equipments.Any() ? _equipments.Max(x => x.Id) + 1 : 1;
+
+            _equipments.Add(equipment);
+        }
+
+        public static void Delete(int packageId)
+        {
+            _equipments.RemoveAll(x => x.Id == packageId);
         }
 
     }
