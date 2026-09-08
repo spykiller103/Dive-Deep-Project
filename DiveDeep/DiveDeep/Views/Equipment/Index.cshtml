@@ -12,12 +12,12 @@
 
 
 <div class="EquipmentButtonSite">
-    <button class="btn btn-primary btn-sm btn-equipment" type="submit">BCD</button>
-    <button class="btn btn-primary btn-sm btn-equipment" type="submit">Dykkerdragter</button>
-    <button class="btn btn-primary btn-sm btn-equipment" type="submit">Tanke</button>
-    <button class="btn btn-primary btn-sm btn-equipment" type="submit">Regulatorsæt</button>
-    <button class="btn btn-primary btn-sm btn-equipment" type="submit">Maske/Snorkel</button>
-    <button class="btn btn-primary btn-sm btn-equipment" type="submit">Finner</button>
+	<a href="/categories/bcd" class="btn btn-primary btn-sm btn-equipment">BCD</a>
+	<a href="/categories/dykkerdragter" class="btn btn-primary btn-sm btn-equipment">Dykkervagter</a>
+	<a href="/categories/tanke" class="btn btn-primary btn-sm btn-equipment">Tanke</a>
+	<a href="/categories/regulatorsæt" class="btn btn-primary btn-sm btn-equipment">Regulatorsæt</a>
+	<a href="/categories/maske" class="btn btn-primary btn-sm btn-equipment">Maske/snorkel</a>
+	<a href="/categories/Finner" class="btn btn-primary btn-sm btn-equipment">Finner</a>
 </div>
 <br />
 <div class="row row-cols-1 row-cols-md-3 g-4 ">
@@ -45,3 +45,20 @@
         </div>
     }
 </div>
+
+
+
+
+@section Scripts {
+	<script src="~/js/bootstrap-datepicker.min.js"></script>
+	<script>
+		$(function() {
+			$('.input-daterange').datepicker({
+				format: "dd/mm/yyyy",
+				startDate: new Date(),
+				autoclose: true,
+				todayHighlight: true
+			});
+		});
+	</script>
+}

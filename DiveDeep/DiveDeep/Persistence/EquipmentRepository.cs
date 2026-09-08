@@ -200,6 +200,7 @@ namespace DiveDeep.Persistence
             },
                 new Equipment
             {
+                Id = 21,
                 ImageID = "/Content/Images/Equipment/Masks/DMask.png",
                 Category = "Maske/Snorkel",
                 Title = "Scubapro D-Mask",
