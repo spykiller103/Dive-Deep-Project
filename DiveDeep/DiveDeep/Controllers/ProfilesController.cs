@@ -12,7 +12,7 @@ namespace DiveDeep.Controllers
             Profile profile = ProfileRepository.GetById(1);
 
             ProfilePackageEquupmentViewData vm = new ProfilePackageEquupmentViewData
-            {
+        {
                 Profile = profile,
                 Packages = new List<Package>(),
                 Equipments = new List<Equipment>()

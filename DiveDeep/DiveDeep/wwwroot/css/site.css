@@ -267,13 +267,28 @@ body {
     font-weight: 600;
 }
 
+/*Packeages and Equipment*/
 .btn-rent {
     border-radius: 10px;
     padding: 6px 12px;
 }
 
+
+.btn-equipment {
+    background: rgb(6, 182, 212);
+    Color: rgb(7, 11, 20);
+}
+
 .card {
     background-color: rgb(13, 18, 32);
+}
+
+
+.employee-cards {
+    width: 100%;
+    height: 250px; 
+    object-fit: cover; 
+    display: block;
 }
 
 .package-img {
@@ -297,12 +312,41 @@ body {
         line-height: 1.6;
     }
 
-/*Profile page*/
-
-.profile-info {
-    background: rgba(6, 182, 212, 0.07);
-    border: 1px solid rgba(6, 182, 212, 0.2);
-    height: 100px;
-    width: 250px;
-    border-radius: 20px;
+.BtnSize {
+    border-radius: 0 !important;
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    color: rgb(148, 163, 184) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 10px !important;
 }
+
+    .BtnSize:focus {
+        background-color: rgb(6, 182, 212) !important;
+        color: rgb(7, 11, 20) !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+/*Login Og Opret Konto*/
+.LoginBox {
+    background-color: #0d1420;
+    border: 1px solid #1f2a3a;
+    border-radius: 16px;
+    padding: 24px;
+    box-sizing: border-box;
+    height: 100%;
+    margin: 0;
+    width: 40%;
+}
+
+.BtnProfile {
+    width: 100%;
+    background: rgb(6, 182, 212);
+    Color: rgb(7, 11, 20);
+    border-radius: 30px;
+}
+
+    .BtnProfile:hover {
+        background: rgb(6, 182, 212);
+        Color: rgb(7, 11, 20);
