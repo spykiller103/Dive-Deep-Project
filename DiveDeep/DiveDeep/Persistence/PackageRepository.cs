@@ -10,6 +10,7 @@ namespace DiveDeep.Persistence
             new Package
             {
                 Id=1,
+                Category = "Pakke",
                 Price = 90,
                 Image = "/Content/Images/Packages/Package1.png",
                 Title = "Komplet dykkersæt",
@@ -28,6 +29,7 @@ namespace DiveDeep.Persistence
             new Package
             {
                 Id=2,
+                Category = "Pakke",
                 Price = 90,
                 Image = "/Content/Images/Packages/Package2.png",
                 Title = "Komplet snorkelsæt",
