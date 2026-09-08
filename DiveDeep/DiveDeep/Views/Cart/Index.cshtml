@@ -50,15 +50,31 @@
             </div>
 
             <div class="border-top border-dark pt-3">
-                <span>
+                <div class="d-flex align-items-end">
+
+                    <!--Amount-->
                     <div class="col-md-2">
+                        <label class="col-form-label">Antal</label>
+
                         <div class="input-group">
                             <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
-                            <input style="max-width:100px" type="text" class="form-control  form-control-sm text-center quantity-input" value="1">
+                            <input style="max-width:100px" type="text" class="form-control form-control-sm text-center quantity-input" value="1">
                             <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
                         </div>
                     </div>
-                </span>
+
+                    <!--Price pr day-->
+                    <div>
+                        <label class="col-form-label">Dagspris</label>
+                        <p class="mb-0">@package.Price kr./dag</p>
+                    </div>
+
+                    <!--Price calculated-->
+                    <div class="ms-auto">
+                        <label class="mb-0">y dag(e) @package.Price kr.</label>
+                        <p class="mb-0">@package.Price</p>
+                    </div>
+                </div>
             </div>
 
         </div>
