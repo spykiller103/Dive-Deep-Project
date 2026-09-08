@@ -20,5 +20,13 @@ namespace DiveDeep.Controllers
 
             return View(vm);
         }
+        public IActionResult Login()
+        {
+            return View();
+        }
+        public IActionResult SignUp()
+        {
+            return View();
+        }
     }
 }
