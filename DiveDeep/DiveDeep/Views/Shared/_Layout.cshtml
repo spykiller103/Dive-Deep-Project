@@ -45,7 +45,7 @@
                 <!-- Login -->
                 <div class="custom-background borderBox login">
                     <div class="custom-text navbar-nav">
-                        <a class="nav-link" href="#">Log ind</a>
+                        <a class="nav-link" asp-controller="Profiles" asp-action="Login">Log ind</a>
                     </div>
                 </div>
 
@@ -88,8 +88,9 @@
             <div class="col mb-3 custom-footer-text2">
                 <h5>Konto</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-text">Log Ind</a></li>
+                    <li class="nav-item mb-2"><a class="nav-link p-0 custom-text" asp-controller="Profiles" asp-action="Login">Log Ind</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 custom-text">Opret Konto</a></li>
+                    <li class="nav-item mb-2"><a class="nav-link p-0 custom-text" asp-controller="Profiles" asp-action="Index">Profile</a></li>
                 </ul>
             </div>
 

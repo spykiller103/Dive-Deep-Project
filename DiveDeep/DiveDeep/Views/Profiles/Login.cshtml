@@ -1,0 +1,22 @@
+﻿@section Title {
+    <div>
+        <h1 class="SiteTitles">Login</h1>
+    </div>
+}
+<div class="LoginBox">
+    <div class="flex p-1 rounded-full mb-8">
+        <a class="nav-link p-0 custom-text btn-primary" asp-controller="Profiles" asp-action="Login">Login</a>
+        <a class="nav-link p-0 custom-text btn-primary" asp-controller="Profiles" asp-action="SignUp">Opret Konto</a>
+    </div>
+    <form class="px-4 py-3">
+        <div class="mb-3">
+            <label for="exampleDropdownFormEmail1" class="form-label custom-text">Email address</label>
+            <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+        </div>
+        <div class="mb-3">
+            <label for="exampleDropdownFormPassword1" class="form-label custom-text">Password</label>
+            <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary BtnProfile">Login</button>
+    </form>
+</div>
