@@ -291,3 +291,45 @@ body {
     .package-equipment p {
         line-height: 1.6;
     }
+
+.package-label {
+    background-color: #102c3d;
+    color: #00d9ff;
+    font-size: 14px;
+    font-weight: 600;
+}
+.package-box {
+    background-color: #0d1320;
+    border: 1px solid #202a3a;
+    border-radius: 22px;
+    padding: 30px;
+}
+.package-details {
+    color: #50627d;
+    font-size: 12px;
+    margin-top: 10px;
+}
+.package-title {
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 700;
+    margin-top: 14px;
+    margin-bottom: 8px;
+}
+.empty-cart {
+    color: #536684;
+    font-size: 16px;
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+    .empty-cart:hover {
+        color: #FF0000;
+    }
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}

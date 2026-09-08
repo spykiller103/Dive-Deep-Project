@@ -1,0 +1,73 @@
+﻿@section Title{
+
+    <div class="cart-header">
+        <div>
+    <p class="mt-5"> <span class="special-text">Antal ting i kurv</span></p>
+    <h1 class="SiteTitles">DIN KURV</h1>
+
+        </div>
+
+    <button type="button"
+            class="align-content-end  btn btn-link text-secondary text-decoration-none"
+            data-bs-toggle="modal"
+            data-bs-target="#emptyCartModal">
+        <i class="bi bi-trash"></i>
+        Tøm kurv
+    </button>
+
+        </div>
+
+}
+<div class="package-box position-relative">
+    <button type="button"
+            class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+            data-bs-toggle="modal"
+            data-bs-target="#removeModal">
+    </button>
+    <span class="badge rounded-pill px-3 py-2 package-label">
+        "kategori midlertidig"
+    </span>
+    <h2 class="package-title">Lille pakke</h2>
+    <p class="package-details">
+        Vådtragt: XXL, Finnestørrelse: 39
+    </p>
+    
+    <hr />
+    <div class="modal fade" id="emptyCartModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Tøm kurv?</h5>
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal">
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    Er du sikker på, at du vil fjerne alle varer fra kurven?
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                        Annuller
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-danger"
+                            id="confirmEmptyCart">
+                        Tøm kurv
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    </div>
