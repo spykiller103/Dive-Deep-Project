@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Extensions\" />
     <Folder Include="wwwroot\Content\Images\Equipment\Regulator\" />
     <Folder Include="wwwroot\Content\Images\Equipment\Tanks\" />
   </ItemGroup>

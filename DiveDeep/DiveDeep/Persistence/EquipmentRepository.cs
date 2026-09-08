@@ -4,12 +4,12 @@ namespace DiveDeep.Persistence
 {
     public static class EquipmentRepository
     {
-        private static List<Equipment> _equipment = new List<Equipment>
+        private static List<Equipment> _equipments = new List<Equipment>
         {
 
             new Equipment
             {
-                Id = 1,
+                Id=1,
                 ImageID = "/Content/Images/Equipment/BCD/NavigatorLite.png",
                 Category = "BCD",
                 Title = "Scubapro Navigator Lite BCD",
@@ -19,7 +19,7 @@ namespace DiveDeep.Persistence
 
             new Equipment
             {
-                Id = 2,
+                Id=2,
                 ImageID = "/Content/Images/Equipment/BCD/GlideBCD.png",
                 Category = "BCD",
                 Title = "Scubapro BCD Glide",
@@ -28,7 +28,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
-                Id = 3,
+                Id=3,
                 ImageID = "/Content/Images/Equipment/BCD/HydrosPro.png",
                 Category = "BCD",
                 Title = "Scubapro BCD Hydros Pro",
@@ -37,7 +37,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
-                Id = 4,
+                Id=4,
                 ImageID = "/Content/Images/Equipment/BCD/Modular.png",
                 Category = "BCD",
                 Title = "Seac BCD Modular",
@@ -47,7 +47,7 @@ namespace DiveDeep.Persistence
 
             new Equipment
             {
-                Id = 5,
+                Id=5,
                 ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
@@ -58,7 +58,7 @@ namespace DiveDeep.Persistence
 
             new Equipment
             {
-                Id = 6,
+                Id=6,
                 ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
@@ -67,7 +67,7 @@ namespace DiveDeep.Persistence
             },
              new Equipment
             {
-                Id = 7,
+                Id=7,
                 ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
@@ -77,7 +77,7 @@ namespace DiveDeep.Persistence
 
               new Equipment
             {
-                Id = 8,
+                Id=8,
                 ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/W5.png",
                 Category = "Dykkerdragt",
                 Title = "Waterproof W5",
@@ -87,7 +87,7 @@ namespace DiveDeep.Persistence
 
                new Equipment
             {
-                Id = 9,
+                Id=9,
                 ImageID = "/Content/Images/Equipment/Divingsuits/Wetsuits/ProteusF.png",
                 Category = "Dykkerdragt",
                 Title = "Fourth Element Proteus",
@@ -97,14 +97,14 @@ namespace DiveDeep.Persistence
 
             new Equipment
             {
-                Id = 10,
+                Id=10,
                 ImageID = "/Content/Images/Equipment/Divingsuits/Drysuits/Exodry4.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Exodry 4.0",
                 Description = "Tørdragt",
                 Price = 300
             },
-             new Equipment
+            new Equipment
             {
                 Id = 11,
                 ImageID = "/Content/Images/Equipment/Divingsuits/Drysuits/D7Evo.png",
@@ -291,6 +291,7 @@ namespace DiveDeep.Persistence
             },
                new Equipment
             {
+                Id = 31,
                 ImageID = "/Content/Images/Equipment/Fins/ALA.png",
                 Category = "Finner",
                 Title = "Seac ALA",
@@ -299,7 +300,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
-                Id = 31,
+                Id = 32,
                 ImageID = "/Content/Images/Equipment/Fins/TechFins.png",
                 Category = "Finner",
                 Title = "Fourth Element Tech",
@@ -308,7 +309,7 @@ namespace DiveDeep.Persistence
             },
             new Equipment
             {
-                Id = 32,
+                Id = 33,
                 ImageID = "/Content/Images/Equipment/Fins/RecFins.png",
                 Category = "Finner",
                 Title = "Fourth Element Rec Fin",
@@ -322,7 +323,25 @@ namespace DiveDeep.Persistence
 
         public static List<Equipment> GetAll()
         {
-            return _equipment;
+            return _equipments;
+        }
+
+        public static Equipment? GetById(int id)
+        {
+            return _equipments.FirstOrDefault(x => x.Id == id);
+        }
+        public static void Add(Equipment equipment)
+        {
+            if (equipment == null) return;
+
+            equipment.Id = _equipments.Any() ? _equipments.Max(x => x.Id) + 1 : 1;
+
+            _equipments.Add(equipment);
+        }
+
+        public static void Delete(int packageId)
+        {
+            _equipments.RemoveAll(x => x.Id == packageId);
         }
 
     }

@@ -1,13 +1,10 @@
-﻿namespace DiveDeep.ViewModels
+﻿using DiveDeep.Models;
+
+namespace DiveDeep.ViewModels
 {
     public class PackageEquipmentViewData
     {
-        public int Id { get; set; }
-        public string ImageID { get; set; }
-        public string Category { get; set; }
-        public string Title { get; set; }
-
-        public int Price { get; set; }
-
+        public List<Package> CartPackages { get; set; } = new();
+        public List<Equipment> CartEquipments { get; set; } = new();
     }
 }
