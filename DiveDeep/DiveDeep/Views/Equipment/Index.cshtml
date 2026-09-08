@@ -33,12 +33,29 @@
                     <p> <span class="special-text">@equipment.Category</span></p>
                     <p class="text-light">@equipment.Title</p>
                     <p class="text-secondary">@equipment.Description</p>
-                    <p class="text-white">@equipment.Price<span class="text-info"> kr./dag</span></p>
-                    <div class="card text-end">
-                        <form asp-controller="equipment" asp-action="rent" method="post">
-                            <input type="hidden" name="id" value="@equipment.Id" />
-                            <button type="submit" class="btn btn-info btn-rent">Lej</button>
-                        </form>
+
+                    <div class="package-footer mt-auto border-top border-dark">
+                        <div class="align-items-center">
+                            <div class="col-12">
+                                <label class="form-label text-white small mb-1">Lejeperiode</label>
+                                <div class="input-daterange input-group">
+                                    <input type="text" class="input-sm form-control" name="start" />
+                                    <span class="input-group-addon custom-text">to</span>
+                                    <input type="text" class="input-sm form-control" name="end" />
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <p class="text-white">@equipment.Price<span class="text-info"> kr./dag</span></p>
+                        <div class="card text-end">
+                            <form asp-controller="equipment" asp-action="rent" method="post">
+                                <input type="hidden" name="id" value="@equipment.Id" />
+                                <button type="submit" class="btn btn-info btn-rent">Lej</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,15 +67,15 @@
 
 
 @section Scripts {
-	<script src="~/js/bootstrap-datepicker.min.js"></script>
-	<script>
-		$(function() {
-			$('.input-daterange').datepicker({
-				format: "dd/mm/yyyy",
-				startDate: new Date(),
-				autoclose: true,
-				todayHighlight: true
-			});
-		});
-	</script>
+    <script src="~/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(function() {
+            $('.input-daterange').datepicker({
+                format: "dd/mm/yyyy",
+                startDate: new Date(),
+                autoclose: true,
+                todayHighlight: true
+            });
+        });
+    </script>
 }
