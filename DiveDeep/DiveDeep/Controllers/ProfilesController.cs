@@ -1,5 +1,6 @@
 ﻿using DiveDeep.Models;
 using DiveDeep.Persistence;
+using DiveDeep.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiveDeep.Controllers
@@ -10,7 +11,14 @@ namespace DiveDeep.Controllers
         {
             Profile profile = ProfileRepository.GetById(1);
 
-            return View(profile);
+            ProfilePackageEquupmentViewData vm = new ProfilePackageEquupmentViewData
+            {
+                Profile = profile,
+                Packages = new List<Package>(),
+                Equipments = new List<Equipment>()
+            };
+
+            return View(vm);
         }
     }
 }

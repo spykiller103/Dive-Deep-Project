@@ -1,8 +1,9 @@
-﻿@model Profile;
+﻿@using DiveDeep.ViewModels;
+@model ProfilePackageEquupmentViewData;
 
 @section Title {
-    <h1 class="mt-4 SiteTitles">@Model.FullName</h1>
-    <p>@Model.Email</p>
+    <h1 class="mt-4 SiteTitles">@Model.Profile.FullName</h1>
+    <p>@Model.Profile.Email</p>
 }
 
 <div class="row row-cols-1 row-cols-md-3 g-3 gap-3">
@@ -17,8 +18,5 @@
 </div>
 
 <h2 class="text-light mt-5">Lejer lige nu</h2>
-<div>
-    @foreach ()
-</div>
 
 <h2 class="text-light mt-5">Lejehistorik</h2>
