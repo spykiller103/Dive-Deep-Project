@@ -33,26 +33,28 @@ namespace DiveDeep.Controllers
                 ModelState.AddModelError(key.ToString(), "Vælg venligst både start- og slutdato.");
 
                 List<Package> package = PackageRepository.GetAll();
+
                 return View("Index", package);
             }
 
-            int days = 1;
-            days = (endDate - startDate).Days + 1;
-            if (days < 1) days = 1;
-            int totalPrice = packagesToBeAdded.Price * days;
+            int days = (endDate - startDate).Days + 1;
 
-            Booking booking = new Booking
+            if (days < 1)
             {
-                PackageId = packagesToBeAdded.PackageId,
-                Category = packagesToBeAdded.Category,
-                Price = packagesToBeAdded.Price,
-                Image = packagesToBeAdded.Image,
-                Title = packagesToBeAdded.Title,
-                Equipment = packagesToBeAdded.Equipment,
-                StartDate = packagesToBeAdded.StartDate,
-                EndDate = packagesToBeAdded.EndDate,
+                days = 1;
+            }
+
+            packagesToBeAdded.TotalDays = days;
+
+            CartItem cartItem = new CartItem
+            {
+                Package = packagesToBeAdded,
+                StartDate = startDate,
+                EndDate = endDate,
                 TotalDays = days
             };
+
+            CartRepository.Add(cartItem);
 
             return RedirectToAction(nameof(Index));
         }

@@ -27,18 +27,6 @@ namespace DiveDeep.Models
             }
         }
 
-        [Display(Name = "Equipment")]
-        public int EquipmentId { get; set; }
-
-        [ValidateNever]
-        [BindNever]
-        public Equipment? Equipment { get; set; }
-
-        [Display(Name = "Package")]
-        public int PackageId { get; set; }
-
-        [ValidateNever]
-        [BindNever]
-        public Package? Package { get; set; }
+        public List<Booking> Bookings { get; set; } = new();
     }
 }

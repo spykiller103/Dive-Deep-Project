@@ -3,16 +3,21 @@ namespace DiveDeep.Persistence
 {
     public static class CartRepository
     {
-        private static List<Booking> _cartBookings = new();
+        private static List<CartItem> _cartItems = new List<CartItem>();
 
-        public static void AddBooking(Booking booking)
+        public static List<CartItem> GetAll()
         {
-            _cartBookings.Add(booking);
+            return _cartItems;
         }
 
-        public static List<Booking> GetBookings()
+        public static void Add(CartItem item)
         {
-            return _cartBookings;
+            _cartItems.Add(item);
+        }
+
+        public static void Delete(int index)
+        {
+            _cartItems.RemoveAt(index);
         }
     }
 }

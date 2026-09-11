@@ -1,5 +1,5 @@
 @using DiveDeep.ViewModels
-@model PackageEquipmentViewData;
+@model List<CartItem>;
 
 @section Title {
 
@@ -19,112 +19,147 @@
     </div>
 }
 
-@foreach (Equipment equipment in Model.CartEquipments)
+@foreach (CartItem item in Model)
 {
     <div class="mb-4 mt-4">
         <div class="package-box position-relative">
+
             <button type="button"
                     class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
                     data-bs-toggle="modal"
                     data-bs-target="#removeModal">
             </button>
 
-            <span class="badge rounded-pill px-3 py-2 equipment-label">Udstyr</span>
-            <h2 class="package-title">@equipment.Title</h2>
+            @if (item.Equipment != null)
+            {
+                <span class="badge rounded-pill px-3 py-2 equipment-label">
+                    Udstyr
+                </span>
 
-            <div class="mb-3">
-                <span class="package-details">@equipment.Category</span>
-            </div>
+                <h2 class="package-title">
+                    @item.Equipment.Title
+                </h2>
 
-            <div class="border-top border-dark pt-3">
-                <div class="d-flex align-items-end">
+                <div class="mb-3">
+                    <span class="package-details">
+                        @item.Equipment.Category
+                    </span>
+                </div>
 
-                    <!--Amount-->
-                    <div class="col-md-2">
-                        <label class="col-form-label custom-footer-text2">Antal</label>
+                <div class="border-top border-dark pt-3">
+                    <div class="d-flex align-items-end">
 
-                        <div class="input-group">
-                            <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
-                            <input style="max-width:100px" type="text" class="form-control form-control-sm text-center quantity-input" value="1">
-                            <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
+                        <div class="col-md-2">
+                            <label class="col-form-label custom-footer-text2">
+                                Antal
+                            </label>
+
+                            <div class="input-group">
+                                <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
+                                <input style="max-width:100px"
+                                       type="text"
+                                       class="form-control form-control-sm text-center quantity-input"
+                                       value="1">
+                                <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
+                            </div>
                         </div>
-                    </div>
 
-                    <!--Price pr day-->
-                    <div>
-                        <label class="col-form-label">Dagspris</label>
-                        <p class="mb-0 custom-text">@equipment.Price kr./dag</p>
-                    </div>
-
-                    <!--Price calculated-->
-                    <div class="ms-auto d-flex flex-column align-items-end">
-                        <label class="mb-1">@equipment.TotalDays dag(e) x @equipment.Price kr.</label>
                         <div>
-                            <span class="text-white fs-3">@(equipment.Price * equipment.TotalDays)</span>
-                            <span class="fs-4 fw-bolder">kr.</span>
+                            <label class="col-form-label">Dagspris</label>
+
+                            <p class="mb-0 custom-text">
+                                @item.Equipment.Price kr./dag
+                            </p>
                         </div>
+
+                        <div class="ms-auto d-flex flex-column align-items-end">
+                            <label class="mb-1">
+                                @item.TotalDays dag(e) x @item.Equipment.Price kr.
+                            </label>
+
+                            <div>
+                                <span class="text-white fs-3">
+                                    @(item.Equipment.Price * item.TotalDays)
+                                </span>
+
+                                <span class="fs-4 fw-bolder">
+                                    kr.
+                                </span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-            </div>
+            }
 
-        </div>
-    </div>
-}
+            @if (item.Package != null)
+            {
+                <span class="badge rounded-pill px-3 py-2 package-label">
+                    @item.Package.Category
+                </span>
 
-@foreach (Package package in Model.CartPackages)
-{
-    <div class="mb-4 mt-4">
-        <div class="package-box position-relative">
-            <button type="button"
-                    class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
-                    data-bs-toggle="modal"
-                    data-bs-target="#removeModal">
-            </button>
+                <h2 class="package-title">
+                    @item.Package.Title
+                </h2>
 
-            <span class="badge rounded-pill px-3 py-2 package-label">@package.Category</span>
-            <h2 class="package-title">@package.Title</h2>
+                <div class="mb-3">
+                    @foreach (string equipment in item.Package.Equipment)
+                    {
+                        <span class="package-details">
+                            @equipment,
+                        </span>
+                    }
+                </div>
 
-            <div class="mb-3">
-                @foreach (string equipment in package.Equipment)
-                {
-                    <span class="package-details">@equipment, </span>
-                }
-            </div>
+                <div class="border-top border-dark pt-3">
+                    <div class="d-flex align-items-end">
 
-            <div class="border-top border-dark pt-3">
-                <div class="d-flex align-items-end">
+                        <div class="col-md-2">
+                            <label class="col-form-label">
+                                Antal
+                            </label>
 
-                    <!--Amount-->
-                    <div class="col-md-2">
-                        <label class="col-form-label">Antal</label>
-
-                        <div class="input-group">
-                            <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
-                            <input style="max-width:100px" type="text" class="form-control form-control-sm text-center quantity-input" value="1">
-                            <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
+                            <div class="input-group">
+                                <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
+                                <input style="max-width:100px"
+                                       type="text"
+                                       class="form-control form-control-sm text-center quantity-input"
+                                       value="1">
+                                <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
+                            </div>
                         </div>
-                    </div>
 
-                    <!--Price pr day-->
-                    <div>
-                        <label class="col-form-label">Dagspris</label>
-                        <p class="mb-0 custom-text">@package.Price kr./dag</p>
-                    </div>
-
-                    <!--Price calculated-->
-                    <div class="ms-auto d-flex flex-column align-items-end">
-                        <label class="mb-1">@package.TotalDays dag(e) x @package.Price kr.</label>
                         <div>
-                            <span class="text-white fs-3">@(package.Price * package.TotalDays)</span>
-                            <span class="fs-4 fw-bolder">kr.</span>
+                            <label class="col-form-label">
+                                Dagspris
+                            </label>
+
+                            <p class="mb-0 custom-text">
+                                @item.Package.Price kr./dag
+                            </p>
                         </div>
+
+                        <div class="ms-auto d-flex flex-column align-items-end">
+                            <label class="mb-1">
+                                @item.TotalDays dag(e) x @item.Package.Price kr.
+                            </label>
+
+                            <div>
+                                <span class="text-white fs-3">
+                                    @(item.Package.Price * item.TotalDays)
+                                </span>
+
+                                <span class="fs-4 fw-bolder">
+                                    kr.
+                                </span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-            </div>
-
+            }
         </div>
     </div>
-
 }
 
 <div class="modal fade" id="emptyCartModal" tabindex="-1">

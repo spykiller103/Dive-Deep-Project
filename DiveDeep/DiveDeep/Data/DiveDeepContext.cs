@@ -15,15 +15,6 @@ namespace DiveDeep.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
-            modelBuilder.Entity<Profile>()
-                .HasOne(p => p.Equipment)
-                .WithMany(e => e.Profiles)
-                .HasForeignKey(p => p.EquipmentId);
-            modelBuilder.Entity<Profile>()
-                .HasOne(p => p.Package)
-                .WithMany(p => p.Profiles)
-                .HasForeignKey(p => p.PackageId);
 
             modelBuilder.Entity<Equipment>().HasData
             (

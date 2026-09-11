@@ -11,9 +11,5 @@ namespace DiveDeep.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public int Price { get; set; }
-
-        public List<Profile>? Profiles { get; set; }
     }
-
-
 }

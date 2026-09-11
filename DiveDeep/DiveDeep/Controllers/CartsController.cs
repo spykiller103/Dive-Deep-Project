@@ -1,4 +1,5 @@
-﻿using DiveDeep.Persistence;
+﻿using DiveDeep.Models;
+using DiveDeep.Persistence;
 using DiveDeep.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,11 +9,10 @@ namespace DiveDeep.Controllers
     {
         public IActionResult Index()
         {
-            PackageEquipmentViewData viewData = new PackageEquipmentViewData();
 
-            viewData.CartEquipments = CartRepository.GetBookings();
+            List<CartItem> bookings = CartRepository.GetAll();
 
-            return View(viewData);
+            return View(bookings);
         }
     }
 }

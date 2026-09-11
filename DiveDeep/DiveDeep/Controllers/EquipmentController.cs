@@ -44,27 +44,24 @@ namespace DiveDeep.Controllers
                 int key = id;
                 ModelState.AddModelError(key.ToString(), "Vælg venligst både start- og slutdato.");
 
-                List<Equipment> equipment = EquipmentRepository.GetAll();
-                return View("Index", equipment);
+                List<Equipment> equipments = EquipmentRepository.GetAll();
+                return View("Index", equipments);
             }
 
             int days = 1;
             days = (endDate - startDate).Days + 1;
             if (days < 1) days = 1;
-            int totalPrice = equipmentToBeAdded.Price * days;
 
-            CartRepository.AddBooking(new 
+            
+            CartItem cartItem = new CartItem
             {
-                EquipmentId = equipmentToBeAdded.EquipmentId,
-                Image = equipmentToBeAdded.Image,
-                Category = equipmentToBeAdded.Category,
-                Title = equipmentToBeAdded.Title,
-                Description = equipmentToBeAdded.Description,
-                Price = totalPrice,
+                Equipment = equipmentToBeAdded,
                 StartDate = startDate,
                 EndDate = endDate,
                 TotalDays = days
-            });
+            };
+
+            CartRepository.Add(cartItem);
 
             return RedirectToAction(nameof(Index));
         }
