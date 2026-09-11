@@ -14,17 +14,10 @@
                 class="align-content-end  btn btn-link text-secondary text-decoration-none"
                 data-bs-toggle="modal"
                 data-bs-target="#emptyCartModal">
-            <i class="bi bi-trash"></i>
-            Tøm kurv
+            <i class="bi bi-trash"></i>Tøm kurv
         </button>
-
     </div>
-
 }
-<div style="background-color:red; height:600px; width:600px; color:white;">
-    @if (Model != null)
-    {
-        <h2>Equipment</h2>
 
         @foreach (Equipment equipment in Model.CartEquipments)
         {
@@ -32,35 +25,67 @@
             <p>@equipment.Title</p>
             <p>@equipment.Description</p>
             <p>@equipment.Category</p>
-            <p>@equipment.Price</p>
+            <p>Pris: @equipment.Price kr.</p>
+            @if (equipment.StartDate.HasValue && equipment.EndDate.HasValue)
+            {
+                <p>Periode: @equipment.StartDate.Value.ToString("dd/MM/yyyy") - @equipment.EndDate.Value.ToString("dd/MM/yyyy")</p>
+            }
             <p>@equipment.ImageID</p>
         }
 
-        <h2>Packages</h2>
+@foreach (Package package in Model.CartPackages)
+{
+    <div class="mb-4 mt-4">
+        <div class="package-box position-relative">
+            <button type="button"
+                    class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#removeModal">
+            </button>
 
-        @foreach (Package package in Model.CartPackages)
-        {
-            <p>@package.Id</p>
-            <p>@package.Title</p>
-            <p>@package.Price</p>
-        }
-    }
-</div>
+            <span class="badge rounded-pill px-3 py-2 package-label">@package.Category</span>
+            <h2 class="package-title">@package.Title</h2>
 
-<div class="package-box position-relative">
-    <button type="button"
-            class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
-            data-bs-toggle="modal"
-            data-bs-target="#removeModal">
-    </button>
-    <span class="badge rounded-pill px-3 py-2 package-label">
-        "kategori midlertidig"
-    </span>
-    <h2 class="package-title">Lille pakke</h2>
-    <p class="package-details">
-        Vådtragt: XXL, Finnestørrelse: 39
-    </p>
+            <div class="mb-3">
+                @foreach (string equipment in package.Equipment)
+                {
+                    <span class="package-details">@equipment, </span>
+                }
+            </div>
 
+            <div class="border-top border-dark pt-3">
+                <div class="d-flex align-items-end">
+
+                    <!--Amount-->
+                    <div class="col-md-2">
+                        <label class="col-form-label">Antal</label>
+
+                        <div class="input-group">
+                            <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
+                            <input style="max-width:100px" type="text" class="form-control form-control-sm text-center quantity-input" value="1">
+                            <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
+                        </div>
+                    </div>
+
+                    <!--Price pr day-->
+                    <div>
+                        <label class="col-form-label">Dagspris</label>
+                        <p class="mb-0">@package.Price kr./dag</p>
+                    </div>
+
+                    <!--Price calculated-->
+                    <div class="ms-auto">
+                        <label class="mb-0">y dag(e) @package.Price kr.</label>
+                        <p class="mb-0">@package.Price</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}
+@*
     <hr />
     <div class="modal fade" id="emptyCartModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
@@ -96,7 +121,6 @@
                 </div>
 
             </div>
-        </div>
+        </div>    
     </div>
-
-</div>
+    *@

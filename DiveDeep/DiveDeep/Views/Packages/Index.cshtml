@@ -42,15 +42,14 @@
                                     <span class="input-group-addon custom-text">to</span>
                                     <input type="text" class="input-sm form-control" name="end" />
                                 </div>
-
                             </div>
 
                         </div>
                         <div class="price text-white mb-3">@package.Price<span class="text-info"> kr./dag</span></div>
                         
-                        <form asp-controller="packages" asp-action="rent" method="post">
+                        <form asp-controller="packages" asp-action="rent" method="post" class="w-100">
                             <input type="hidden" name="id" value="@package.Id" />
-                            <button type="submit" class="btn btn-info btn-rent">Lej</button>
+                            <button type="submit" class="btn btn-info btn-rent w-100">Lej</button>
                         </form>
                     </div>
                 </div>

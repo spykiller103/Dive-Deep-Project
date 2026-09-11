@@ -43,6 +43,9 @@ body {
 
 
 /* Header */
+nav {
+    padding-bottom: 10px;
+}
 .logo {
     height: 70px;
     width: auto;
@@ -101,6 +104,8 @@ body {
 
 .cartBox {
     padding: 10px;
+    padding-bottom: 15px;
+    margin-left: 12px;
 }
 
 .shoppingCart {
@@ -370,6 +375,10 @@ body {
         outline: none !important;
         box-shadow: none !important;
     }
+
+.equipment-title {
+    min-height: 48px;
+}
 
 /*Login Og Opret Konto*/
 .LoginBox {
