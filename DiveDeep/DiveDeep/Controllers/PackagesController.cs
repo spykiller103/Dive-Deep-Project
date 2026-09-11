@@ -44,8 +44,6 @@ namespace DiveDeep.Controllers
                 days = 1;
             }
 
-            packagesToBeAdded.TotalDays = days;
-
             CartItem cartItem = new CartItem
             {
                 Package = packagesToBeAdded,

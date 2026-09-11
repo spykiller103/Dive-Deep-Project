@@ -48,11 +48,13 @@ namespace DiveDeep.Controllers
                 return View("Index", equipments);
             }
 
-            int days = 1;
-            days = (endDate - startDate).Days + 1;
-            if (days < 1) days = 1;
+            int days = (endDate - startDate).Days + 1;
 
-            
+            if (days < 1)
+            {
+                days = 1;
+            }
+
             CartItem cartItem = new CartItem
             {
                 Equipment = equipmentToBeAdded,
