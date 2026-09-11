@@ -9,7 +9,7 @@ namespace DiveDeep.Persistence
         {
             new Package
             {
-                Id=1,
+                Id=0,
                 Category = "Pakke",
                 Price = 90,
                 Image = "/Content/Images/Packages/Package1.png",
@@ -28,7 +28,7 @@ namespace DiveDeep.Persistence
 
             new Package
             {
-                Id=2,
+                Id=1,
                 Category = "Pakke",
                 Price = 90,
                 Image = "/Content/Images/Packages/Package2.png",
@@ -52,10 +52,6 @@ namespace DiveDeep.Persistence
         }
         public static void Add(Package package)
         {
-            if (package == null) return;
-
-            package.Id = _packages.Any() ? _packages.Max(x => x.Id) + 1 : 1;
-
             _packages.Add(package);
         }
 

@@ -8,7 +8,7 @@ namespace DiveDeep.Persistence
         {
             new Profile
             {
-                Id = 1,
+                Id = 0,
                 FirstName = "Nicklas",
                 LastName = "Jensen",
                 Email = "Test@mail.com",
@@ -28,9 +28,6 @@ namespace DiveDeep.Persistence
         }
         public static void Add(Profile profile)
         {
-            if (profile == null) return;
-
-            profile.Id = _profile.Any() ? _profile.Max(x => x.Id) + 1 : 1;
 
             _profile.Add(profile);
         }
