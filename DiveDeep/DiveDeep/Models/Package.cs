@@ -12,6 +12,7 @@ namespace DiveDeep.Models
         public string Image { get; set; }
         public string Title { get; set; }
         public List<string> Equipment { get; set; }
+        public int TotalDays { get; set; }
 
         public List<Profile>? Profiles { get; set; }
     }
