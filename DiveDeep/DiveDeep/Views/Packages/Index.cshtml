@@ -48,7 +48,7 @@
                         <div class="price text-white mb-3">@package.Price<span class="text-info"> kr./dag</span></div>
                         
                         <form asp-controller="packages" asp-action="rent" method="post" class="w-100">
-                            <input type="hidden" name="id" value="@package.Id" />
+                            <input type="hidden" name="id" value="@package.PackageId" />
                             <button type="submit" class="btn btn-info btn-rent w-100">Lej</button>
                         </form>
                     </div>

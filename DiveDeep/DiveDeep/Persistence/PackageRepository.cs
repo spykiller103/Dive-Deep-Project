@@ -9,9 +9,9 @@ namespace DiveDeep.Persistence
         {
             new Package
             {
-                Id=1,
+                PackageId=0,
                 Category = "Pakke",
-                Price = 90,
+                Price = 750,
                 Image = "/Content/Images/Packages/Package1.png",
                 Title = "Komplet dykkersæt",
                 Equipment = new List<string>
@@ -28,9 +28,9 @@ namespace DiveDeep.Persistence
 
             new Package
             {
-                Id=2,
+                PackageId=1,
                 Category = "Pakke",
-                Price = 90,
+                Price = 100,
                 Image = "/Content/Images/Packages/Package2.png",
                 Title = "Komplet snorkelsæt",
                 Equipment = new List<string>
@@ -48,20 +48,20 @@ namespace DiveDeep.Persistence
 
         public static Package? GetById(int id)
         {
-            return _packages.FirstOrDefault(x => x.Id == id);
+            return _packages.FirstOrDefault(x => x.PackageId == id);
         }
         public static void Add(Package package)
         {
             if (package == null) return;
 
-            package.Id = _packages.Any() ? _packages.Max(x => x.Id) + 1 : 1;
+            package.PackageId = _packages.Any() ? _packages.Max(x => x.PackageId) + 1 : 0;
 
             _packages.Add(package);
         }
 
         public static void Delete(int packageId)
         {
-            _packages.RemoveAll(x => x.Id == packageId);
+            _packages.RemoveAll(x => x.PackageId == packageId);
         }
     }
 }

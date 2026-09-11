@@ -56,8 +56,8 @@ namespace DiveDeep.Controllers
 
             CartRepository.AddEquipment(new Equipment
             {
-                Id = equipmentToBeAdded.Id,
-                ImageID = equipmentToBeAdded.ImageID,
+                EquipmentId = equipmentToBeAdded.EquipmentId,
+                Image = equipmentToBeAdded.Image,
                 Category = equipmentToBeAdded.Category,
                 Title = equipmentToBeAdded.Title,
                 Description = equipmentToBeAdded.Description,

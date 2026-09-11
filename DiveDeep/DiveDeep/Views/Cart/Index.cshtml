@@ -21,7 +21,7 @@
 
         @foreach (Equipment equipment in Model.CartEquipments)
         {
-            <p>@equipment.Id</p>
+            <p>@equipment.EquipmentId</p>
             <p>@equipment.Title</p>
             <p>@equipment.Description</p>
             <p>@equipment.Category</p>
@@ -30,7 +30,7 @@
             {
                 <p>Periode: @equipment.StartDate.Value.ToString("dd/MM/yyyy") - @equipment.EndDate.Value.ToString("dd/MM/yyyy")</p>
             }
-            <p>@equipment.ImageID</p>
+            <p>@equipment.Image</p>
         }
 
 @foreach (Package package in Model.CartPackages)
