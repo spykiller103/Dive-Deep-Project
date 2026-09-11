@@ -50,14 +50,5 @@ namespace DiveDeep.Persistence
         {
             return _packages.FirstOrDefault(x => x.PackageId == id);
         }
-        public static void Add(Package package)
-        {
-            _packages.Add(package);
-        }
-
-        public static void Delete(int packageId)
-        {
-            _packages.RemoveAll(x => x.PackageId == packageId);
-        }
     }
 }

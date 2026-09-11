@@ -327,18 +327,5 @@ namespace DiveDeep.Persistence
         {
             return _equipments.FirstOrDefault(x => x.EquipmentId == id);
         }
-        public static void Add(Equipment equipment)
-        {
-            _equipments.Add(equipment);
-        }
-
-        public static void Delete(int packageId)
-        {
-            _equipments.RemoveAll(x => x.EquipmentId == packageId);
-        }
-
     }
-
-
-
 }

@@ -9,13 +9,13 @@ namespace DiveDeep.Controllers
     {
         public IActionResult Index()
         {
-            Profile profile = ProfileRepository.GetById(1);
+            Profile profile = ProfileRepository.GetById(0);
+            List<Booking>? bookings = BookingRepository.GetAll();
 
-            ProfilePackageEquupmentViewData vm = new ProfilePackageEquupmentViewData
+            ProfileBookingViewData vm = new ProfileBookingViewData
         {
                 Profile = profile,
-                Packages = new List<Package>(),
-                Equipments = new List<Equipment>()
+                Bookings = bookings
             };
 
             return View(vm);
