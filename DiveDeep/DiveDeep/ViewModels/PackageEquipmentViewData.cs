@@ -4,7 +4,8 @@ namespace DiveDeep.ViewModels
 {
     public class PackageEquipmentViewData
     {
-        public List<Package> CartPackages { get; set; } = new();
-        public List<Equipment> CartEquipments { get; set; } = new();
+        public List<Package> Packages { get; set; }
+        public List<Package> CartPackages { get; set; }
+        public List<Equipment> CartEquipments { get; set; }
     }
 }

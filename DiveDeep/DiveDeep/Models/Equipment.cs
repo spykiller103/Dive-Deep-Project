@@ -14,6 +14,8 @@ namespace DiveDeep.Models
         public DateTime? StartDate { get; set; }
         [Required]
         public DateTime? EndDate { get; set; }
+
+        public int TotalDays { get; set; }
     }
 
 
