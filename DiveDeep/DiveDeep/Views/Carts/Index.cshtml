@@ -1,0 +1,149 @@
+@using DiveDeep.ViewModels
+@model PackageEquipmentViewData;
+
+@section Title {
+
+    <div class="cart-header">
+        <div>
+            <p class="mt-5"> <span class="special-text">Antal ting i kurv</span></p>
+            <h1 class="SiteTitles">DIN KURV</h1>
+
+        </div>
+
+        <button type="button"
+                class="align-content-end  btn btn-link text-secondary text-decoration-none"
+                data-bs-toggle="modal"
+                data-bs-target="#emptyCartModal">
+            <i class="bi bi-trash"></i>Tøm kurv
+        </button>
+    </div>
+}
+
+@foreach (Equipment equipment in Model.CartEquipments)
+{
+    <div class="mb-4 mt-4">
+        <div class="package-box position-relative">
+            <button type="button"
+                    class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#removeModal">
+            </button>
+
+            <span class="badge rounded-pill px-3 py-2 equipment-label">Udstyr</span>
+            <h2 class="package-title">@equipment.Title</h2>
+
+            <div class="mb-3">
+                <span class="package-details">@equipment.Category</span>
+            </div>
+
+            <div class="border-top border-dark pt-3">
+                <div class="d-flex align-items-end">
+
+                    <!--Amount-->
+                    <div class="col-md-2">
+                        <label class="col-form-label custom-footer-text2">Antal</label>
+
+                        <div class="input-group">
+                            <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
+                            <input style="max-width:100px" type="text" class="form-control form-control-sm text-center quantity-input" value="1">
+                            <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
+                        </div>
+                    </div>
+
+                    <!--Price pr day-->
+                    <div>
+                        <label class="col-form-label">Dagspris</label>
+                        <p class="mb-0 custom-text">@equipment.Price kr./dag</p>
+                    </div>
+
+                    <!--Price calculated-->
+                    <div class="ms-auto d-flex flex-column align-items-end">
+                        <label class="mb-1">@equipment.TotalDays dag(e) x @equipment.Price kr.</label>
+                        <div>
+                            <span class="text-white fs-3">@(equipment.Price * equipment.TotalDays)</span>
+                            <span class="fs-4 fw-bolder">kr.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+@foreach (Package package in Model.CartPackages)
+{
+    <div class="mb-4 mt-4">
+        <div class="package-box position-relative">
+            <button type="button"
+                    class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#removeModal">
+            </button>
+
+            <span class="badge rounded-pill px-3 py-2 package-label">@package.Category</span>
+            <h2 class="package-title">@package.Title</h2>
+
+            <div class="mb-3">
+                @foreach (string equipment in package.Equipment)
+                {
+                    <span class="package-details">@equipment, </span>
+                }
+            </div>
+
+            <div class="border-top border-dark pt-3">
+                <div class="d-flex align-items-end">
+
+                    <!--Amount-->
+                    <div class="col-md-2">
+                        <label class="col-form-label">Antal</label>
+
+                        <div class="input-group">
+                            <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
+                            <input style="max-width:100px" type="text" class="form-control form-control-sm text-center quantity-input" value="1">
+                            <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
+                        </div>
+                    </div>
+
+                    <!--Price pr day-->
+                    <div>
+                        <label class="col-form-label">Dagspris</label>
+                        <p class="mb-0 custom-text">@package.Price kr./dag</p>
+                    </div>
+
+                    <!--Price calculated-->
+                    <div class="ms-auto d-flex flex-column align-items-end">
+                        <label class="mb-1">@package.TotalDays dag(e) x @package.Price kr.</label>
+                        <div>
+                            <span class="text-white fs-3">@(package.Price * package.TotalDays)</span>
+                            <span class="fs-4 fw-bolder">kr.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}
+
+<div class="modal fade" id="emptyCartModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Tøm kurv?</h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body"> Er du sikker på, at du vil fjerne alle varer fra kurven?</div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuller</button>
+
+                <button type="button" class="btn btn-danger" id="confirmEmptyCart">Tøm kurv</button>
+            </div>
+        </div>
+    </div>
+</div>

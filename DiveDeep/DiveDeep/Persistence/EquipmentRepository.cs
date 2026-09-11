@@ -316,9 +316,6 @@ namespace DiveDeep.Persistence
                 Description = "N/A",
                 Price = 80
             },
-
-
-
         };
 
         public static List<Equipment> GetAll()
@@ -332,10 +329,6 @@ namespace DiveDeep.Persistence
         }
         public static void Add(Equipment equipment)
         {
-            if (equipment == null) return;
-
-            equipment.EquipmentId = _equipments.Any() ? _equipments.Max(x => x.EquipmentId) + 1 : 1;
-
             _equipments.Add(equipment);
         }
 

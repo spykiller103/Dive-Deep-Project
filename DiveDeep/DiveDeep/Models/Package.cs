@@ -1,4 +1,8 @@
-﻿namespace DiveDeep.Models
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace DiveDeep.Models
 {
     public class Package
     {

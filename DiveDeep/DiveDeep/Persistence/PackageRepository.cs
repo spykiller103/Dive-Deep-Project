@@ -52,10 +52,6 @@ namespace DiveDeep.Persistence
         }
         public static void Add(Package package)
         {
-            if (package == null) return;
-
-            package.PackageId = _packages.Any() ? _packages.Max(x => x.PackageId) + 1 : 0;
-
             _packages.Add(package);
         }
 

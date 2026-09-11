@@ -28,9 +28,6 @@ namespace DiveDeep.Persistence
         }
         public static void Add(Profile profile)
         {
-            if (profile == null) return;
-
-            profile.ProfileId = _profile.Any() ? _profile.Max(x => x.ProfileId) + 1 : 0;
 
             _profile.Add(profile);
         }

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DiveDeep.Controllers
 {
-    public class CartController : Controller
+    public class CartsController : Controller
     {
         public IActionResult Index()
         {

@@ -33,6 +33,7 @@
                         </div>
                     </div>
 
+                <form asp-controller="packages" asp-action="rent" method="post" class="w-100">
                     <div class="package-footer mt-auto border-top border-dark">
                         <div class="align-items-center">
                             <div class="col-12">
@@ -41,17 +42,27 @@
                                     <input type="text" class="input-sm form-control" name="start" />
                                     <span class="input-group-addon custom-text">to</span>
                                     <input type="text" class="input-sm form-control" name="end" />
-                                </div>
-                            </div>
 
+        
+                                </div>
+                                    @{
+                                        int? key = package.Id;
+                                        var dateErrors = ViewData.ModelState[key.ToString()]?.Errors;
+                                        if (dateErrors != null && dateErrors.Count > 0)
+                                        {
+                                            <div class="text-danger small mt-1">@dateErrors[0].ErrorMessage</div>
+                                        }
+                                    }
+
+                            </div>
                         </div>
+
                         <div class="price text-white mb-3">@package.Price<span class="text-info"> kr./dag</span></div>
                         
-                        <form asp-controller="packages" asp-action="rent" method="post" class="w-100">
-                            <input type="hidden" name="id" value="@package.PackageId" />
-                            <button type="submit" class="btn btn-info btn-rent w-100">Lej</button>
-                        </form>
+                        <input type="hidden" name="id" value="@package.Id" />
+                        <button type="submit" class="btn btn-info btn-rent w-100">Lej</button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

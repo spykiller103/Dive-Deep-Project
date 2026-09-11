@@ -28,7 +28,6 @@ namespace DiveDeep.Controllers
         public IActionResult Rent(int id, string start, string end)
         {
 
-
             Equipment equipmentToBeAdded = EquipmentRepository.GetById(id);
 
             DateTime startDate, endDate;
@@ -45,7 +44,7 @@ namespace DiveDeep.Controllers
                 int key = id;
                 ModelState.AddModelError(key.ToString(), "Vælg venligst både start- og slutdato.");
 
-                var equipment = EquipmentRepository.GetAll();
+                List<Equipment> equipment = EquipmentRepository.GetAll();
                 return View("Index", equipment);
             }
 
@@ -63,7 +62,8 @@ namespace DiveDeep.Controllers
                 Description = equipmentToBeAdded.Description,
                 Price = totalPrice,
                 StartDate = startDate,
-                EndDate = endDate
+                EndDate = endDate,
+                TotalDays = days
             });
 
             return RedirectToAction(nameof(Index));
