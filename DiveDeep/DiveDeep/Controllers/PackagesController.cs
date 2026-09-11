@@ -41,9 +41,9 @@ namespace DiveDeep.Controllers
             if (days < 1) days = 1;
             int totalPrice = packagesToBeAdded.Price * days;
 
-            CartRepository.AddPackage(new Package
+            Booking booking = new Booking
             {
-                Id = packagesToBeAdded.Id,
+                PackageId = packagesToBeAdded.PackageId,
                 Category = packagesToBeAdded.Category,
                 Price = packagesToBeAdded.Price,
                 Image = packagesToBeAdded.Image,
@@ -52,7 +52,7 @@ namespace DiveDeep.Controllers
                 StartDate = packagesToBeAdded.StartDate,
                 EndDate = packagesToBeAdded.EndDate,
                 TotalDays = days
-            });
+            };
 
             return RedirectToAction(nameof(Index));
         }

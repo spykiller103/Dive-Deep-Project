@@ -3,26 +3,16 @@ namespace DiveDeep.Persistence
 {
     public static class CartRepository
     {
-        private static List<Equipment> _cartEquipments = new();
-        private static List<Package> _cartPackages = new();
+        private static List<Booking> _cartBookings = new();
 
-        public static void AddEquipment(Equipment equipment)
+        public static void AddBooking(Booking booking)
         {
-            _cartEquipments.Add(equipment);
+            _cartBookings.Add(booking);
         }
 
-        public static void AddPackage(Package package)
+        public static List<Booking> GetBookings()
         {
-            _cartPackages.Add(package);
-        }
-
-        public static List<Package> GetPackages()
-        {
-            return _cartPackages;
-        }
-        public static List<Equipment> GetEquipment()
-        {
-            return _cartEquipments;
+            return _cartBookings;
         }
     }
 }

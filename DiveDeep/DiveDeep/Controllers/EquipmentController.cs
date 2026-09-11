@@ -53,7 +53,7 @@ namespace DiveDeep.Controllers
             if (days < 1) days = 1;
             int totalPrice = equipmentToBeAdded.Price * days;
 
-            CartRepository.AddEquipment(new Equipment
+            CartRepository.AddBooking(new 
             {
                 EquipmentId = equipmentToBeAdded.EquipmentId,
                 Image = equipmentToBeAdded.Image,

@@ -10,8 +10,7 @@ namespace DiveDeep.Controllers
         {
             PackageEquipmentViewData viewData = new PackageEquipmentViewData();
 
-            viewData.CartEquipments = CartRepository.GetEquipment();
-            viewData.CartPackages = CartRepository.GetPackages();
+            viewData.CartEquipments = CartRepository.GetBookings();
 
             return View(viewData);
         }

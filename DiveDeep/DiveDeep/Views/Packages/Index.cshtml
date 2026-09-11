@@ -46,7 +46,7 @@
         
                                 </div>
                                     @{
-                                        int? key = package.Id;
+                                        int? key = package.PackageId;
                                         var dateErrors = ViewData.ModelState[key.ToString()]?.Errors;
                                         if (dateErrors != null && dateErrors.Count > 0)
                                         {
