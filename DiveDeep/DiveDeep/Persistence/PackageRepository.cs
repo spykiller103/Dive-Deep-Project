@@ -1,54 +1,31 @@
 ﻿using DiveDeep.Models;
-using System.Reflection;
+using DiveDeep.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DiveDeep.Persistence
 {
-    public class PackageRepository
+    public class PackageRepository : IPackageRepository
     {
-        private static List<Package> _packages = new List<Package>
-        {
-            new Package
-            {
-                PackageId=0,
-                Category = "Pakke",
-                Price = 750,
-                Image = "/Content/Images/Packages/Package1.png",
-                Title = "Komplet dykkersæt",
-                Equipment = new List<string>
-                {
-                    "BCD",
-                    "Dykkerdragt",
-                    "Regulatorsæt",
-                    "Tank",
-                    "Finner",
-                    "Maske",
-                    "Snorkel"
-                }
-            },
+        private readonly DiveDeepContext _context;
 
-            new Package
-            {
-                PackageId=1,
-                Category = "Pakke",
-                Price = 100,
-                Image = "/Content/Images/Packages/Package2.png",
-                Title = "Komplet snorkelsæt",
-                Equipment = new List<string>
-                {
-                    "Finner",
-                    "Maske",
-                    "Snorkel"
-                }
-            }
-        };
-        public static List<Package> GetAll()
+        public PackageRepository(DiveDeepContext context)
         {
-            return _packages;
+            _context = context;
         }
 
-        public static Package? GetById(int id)
+        public List<Package> GetAll()
         {
-            return _packages.FirstOrDefault(x => x.PackageId == id);
+            return _context.Packages
+                .ToList();
         }
+
+        public Package? GetById(int id)
+        {
+            return _context.Packages
+                .FirstOrDefault(p => p.PackageId == id);
+        }
+
     }
 }

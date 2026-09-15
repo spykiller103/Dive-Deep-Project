@@ -1,40 +1,30 @@
 ﻿using DiveDeep.Models;
+using DiveDeep.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiveDeep.Persistence
 {
-    public class ProfileRepository
+    public class ProfileRepository : IProfileRepository
     {
-        private static List<Profile> _profile = new List<Profile>
-        {
-            new Profile
-            {
-                ProfileId = 0,
-                FirstName = "Nicklas",
-                LastName = "Jensen",
-                Email = "Test@mail.com",
-                ActiveRents = 2,
-                CompletedRents = 4
-            }
-        };
+        private readonly DiveDeepContext _context;
 
-        public static List<Profile> GetAll()
+        public ProfileRepository(DiveDeepContext context)
         {
-            return _profile;
+            _context = context;
         }
 
-        public static Profile? GetById(int id)
+        public List<Profile> GetAll()
         {
-            return _profile.FirstOrDefault(x => x.ProfileId == id);
-        }
-        public static void Add(Profile profile)
-        {
-
-            _profile.Add(profile);
+            return _context.Profiles
+                .ToList();
         }
 
-        public static void Delete(int packageId)
+        public Profile? GetById(int id)
         {
-            _profile.RemoveAll(x => x.ProfileId == packageId);
+            return _context.Profiles
+                .FirstOrDefault(p => p.ProfileId == id);
         }
+
+       
     }
 }
