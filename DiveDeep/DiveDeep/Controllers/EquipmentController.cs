@@ -4,14 +4,23 @@ using DiveDeep.Models;
 using DiveDeep.ViewModels;
 using System;
 using System.Globalization;
+using DiveDeep.Service;
 
 namespace DiveDeep.Controllers
 {
     public class EquipmentController : Controller
     {
+        private readonly CartService _cartService;
+        private readonly IEquipmentRepository _equipmentRepository;
+
+        public EquipmentController(IEquipmentRepository equipmentRepository, CartService cartService)
+        {
+            _equipmentRepository = equipmentRepository;
+            _cartService = cartService;
+        }
         public IActionResult Index()
         {
-            var equipment = EquipmentRepository.GetAll();
+            var equipment = _equipmentRepository.GetAll();
             return View(equipment);
         }
 
@@ -19,7 +28,7 @@ namespace DiveDeep.Controllers
         [HttpPost]
         public IActionResult Reload(int buttonID)
         {
-            var equipment = EquipmentRepository.GetAll();
+            var equipment = _equipmentRepository.GetAll();
             return View(equipment);
         }
 
@@ -28,7 +37,7 @@ namespace DiveDeep.Controllers
         public IActionResult Rent(int id, string start, string end)
         {
 
-            Equipment equipmentToBeAdded = EquipmentRepository.GetById(id);
+            Equipment equipmentToBeAdded = _equipmentRepository.GetById(id);
 
             DateTime startDate, endDate;
             bool _start = DateTime.TryParseExact(start,
@@ -44,7 +53,7 @@ namespace DiveDeep.Controllers
                 int key = id;
                 ModelState.AddModelError(key.ToString(), "Vælg venligst både start- og slutdato.");
 
-                List<Equipment> equipments = EquipmentRepository.GetAll();
+                List<Equipment> equipments = _equipmentRepository.GetAll();
                 return View("Index", equipments);
             }
 
@@ -63,7 +72,7 @@ namespace DiveDeep.Controllers
                 TotalDays = days
             };
 
-            CartRepository.Add(cartItem);
+            _cartService.Add(cartItem);
 
             return RedirectToAction(nameof(Index));
         }

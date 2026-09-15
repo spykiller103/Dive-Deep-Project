@@ -1,5 +1,6 @@
 ﻿using DiveDeep.Models;
 using DiveDeep.Persistence;
+using DiveDeep.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 
@@ -7,16 +8,25 @@ namespace DiveDeep.Controllers
 {
     public class PackagesController : Controller
     {
+        private readonly IPackageRepository _packageRepository;
+        private readonly CartService _cartService;
+
+        public PackagesController(IPackageRepository packageRepository, CartService cartService)
+        {
+            _packageRepository = packageRepository;
+            _cartService = cartService;
+        }
+
         public IActionResult Index()
         {
-            List<Package> packeges = PackageRepository.GetAll();
-            return View(packeges);
+            List<Package> packages = _packageRepository.GetAll();
+            return View(packages);
         }
 
         [HttpPost]
         public IActionResult Rent(int id, string start, string end)
         {
-            Package packagesToBeAdded = PackageRepository.GetById(id);
+            Package packagesToBeAdded = _packageRepository.GetById(id);
 
             DateTime startDate, endDate;
             bool _start = DateTime.TryParseExact(start,
@@ -32,9 +42,9 @@ namespace DiveDeep.Controllers
                 int key = id;
                 ModelState.AddModelError(key.ToString(), "Vælg venligst både start- og slutdato.");
 
-                List<Package> package = PackageRepository.GetAll();
+                List<Package> packages = _packageRepository.GetAll();
 
-                return View("Index", package);
+                return View("Index", packages);
             }
 
             int days = (endDate - startDate).Days + 1;
@@ -52,7 +62,7 @@ namespace DiveDeep.Controllers
                 TotalDays = days
             };
 
-            CartRepository.Add(cartItem);
+            _cartService.Add(cartItem);
 
             return RedirectToAction(nameof(Index));
         }

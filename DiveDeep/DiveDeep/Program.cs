@@ -1,6 +1,7 @@
 using DiveDeep.Data;
+using DiveDeep.Persistence;
 using Microsoft.EntityFrameworkCore;
-
+using DiveDeep.Service;
 namespace DiveDeep
 {
     public class Program
@@ -16,7 +17,12 @@ namespace DiveDeep
             { 
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Default")); 
             });
-            
+            builder.Services.AddScoped<ICartItemRepository, CartItemRepository>();
+            builder.Services.AddScoped<IEquipmentRepository, EquipmentRepository>();
+            builder.Services.AddScoped<IPackageRepository, PackageRepository>();
+            builder.Services.AddScoped<IPackageRepository, PackageRepository>();
+            builder.Services.AddScoped<CartService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
