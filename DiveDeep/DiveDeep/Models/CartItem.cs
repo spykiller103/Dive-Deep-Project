@@ -13,5 +13,8 @@
 
         public int? EquipmentId { get; set; }
         public Equipment? Equipment { get; set; }
+
+        public int ProfileId { get; set; }
+        public Profile Profile { get; set; } = null!;
     }
 }
