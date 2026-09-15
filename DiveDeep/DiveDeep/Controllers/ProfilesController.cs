@@ -10,12 +10,12 @@ namespace DiveDeep.Controllers
         public IActionResult Index()
         {
             Profile profile = ProfileRepository.GetById(0);
-            List<Booking>? bookings = BookingRepository.GetAll();
+            List<CartItem>? cartItems = CartRepository.GetAll();
 
-            ProfileBookingViewData vm = new ProfileBookingViewData
-        {
+            ProfileCartItemViewData vm = new ProfileCartItemViewData
+            {
                 Profile = profile,
-                Bookings = bookings
+                CartItems = cartItems
             };
 
             return View(vm);
@@ -28,6 +28,6 @@ namespace DiveDeep.Controllers
         {
             return View();
         }
-       
+
     }
 }

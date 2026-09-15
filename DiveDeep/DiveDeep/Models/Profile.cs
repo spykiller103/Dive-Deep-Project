@@ -27,6 +27,6 @@ namespace DiveDeep.Models
             }
         }
 
-        public List<Booking> Bookings { get; set; } = new();
+        public List<CartItem> CartItems { get; set; } = new();
     }
 }

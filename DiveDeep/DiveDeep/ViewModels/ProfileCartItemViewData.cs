@@ -2,10 +2,10 @@
 
 namespace DiveDeep.ViewModels
 {
-    public class ProfileBookingViewData
+    public class ProfileCartItemViewData
     {
         public Profile Profile { get; set; }
 
-        public List<Booking>? Bookings { get; set; }
+        public List<CartItem>? CartItems { get; set; }
     }
 }
