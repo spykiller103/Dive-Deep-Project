@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiveDeep.Migrations
 {
     [DbContext(typeof(DiveDeepContext))]
-    [Migration("20260915120650_init")]
+    [Migration("20260915142023_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -42,7 +42,7 @@ namespace DiveDeep.Migrations
                     b.Property<int?>("PackageId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProfileId")
+                    b.Property<int?>("ProfileId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("StartDate")
@@ -499,9 +499,7 @@ namespace DiveDeep.Migrations
 
                     b.HasOne("DiveDeep.Models.Profile", "Profile")
                         .WithMany("CartItems")
-                        .HasForeignKey("ProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProfileId");
 
                     b.Navigation("Equipment");
 

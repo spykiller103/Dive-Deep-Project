@@ -20,7 +20,7 @@ namespace DiveDeep.Data
                 .HasOne(c => c.Profile)
                 .WithMany(p => p.CartItems)
                 .HasForeignKey(c => c.ProfileId)
-                .IsRequired();
+                .IsRequired(false);
 
             modelBuilder.Entity<Equipment>().HasData
             (

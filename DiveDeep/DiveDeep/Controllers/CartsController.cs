@@ -8,22 +8,25 @@ namespace DiveDeep.Controllers
     public class CartsController : Controller
     {
         private readonly CartService _cartService;
-        private readonly IEquipmentRepository _equipmentRepository;
-        private readonly IPackageRepository _packageRepository;
 
         public CartsController(CartService cartService, IEquipmentRepository equipmentRepository, IPackageRepository packageRepository)
         {
             _cartService = cartService;
-            _equipmentRepository = equipmentRepository;
-            _packageRepository = packageRepository;
         }
 
         public IActionResult Index()
         {
+            List<CartItem> cartItems = _cartService.GetAll();
 
-            List<CartItem> bookings = _cartService.GetAll();
+            return View(cartItems);
+        }
 
-            return View(bookings);
+        [HttpPost]
+        public IActionResult Checkout()
+        {
+            _cartService.AssignProfileToAllCartItems(1);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

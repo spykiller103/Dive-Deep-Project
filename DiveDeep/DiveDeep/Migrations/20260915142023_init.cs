@@ -75,7 +75,7 @@ namespace DiveDeep.Migrations
                     TotalDays = table.Column<int>(type: "int", nullable: false),
                     PackageId = table.Column<int>(type: "int", nullable: true),
                     EquipmentId = table.Column<int>(type: "int", nullable: true),
-                    ProfileId = table.Column<int>(type: "int", nullable: false)
+                    ProfileId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -94,8 +94,7 @@ namespace DiveDeep.Migrations
                         name: "FK_CartItems_Profiles_ProfileId",
                         column: x => x.ProfileId,
                         principalTable: "Profiles",
-                        principalColumn: "ProfileId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ProfileId");
                 });
 
             migrationBuilder.InsertData(

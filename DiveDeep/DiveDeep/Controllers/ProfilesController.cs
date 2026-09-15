@@ -18,7 +18,7 @@ namespace DiveDeep.Controllers
 
         public IActionResult Index()
         {
-            Profile profile = _profileRepository.GetById(0);
+            Profile profile = _profileRepository.GetById(1);
             List<CartItem>? cartItems = _cartService.GetAll();
 
             ProfileCartItemViewData vm = new ProfileCartItemViewData

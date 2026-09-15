@@ -184,5 +184,7 @@
 </div>
 
 <div>
-    <button type="button" class="btn btn-primary">Betal</button>
+    <form asp-controller="Carts" asp-action="Checkout" method="post">
+        <button type="submit" class="btn btn-primary">Køb</button>
+    </form>
 </div>
