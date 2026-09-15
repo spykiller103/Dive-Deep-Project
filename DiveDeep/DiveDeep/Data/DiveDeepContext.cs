@@ -20,7 +20,7 @@ namespace DiveDeep.Data
             (
                 new Equipment
                 {
-                    EquipmentId = 1,
+                    EquipmentId = 0,
                     Image = "/Content/Images/Equipment/BCD/NavigatorLite.png",
                     Category = "BCD",
                     Title = "Scubapro Navigator Lite BCD",
@@ -30,7 +30,7 @@ namespace DiveDeep.Data
 
             new Equipment
             {
-                EquipmentId = 2,
+                EquipmentId = 1,
                 Image = "/Content/Images/Equipment/BCD/GlideBCD.png",
                 Category = "BCD",
                 Title = "Scubapro BCD Glide",
@@ -39,7 +39,7 @@ namespace DiveDeep.Data
             },
             new Equipment
             {
-                EquipmentId = 3,
+                EquipmentId = 2,
                 Image = "/Content/Images/Equipment/BCD/HydrosPro.png",
                 Category = "BCD",
                 Title = "Scubapro BCD Hydros Pro",
@@ -48,7 +48,7 @@ namespace DiveDeep.Data
             },
             new Equipment
             {
-                EquipmentId = 4,
+                EquipmentId = 3,
                 Image = "/Content/Images/Equipment/BCD/Modular.png",
                 Category = "BCD",
                 Title = "Seac BCD Modular",
@@ -58,7 +58,7 @@ namespace DiveDeep.Data
 
             new Equipment
             {
-                EquipmentId = 5,
+                EquipmentId = 4,
                 Image = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
@@ -69,7 +69,7 @@ namespace DiveDeep.Data
 
             new Equipment
             {
-                EquipmentId = 6,
+                EquipmentId = 5,
                 Image = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
@@ -78,7 +78,7 @@ namespace DiveDeep.Data
             },
              new Equipment
              {
-                 EquipmentId = 7,
+                 EquipmentId = 6,
                  Image = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
                  Category = "Dykkerdragt",
                  Title = "Scubapro Definition",
@@ -88,7 +88,7 @@ namespace DiveDeep.Data
 
               new Equipment
               {
-                  EquipmentId = 8,
+                  EquipmentId = 7,
                   Image = "/Content/Images/Equipment/Divingsuits/Wetsuits/W5.png",
                   Category = "Dykkerdragt",
                   Title = "Waterproof W5",
@@ -98,7 +98,7 @@ namespace DiveDeep.Data
 
                new Equipment
                {
-                   EquipmentId = 9,
+                   EquipmentId = 8,
                    Image = "/Content/Images/Equipment/Divingsuits/Wetsuits/ProteusF.png",
                    Category = "Dykkerdragt",
                    Title = "Fourth Element Proteus",
@@ -108,7 +108,7 @@ namespace DiveDeep.Data
 
             new Equipment
             {
-                EquipmentId = 10,
+                EquipmentId = 9,
                 Image = "/Content/Images/Equipment/Divingsuits/Drysuits/Exodry4.png",
                 Category = "Dykkerdragt",
                 Title = "Scubapro Exodry 4.0",
@@ -117,7 +117,7 @@ namespace DiveDeep.Data
             },
             new Equipment
             {
-                EquipmentId = 11,
+                EquipmentId = 10,
                 Image = "/Content/Images/Equipment/Divingsuits/Drysuits/D7Evo.png",
                 Category = "Dykkerdragt",
                 Title = "Waterproof D7 Evo",
@@ -127,7 +127,7 @@ namespace DiveDeep.Data
 
               new Equipment
               {
-                  EquipmentId = 12,
+                  EquipmentId = 11,
                   Image = "/Content/Images/Equipment/Divingsuits/Drysuits/ELitePlus.png",
                   Category = "Dykkerdragt",
                   Title = "Santi E.Lite Plus",
@@ -137,7 +137,7 @@ namespace DiveDeep.Data
 
              new Equipment
              {
-                 EquipmentId = 13,
+                 EquipmentId = 12,
                  Image = "/Content/Images/Equipment/Tanks/Tank.png",
                  Category = "Tanke",
                  Title = "Scubapro 5 liter",
@@ -146,7 +146,7 @@ namespace DiveDeep.Data
              },
               new Equipment
               {
-                  EquipmentId = 14,
+                  EquipmentId = 13,
                   Image = "/Content/Images/Equipment/Tanks/Tank.png",
                   Category = "Tanke",
                   Title = "Scubapro 10 liter",
@@ -155,7 +155,7 @@ namespace DiveDeep.Data
               },
              new Equipment
              {
-                 EquipmentId = 15,
+                 EquipmentId = 14,
                  Image = "/Content/Images/Equipment/Tanks/Tank.png",
                  Category = "Tanke",
                  Title = "Scubapro 12 liter",
@@ -164,7 +164,7 @@ namespace DiveDeep.Data
              },
             new Equipment
             {
-                EquipmentId = 16,
+                EquipmentId = 15,
                 Image = "/Content/Images/Equipment/Tanks/Tank.png",
                 Category = "Tanke",
                 Title = "Scubapro 15 liter",
@@ -174,7 +174,7 @@ namespace DiveDeep.Data
 
             new Equipment
             {
-                EquipmentId = 17,
+                EquipmentId = 16,
                 Image = "/Content/Images/Equipment/Regulator/MK25EVO.png",
                 Category = "Regulatorsæt",
                 Title = "Scubapro Octopus R105/MK25EVO/S600",
@@ -183,7 +183,7 @@ namespace DiveDeep.Data
             },
                new Equipment
                {
-                   EquipmentId = 18,
+                    EquipmentId = 17,
                    Image = "/Content/Images/Equipment/Regulator/MK17.png",
                    Category = "Regulatorsæt",
                    Title = "Scubapro Octopus R095/MK17EVO/C370",
@@ -192,7 +192,7 @@ namespace DiveDeep.Data
                },
             new Equipment
             {
-                EquipmentId = 19,
+                EquipmentId = 18,
                 Image = "/Content/Images/Equipment/Regulator/MK25EVObt.png",
                 Category = "Regulatorsæt",
                 Title = "Scubapro Octopus S270/MK25EVO BT/A700 Carbon BT",
@@ -202,7 +202,7 @@ namespace DiveDeep.Data
 
              new Equipment
              {
-                 EquipmentId = 20,
+                 EquipmentId = 19,
                  Image = "/Content/Images/Equipment/Masks/Ghost.png",
                  Category = "Maske/Snorkel",
                  Title = "Scubapro Ghost",
@@ -211,7 +211,7 @@ namespace DiveDeep.Data
              },
                 new Equipment
                 {
-                    EquipmentId = 21,
+                    EquipmentId = 20,
                     Image = "/Content/Images/Equipment/Masks/DMask.png",
                     Category = "Maske/Snorkel",
                     Title = "Scubapro D-Mask",
@@ -220,7 +220,7 @@ namespace DiveDeep.Data
                 },
             new Equipment
             {
-                EquipmentId = 22,
+                EquipmentId = 21,
                 Image = "/Content/Images/Equipment/Masks/SpectraMini.png",
                 Category = "Maske/Snorkel",
                 Title = "Scubapro Spectra Mini",
@@ -229,7 +229,7 @@ namespace DiveDeep.Data
             },
              new Equipment
              {
-                 EquipmentId = 23,
+                 EquipmentId = 22,
                  Image = "/Content/Images/Equipment/Masks/CrystalVu.png",
                  Category = "Maske/Snorkel",
                  Title = "Scubapro Crystal VU",
@@ -238,7 +238,7 @@ namespace DiveDeep.Data
              },
             new Equipment
             {
-                EquipmentId = 24,
+                EquipmentId = 23,
                 Image = "/Content/Images/Equipment/Masks/Scout.png",
                 Category = "Maske/Snorkel",
                 Title = "Fourth Element Scout Kontrast",
@@ -247,7 +247,7 @@ namespace DiveDeep.Data
             },
               new Equipment
               {
-                  EquipmentId = 25,
+                  EquipmentId = 24,
                   Image = "/Content/Images/Equipment/Masks/ScoutEnchance.png",
                   Category = "Maske/Snorkel",
                   Title = "Fourth Element Scout Enchance",
@@ -256,7 +256,7 @@ namespace DiveDeep.Data
               },
             new Equipment
             {
-                EquipmentId = 26,
+                EquipmentId = 25,
                 Image = "/Content/Images/Equipment/Masks/Element.png",
                 Category = "Maske/Snorkel",
                 Title = "Tusa Element",
@@ -266,7 +266,7 @@ namespace DiveDeep.Data
 
               new Equipment
               {
-                  EquipmentId = 27,
+                  EquipmentId = 26,
                   Image = "/Content/Images/Equipment/Fins/JetFin.png",
                   Category = "Finner",
                   Title = "Scubapro Jet Fin",
@@ -275,7 +275,7 @@ namespace DiveDeep.Data
               },
                  new Equipment
                  {
-                     EquipmentId = 28,
+                     EquipmentId = 27,
                      Image = "/Content/Images/Equipment/Fins/TravelFins.png",
                      Category = "Finner",
                      Title = "Scubapro GO travel",
@@ -284,7 +284,7 @@ namespace DiveDeep.Data
                  },
                new Equipment
                {
-                   EquipmentId = 29,
+                   EquipmentId = 28,
                    Image = "/Content/Images/Equipment/Fins/SeawingSupernova.png",
                    Category = "Finner",
                    Title = "Scubapro Seawing Supernova",
@@ -293,7 +293,7 @@ namespace DiveDeep.Data
                },
             new Equipment
             {
-                EquipmentId = 30,
+                EquipmentId = 29,
                 Image = "/Content/Images/Equipment/Fins/Propulsion.png",
                 Category = "Finner",
                 Title = "Seac Propulsion",
@@ -302,7 +302,7 @@ namespace DiveDeep.Data
             },
                new Equipment
                {
-                   EquipmentId = 31,
+                    EquipmentId = 30,
                    Image = "/Content/Images/Equipment/Fins/ALA.png",
                    Category = "Finner",
                    Title = "Seac ALA",
@@ -311,7 +311,7 @@ namespace DiveDeep.Data
                },
             new Equipment
             {
-                EquipmentId = 32,
+                EquipmentId = 31,
                 Image = "/Content/Images/Equipment/Fins/TechFins.png",
                 Category = "Finner",
                 Title = "Fourth Element Tech",
@@ -320,7 +320,7 @@ namespace DiveDeep.Data
             },
             new Equipment
             {
-                EquipmentId = 33,
+                EquipmentId = 32,
                 Image = "/Content/Images/Equipment/Fins/RecFins.png",
                 Category = "Finner",
                 Title = "Fourth Element Rec Fin",
@@ -332,7 +332,7 @@ namespace DiveDeep.Data
                 (
                 new Package
                 {
-                    PackageId = 1,
+                    PackageId = 0,
                     Category = "Pakke",
                     Price = 750,
                     Image = "/Content/Images/Packages/Package1.png",
@@ -351,7 +351,7 @@ namespace DiveDeep.Data
 
             new Package
             {
-                PackageId = 2,
+                PackageId = 1,
                 Category = "Pakke",
                 Price = 100,
                 Image = "/Content/Images/Packages/Package2.png",
@@ -368,7 +368,7 @@ namespace DiveDeep.Data
                 (
                             new Profile
                             {
-                                ProfileId = 1,
+                                ProfileId = 0,
                                 FirstName = "Nicklas",
                                 LastName = "Jensen",
                                 Email = "Test@mail.com",
