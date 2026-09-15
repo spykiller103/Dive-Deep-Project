@@ -1,3 +1,6 @@
+using DiveDeep.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace DiveDeep
 {
     public class Program
@@ -9,6 +12,11 @@ namespace DiveDeep
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddDbContext<DiveDeepContext>(options =>
+            { 
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Default")); 
+            });
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

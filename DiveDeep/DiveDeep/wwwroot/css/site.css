@@ -46,6 +46,7 @@ body {
 nav {
     padding-bottom: 10px;
 }
+
 .logo {
     height: 70px;
     width: auto;
@@ -324,17 +325,27 @@ nav {
     font-size: 14px;
     font-weight: 600;
 }
+
+.equipment-label {
+    background-color: rgba(255, 255, 255, 0.07);
+    color: rgb(148, 163, 184);
+    font-size: 14px;
+    font-weight: 600;
+}
+
 .package-box {
     background-color: #0d1320;
     border: 1px solid #202a3a;
     border-radius: 22px;
     padding: 30px;
 }
+
 .package-details {
     color: #50627d;
     font-size: 12px;
     margin-top: 10px;
 }
+
 .package-title {
     color: #ffffff;
     font-size: 26px;
@@ -342,6 +353,7 @@ nav {
     margin-top: 14px;
     margin-bottom: 8px;
 }
+
 .empty-cart {
     color: #536684;
     font-size: 16px;
@@ -353,6 +365,7 @@ nav {
     .empty-cart:hover {
         color: #FF0000;
     }
+
 .cart-header {
     display: flex;
     justify-content: space-between;

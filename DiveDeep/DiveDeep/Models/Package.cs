@@ -1,8 +1,12 @@
-﻿namespace DiveDeep.Models
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace DiveDeep.Models
 {
     public class Package
     {
-        public int Id { get; set; }
+        public int PackageId { get; set; }
         public string Category { get; set; }
         public int Price { get; set; }
         public string Image { get; set; }

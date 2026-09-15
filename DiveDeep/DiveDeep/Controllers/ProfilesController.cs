@@ -9,13 +9,13 @@ namespace DiveDeep.Controllers
     {
         public IActionResult Index()
         {
-            Profile profile = ProfileRepository.GetById(1);
+            Profile profile = ProfileRepository.GetById(0);
+            List<CartItem>? cartItems = CartRepository.GetAll();
 
-            ProfilePackageEquupmentViewData vm = new ProfilePackageEquupmentViewData
-        {
+            ProfileCartItemViewData vm = new ProfileCartItemViewData
+            {
                 Profile = profile,
-                Packages = new List<Package>(),
-                Equipments = new List<Equipment>()
+                CartItems = cartItems
             };
 
             return View(vm);
@@ -28,6 +28,6 @@ namespace DiveDeep.Controllers
         {
             return View();
         }
-       
+
     }
 }
