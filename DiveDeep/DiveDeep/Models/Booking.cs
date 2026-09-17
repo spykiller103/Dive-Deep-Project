@@ -6,10 +6,10 @@ namespace DiveDeep.Models
 {
     public class Booking
     {
-        public int CartItemId { get; set; }
+        public int BookingId { get; set; }
         public List<CartItem> CartItems { get; set; } = new();
 
-        
+
         [Required]
         public string ApplicationUserId { get; set; }
         [ValidateNever]

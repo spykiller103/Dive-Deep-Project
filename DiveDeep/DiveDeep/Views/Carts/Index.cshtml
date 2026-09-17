@@ -1,4 +1,3 @@
-@using DiveDeep.ViewModels
 @model List<CartItem>;
 
 @section Title {
@@ -67,24 +66,16 @@
                         <div>
                             <label class="col-form-label">Dagspris</label>
 
-                            <p class="mb-0 custom-text">
-                                @item.Equipment.Price kr./dag
-                            </p>
+                            <p class="mb-0 custom-text">@item.Equipment.Price kr./dag</p>
                         </div>
 
                         <div class="ms-auto d-flex flex-column align-items-end">
-                            <label class="mb-1">
-                                @item.TotalDays dag(e) x @item.Equipment.Price kr.
-                            </label>
+                            <label class="mb-1">@item.TotalDays dag(e) x @item.Equipment.Price kr.</label>
 
                             <div>
-                                <span class="text-white fs-3">
-                                    @(item.Equipment.Price * item.TotalDays)
-                                </span>
+                                <span class="text-white fs-3">@(item.Equipment.Price * item.TotalDays)</span>
 
-                                <span class="fs-4 fw-bolder">
-                                    kr.
-                                </span>
+                                <span class="fs-4 fw-bolder">kr.</span>
                             </div>
                         </div>
 
@@ -94,9 +85,7 @@
 
             @if (item.Package != null)
             {
-                <span class="badge rounded-pill px-3 py-2 package-label">
-                    @item.Package.Category
-                </span>
+                <span class="badge rounded-pill px-3 py-2 package-label">@item.Package.Category</span>
 
                 <h2 class="package-title">
                     @item.Package.Title
@@ -105,19 +94,14 @@
                 <div class="mb-3">
                     @foreach (string equipment in item.Package.Equipment)
                     {
-                        <span class="package-details">
-                            @equipment,
-                        </span>
+                        <span class="package-details">@equipment,</span>
                     }
                 </div>
 
                 <div class="border-top border-dark pt-3">
                     <div class="d-flex align-items-end">
-
                         <div class="col-md-2">
-                            <label class="col-form-label">
-                                Antal
-                            </label>
+                            <label class="col-form-label">Antal</label>
 
                             <div class="input-group">
                                 <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
@@ -149,9 +133,7 @@
                                     @(item.Package.Price * item.TotalDays)
                                 </span>
 
-                                <span class="fs-4 fw-bolder">
-                                    kr.
-                                </span>
+                                <span class="fs-4 fw-bolder">kr.</span>
                             </div>
                         </div>
 
@@ -185,6 +167,11 @@
 
 <div>
     <form asp-controller="Carts" asp-action="Checkout" method="post">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <input type="hidden" name="cartItemIds" value="@Model[i].CartItemId" />
+        }
+
         <button type="submit" class="btn btn-primary">Lej</button>
     </form>
 </div>

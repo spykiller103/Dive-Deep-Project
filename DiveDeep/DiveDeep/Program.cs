@@ -24,6 +24,7 @@ namespace DiveDeep
             builder.Services.AddScoped<IEquipmentRepository, EquipmentRepository>();
             builder.Services.AddScoped<IPackageRepository, PackageRepository>();
             builder.Services.AddScoped<IPackageRepository, PackageRepository>();
+            builder.Services.AddScoped<IBookingRepository, BookingRepository>();
             builder.Services.AddScoped<CartService>();
 
             var app = builder.Build();
@@ -39,6 +40,8 @@ namespace DiveDeep
             app.UseHttpsRedirection();
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.MapStaticAssets();
@@ -46,6 +49,7 @@ namespace DiveDeep
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}")
                 .WithStaticAssets();
+            app.MapRazorPages();
 
             app.Run();
         }

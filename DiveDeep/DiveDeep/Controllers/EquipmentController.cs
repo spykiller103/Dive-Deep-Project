@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using DiveDeep.Persistence;
 using DiveDeep.Models;
-using DiveDeep.ViewModels;
 using System;
 using System.Globalization;
 using DiveDeep.Service;
@@ -18,9 +17,25 @@ namespace DiveDeep.Controllers
             _equipmentRepository = equipmentRepository;
             _cartService = cartService;
         }
-        public IActionResult Index()
+        public IActionResult Index(string? category)
         {
-            var equipment = _equipmentRepository.GetAll();
+            List<Equipment> equipment;
+            if (string.IsNullOrWhiteSpace(category))
+            {
+                equipment = _equipmentRepository.GetAll();
+            }
+            else
+            {
+                equipment = _equipmentRepository.GetByCategory(category);
+            }
+
+            return View(equipment);
+        }
+
+        public IActionResult Details(int id)
+        {
+            Equipment equipment = _equipmentRepository.GetById(id);
+
             return View(equipment);
         }
 
@@ -28,13 +43,12 @@ namespace DiveDeep.Controllers
         [HttpPost]
         public IActionResult Reload(int buttonID)
         {
-            var equipment = _equipmentRepository.GetAll();
-            return View(equipment);
+            return RedirectToAction(nameof(Index));
         }
 
 
         [HttpPost]
-        public IActionResult Rent(int id, string start, string end)
+        public IActionResult Rent(int id, string start, string end, string? size)
         {
 
             Equipment equipmentToBeAdded = _equipmentRepository.GetById(id);
@@ -66,11 +80,17 @@ namespace DiveDeep.Controllers
 
             CartItem cartItem = new CartItem
             {
+                
                 Equipment = equipmentToBeAdded,
                 StartDate = startDate,
                 EndDate = endDate,
                 TotalDays = days
             };
+
+            if (!string.IsNullOrWhiteSpace(size))
+            {
+                cartItem.SelectedSize = size;
+            }
 
             _cartService.Add(cartItem);
 
