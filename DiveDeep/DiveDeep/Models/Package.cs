@@ -17,10 +17,10 @@ namespace DiveDeep.Models
 
         public List<CartItem> CartItems { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+
         public string? Sizes { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+
         public List<string> SizeList
         {
             get

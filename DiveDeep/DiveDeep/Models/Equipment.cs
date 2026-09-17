@@ -19,7 +19,6 @@ namespace DiveDeep.Models
         [NotMapped]
         public string? Sizes { get; set; }
 
-        [NotMapped]
         public List<string> SizeList
         {
             get
