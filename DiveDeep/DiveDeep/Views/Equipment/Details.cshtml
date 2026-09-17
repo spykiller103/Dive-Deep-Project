@@ -11,10 +11,30 @@
 <div class="col">
     <div class="card h-100">
         <div class="card-body d-flex flex-column">
-            <p> <span class="special-text">Varenummer: @Model.EquipmentId</span></p>
             <p> <span class="special-text">Title: @Model.Title</span></p>
+            <p> <span class="special-text">Varenummer: @Model.EquipmentId</span></p>
+            <img src="@Model.Image"
+                 class="card-img-top package-img"
+                 alt="Equipment" />
             <p class="text-secondary">@Model.Description</p>
             <form asp-controller="equipment" asp-action="rent" method="post" class="w-100">
+
+                <div class="package-footer mt-auto border-top border-dark">
+                    <div class="mb-2">
+                        @{
+                            List<string> sizes = Model.SizeList ?? new List<string> { "S", "M", "L", "XL" };
+                        }
+                        <div class="btn-group" role="group">
+                            @for (int i = 0; i < sizes.Count; i++)
+                            {
+                                string s = sizes[i];
+                                string id = $"esize_{Model.EquipmentId}_{s}";
+                                string checkedAttr = i == 0 ? "checked" : "";
+                                <input type="radio" class="btn-check" name="size" id="@id" autocomplete="off" value="@s" @checkedAttr />
+                                <label class="btn btn-sm btn-outline-light me-1" for="@id">@s</label>
+                            }
+                        </div>
+                    </div>
 
                   
                 <div class="package-footer mt-auto border-top border-dark">
@@ -48,7 +68,7 @@
         </div>
     </div>
 </div>
-}
+
 </div>
 
 
