@@ -14,10 +14,6 @@ namespace DiveDeep.Models
         public string Image { get; set; }
         public string Title { get; set; }
         public List<string> Equipment { get; set; }
-
-        public List<CartItem> CartItems { get; set; }
-
-
         public string? Sizes { get; set; }
 
 
@@ -33,5 +29,9 @@ namespace DiveDeep.Models
                 return Sizes.Split(',').Select(s => s.Trim()).Where(s => s.Length > 0).ToList();
             }
         }
+        public List<CartItem> CartItems { get; set; }
+
+
+       
     }
 }
