@@ -13,7 +13,7 @@ namespace DiveDeep.Persistence
         {
             _context = context;
         }
-        public void Add(List<CartItem> cartItems, string UserId)
+        public Booking Add(List<CartItem> cartItems, string UserId)
         {
             Booking booking = new Booking
             {
@@ -22,6 +22,8 @@ namespace DiveDeep.Persistence
             };
             _context.Bookings.Add(booking);
             _context.SaveChanges();
+            
+            return booking;
         }
         public List<Booking> GetAll()
         {

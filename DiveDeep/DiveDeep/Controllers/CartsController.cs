@@ -32,16 +32,34 @@ namespace DiveDeep.Controllers
         [HttpPost]
         public IActionResult Checkout(List<int> cartItemIds)
         {
-            string user = _userManager.GetUserId(User);
-
             List<CartItem> cartItems = new();
+
+            string user = _userManager.GetUserId(User);
 
             foreach (int id in cartItemIds)
                 cartItems.Add(_cartService.GetById(id));
 
-            _bookingRepository.Add(cartItems, user);
+            Booking booking = _bookingRepository.Add(cartItems, user);
 
-            return RedirectToAction(nameof(Index));
+            foreach (CartItem cartItem in cartItems)
+            {
+                CartItem newCartItem = new CartItem
+                {
+                    PackageId = cartItem.PackageId,
+                    EquipmentId = cartItem.EquipmentId,
+                    BookingId = booking.BookingId,
+                    StartDate = cartItem.StartDate,
+                    EndDate = cartItem.EndDate,
+                    TotalDays = cartItem.TotalDays
+                };
+
+                _cartService.Add(newCartItem);
+            }
+
+            foreach (CartItem cartItem in cartItems)
+                _cartService.Delete(cartItem.CartItemId);
+
+            return RedirectToAction("Index");
         }
     }
 }
