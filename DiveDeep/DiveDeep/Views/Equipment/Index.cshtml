@@ -48,7 +48,7 @@
                                         string s = sizes[i];
                                         string id = $"esize_{equipment.EquipmentId}_{s}";
                                         string checkedAttr = i == 0 ? "checked" : "";
-                                        <input type="radio" class="btn-check" name="size" id="@id" autocomplete="off" value="@s" @checkedAttr />
+                                        <input type="radio" class="btn-check" name="size" id="@id" value="@s" @checkedAttr />
                                         <label class="btn btn-sm btn-outline-light me-1" for="@id">@s</label>
                                     }
                                 </div>
