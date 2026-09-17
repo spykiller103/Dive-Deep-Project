@@ -17,9 +17,18 @@ namespace DiveDeep.Controllers
             _equipmentRepository = equipmentRepository;
             _cartService = cartService;
         }
-        public IActionResult Index()
+        public IActionResult Index(string? category)
         {
-            var equipment = _equipmentRepository.GetAll();
+            List<Equipment> equipment;
+            if (string.IsNullOrWhiteSpace(category))
+            {
+                equipment = _equipmentRepository.GetAll();
+            }
+            else
+            {
+                equipment = _equipmentRepository.GetByCategory(category);
+            }
+
             return View(equipment);
         }
 
@@ -27,8 +36,7 @@ namespace DiveDeep.Controllers
         [HttpPost]
         public IActionResult Reload(int buttonID)
         {
-            var equipment = _equipmentRepository.GetAll();
-            return View(equipment);
+            return RedirectToAction(nameof(Index));
         }
 
 

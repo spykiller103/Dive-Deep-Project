@@ -27,6 +27,19 @@ namespace DiveDeep.Persistence
                 .FirstOrDefault(e => e.EquipmentId == id);
         }
 
+        public List<Equipment> GetByCategory(string category)
+        {
+            if (string.IsNullOrWhiteSpace(category))
+            {
+                return GetAll();
+            }
+
+            string equipmentCategory = category;
+            return _context.Equipments
+                .Where(e => !string.IsNullOrEmpty(e.Category) && e.Category == equipmentCategory)
+                .ToList();
+        }
+
        
     }
 }

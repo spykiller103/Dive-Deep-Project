@@ -5,5 +5,6 @@ namespace DiveDeep.Persistence
     {
         List<Equipment> GetAll();
         Equipment? GetById(int id);
+        List<Equipment> GetByCategory(string category);
     }
 }
