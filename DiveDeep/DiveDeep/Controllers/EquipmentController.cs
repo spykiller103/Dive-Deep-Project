@@ -41,7 +41,7 @@ namespace DiveDeep.Controllers
 
 
         [HttpPost]
-        public IActionResult Rent(int id, string start, string end)
+        public IActionResult Rent(int id, string start, string end, string? size)
         {
 
             Equipment equipmentToBeAdded = _equipmentRepository.GetById(id);
@@ -78,6 +78,11 @@ namespace DiveDeep.Controllers
                 EndDate = endDate,
                 TotalDays = days
             };
+
+            if (!string.IsNullOrWhiteSpace(size))
+            {
+                cartItem.SelectedSize = size;
+            }
 
             _cartService.Add(cartItem);
 

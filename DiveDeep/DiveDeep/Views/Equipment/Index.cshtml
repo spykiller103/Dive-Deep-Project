@@ -38,6 +38,21 @@
 
                   
                         <div class="package-footer mt-auto border-top border-dark">
+                            <div class="mb-2">
+                                @{
+                                    var sizes = equipment.SizeList ?? new List<string>{ "S","M","L","XL" };
+                                }
+                                <div class="btn-group" role="group">
+                                    @for (int i = 0; i < sizes.Count; i++)
+                                    {
+                                        var s = sizes[i];
+                                        var id = $"esize_{equipment.EquipmentId}_{s}";
+                                        var checkedAttr = i == 0 ? "checked" : "";
+                                        <input type="radio" class="btn-check" name="size" id="@id" autocomplete="off" value="@s" @checkedAttr />
+                                        <label class="btn btn-sm btn-outline-light me-1" for="@id">@s</label>
+                                    }
+                                </div>
+                            </div>
                             <div class="align-items-center">
                                 <div class="col-12">
                                     <label class="form-label text-white small mb-1">Lejeperiode</label>

@@ -9,6 +9,7 @@ namespace DiveDeep.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int TotalDays { get; set; }
+        public string? SelectedSize { get; set; }
 
         public int? PackageId { get; set; }
         public Package? Package { get; set; }
@@ -18,5 +19,6 @@ namespace DiveDeep.Models
 
         public int? BookingId { get; set; }
         public Booking? Booking { get; set; } = null!;
+
     }
 }
