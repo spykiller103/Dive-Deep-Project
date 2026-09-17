@@ -25,8 +25,7 @@ namespace DiveDeep.Persistence
 
         public void Delete(int id)
         {
-            CartItem cartItem = _context.CartItems.Find(id);
-            if (cartItem == null) return;
+            CartItem cartItem = GetById(id);
 
             _context.CartItems.Remove(cartItem);
             _context.SaveChanges();
@@ -50,16 +49,7 @@ namespace DiveDeep.Persistence
 
         public void Update(CartItem cartItem)
         {
-            if (cartItem == null) return;
-
-            CartItem existing = _context.CartItems.Find(cartItem.CartItemId);
-            if (existing == null) return;
-
-            existing.CartItemId = cartItem.CartItemId;
-            existing.StartDate = cartItem.StartDate;
-            existing.EndDate = cartItem.EndDate;
-            existing.TotalDays = cartItem.TotalDays;
-
+            _context.CartItems.Update(cartItem);
             _context.SaveChanges();
         }
     }
