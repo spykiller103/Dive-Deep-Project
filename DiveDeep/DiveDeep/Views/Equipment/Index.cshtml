@@ -1,4 +1,5 @@
 ﻿@model List<Equipment>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @section Title {
     <br />
@@ -22,83 +23,27 @@
 </div>
 <br />
 <div class="row row-cols-1 row-cols-md-3 g-4 ">
-
-
     @foreach (Equipment equipment in Model)
     {
         <div class="col">
             <div class="card h-100">
-                <img src="@equipment.Image" class="card-img-top package-img" alt="...">
+                <div id="img_container">
+                    <a asp-controller="Equipment"
+                    asp-action="Details"
+                    asp-route-id="@equipment.EquipmentId">
+
+                        <img src="@equipment.Image"
+                        class="card-img-top package-img"
+                        alt="Equipment" />
+                    </a>
+                </div>
                 <div class="card-body d-flex flex-column">
-                    @* <p <span class="special-text">BEKLÆDNING</span></p> *@
                     <p> <span class="special-text">@equipment.Category</span></p>
                     <p class="text-light equipment-title">@equipment.Title</p>
-                    <p class="text-secondary">@equipment.Description</p>
-                    
-                    <form asp-controller="equipment" asp-action="rent" method="post" class="w-100">
-                  
-                        <div class="package-footer mt-auto border-top border-dark">
-                            <div class="mb-2">
-                                @{
-                                    List<string> sizes = equipment.SizeList ?? new List<string>{ "S","M","L","XL" };
-                                }
-                                <div class="btn-group" role="group">
-                                    @for (int i = 0; i < sizes.Count; i++)
-                                    {
-                                        string s = sizes[i];
-                                        string id = $"esize_{equipment.EquipmentId}_{s}";
-                                        string checkedAttr = i == 0 ? "checked" : "";
-                                        <input type="radio" class="btn-check" name="size" id="@id" value="@s" @checkedAttr />
-                                        <label class="btn btn-sm btn-outline-light me-1" for="@id">@s</label>
-                                    }
-                                </div>
-                            </div>
-                            <div class="align-items-center">
-                                <div class="col-12">
-                                    <label class="form-label text-white small mb-1">Lejeperiode</label>
-                                    <div class="input-daterange input-group">
-                                        <input type="text" class="input-sm form-control" name="start" />
-                                        <span class="input-group-addon custom-text">to</span>
-                                        <input type="text" class="input-sm form-control" name="end" />
-
-                                    </div>
-                                    @{
-                                        int? key = equipment.EquipmentId;
-                                        var dateErrors = ViewData.ModelState[key.ToString()]?.Errors;
-                                        if (dateErrors != null && dateErrors.Count > 0)
-                                        {
-                                            <div class="text-danger small mt-1">@dateErrors[0].ErrorMessage</div>
-                                        }
-                                    }
-
-                                </div>
-                            </div>
-
-                            <p class="text-white">@equipment.Price<span class="text-info"> kr./dag</span></p>
-
-                            <input type="hidden" name="id" value="@equipment.EquipmentId" />
-                            <button type="submit" class="btn btn-info btn-rent w-100">Lej</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+                    <p class="text-secondary">@equipment.Description</p>          
+                </div> <!-- .card-body -->
+            </div> <!-- .card -->
+        </div> 
     }
 </div>
-
-
-
-
-@section Scripts {
-    <script src="~/js/bootstrap-datepicker.min.js"></script>
-    <script>
-        $(function() {
-            $('.input-daterange').datepicker({
-                format: "dd/mm/yyyy",
-                startDate: new Date(),
-                autoclose: true,
-                todayHighlight: true
-            });
-        });
-    </script>
-}
+    
