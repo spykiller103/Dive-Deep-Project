@@ -23,6 +23,13 @@ namespace DiveDeep.Controllers
             return View(equipment);
         }
 
+        public IActionResult Details(int id)
+        {
+            Equipment equipment = _equipmentRepository.GetById(id);
+
+            return View(equipment);
+        }
+
 
         [HttpPost]
         public IActionResult Reload(int buttonID)
@@ -65,6 +72,7 @@ namespace DiveDeep.Controllers
 
             CartItem cartItem = new CartItem
             {
+                
                 Equipment = equipmentToBeAdded,
                 StartDate = startDate,
                 EndDate = endDate,
