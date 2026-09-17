@@ -5,6 +5,7 @@ namespace DiveDeep.Models
 {
     public class Equipment
     {
+        [Range(0, 5)]
         public int Amount { get; set; } = 5;
         public int EquipmentId { get; set; }
         public string Image { get; set; }

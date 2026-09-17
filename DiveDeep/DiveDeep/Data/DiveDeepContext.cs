@@ -7,7 +7,6 @@ namespace DiveDeep.Data
     {
         public DbSet<Equipment> Equipments { get; set; }
         public DbSet<Package> Packages { get; set; }
-        public DbSet<Profile> Profiles { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Booking> Bookings { get; set; }
 
@@ -18,11 +17,31 @@ namespace DiveDeep.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CartItem>()
-                .HasOne(c => c.Booking)
-                .WithMany(p => p.CartItems)
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Booking>()
+                .HasMany(b => b.CartItems)
+                .WithOne(c => c.Booking)
                 .HasForeignKey(c => c.BookingId)
+                .IsRequired();
+
+            modelBuilder.Entity<CartItem>()
+                .HasOne(c => c.Package)
+                .WithMany(p => p.CartItems)
+                .HasForeignKey(c => c.PackageId)
                 .IsRequired(false);
+
+            modelBuilder.Entity<CartItem>()
+                .HasOne(c => c.Equipment)
+                .WithMany(e => e.CartItems)
+                .HasForeignKey(c => c.EquipmentId)
+                .IsRequired(false);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(a => a.Bookings)
+                .WithOne(b => b.ApplicationUser)
+                .HasForeignKey(b => b.ApplicationUserId)
+                .IsRequired();
 
             modelBuilder.Entity<Equipment>().HasData
             (
@@ -371,19 +390,6 @@ namespace DiveDeep.Data
                     "Snorkel"
                 }
             });
-
-            modelBuilder.Entity<Profile>().HasData
-                (
-                            new Profile
-                            {
-                                ProfileId = 1,
-                                FirstName = "Nicklas",
-                                LastName = "Jensen",
-                                Email = "Test@mail.com",
-                                ActiveRents = 2,
-                                CompletedRents = 4
-                            });
-
         }
     }
 }

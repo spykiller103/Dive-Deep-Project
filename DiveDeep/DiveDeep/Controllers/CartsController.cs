@@ -1,6 +1,5 @@
 ﻿using DiveDeep.Models;
 using DiveDeep.Persistence;
-using DiveDeep.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using DiveDeep.Service;
 namespace DiveDeep.Controllers

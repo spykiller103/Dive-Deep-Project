@@ -1,4 +1,6 @@
-﻿namespace DiveDeep.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DiveDeep.Models
 {
     public class CartItem
     {

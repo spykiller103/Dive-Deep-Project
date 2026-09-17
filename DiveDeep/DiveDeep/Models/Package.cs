@@ -6,6 +6,7 @@ namespace DiveDeep.Models
 {
     public class Package
     {
+        [Range(0, 5)]
         public int Amount { get; set; } = 5;
         public int PackageId { get; set; }
         public string Category { get; set; }
