@@ -1,10 +1,8 @@
 @page
 @model RegisterConfirmationModel
-@{
-    ViewData["Title"] = "Register confirmation";
+@section Title {
+    <h1>Register confirmation</h1>
 }
-
-<h1>@ViewData["Title"]</h1>
 @{
     if (@Model.DisplayConfirmAccountLink)
     {
