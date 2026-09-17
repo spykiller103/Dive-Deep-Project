@@ -7,13 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ViewModels\**" />
     <Compile Remove="wwwroot\Content\Images\WithBackground\**" />
-    <Content Remove="ViewModels\**" />
     <Content Remove="wwwroot\Content\Images\WithBackground\**" />
-    <EmbeddedResource Remove="ViewModels\**" />
     <EmbeddedResource Remove="wwwroot\Content\Images\WithBackground\**" />
-    <None Remove="ViewModels\**" />
     <None Remove="wwwroot\Content\Images\WithBackground\**" />
   </ItemGroup>
 
