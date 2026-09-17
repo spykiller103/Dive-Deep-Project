@@ -87,6 +87,7 @@ nav .borderBox,
     border: 1px solid rgba(25,167,206,0.14) !important;
     outline-color: rgba(25,167,206,0.06) !important;
     box-shadow: none !important;
+    
 }
 
 /* Ensure individual nav links / buttons do NOT have their own borders */
@@ -397,4 +398,67 @@ nav .borderBox.cartBox {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+}
+
+/* Packages & Equipment — solid, high-contrast buttons and labels */
+.btn-equipment,
+.btn-rent {
+    background: var(--primary) !important;   /* bright ocean cyan */
+    color: #04121a !important;               /* dark text for legibility */
+    border: none !important;
+    box-shadow: 0 8px 20px rgba(25,167,206,0.12) !important;
+    padding: 10px 16px !important;
+    font-weight: 700 !important;
+}
+
+/* Primary package label */
+.package-label {
+    background: var(--primary) !important;
+    color: #04121a !important;
+    border: none !important;
+    padding: 6px 10px !important;
+    border-radius: 8px !important;
+}
+
+/* Equipment label: darker surface with light text for contrast */
+.equipment-label {
+    background: var(--surface-2) !important;
+    color: var(--text) !important;
+    border: none !important;
+    padding: 6px 10px !important;
+    border-radius: 8px !important;
+}
+
+/* Ensure titles/details remain readable */
+.package-title,
+.package-details {
+    color: var(--text) !important;
+}
+.login-btn {
+    background-color: #11151D !important;
+    border-color: #11151D !important;
+}
+
+    .login-btn:hover {
+        background-color: #1A1F29 !important;
+        border-color: #1A1F29 !important;
+    }
+.size-btn {
+    color: white;
+    background-color: transparent;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Valgt størrelse */
+.btn-check:checked + .size-btn {
+    color: white;
+    background-color: #20A8C9;
+    border-color: #20A8C9;
 }

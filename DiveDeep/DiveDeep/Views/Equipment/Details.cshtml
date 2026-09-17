@@ -31,7 +31,7 @@
                                 string id = $"esize_{Model.EquipmentId}_{s}";
                                 string checkedAttr = i == 0 ? "checked" : "";
                                 <input type="radio" class="btn-check" name="size" id="@id" autocomplete="off" value="@s" @checkedAttr />
-                                <label class="btn btn-sm btn-outline-light me-1" for="@id">@s</label>
+                                <label class="size-btn" for="@id">@s</label>
                             }
                         </div>
                     </div>
