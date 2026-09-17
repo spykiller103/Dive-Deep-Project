@@ -120,7 +120,7 @@ namespace DiveDeep.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartItemId"));
 
-                    b.Property<int>("BookingId")
+                    b.Property<int?>("BookingId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndDate")
@@ -725,9 +725,7 @@ namespace DiveDeep.Migrations
                 {
                     b.HasOne("DiveDeep.Models.Booking", "Booking")
                         .WithMany("CartItems")
-                        .HasForeignKey("BookingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BookingId");
 
                     b.HasOne("DiveDeep.Models.Equipment", "Equipment")
                         .WithMany("CartItems")

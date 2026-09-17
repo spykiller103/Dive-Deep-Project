@@ -3,50 +3,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace DiveDeep.Migrations
 {
     /// <inheritdoc />
-    public partial class identity : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_CartItems_Profiles_ProfileId",
-                table: "CartItems");
-
-            migrationBuilder.DropTable(
-                name: "Profiles");
-
-            migrationBuilder.DropIndex(
-                name: "IX_CartItems_ProfileId",
-                table: "CartItems");
-
-            migrationBuilder.DropColumn(
-                name: "ProfileId",
-                table: "CartItems");
-
-            migrationBuilder.AddColumn<int>(
-                name: "Amount",
-                table: "Packages",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AddColumn<int>(
-                name: "Amount",
-                table: "Equipments",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AddColumn<int>(
-                name: "BookingId",
-                table: "CartItems",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -86,6 +52,42 @@ namespace DiveDeep.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Equipments",
+                columns: table => new
+                {
+                    EquipmentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Amount = table.Column<int>(type: "int", nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Equipments", x => x.EquipmentId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Packages",
+                columns: table => new
+                {
+                    PackageId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Amount = table.Column<int>(type: "int", nullable: false),
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<int>(type: "int", nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Equipment = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Packages", x => x.PackageId);
                 });
 
             migrationBuilder.CreateTable(
@@ -213,255 +215,87 @@ namespace DiveDeep.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 1,
-                column: "Amount",
-                value: 5);
+            migrationBuilder.CreateTable(
+                name: "CartItems",
+                columns: table => new
+                {
+                    CartItemId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TotalDays = table.Column<int>(type: "int", nullable: false),
+                    PackageId = table.Column<int>(type: "int", nullable: true),
+                    EquipmentId = table.Column<int>(type: "int", nullable: true),
+                    BookingId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartItems", x => x.CartItemId);
+                    table.ForeignKey(
+                        name: "FK_CartItems_Bookings_BookingId",
+                        column: x => x.BookingId,
+                        principalTable: "Bookings",
+                        principalColumn: "BookingId");
+                    table.ForeignKey(
+                        name: "FK_CartItems_Equipments_EquipmentId",
+                        column: x => x.EquipmentId,
+                        principalTable: "Equipments",
+                        principalColumn: "EquipmentId");
+                    table.ForeignKey(
+                        name: "FK_CartItems_Packages_PackageId",
+                        column: x => x.PackageId,
+                        principalTable: "Packages",
+                        principalColumn: "PackageId");
+                });
 
-            migrationBuilder.UpdateData(
+            migrationBuilder.InsertData(
                 table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 2,
-                column: "Amount",
-                value: 5);
+                columns: new[] { "EquipmentId", "Amount", "Category", "Description", "Image", "Price", "Title" },
+                values: new object[,]
+                {
+                    { 1, 5, "BCD", "TEMP", "/Content/Images/Equipment/BCD/NavigatorLite.png", 125, "Scubapro Navigator Lite BCD" },
+                    { 2, 5, "BCD", "TEMP", "/Content/Images/Equipment/BCD/GlideBCD.png", 140, "Scubapro BCD Glide" },
+                    { 3, 5, "BCD", "TEMP", "/Content/Images/Equipment/BCD/HydrosPro.png", 200, "Scubapro BCD Hydros Pro" },
+                    { 4, 5, "BCD", "TEMP", "/Content/Images/Equipment/BCD/Modular.png", 145, "Seac BCD Modular" },
+                    { 5, 5, "Dykkerdragt", "Våddragt, 3 mm", "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png", 100, "Scubapro Definition" },
+                    { 6, 5, "Dykkerdragt", "Våddragt, 5 mm", "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png", 100, "Scubapro Definition" },
+                    { 7, 5, "Dykkerdragt", "Våddragt, 7 mm", "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png", 100, "Scubapro Definition" },
+                    { 8, 5, "Dykkerdragt", "Våddragt, 3.5 mm", "/Content/Images/Equipment/Divingsuits/Wetsuits/W5.png", 100, "Waterproof W5" },
+                    { 9, 5, "Dykkerdragt", "Våddragt, 5 mm", "/Content/Images/Equipment/Divingsuits/Wetsuits/ProteusF.png", 120, "Fourth Element Proteus" },
+                    { 10, 5, "Dykkerdragt", "Tørdragt", "/Content/Images/Equipment/Divingsuits/Drysuits/Exodry4.png", 300, "Scubapro Exodry 4.0" },
+                    { 11, 5, "Dykkerdragt", "Tørdragt", "/Content/Images/Equipment/Divingsuits/Drysuits/D7Evo.png", 320, "Waterproof D7 Evo" },
+                    { 12, 5, "Dykkerdragt", "Tørdragt", "/Content/Images/Equipment/Divingsuits/Drysuits/ELitePlus.png", 350, "Santi E.Lite Plus" },
+                    { 13, 5, "Tanke", "N/A", "/Content/Images/Equipment/Tanks/Tank.png", 150, "Scubapro 5 liter" },
+                    { 14, 5, "Tanke", "N/A", "/Content/Images/Equipment/Tanks/Tank.png", 160, "Scubapro 10 liter" },
+                    { 15, 5, "Tanke", "N/A", "/Content/Images/Equipment/Tanks/Tank.png", 170, "Scubapro 12 liter" },
+                    { 16, 5, "Tanke", "N/A", "/Content/Images/Equipment/Tanks/Tank.png", 180, "Scubapro 15 liter" },
+                    { 17, 5, "Regulatorsæt", "N/A", "/Content/Images/Equipment/Regulator/MK25EVO.png", 125, "Scubapro Octopus R105/MK25EVO/S600" },
+                    { 18, 5, "Regulatorsæt", "N/A", "/Content/Images/Equipment/Regulator/MK17.png", 100, "Scubapro Octopus R095/MK17EVO/C370" },
+                    { 19, 5, "Regulatorsæt", "N/A", "/Content/Images/Equipment/Regulator/MK25EVObt.png", 150, "Scubapro Octopus S270/MK25EVO BT/A700 Carbon BT" },
+                    { 20, 5, "Maske/Snorkel", "N/A", "/Content/Images/Equipment/Masks/Ghost.png", 50, "Scubapro Ghost" },
+                    { 21, 5, "Maske/Snorkel", "N/A", "/Content/Images/Equipment/Masks/DMask.png", 60, "Scubapro D-Mask" },
+                    { 22, 5, "Maske/Snorkel", "N/A", "/Content/Images/Equipment/Masks/SpectraMini.png", 50, "Scubapro Spectra Mini" },
+                    { 23, 5, "Maske/Snorkel", "N/A", "/Content/Images/Equipment/Masks/CrystalVu.png", 75, "Scubapro Crystal VU" },
+                    { 24, 5, "Maske/Snorkel", "N/A", "/Content/Images/Equipment/Masks/Scout.png", 75, "Fourth Element Scout Kontrast" },
+                    { 25, 5, "Maske/Snorkel", "N/A", "/Content/Images/Equipment/Masks/ScoutEnchance.png", 75, "Fourth Element Scout Enchance" },
+                    { 26, 5, "Maske/Snorkel", "N/A", "/Content/Images/Equipment/Masks/Element.png", 75, "Tusa Element" },
+                    { 27, 5, "Finner", "N/A", "/Content/Images/Equipment/Fins/JetFin.png", 50, "Scubapro Jet Fin" },
+                    { 28, 5, "Finner", "N/A", "/Content/Images/Equipment/Fins/TravelFins.png", 50, "Scubapro GO travel" },
+                    { 29, 5, "Finner", "N/A", "/Content/Images/Equipment/Fins/SeawingSupernova.png", 60, "Scubapro Seawing Supernova" },
+                    { 30, 5, "Finner", "N/A", "/Content/Images/Equipment/Fins/Propulsion.png", 50, "Seac Propulsion" },
+                    { 31, 5, "Finner", "N/A", "/Content/Images/Equipment/Fins/ALA.png", 50, "Seac ALA" },
+                    { 32, 5, "Finner", "N/A", "/Content/Images/Equipment/Fins/TechFins.png", 75, "Fourth Element Tech" },
+                    { 33, 5, "Finner", "N/A", "/Content/Images/Equipment/Fins/RecFins.png", 80, "Fourth Element Rec Fin" }
+                });
 
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 3,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 4,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 5,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 6,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 7,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 8,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 9,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 10,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 11,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 12,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 13,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 14,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 15,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 16,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 17,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 18,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 19,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 20,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 21,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 22,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 23,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 24,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 25,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 26,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 27,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 28,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 29,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 30,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 31,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 32,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Equipments",
-                keyColumn: "EquipmentId",
-                keyValue: 33,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
+            migrationBuilder.InsertData(
                 table: "Packages",
-                keyColumn: "PackageId",
-                keyValue: 1,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.UpdateData(
-                table: "Packages",
-                keyColumn: "PackageId",
-                keyValue: 2,
-                column: "Amount",
-                value: 5);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CartItems_BookingId",
-                table: "CartItems",
-                column: "BookingId");
+                columns: new[] { "PackageId", "Amount", "Category", "Equipment", "Image", "Price", "Title" },
+                values: new object[,]
+                {
+                    { 1, 5, "Pakke", "[\"BCD\",\"Dykkerdragt\",\"Regulators\\u00E6t\",\"Tank\",\"Finner\",\"Maske\",\"Snorkel\"]", "/Content/Images/Packages/Package1.png", 750, "Komplet dykkersæt" },
+                    { 2, 5, "Pakke", "[\"Finner\",\"Maske\",\"Snorkel\"]", "/Content/Images/Packages/Package2.png", 100, "Komplet snorkelsæt" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -507,22 +341,25 @@ namespace DiveDeep.Migrations
                 table: "Bookings",
                 column: "ApplicationUserId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_CartItems_Bookings_BookingId",
+            migrationBuilder.CreateIndex(
+                name: "IX_CartItems_BookingId",
                 table: "CartItems",
-                column: "BookingId",
-                principalTable: "Bookings",
-                principalColumn: "BookingId",
-                onDelete: ReferentialAction.Cascade);
+                column: "BookingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartItems_EquipmentId",
+                table: "CartItems",
+                column: "EquipmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartItems_PackageId",
+                table: "CartItems",
+                column: "PackageId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_CartItems_Bookings_BookingId",
-                table: "CartItems");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -539,69 +376,22 @@ namespace DiveDeep.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Bookings");
+                name: "CartItems");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Bookings");
+
+            migrationBuilder.DropTable(
+                name: "Equipments");
+
+            migrationBuilder.DropTable(
+                name: "Packages");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropIndex(
-                name: "IX_CartItems_BookingId",
-                table: "CartItems");
-
-            migrationBuilder.DropColumn(
-                name: "Amount",
-                table: "Packages");
-
-            migrationBuilder.DropColumn(
-                name: "Amount",
-                table: "Equipments");
-
-            migrationBuilder.DropColumn(
-                name: "BookingId",
-                table: "CartItems");
-
-            migrationBuilder.AddColumn<int>(
-                name: "ProfileId",
-                table: "CartItems",
-                type: "int",
-                nullable: true);
-
-            migrationBuilder.CreateTable(
-                name: "Profiles",
-                columns: table => new
-                {
-                    ProfileId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ActiveRents = table.Column<int>(type: "int", nullable: false),
-                    CompletedRents = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Profiles", x => x.ProfileId);
-                });
-
-            migrationBuilder.InsertData(
-                table: "Profiles",
-                columns: new[] { "ProfileId", "ActiveRents", "CompletedRents", "Email", "FirstName", "LastName" },
-                values: new object[] { 1, 2, 4, "Test@mail.com", "Nicklas", "Jensen" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CartItems_ProfileId",
-                table: "CartItems",
-                column: "ProfileId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_CartItems_Profiles_ProfileId",
-                table: "CartItems",
-                column: "ProfileId",
-                principalTable: "Profiles",
-                principalColumn: "ProfileId");
         }
     }
 }
