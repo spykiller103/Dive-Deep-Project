@@ -39,6 +39,8 @@ namespace DiveDeep
             app.UseHttpsRedirection();
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.MapStaticAssets();
@@ -46,6 +48,7 @@ namespace DiveDeep
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}")
                 .WithStaticAssets();
+            app.MapRazorPages();
 
             app.Run();
         }

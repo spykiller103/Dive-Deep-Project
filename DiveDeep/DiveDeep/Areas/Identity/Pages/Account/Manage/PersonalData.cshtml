@@ -1,11 +1,11 @@
 @page
 @model PersonalDataModel
 @{
-    ViewData["Title"] = "Personal Data";
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
 }
-
-<h3>@ViewData["Title"]</h3>
+@section Title {
+    <h1>Personal Data</h1>
+}
 
 <div class="row">
     <div class="col-md-6">
