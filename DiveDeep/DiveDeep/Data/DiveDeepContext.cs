@@ -1,8 +1,9 @@
 ﻿using DiveDeep.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 namespace DiveDeep.Data
 {
-    public class DiveDeepContext : DbContext
+    public class DiveDeepContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Equipment> Equipments { get; set; }
         public DbSet<Package> Packages { get; set; }
@@ -17,9 +18,9 @@ namespace DiveDeep.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CartItem>()
-                .HasOne(c => c.Profile)
+                .HasOne(c => c.Booking)
                 .WithMany(p => p.CartItems)
-                .HasForeignKey(c => c.ProfileId)
+                .HasForeignKey(c => c.BookingId)
                 .IsRequired(false);
 
             modelBuilder.Entity<Equipment>().HasData

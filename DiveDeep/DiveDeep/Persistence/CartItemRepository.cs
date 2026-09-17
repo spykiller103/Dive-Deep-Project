@@ -32,26 +32,9 @@ namespace DiveDeep.Persistence
             _context.SaveChanges();
         }
 
-        public void AssignProfileToAllCartItems(int profileId)
-        {
-            var items = _context.CartItems
-                .Where(c => c.ProfileId == null || c.ProfileId == 0)
-                .ToList();
-
-            if (!items.Any()) return;
-
-            foreach (var item in items)
-            {
-                item.ProfileId = profileId;
-            }
-
-            _context.SaveChanges();
-        }
-
         public List<CartItem> GetAll()
         {
             return _context.CartItems
-             .Where(c => c.ProfileId == null)
              .Include(c => c.Equipment)
              .Include(c => c.Package)
              .ToList();
