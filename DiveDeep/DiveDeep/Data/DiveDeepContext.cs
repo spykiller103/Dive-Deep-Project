@@ -9,6 +9,7 @@ namespace DiveDeep.Data
         public DbSet<Package> Packages { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
 
         public DiveDeepContext(DbContextOptions contextOptions) : base(contextOptions)
         {
