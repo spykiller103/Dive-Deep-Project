@@ -22,7 +22,7 @@ namespace DiveDeep.Persistence
             };
             _context.Bookings.Add(booking);
             _context.SaveChanges();
-            
+
             return booking;
         }
         public List<Booking> GetAll()

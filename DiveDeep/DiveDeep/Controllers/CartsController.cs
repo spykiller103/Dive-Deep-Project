@@ -5,6 +5,7 @@ using DiveDeep.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+
 namespace DiveDeep.Controllers
 {
     [Authorize]
@@ -12,10 +13,9 @@ namespace DiveDeep.Controllers
     {
         private readonly CartService _cartService;
         private readonly UserManager<ApplicationUser> _userManager;
-
         private readonly IBookingRepository _bookingRepository;
 
-        public CartsController(CartService cartService, IEquipmentRepository equipmentRepository, IPackageRepository packageRepository, IBookingRepository bookingRepository, UserManager<ApplicationUser> userManager)
+        public CartsController(CartService cartService, IBookingRepository bookingRepository, UserManager<ApplicationUser> userManager)
         {
             _cartService = cartService;
             _userManager = userManager;
@@ -24,7 +24,9 @@ namespace DiveDeep.Controllers
 
         public IActionResult Index()
         {
-            List<CartItem> cartItems = _cartService.GetAll();
+            List<CartItem> cartItems = _cartService.GetAll()
+                .Where(c => c.BookingId == null)
+                .ToList();
 
             return View(cartItems);
         }
@@ -37,27 +39,17 @@ namespace DiveDeep.Controllers
             string user = _userManager.GetUserId(User);
 
             foreach (int id in cartItemIds)
+            {
                 cartItems.Add(_cartService.GetById(id));
+            }
 
             Booking booking = _bookingRepository.Add(cartItems, user);
 
             foreach (CartItem cartItem in cartItems)
             {
-                CartItem newCartItem = new CartItem
-                {
-                    PackageId = cartItem.PackageId,
-                    EquipmentId = cartItem.EquipmentId,
-                    BookingId = booking.BookingId,
-                    StartDate = cartItem.StartDate,
-                    EndDate = cartItem.EndDate,
-                    TotalDays = cartItem.TotalDays
-                };
-
-                _cartService.Add(newCartItem);
+                cartItem.BookingId = booking.BookingId;
+                _cartService.Update(cartItem);
             }
-
-            foreach (CartItem cartItem in cartItems)
-                _cartService.Delete(cartItem.CartItemId);
 
             return RedirectToAction("Index");
         }
