@@ -1,426 +1,328 @@
-html {
-    font-size: 16px;
+/* Ocean-inspired high-contrast theme — only site.css (bootstrap untouched) */
+:root {
+    --bg: #022f3d;         /* deep ocean */
+    --surface: #083542;    /* card / container surface */
+    --surface-2: #0b4f63;  /* header / secondary surfaces */
+    --primary: #19a7ce;    /* bright cyan */
+    --primary-600: #1596b8;
+    --accent: #2fd3c8;     /* minty accent */
+    --text: #e9fbff;       /* light text for contrast */
+    --muted: #9cc6cf;      /* muted text */
+    --muted-2: #7fa6ad;
+    --border: rgba(255,255,255,0.06);
+    --glass: rgba(255,255,255,0.03);
+    --danger: #ff6b6b;
+    --focus-shadow: 0 0 0 0.2rem rgba(25,167,206,0.16);
+    --radius-lg: 16px;
+    --radius-md: 10px;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html, body {
-    height: 100%;
-}
-
+/* Base */
+html { font-size: 16px; box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+html, body { height: 100%; }
 body {
-    display: flex;
-    flex-direction: column;
-    background-color: #070b14;
-    color: #475569;
-}
-
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-    color: var(--bs-secondary-color);
-    text-align: end;
-}
-
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-    text-align: start;
-}
-
-/*Design for every site*/
-.custom-text {
-    color: #94a3b8 !important;
-}
-
-.custom-background {
-    background: rgb(17, 21, 29);
-}
-
-.SiteTitles {
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 60px;
-}
-
-
-/* Header */
-nav {
-    padding-bottom: 10px;
-}
-
-.logo {
-    height: 70px;
-    width: auto;
-}
-
-.searchBar {
-    padding-left: 40px;
-    border-radius: 15px;
-    outline: solid;
-    outline-width: 1.6px;
-    outline-color: rgba(27, 30, 39);
-    height: 45px;
-}
-
-    .searchBar::placeholder {
-        color: gray;
-        opacity: 0.7;
-    }
-
-    .searchBar:focus {
-        background: rgb(18, 26, 36);
-        outline: none;
-        box-shadow: none;
-    }
-
-.searchContainer {
-    position: relative;
-    width: 300px;
-}
-
-    .searchContainer .bi-search {
-        position: absolute;
-        left: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 1;
-    }
-
-.borderBox {
-    border-radius: 30px;
-    padding: 5px;
-    padding-left: 25px;
-    padding-right: 25px;
-    outline: solid;
-    outline-width: 1.6px;
-    outline-color: rgba(27, 30, 39);
-}
-
-.borderBox-border {
-    opacity: 0.2;
-}
-
-.login {
-    margin-left: 20px;
-}
-
-.cartBox {
-    padding: 10px;
-    padding-bottom: 15px;
-    margin-left: 12px;
-}
-
-.shoppingCart {
-    height: 60px;
-    margin-left: 10px;
-}
-
-
-/*footer*/
-.custom-footer-text2 {
-    color: #475569 !important;
-}
-
-/*Front page*/
-.front-page-btn {
-    width: 20% !important;
-    height: 55px !important;
-    font-weight: bolder;
-    border-radius: 30px;
-}
-
-    .front-page-btn:hover {
-        transform: scale(1.1);
-    }
-
-#front-page-package-btn {
-    box-shadow: rgba(6, 182, 212, 0.4) 0px 0px 30px;
-    background: rgb(6, 182, 212);
-    color: black;
-}
-
-#front-page-equipment-btn {
-    background: rgba(255, 255, 255, 0.1);
-    color: rgb(241, 245, 249);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(8px);
-    color: white;
-}
-
-
-/*About us site*/
-.banner {
-    background-image: url("/Content/Images/FishPhoto.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 70vh;
-    background-blend-mode: overlay;
-    background-color: rgba(0, 0, 0, 0.4);
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-}
-
-.special-text {
-    color: aqua;
-    font-style: italic;
-}
-
-.form-control,
-.form-control:focus {
-    background-color: #070b14;
-    color: #ffffff;
-    border-color: rgb(18, 26, 36);
-}
-
-.ContactInput::placeholder {
-    color: gray;
-    opacity: 0.7;
-}
-
-.ContactSelect {
-    background-color: #070b14;
-    color: #ffffff;
-    border-color: rgb(18, 26, 36);
-    width: 100%;
-    height: 40px;
-    border-radius: 5px;
-}
-
-.ContactBox {
-    background-color: #0d1420;
-    border: 1px solid #1f2a3a;
-    border-radius: 16px;
-    padding: 24px;
-    box-sizing: border-box;
-    height: 100%;
-    max-width: none;
     margin: 0;
     display: flex;
     flex-direction: column;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-    .ContactBox textarea {
-        flex: 1;
-        min-height: 0;
+/* Focus states */
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: var(--focus-shadow);
+    outline: none;
+}
+
+/* Shared helpers */
+.custom-text { color: var(--muted) !important; }
+.SiteTitles {
+    color: var(--text);
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 1;
+}
+
+/* Header / Nav */
+nav {
+    padding: 12px 0;
+    background: linear-gradient(180deg, rgba(11,79,99,0.95), rgba(2,47,61,0.85));
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.logo { height: 70px; width: auto; display: block; }
+
+/* Search */
+.searchBar {
+    padding-left: 44px;
+    border-radius: 12px;
+    height: 44px;
+    background: rgba(255,255,255,0.02);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+.searchBar::placeholder { color: rgba(233,251,255,0.35); }
+.searchBar:focus { background: rgba(255,255,255,0.02); box-shadow: var(--focus-shadow); }
+
+.searchContainer { position: relative; width: 320px; }
+.searchContainer .bi-search {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(233,251,255,0.45);
+}
+
+/* Small header boxes */
+.borderBox {
+    border-radius: 22px;
+    padding: 8px 24px;
+    border: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+}
+.login { margin-left: 20px; }
+.cartBox { padding: 10px 12px; margin-left: 12px; }
+.shoppingCart { height: 60px; margin-left: 10px; }
+
+/* Footer */
+.custom-footer-text2 { color: var(--muted-2) !important; }
+
+/* Front page buttons */
+.front-page-btn {
+    width: 20% !important;
+    height: 55px !important;
+    font-weight: 800;
+    border-radius: 30px;
+    background: linear-gradient(180deg, var(--primary), var(--primary-600));
+    color: #04121a;
+}
+.front-page-btn:hover { transform: translateY(-2px); filter: brightness(1.03); }
+
+#front-page-package-btn { box-shadow: 0 0 30px rgba(25,167,206,0.16); }
+#front-page-equipment-btn {
+    background: rgba(255,255,255,0.03);
+    color: var(--text);
+    border: 1px solid rgba(255,255,255,0.05);
+    backdrop-filter: blur(6px);
+}
+
+/* Banner */
+.banner {
+    background-image: url("/Content/Images/FishPhoto.png");
+    height: 78vh !important;      /* adjust as needed (75vh, 80vh, etc.) */
+    min-height: 520px;
+    background-size: cover;
+    background-position: center top ;
+    background-repeat: no-repeat;
+    background-color: transparent;    /* make image show at full brightness */
+    width: 100vw;
+    
+    margin-left: calc(-50vw + 50%);
+}
+.employee-cards {
+    width: 100%;
+    height: 320px; /* original size used previously */
+    object-fit: cover; /* crop to fill while preserving aspect */
+    display: block;
+}
+
+    .special-text {
+        color: var(--accent);
+        font-style: italic;
+    }
+    /* Forms */
+    .form-control,
+    .form-control:focus {
+        background-color: rgba(255,255,255,0.02);
+        color: var(--text);
+        border-color: var(--border);
+        border-radius: 8px;
     }
 
-    .ContactBox .mb-3:has(textarea) {
-        flex: 1;
+        .form-control::placeholder {
+            color: rgba(233,251,255,0.3);
+        }
+    /* Contact boxes */
+    .ContactBox, .ContactBox1 {
+        background-color: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.04);
+        border-radius: var(--radius-lg);
+        padding: 20px;
+        box-sizing: border-box;
+        color: var(--text);
+    }
+
+        .ContactBox textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+    /* Buttons */
+    .btn-send-formular, .btn-equipment, .BtnProfile, .btn-rent {
+        background: linear-gradient(180deg, var(--primary), var(--primary-600));
+        color: #04121a;
+        border-radius: 30px;
+        border: none;
+        padding: 10px 18px;
+        font-weight: 700;
+    }
+
+        .btn-send-formular:hover, .btn-equipment:hover, .BtnProfile:hover, .btn-rent:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.03);
+        }
+    /* Small size buttons */
+    .BtnSize {
+        border-radius: 10px !important;
+        margin: 10px;
+        background-color: rgba(255,255,255,0.03) !important;
+        color: var(--muted) !important;
+        border: 1px solid rgba(255,255,255,0.04) !important;
+    }
+
+        .BtnSize:focus {
+            background-color: var(--primary) !important;
+            color: #04121a !important;
+        }
+    /* Icon box */
+    .IconBox {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(255,255,255,0.02);
+        border-radius: 8px;
+    }
+
+        .IconBox i {
+            color: var(--primary);
+            font-size: 18px;
+        }
+    /* Cards, packages and equipment */
+    .card {
+        background-color: var(--surface);
+        border: 1px solid rgba(255,255,255,0.03);
+        border-radius: 14px;
+        color: var(--text);
+    }
+
+    .package-img {
+        width: 100%;
+        height: 300px;
+        object-fit: contain;
+        padding: 8px;
+        display: block;
+        background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+    }
+
+    .package-top {
         display: flex;
         flex-direction: column;
     }
 
-    .ContactBox > div:last-child {
-        margin-top: auto;
+    .package-equipment {
+        margin-top: 4px;
     }
 
+        .package-equipment p {
+            line-height: 1.6;
+        }
 
-.ContactBox1 {
-    background-color: #0d1420;
-    border: 1px solid #1f2a3a;
-    border-radius: 16px;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: none;
-    margin: 0 0 20px 0;
-    text-align: left;
-    padding: 16px;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-}
-
-    .ContactBox1:last-child {
-        margin-bottom: 0;
+    .package-label {
+        background-color: rgba(25,167,206,0.08);
+        color: var(--primary);
+        font-size: 14px;
+        font-weight: 700;
+        padding: 6px 10px;
+        border-radius: 8px;
     }
 
-.btn-send-formular {
-    width: 100%;
-    background: rgb(6, 182, 212);
-    Color: rgb(7, 11, 20);
-    border-radius: 30px;
-}
-
-    .btn-send-formular:hover {
-        background: rgb(6, 182, 212);
-        Color: rgb(7, 11, 20);
+    .equipment-label {
+        background-color: rgba(255,255,255,0.02);
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 700;
+        padding: 6px 10px;
+        border-radius: 8px;
     }
 
-.IconBox {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-    background-color: #1b2a3a;
-    border-radius: 8px;
-}
-
-    .IconBox i {
-        color: rgb(6, 176, 205);
-        font-size: 18px;
+    .package-box {
+        background-color: rgba(255,255,255,0.01);
+        border: 1px solid rgba(255,255,255,0.03);
+        border-radius: 18px;
+        padding: 24px;
     }
 
-.InfoTextWrapper {
-    display: flex;
-    flex-direction: column;
-}
-
-.InfoTitle {
-    color: #ffffff;
-    margin: 0;
-    font-weight: 600;
-}
-
-/*Packeages and Equipment*/
-.btn-rent {
-    border-radius: 10px;
-    padding: 6px 12px;
-}
-
-
-.btn-equipment {
-    background: rgb(6, 182, 212);
-    Color: rgb(7, 11, 20);
-}
-
-.card {
-    background-color: rgb(13, 18, 32);
-}
-
-
-.employee-cards {
-    width: 100%;
-    height: 320px;
-    object-fit: cover;
-    display: block;
-}
-
-
-.package-img {
-    width: 100%;
-    height: 300px;
-    object-fit: contain;
-    padding: 8px;
-    display: block;
-}
-
-.package-top {
-    display: flex;
-    flex-direction: column;
-}
-
-.package-equipment {
-    margin-top: 4px;
-}
-
-    .package-equipment p {
-        line-height: 1.6;
+    .package-details {
+        color: var(--muted);
+        font-size: 13px;
+        margin-top: 10px;
     }
 
-.package-label {
-    background-color: #102c3d;
-    color: #00d9ff;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.equipment-label {
-    background-color: rgba(255, 255, 255, 0.07);
-    color: rgb(148, 163, 184);
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.package-box {
-    background-color: #0d1320;
-    border: 1px solid #202a3a;
-    border-radius: 22px;
-    padding: 30px;
-}
-
-.package-details {
-    color: #50627d;
-    font-size: 12px;
-    margin-top: 10px;
-}
-
-.package-title {
-    color: #ffffff;
-    font-size: 26px;
-    font-weight: 700;
-    margin-top: 14px;
-    margin-bottom: 8px;
-}
-
-.empty-cart {
-    color: #536684;
-    font-size: 16px;
-    border: none;
-    background: none;
-    padding: 0;
-}
-
-    .empty-cart:hover {
-        color: #FF0000;
+    .package-title {
+        color: var(--text);
+        font-size: 26px;
+        font-weight: 700;
+        margin: 14px 0 8px;
+    }
+    /* Cart */
+    .empty-cart {
+        color: var(--muted);
+        font-size: 16px;
+        background: none;
+        border: none;
+        padding: 0;
     }
 
-.cart-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.BtnSize {
-    border-radius: 0 !important;
-    margin: 10px;
-    background-color: rgba(255, 255, 255, 0.06) !important;
-    color: rgb(148, 163, 184) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 10px !important;
-}
-
-    .BtnSize:focus {
-        background-color: rgb(6, 182, 212) !important;
-        color: rgb(7, 11, 20) !important;
-        outline: none !important;
-        box-shadow: none !important;
+        .empty-cart:hover {
+            color: var(--danger);
+        }
+    /* Profile area */
+    .profile-info {
+        background: linear-gradient(180deg, rgba(25,167,206,0.04), rgba(255,255,255,0.01));
+        border: 1px solid rgba(25,167,206,0.14);
+        height: 100px;
+        width: 250px;
+        border-radius: 20px;
+        padding: 12px;
+        color: var(--text);
+    }
+    /* Misc layout */
+    .cart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
     }
 
-.equipment-title {
-    min-height: 48px;
-}
-
-/*Login Og Opret Konto*/
-.LoginBox {
-    background-color: #0d1420;
-    border: 1px solid #1f2a3a;
-    border-radius: 16px;
-    padding: 24px;
-    box-sizing: border-box;
-    height: 100%;
-    margin: 0;
-    width: 40%;
-}
-
-.BtnProfile {
-    width: 100%;
-    background: rgb(6, 182, 212);
-    Color: rgb(7, 11, 20);
-    border-radius: 30px;
-}
-
-    .BtnProfile:hover {
-        background: rgb(6, 182, 212);
-        Color: rgb(7, 11, 20)
+    .InfoTitle {
+        color: var(--text);
+        margin: 0;
+        font-weight: 600;
+    }
+    /* Utilities */
+    .text-light {
+        color: rgba(233,251,255,0.9);
     }
 
-.profile-info {
-    background: rgba(6, 182, 212, 0.07);
-    border: 1px solid rgba(6, 182, 212, 0.2);
-    height: 100px;
-    width: 250px;
-    border-radius: 20px;
-}
+    .small {
+        font-size: 0.85rem;
+    }
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+        .searchContainer {
+            width: 200px;
+        }
+
+        .SiteTitles {
+            font-size: 34px;
+        }
+
+        .front-page-btn {
+            width: 40% !important;
+        }
+    }
+    /* End of ocean theme */
