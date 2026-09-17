@@ -52,7 +52,8 @@ namespace DiveDeep.Data
                     Category = "BCD",
                     Title = "Scubapro Navigator Lite BCD",
                     Description = "TEMP",
-                    Price = 125
+                    Price = 125,
+                    Sizes = "S,M,L,XL"
                 },
 
             new Equipment
@@ -62,7 +63,8 @@ namespace DiveDeep.Data
                 Category = "BCD",
                 Title = "Scubapro BCD Glide",
                 Description = "TEMP",
-                Price = 140
+                Price = 140,
+                Sizes = "S,M,L,XL"
             },
             new Equipment
             {
@@ -71,7 +73,8 @@ namespace DiveDeep.Data
                 Category = "BCD",
                 Title = "Scubapro BCD Hydros Pro",
                 Description = "TEMP",
-                Price = 200
+                Price = 200,
+                Sizes = "S,M,L,XL"
             },
             new Equipment
             {
@@ -80,7 +83,8 @@ namespace DiveDeep.Data
                 Category = "BCD",
                 Title = "Seac BCD Modular",
                 Description = "TEMP",
-                Price = 145
+                Price = 145,
+                Sizes = "S,M,L,XL"
             },
 
             new Equipment
@@ -90,7 +94,8 @@ namespace DiveDeep.Data
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
                 Description = "Våddragt, 3 mm",
-                Price = 100
+                Price = 100,
+                Sizes = "S,M,L,XL"
             },
 
 
@@ -101,7 +106,8 @@ namespace DiveDeep.Data
                 Category = "Dykkerdragt",
                 Title = "Scubapro Definition",
                 Description = "Våddragt, 5 mm",
-                Price = 100
+                Price = 100,
+                Sizes = "S,M,L,XL"
             },
              new Equipment
              {
@@ -110,7 +116,8 @@ namespace DiveDeep.Data
                  Category = "Dykkerdragt",
                  Title = "Scubapro Definition",
                  Description = "Våddragt, 7 mm",
-                 Price = 100
+                 Price = 100,
+                 Sizes = "S,M,L,XL"
              },
 
               new Equipment
@@ -120,7 +127,8 @@ namespace DiveDeep.Data
                   Category = "Dykkerdragt",
                   Title = "Waterproof W5",
                   Description = "Våddragt, 3.5 mm",
-                  Price = 100
+                  Price = 100,
+                  Sizes = "S,M,L,XL"
               },
 
                new Equipment
@@ -130,7 +138,8 @@ namespace DiveDeep.Data
                    Category = "Dykkerdragt",
                    Title = "Fourth Element Proteus",
                    Description = "Våddragt, 5 mm",
-                   Price = 120
+                   Price = 120,
+                   Sizes = "S,M,L,XL"
                },
 
             new Equipment
@@ -140,7 +149,8 @@ namespace DiveDeep.Data
                 Category = "Dykkerdragt",
                 Title = "Scubapro Exodry 4.0",
                 Description = "Tørdragt",
-                Price = 300
+                Price = 300,
+                Sizes = "S,M,L,XL"
             },
             new Equipment
             {
@@ -149,7 +159,8 @@ namespace DiveDeep.Data
                 Category = "Dykkerdragt",
                 Title = "Waterproof D7 Evo",
                 Description = "Tørdragt",
-                Price = 320
+                Price = 320,
+                Sizes = "S,M,L,XL"
             },
 
               new Equipment
@@ -159,7 +170,8 @@ namespace DiveDeep.Data
                   Category = "Dykkerdragt",
                   Title = "Santi E.Lite Plus",
                   Description = "Tørdragt",
-                  Price = 350
+                  Price = 350,
+                  Sizes = "S,M,L,XL"
               },
 
              new Equipment
@@ -169,7 +181,8 @@ namespace DiveDeep.Data
                  Category = "Tanke",
                  Title = "Scubapro 5 liter",
                  Description = "N/A",
-                 Price = 150
+                 Price = 150,
+                 Sizes = "S,M,L,XL"
              },
               new Equipment
               {
@@ -178,7 +191,8 @@ namespace DiveDeep.Data
                   Category = "Tanke",
                   Title = "Scubapro 10 liter",
                   Description = "N/A",
-                  Price = 160
+                  Price = 160,
+                  Sizes = "S,M,L,XL"
               },
              new Equipment
              {
@@ -187,7 +201,8 @@ namespace DiveDeep.Data
                  Category = "Tanke",
                  Title = "Scubapro 12 liter",
                  Description = "N/A",
-                 Price = 170
+                 Price = 170,
+                 Sizes = "S,M,L,XL"
              },
             new Equipment
             {
@@ -196,7 +211,8 @@ namespace DiveDeep.Data
                 Category = "Tanke",
                 Title = "Scubapro 15 liter",
                 Description = "N/A",
-                Price = 180
+                Price = 180,
+                Sizes = "S,M,L,XL"
             },
 
             new Equipment
@@ -206,7 +222,8 @@ namespace DiveDeep.Data
                 Category = "Regulatorsæt",
                 Title = "Scubapro Octopus R105/MK25EVO/S600",
                 Description = "N/A",
-                Price = 125
+                Price = 125,
+                Sizes = "S,M,L,XL"
             },
                new Equipment
                {
@@ -215,7 +232,8 @@ namespace DiveDeep.Data
                    Category = "Regulatorsæt",
                    Title = "Scubapro Octopus R095/MK17EVO/C370",
                    Description = "N/A",
-                   Price = 100
+                   Price = 100,
+                   Sizes = "S,M,L,XL"
                },
             new Equipment
             {
@@ -224,7 +242,8 @@ namespace DiveDeep.Data
                 Category = "Regulatorsæt",
                 Title = "Scubapro Octopus S270/MK25EVO BT/A700 Carbon BT",
                 Description = "N/A",
-                Price = 150
+                Price = 150,
+                Sizes = "S,M,L,XL"
             },
 
              new Equipment
@@ -234,7 +253,8 @@ namespace DiveDeep.Data
                  Category = "Maske/Snorkel",
                  Title = "Scubapro Ghost",
                  Description = "N/A",
-                 Price = 50
+                 Price = 50,
+                 Sizes = "S,M,L,XL"
              },
                 new Equipment
                 {
@@ -243,7 +263,8 @@ namespace DiveDeep.Data
                     Category = "Maske/Snorkel",
                     Title = "Scubapro D-Mask",
                     Description = "N/A",
-                    Price = 60
+                    Price = 60,
+                    Sizes = "S,M,L,XL"
                 },
             new Equipment
             {
@@ -252,7 +273,8 @@ namespace DiveDeep.Data
                 Category = "Maske/Snorkel",
                 Title = "Scubapro Spectra Mini",
                 Description = "N/A",
-                Price = 50
+                Price = 50,
+                Sizes = "S,M,L,XL"
             },
              new Equipment
              {
@@ -261,7 +283,8 @@ namespace DiveDeep.Data
                  Category = "Maske/Snorkel",
                  Title = "Scubapro Crystal VU",
                  Description = "N/A",
-                 Price = 75
+                 Price = 75,
+                 Sizes = "S,M,L,XL"
              },
             new Equipment
             {
@@ -270,7 +293,8 @@ namespace DiveDeep.Data
                 Category = "Maske/Snorkel",
                 Title = "Fourth Element Scout Kontrast",
                 Description = "N/A",
-                Price = 75
+                Price = 75,
+                Sizes = "S,M,L,XL"
             },
               new Equipment
               {
@@ -279,7 +303,8 @@ namespace DiveDeep.Data
                   Category = "Maske/Snorkel",
                   Title = "Fourth Element Scout Enchance",
                   Description = "N/A",
-                  Price = 75
+                  Price = 75,
+                  Sizes = "S,M,L,XL"
               },
             new Equipment
             {
@@ -288,7 +313,8 @@ namespace DiveDeep.Data
                 Category = "Maske/Snorkel",
                 Title = "Tusa Element",
                 Description = "N/A",
-                Price = 75
+                Price = 75,
+                Sizes = "S,M,L,XL"
             },
 
               new Equipment
@@ -298,7 +324,8 @@ namespace DiveDeep.Data
                   Category = "Finner",
                   Title = "Scubapro Jet Fin",
                   Description = "N/A",
-                  Price = 50
+                  Price = 50,
+                  Sizes = "S,M,L,XL"
               },
                  new Equipment
                  {
@@ -316,7 +343,8 @@ namespace DiveDeep.Data
                    Category = "Finner",
                    Title = "Scubapro Seawing Supernova",
                    Description = "N/A",
-                   Price = 60
+                   Price = 60,
+                   Sizes = "S,M,L,XL"
                },
             new Equipment
             {
@@ -325,7 +353,8 @@ namespace DiveDeep.Data
                 Category = "Finner",
                 Title = "Seac Propulsion",
                 Description = "N/A",
-                Price = 50
+                Price = 50,
+                Sizes = "S,M,L,XL"
             },
                new Equipment
                {
@@ -334,7 +363,8 @@ namespace DiveDeep.Data
                    Category = "Finner",
                    Title = "Seac ALA",
                    Description = "N/A",
-                   Price = 50
+                   Price = 50,
+                   Sizes = "S,M,L,XL"
                },
             new Equipment
             {
@@ -343,7 +373,8 @@ namespace DiveDeep.Data
                 Category = "Finner",
                 Title = "Fourth Element Tech",
                 Description = "N/A",
-                Price = 75
+                Price = 75,
+                Sizes = "S,M,L,XL"
             },
             new Equipment
             {
@@ -352,7 +383,8 @@ namespace DiveDeep.Data
                 Category = "Finner",
                 Title = "Fourth Element Rec Fin",
                 Description = "N/A",
-                Price = 80
+                Price = 80,
+                Sizes = "S,M,L,XL"
             });
 
             modelBuilder.Entity<Package>().HasData

@@ -1,6 +1,11 @@
-﻿@section Title {
-    <h1 class="mt-4 SiteTitles">@Model.Profile.FullName</h1>
-    <p>@Model.Profile.Email</p>
+﻿﻿@using DiveDeep.ViewModels;
+@model BookingApplicationUserViewData;
+
+@section Title {
+    <a class="btn btn-primary mt-3" href="/Identity/Account/Manage">Back to profile</a>
+
+    <h1 class="mt-4 SiteTitles">@Model.ApplicationUser.FullName</h1>
+    <p>@Model.ApplicationUser.Email</p>
 }
 
 <div class="row row-cols-1 row-cols-md-3 g-3 gap-3">
