@@ -13,12 +13,13 @@
 
 
 <div class="EquipmentButtonSite">
-    <a class="btn btn-primary btn-sm btn-equipment" asp-controller="Equipment" asp-action="reload">BCD</a>
-    <a href="/categories/dykkerdragter" class="btn btn-primary btn-sm btn-equipment">Dykkerdragter</a>
-    <a href="/categories/tanke" class="btn btn-primary btn-sm btn-equipment">Tanke</a>
-    <a href="/categories/regulatorsæt" class="btn btn-primary btn-sm btn-equipment">Regulatorsæt</a>
-    <a href="/categories/maske" class="btn btn-primary btn-sm btn-equipment">Maske/snorkel</a>
-    <a href="/categories/Finner" class="btn btn-primary btn-sm btn-equipment">Finner</a>
+    <a class="btn btn-primary btn-sm btn-equipment" asp-controller="Equipment" asp-action="Index" asp-route-category="BCD">BCD</a>
+    <a class="btn btn-primary btn-sm btn-equipment" asp-controller="Equipment" asp-action="Index" asp-route-category="Dykkerdragt">Dykkerdragter</a>
+    <a class="btn btn-primary btn-sm btn-equipment" asp-controller="Equipment" asp-action="Index" asp-route-category="Tanke">Tanke</a>
+    <a class="btn btn-primary btn-sm btn-equipment" asp-controller="Equipment" asp-action="Index" asp-route-category="Regulatorsæt">Regulatorsæt</a>
+    <a class="btn btn-primary btn-sm btn-equipment" asp-controller="Equipment" asp-action="Index" asp-route-category="Maske/Snorkel">Maske/snorkel</a>
+    <a class="btn btn-primary btn-sm btn-equipment" asp-controller="Equipment" asp-action="Index" asp-route-category="Finner">Finner</a>
+    <a class="btn btn-primary btn-sm btn-equipment" asp-controller="Equipment" asp-action="Index">Alt</a>
 </div>
 <br />
 <div class="row row-cols-1 row-cols-md-3 g-4 ">
@@ -47,6 +48,21 @@
 
                   
                         <div class="package-footer mt-auto border-top border-dark">
+                            <div class="mb-2">
+                                @{
+                                    List<string> sizes = equipment.SizeList ?? new List<string>{ "S","M","L","XL" };
+                                }
+                                <div class="btn-group" role="group">
+                                    @for (int i = 0; i < sizes.Count; i++)
+                                    {
+                                        string s = sizes[i];
+                                        string id = $"esize_{equipment.EquipmentId}_{s}";
+                                        string checkedAttr = i == 0 ? "checked" : "";
+                                        <input type="radio" class="btn-check" name="size" id="@id" autocomplete="off" value="@s" @checkedAttr />
+                                        <label class="btn btn-sm btn-outline-light me-1" for="@id">@s</label>
+                                    }
+                                </div>
+                            </div>
                             <div class="align-items-center">
                                 <div class="col-12">
                                     <label class="form-label text-white small mb-1">Lejeperiode</label>

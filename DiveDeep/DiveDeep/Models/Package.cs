@@ -16,5 +16,22 @@ namespace DiveDeep.Models
         public List<string> Equipment { get; set; }
 
         public List<CartItem> CartItems { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public string? Sizes { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public List<string> SizeList
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(Sizes))
+                {
+                    return new List<string> { "S", "M", "L", "XL" };
+                }
+
+                return Sizes.Split(',').Select(s => s.Trim()).Where(s => s.Length > 0).ToList();
+            }
+        }
     }
 }

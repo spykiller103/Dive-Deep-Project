@@ -24,16 +24,24 @@
                         </div>
                     </div>
 
-                    <div class="btn-toolbar border-top border-dark" role="toolbar" aria-label="Toolbar with button groups">
-                        <div class="btn-group me-2 gap-2" role="group" aria-label="First group">
-                            <button type="button" class="btn btn-primary BtnSize">1</button>
-                            <button type="button" class="btn btn-primary BtnSize">2</button>
-                            <button type="button" class="btn btn-primary BtnSize">3</button>
-                            <button type="button" class="btn btn-primary BtnSize">4</button>
+                    <form asp-controller="packages" asp-action="rent" method="post" class="w-100">
+                        <div class="btn-toolbar border-top border-dark mb-3" role="toolbar" aria-label="Toolbar with button groups">
+                            <div class="btn-group me-2 gap-2" role="group" aria-label="Size group">
+                                @{
+                                    List<string> sizes = package.SizeList ?? new List<string> { "S", "M", "L", "XL" };
+                                }
+                                <div class="btn-group" role="group">
+                                    @for (int i = 0; i < sizes.Count; i++)
+                                    {
+                                        string s = sizes[i];
+                                        string id = $"esize_{package.PackageId}_{s}";
+                                        string checkedAttr = i == 0 ? "checked" : "";
+                                        <input type="radio" class="btn-check" name="size" id="@id" autocomplete="off" value="@s" @checkedAttr />
+                                        <label class="btn btn-sm btn-outline-light me-1" for="@id">@s</label>
+                                }
+                            </div>
                         </div>
                     </div>
-
-                <form asp-controller="packages" asp-action="rent" method="post" class="w-100">
                     <div class="package-footer mt-auto border-top border-dark">
                         <div class="align-items-center">
                             <div class="col-12">
@@ -68,7 +76,6 @@
         </div>
     }
 </div>
-
 @section Scripts {
     <script src="~/js/bootstrap-datepicker.min.js"></script>
     <script>
