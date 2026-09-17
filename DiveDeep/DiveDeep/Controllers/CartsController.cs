@@ -24,8 +24,6 @@ namespace DiveDeep.Controllers
         [HttpPost]
         public IActionResult Checkout()
         {
-            _cartService.AssignProfileToAllCartItems(1);
-
             return RedirectToAction(nameof(Index));
         }
     }

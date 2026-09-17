@@ -38,11 +38,6 @@ namespace DiveDeep.Service
         {
             _cartItemRepository.Delete(id);
         }
-
-        public void AssignProfileToAllCartItems(int profileId)
-        {
-            _cartItemRepository.AssignProfileToAllCartItems(profileId);
-        }
     }
 }
 
