@@ -1,5 +1,7 @@
 ﻿using DiveDeep.Data;
 using DiveDeep.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiveDeep.Persistence
 {
@@ -11,7 +13,16 @@ namespace DiveDeep.Persistence
         {
             _context = context;
         }
-
+        public void Add(List<CartItem> cartItems, string UserId)
+        {
+            Booking booking = new Booking
+            {
+                CartItems = cartItems,
+                ApplicationUserId = UserId
+            };
+            _context.Bookings.Add(booking);
+            _context.SaveChanges();
+        }
         public List<Booking> GetAll()
         {
             return _context.Bookings.ToList();
@@ -19,12 +30,9 @@ namespace DiveDeep.Persistence
 
         public Booking? GetById(int id)
         {
-            return null;
-            /*
-            return _bookingRepository.GetAll()
-    .Where(b => b.ApplicationUserId == userId)
-    .ToList();
-            */
+            return _context.Bookings
+                .Include(b => b.CartItems)
+                .FirstOrDefault(b => b.BookingId == id);
         }
     }
 }

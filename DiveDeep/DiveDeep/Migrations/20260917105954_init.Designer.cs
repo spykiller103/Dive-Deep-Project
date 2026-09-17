@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiveDeep.Migrations
 {
     [DbContext(typeof(DiveDeepContext))]
-    [Migration("20260915142023_init")]
+    [Migration("20260917105954_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -25,6 +25,96 @@ namespace DiveDeep.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("DiveDeep.Data.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ActiveRents")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CompletedRents")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("DiveDeep.Models.Booking", b =>
+                {
+                    b.Property<int>("BookingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("BookingId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("Bookings");
+                });
+
             modelBuilder.Entity("DiveDeep.Models.CartItem", b =>
                 {
                     b.Property<int>("CartItemId")
@@ -32,6 +122,9 @@ namespace DiveDeep.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartItemId"));
+
+                    b.Property<int?>("BookingId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
@@ -42,9 +135,6 @@ namespace DiveDeep.Migrations
                     b.Property<int?>("PackageId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProfileId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -53,11 +143,11 @@ namespace DiveDeep.Migrations
 
                     b.HasKey("CartItemId");
 
+                    b.HasIndex("BookingId");
+
                     b.HasIndex("EquipmentId");
 
                     b.HasIndex("PackageId");
-
-                    b.HasIndex("ProfileId");
 
                     b.ToTable("CartItems");
                 });
@@ -69,6 +159,9 @@ namespace DiveDeep.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EquipmentId"));
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
 
                     b.Property<string>("Category")
                         .IsRequired()
@@ -97,6 +190,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 1,
+                            Amount = 5,
                             Category = "BCD",
                             Description = "TEMP",
                             Image = "/Content/Images/Equipment/BCD/NavigatorLite.png",
@@ -106,6 +200,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 2,
+                            Amount = 5,
                             Category = "BCD",
                             Description = "TEMP",
                             Image = "/Content/Images/Equipment/BCD/GlideBCD.png",
@@ -115,6 +210,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 3,
+                            Amount = 5,
                             Category = "BCD",
                             Description = "TEMP",
                             Image = "/Content/Images/Equipment/BCD/HydrosPro.png",
@@ -124,6 +220,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 4,
+                            Amount = 5,
                             Category = "BCD",
                             Description = "TEMP",
                             Image = "/Content/Images/Equipment/BCD/Modular.png",
@@ -133,6 +230,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 5,
+                            Amount = 5,
                             Category = "Dykkerdragt",
                             Description = "Våddragt, 3 mm",
                             Image = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
@@ -142,6 +240,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 6,
+                            Amount = 5,
                             Category = "Dykkerdragt",
                             Description = "Våddragt, 5 mm",
                             Image = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
@@ -151,6 +250,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 7,
+                            Amount = 5,
                             Category = "Dykkerdragt",
                             Description = "Våddragt, 7 mm",
                             Image = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
@@ -160,6 +260,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 8,
+                            Amount = 5,
                             Category = "Dykkerdragt",
                             Description = "Våddragt, 3.5 mm",
                             Image = "/Content/Images/Equipment/Divingsuits/Wetsuits/W5.png",
@@ -169,6 +270,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 9,
+                            Amount = 5,
                             Category = "Dykkerdragt",
                             Description = "Våddragt, 5 mm",
                             Image = "/Content/Images/Equipment/Divingsuits/Wetsuits/ProteusF.png",
@@ -178,6 +280,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 10,
+                            Amount = 5,
                             Category = "Dykkerdragt",
                             Description = "Tørdragt",
                             Image = "/Content/Images/Equipment/Divingsuits/Drysuits/Exodry4.png",
@@ -187,6 +290,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 11,
+                            Amount = 5,
                             Category = "Dykkerdragt",
                             Description = "Tørdragt",
                             Image = "/Content/Images/Equipment/Divingsuits/Drysuits/D7Evo.png",
@@ -196,6 +300,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 12,
+                            Amount = 5,
                             Category = "Dykkerdragt",
                             Description = "Tørdragt",
                             Image = "/Content/Images/Equipment/Divingsuits/Drysuits/ELitePlus.png",
@@ -205,6 +310,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 13,
+                            Amount = 5,
                             Category = "Tanke",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Tanks/Tank.png",
@@ -214,6 +320,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 14,
+                            Amount = 5,
                             Category = "Tanke",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Tanks/Tank.png",
@@ -223,6 +330,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 15,
+                            Amount = 5,
                             Category = "Tanke",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Tanks/Tank.png",
@@ -232,6 +340,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 16,
+                            Amount = 5,
                             Category = "Tanke",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Tanks/Tank.png",
@@ -241,6 +350,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 17,
+                            Amount = 5,
                             Category = "Regulatorsæt",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Regulator/MK25EVO.png",
@@ -250,6 +360,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 18,
+                            Amount = 5,
                             Category = "Regulatorsæt",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Regulator/MK17.png",
@@ -259,6 +370,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 19,
+                            Amount = 5,
                             Category = "Regulatorsæt",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Regulator/MK25EVObt.png",
@@ -268,6 +380,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 20,
+                            Amount = 5,
                             Category = "Maske/Snorkel",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/Ghost.png",
@@ -277,6 +390,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 21,
+                            Amount = 5,
                             Category = "Maske/Snorkel",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/DMask.png",
@@ -286,6 +400,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 22,
+                            Amount = 5,
                             Category = "Maske/Snorkel",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/SpectraMini.png",
@@ -295,6 +410,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 23,
+                            Amount = 5,
                             Category = "Maske/Snorkel",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/CrystalVu.png",
@@ -304,6 +420,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 24,
+                            Amount = 5,
                             Category = "Maske/Snorkel",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/Scout.png",
@@ -313,6 +430,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 25,
+                            Amount = 5,
                             Category = "Maske/Snorkel",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/ScoutEnchance.png",
@@ -322,6 +440,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 26,
+                            Amount = 5,
                             Category = "Maske/Snorkel",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/Element.png",
@@ -331,6 +450,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 27,
+                            Amount = 5,
                             Category = "Finner",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Fins/JetFin.png",
@@ -340,6 +460,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 28,
+                            Amount = 5,
                             Category = "Finner",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Fins/TravelFins.png",
@@ -349,6 +470,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 29,
+                            Amount = 5,
                             Category = "Finner",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Fins/SeawingSupernova.png",
@@ -358,6 +480,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 30,
+                            Amount = 5,
                             Category = "Finner",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Fins/Propulsion.png",
@@ -367,6 +490,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 31,
+                            Amount = 5,
                             Category = "Finner",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Fins/ALA.png",
@@ -376,6 +500,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 32,
+                            Amount = 5,
                             Category = "Finner",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Fins/TechFins.png",
@@ -385,6 +510,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             EquipmentId = 33,
+                            Amount = 5,
                             Category = "Finner",
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Fins/RecFins.png",
@@ -400,6 +526,9 @@ namespace DiveDeep.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PackageId"));
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
 
                     b.Property<string>("Category")
                         .IsRequired()
@@ -428,6 +557,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             PackageId = 1,
+                            Amount = 5,
                             Category = "Pakke",
                             Equipment = "[\"BCD\",\"Dykkerdragt\",\"Regulators\\u00E6t\",\"Tank\",\"Finner\",\"Maske\",\"Snorkel\"]",
                             Image = "/Content/Images/Packages/Package1.png",
@@ -437,6 +567,7 @@ namespace DiveDeep.Migrations
                         new
                         {
                             PackageId = 2,
+                            Amount = 5,
                             Category = "Pakke",
                             Equipment = "[\"Finner\",\"Maske\",\"Snorkel\"]",
                             Image = "/Content/Images/Packages/Package2.png",
@@ -445,70 +576,242 @@ namespace DiveDeep.Migrations
                         });
                 });
 
-            modelBuilder.Entity("DiveDeep.Models.Profile", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
-                    b.Property<int>("ProfileId")
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProfileId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ActiveRents")
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("CompletedRents")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Email")
-                        .IsRequired()
+                    b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
+                    b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastName")
+                    b.Property<string>("UserId")
                         .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ProfileId");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.ToTable("Profiles");
+                    b.HasKey("LoginProvider", "ProviderKey");
 
-                    b.HasData(
-                        new
-                        {
-                            ProfileId = 1,
-                            ActiveRents = 2,
-                            CompletedRents = 4,
-                            Email = "Test@mail.com",
-                            FirstName = "Nicklas",
-                            LastName = "Jensen"
-                        });
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("DiveDeep.Models.Booking", b =>
+                {
+                    b.HasOne("DiveDeep.Data.ApplicationUser", "ApplicationUser")
+                        .WithMany("Bookings")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("DiveDeep.Models.CartItem", b =>
                 {
+                    b.HasOne("DiveDeep.Models.Booking", "Booking")
+                        .WithMany("CartItems")
+                        .HasForeignKey("BookingId");
+
                     b.HasOne("DiveDeep.Models.Equipment", "Equipment")
-                        .WithMany()
+                        .WithMany("CartItems")
                         .HasForeignKey("EquipmentId");
 
                     b.HasOne("DiveDeep.Models.Package", "Package")
-                        .WithMany()
+                        .WithMany("CartItems")
                         .HasForeignKey("PackageId");
 
-                    b.HasOne("DiveDeep.Models.Profile", "Profile")
-                        .WithMany("CartItems")
-                        .HasForeignKey("ProfileId");
+                    b.Navigation("Booking");
 
                     b.Navigation("Equipment");
 
                     b.Navigation("Package");
-
-                    b.Navigation("Profile");
                 });
 
-            modelBuilder.Entity("DiveDeep.Models.Profile", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("DiveDeep.Data.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("DiveDeep.Data.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DiveDeep.Data.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("DiveDeep.Data.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DiveDeep.Data.ApplicationUser", b =>
+                {
+                    b.Navigation("Bookings");
+                });
+
+            modelBuilder.Entity("DiveDeep.Models.Booking", b =>
+                {
+                    b.Navigation("CartItems");
+                });
+
+            modelBuilder.Entity("DiveDeep.Models.Equipment", b =>
+                {
+                    b.Navigation("CartItems");
+                });
+
+            modelBuilder.Entity("DiveDeep.Models.Package", b =>
                 {
                     b.Navigation("CartItems");
                 });

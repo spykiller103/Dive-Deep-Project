@@ -23,7 +23,7 @@ namespace DiveDeep.Data
                 .HasMany(b => b.CartItems)
                 .WithOne(c => c.Booking)
                 .HasForeignKey(c => c.BookingId)
-                .IsRequired();
+                .IsRequired(false);
 
             modelBuilder.Entity<CartItem>()
                 .HasOne(c => c.Package)
