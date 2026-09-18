@@ -3,7 +3,7 @@ html {
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem #FFFFFF, 0 0 0 0.25rem #0ea5ff;
 }
 
 html, body {
@@ -13,8 +13,8 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    background-color: #070b14;
-    color: #475569;
+    background-color: #071428;
+    color: #cfeafc;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -28,15 +28,15 @@ body {
 
 /*Design for every site*/
 .custom-text {
-    color: #94a3b8 !important;
+    color: #FFFFFF !important;
 }
 
 .custom-background {
-    background: rgb(17, 21, 29);
+    background: rgb(5, 8, 15);
 }
 
 .SiteTitles {
-    color: #ffffff;
+    color: #FFFFFF;
     font-weight: bold;
     font-size: 60px;
 }
@@ -57,17 +57,17 @@ nav {
     border-radius: 15px;
     outline: solid;
     outline-width: 1.6px;
-    outline-color: rgba(27, 30, 39);
+    outline-color: rgba(10, 12, 20);
     height: 45px;
 }
 
     .searchBar::placeholder {
-        color: gray;
-        opacity: 0.7;
+        color: #98a6b3;
+        opacity: 0.9;
     }
 
     .searchBar:focus {
-        background: rgb(18, 26, 36);
+        background: rgb(12, 18, 28);
         outline: none;
         box-shadow: none;
     }
@@ -92,7 +92,7 @@ nav {
     padding-right: 25px;
     outline: solid;
     outline-width: 1.6px;
-    outline-color: rgba(27, 30, 39);
+    outline-color: rgba(10, 12, 20);
 }
 
 .borderBox-border {
@@ -101,6 +101,39 @@ nav {
 
 .login {
     margin-left: 20px;
+}
+
+/* Empty cart modal: adjust only colors so text is readable; keep confirm (.btn-danger) red */
+#emptyCartModal .modal-content {
+    background-color: #ffffff !important; /* ensure light backdrop for modal content */
+    color: #072028 !important; /* dark teal/near-black for general text */
+}
+
+#emptyCartModal .modal-header .modal-title {
+    color: #072028 !important; /* strong contrast for title */
+}
+
+#emptyCartModal .modal-body {
+    color: #0d3b47 !important; /* readable, slightly softer than title */
+}
+
+#emptyCartModal .modal-footer .btn-secondary {
+    color: #ffffff !important; /* ensure cancel button text is readable */
+}
+
+/* Style the Log in submit button on the Identity login page only (colors + hover) */
+#account #login-submit {
+    background-color: #00afcb !important; /* project teal */
+    color: #021217 !important; /* dark text for contrast */
+    border: 2px solid rgba(0, 175, 203, 0.9) !important;
+    box-shadow: 0 0 0 4px rgba(0, 175, 203, 0.08) inset, 0 6px 18px rgba(0, 175, 203, 0.12) !important;
+}
+
+#account #login-submit:hover {
+    background-color: #008fa9 !important; /* slightly darker on hover */
+    color: #FFFFFF !important; /* ensure contrast on hover */
+    border-color: rgba(0, 143, 169, 0.95) !important;
+    box-shadow: 0 0 0 6px rgba(0, 143, 169, 0.12) inset, 0 8px 22px rgba(0, 143, 169, 0.18) !important;
 }
 
 .cartBox {
@@ -117,7 +150,7 @@ nav {
 
 /*footer*/
 .custom-footer-text2 {
-    color: #475569 !important;
+    color: #FFFFFF !important;
 }
 
 /*Front page*/
@@ -133,17 +166,17 @@ nav {
     }
 
 #front-page-package-btn {
-    box-shadow: rgba(6, 182, 212, 0.4) 0px 0px 30px;
-    background: rgb(6, 182, 212);
-    color: black;
+    box-shadow: rgba(0, 173, 200, 0.6) 0px 0px 30px;
+    background: rgb(0, 173, 200);
+    color: #000000;
 }
 
 #front-page-equipment-btn {
-    background: rgba(255, 255, 255, 0.1);
-    color: rgb(241, 245, 249);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.12);
+    color: #F1F5F9;
+    border: 1px solid rgba(255, 255, 255, 0.18);
     backdrop-filter: blur(8px);
-    color: white;
+    color: #FFFFFF;
 }
 
 
@@ -155,40 +188,40 @@ nav {
     background-repeat: no-repeat;
     height: 70vh;
     background-blend-mode: overlay;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.6);
     width: 100vw;
     margin-left: calc(-50vw + 50%);
 }
 
 .special-text {
-    color: aqua;
+    color: #00e5ff;
     font-style: italic;
 }
 
 .form-control,
 .form-control:focus {
-    background-color: #070b14;
-    color: #ffffff;
-    border-color: rgb(18, 26, 36);
+    background-color: #02040a;
+    color: #FFFFFF;
+    border-color: rgb(12, 18, 28);
 }
 
 .ContactInput::placeholder {
-    color: gray;
-    opacity: 0.7;
+    color: #98a6b3;
+    opacity: 0.9;
 }
 
 .ContactSelect {
-    background-color: #070b14;
-    color: #ffffff;
-    border-color: rgb(18, 26, 36);
+    background-color: #02040a;
+    color: #FFFFFF;
+    border-color: rgb(12, 18, 28);
     width: 100%;
     height: 40px;
     border-radius: 5px;
 }
 
 .ContactBox {
-    background-color: #0d1420;
-    border: 1px solid #1f2a3a;
+    background-color: #07101a;
+    border: 1px solid #0f2230;
     border-radius: 16px;
     padding: 24px;
     box-sizing: border-box;
@@ -216,8 +249,8 @@ nav {
 
 
 .ContactBox1 {
-    background-color: #0d1420;
-    border: 1px solid #1f2a3a;
+    background-color: #07101a;
+    border: 1px solid #0f2230;
     border-radius: 16px;
     box-sizing: border-box;
     width: 100%;
@@ -236,8 +269,8 @@ nav {
 
 .btn-send-formular {
     width: 100%;
-    background: rgb(6, 182, 212);
-    Color: rgb(7, 11, 20);
+    background: rgb(0, 173, 200);
+    Color: rgb(3, 6, 12);
     border-radius: 30px;
 }
 
@@ -281,12 +314,18 @@ nav {
 
 
 .btn-equipment {
-    background: rgb(6, 182, 212);
-    Color: rgb(7, 11, 20);
+    background: rgb(0, 173, 200);
+    Color: rgb(3, 6, 12);
 }
 
 .card {
     background-color: rgb(13, 18, 32);
+    color: #E6F7FF;
+}
+
+/* Ensure any .text-secondary inside cards (used for descriptions) is high-contrast */
+.card .text-secondary {
+    color: #E6F7FF !important;
 }
 
 
@@ -315,6 +354,17 @@ nav {
     margin-top: 4px;
 }
 
+/* Force very high-contrast text for package/equipment descriptions (use specific selectors and !important to override other rules) */
+.package-equipment,
+.package-equipment p,
+.package-equipment li,
+.package-box .package-equipment,
+.package-box .package-equipment p,
+.package-box .package-equipment li,
+ul.package-equipment li {
+    color: #FFFFFF !important;
+}
+
     .package-equipment p {
         line-height: 1.6;
     }
@@ -341,13 +391,13 @@ nav {
 }
 
 .package-details {
-    color: #50627d;
+    color: #FFFFFF !important;
     font-size: 12px;
     margin-top: 10px;
 }
 
 .package-title {
-    color: #ffffff;
+    color: #FFFFFF;
     font-size: 26px;
     font-weight: 700;
     margin-top: 14px;
@@ -355,7 +405,7 @@ nav {
 }
 
 .empty-cart {
-    color: #536684;
+    color: #c1d6ee;
     font-size: 16px;
     border: none;
     background: none;
@@ -363,7 +413,7 @@ nav {
 }
 
     .empty-cart:hover {
-        color: #FF0000;
+        color: #FF3B30;
     }
 
 .cart-header {
@@ -376,9 +426,9 @@ nav {
 .BtnSize {
     border-radius: 0 !important;
     margin: 10px;
-    background-color: rgba(255, 255, 255, 0.06) !important;
-    color: rgb(148, 163, 184) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    color: rgb(198, 214, 234) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
     border-radius: 10px !important;
 }
 
@@ -424,3 +474,5 @@ nav {
     width: 250px;
     border-radius: 20px;
 }
+
+
