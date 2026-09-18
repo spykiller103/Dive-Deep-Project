@@ -1,30 +1,205 @@
-﻿    ﻿@using DiveDeep.ViewModels;
-    @model BookingApplicationUserViewData;
+﻿@using DiveDeep.ViewModels;
+@model BookingApplicationUserViewData;
 
-    @section Title {
-        <a class="btn btn-primary mt-3" href="/Identity/Account/Manage">Back to profile</a>
+@section Title {
+    <a class="btn btn-primary mt-3" href="/Identity/Account/Manage">Back to profile</a>
 
-        <h1 class="mt-4 SiteTitles">@Model.ApplicationUser.FullName</h1>
-        <p>@Model.ApplicationUser.Email</p>
-    }
+    <h1 class="mt-4 SiteTitles">@Model.ApplicationUser.FullName</h1>
+    <p>@Model.ApplicationUser.Email</p>
+}
 
-    <div class="row row-cols-1 row-cols-md-3 g-3 gap-3">
-        <div class="mt-4 profile-info">
-            <h3>Aktive lejemål</h3>
-            <p>@Model.ActiveBookingCount</p>
-        </div>
-
-        <div class="mt-4 profile-info">
-            <h3>Afsluttede lejemål</h3>
-            <p>@Model.CompletedBookingCount</p>
-        </div>
-
-        <div class="mt-4 profile-info">
-            <h3>Samlede lejeperioder</h3>
-            <p>@Model.TotalRentalPeriods</p>
-        </div>
+<div class="row row-cols-1 row-cols-md-3 g-3 gap-3">
+    <div class="mt-4 profile-info">
+        <h3>Aktive lejemål</h3>
+        <p>@Model.ActiveBookingCount</p>
     </div>
 
-    <h2 class="text-light mt-5">Lejer lige nu</h2>
+    <div class="mt-4 profile-info">
+        <h3>Kommende lejemål</h3>
+        <p>@Model.UpcomingBookingCount</p>
+    </div>
 
-    <h2 class="text-light mt-5">Lejehistorik</h2>
+    <div class="mt-4 profile-info">
+        <h3>Afsluttede lejemål</h3>
+        <p>@Model.CompletedBookingCount</p>
+    </div>
+
+    <div class="mt-4 profile-info">
+        <h3>Samlede lejeperioder</h3>
+        <p>@Model.TotalRentalPeriods</p>
+    </div>
+</div>
+
+
+<h2 class="text-light mt-5">Lejer lige nu</h2>
+
+@foreach (var booking in Model.ActiveBookings)
+{
+    <div class="booking-card mt-3">
+
+        <div class="booking-header">
+            <div>
+                @if (booking.CartItems.Any())
+
+                {
+                    var firstItem = booking.CartItems
+                        .FirstOrDefault(c => c.Package != null || c.Equipment != null);
+
+                    @if (firstItem?.Package != null)
+                    {
+                        <h3>@firstItem.Package.Title</h3>
+                    }
+                    else if (firstItem?.Equipment != null)
+                    {
+                        <h3>@firstItem.Equipment.Title</h3>
+                    }
+
+                    <p>
+                        @booking.CartItems.Min(c => c.StartDate).ToString("d. MMMM yyyy")
+                        →
+                        @booking.CartItems.Max(c => c.EndDate).ToString("d. MMMM yyyy")
+                    </p>
+                }
+            </div>
+        </div>
+
+        <div class="booking-items">
+
+            @foreach (var item in booking.CartItems)
+            {
+                <div class="booking-item">
+
+                    @if (!string.IsNullOrEmpty(item.SelectedSize))
+                    {
+                        <div>
+                            Størrelse: @item.SelectedSize
+                        </div>
+                    }
+
+                    <div>
+                        @item.TotalDays dage · afleveres
+                        @item.EndDate.ToString("d. MMMM yyyy")
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    </div>
+}
+
+
+<h2 class="text-light mt-5">Kommende lejemål</h2>
+
+@foreach (var booking in Model.UpcomingBookings)
+{
+    <div class="booking-card mt-3">
+
+        <div class="booking-header">
+            <div>
+                @if (booking.CartItems.Any())
+
+                {
+                    var firstItem = booking.CartItems
+                        .FirstOrDefault(c => c.Package != null || c.Equipment != null);
+
+                    @if (firstItem?.Package != null)
+                    {
+                        <h3>@firstItem.Package.Title</h3>
+                    }
+                    else if (firstItem?.Equipment != null)
+                    {
+                        <h3>@firstItem.Equipment.Title</h3>
+                    }
+
+                    <p>
+                        @booking.CartItems.Min(c => c.StartDate).ToString("d. MMMM yyyy")
+                        →
+                        @booking.CartItems.Max(c => c.EndDate).ToString("d. MMMM yyyy")
+                    </p>
+                }
+            </div>
+        </div>
+
+        <div class="booking-items">
+
+            @foreach (var item in booking.CartItems)
+            {
+                <div class="booking-item">
+
+                    @if (!string.IsNullOrEmpty(item.SelectedSize))
+                    {
+                        <div>
+                            Størrelse: @item.SelectedSize
+                        </div>
+                    }
+
+                    <div>
+                        @item.TotalDays dage · afleveres
+                        @item.EndDate.ToString("d. MMMM yyyy")
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    </div>
+}
+
+
+<h2 class="text-light mt-5">Lejehistorik</h2>
+
+@foreach (var booking in Model.CompletedBookings)
+{
+    <div class="booking-card mt-3">
+
+        <div class="booking-header">
+            <div>
+                @if (booking.CartItems.Any())
+
+                {
+                    var firstItem = booking.CartItems
+                        .FirstOrDefault(c => c.Package != null || c.Equipment != null);
+
+                    @if (firstItem?.Package != null)
+                    {
+                        <h3>@firstItem.Package.Title</h3>
+                    }
+                    else if (firstItem?.Equipment != null)
+                    {
+                        <h3>@firstItem.Equipment.Title</h3>
+                    }
+
+                    <p>
+                        @booking.CartItems.Min(c => c.StartDate).ToString("d. MMMM yyyy")
+                        →
+                        @booking.CartItems.Max(c => c.EndDate).ToString("d. MMMM yyyy")
+                    </p>
+                }
+            </div>
+        </div>
+
+        <div class="booking-items">
+
+            @foreach (var item in booking.CartItems)
+            {
+                <div class="booking-item">
+
+                    @if (!string.IsNullOrEmpty(item.SelectedSize))
+                    {
+                        <div>
+                            Størrelse: @item.SelectedSize
+                        </div>
+                    }
+
+                    <div>
+                        @item.TotalDays dage · afleveret
+                        @item.EndDate.ToString("d. MMMM yyyy")
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    </div>
+}

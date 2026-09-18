@@ -29,6 +29,9 @@ namespace DiveDeep.Persistence
         {
             return _context.Bookings
                 .Include(b => b.CartItems)
+                    .ThenInclude(ci => ci.Package)
+                .Include(b => b.CartItems)
+                    .ThenInclude(ci => ci.Equipment)
                 .ToList();
         }
 
@@ -36,6 +39,9 @@ namespace DiveDeep.Persistence
         {
             return _context.Bookings
                 .Include(b => b.CartItems)
+                    .ThenInclude(ci => ci.Package)
+                .Include(b => b.CartItems)
+                    .ThenInclude(ci => ci.Equipment)
                 .FirstOrDefault(b => b.BookingId == id);
         }
     }
