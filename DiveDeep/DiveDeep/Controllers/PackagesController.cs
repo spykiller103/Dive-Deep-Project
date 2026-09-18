@@ -3,6 +3,7 @@ using DiveDeep.Persistence;
 using DiveDeep.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
+using Microsoft.AspNetCore.Http;
 
 namespace DiveDeep.Controllers
 {
@@ -24,7 +25,7 @@ namespace DiveDeep.Controllers
         }
 
         [HttpPost]
-        public IActionResult Rent(int id, string start, string end, string? size)
+        public IActionResult Rent(int id, string start, string end, string? size, IFormCollection form)
         {
             Package packagesToBeAdded = _packageRepository.GetById(id);
 
@@ -62,8 +63,30 @@ namespace DiveDeep.Controllers
                 TotalDays = days
             };
 
-            if (!string.IsNullOrWhiteSpace(size))
+            // Handle individual equipment sizes from the form
+            var equipmentSizes = new Dictionary<string, string>();
+            foreach (var key in form.Keys)
             {
+                if (key.StartsWith("equipmentSizes["))
+                {
+                    var startIndex = "equipmentSizes[".Length;
+                    var endIndex = key.IndexOf("]");
+                    var equipmentName = key.Substring(startIndex, endIndex - startIndex);
+                    var selectedSize = form[key];
+                    if (!string.IsNullOrWhiteSpace(selectedSize))
+                    {
+                        equipmentSizes[equipmentName] = selectedSize;
+                    }
+                }
+            }
+
+            if (equipmentSizes.Count > 0)
+            {
+                cartItem.EquipmentSizes = equipmentSizes;
+            }
+            else if (!string.IsNullOrWhiteSpace(size))
+            {
+                // Fallback for backward compatibility
                 cartItem.SelectedSize = size;
             }
 

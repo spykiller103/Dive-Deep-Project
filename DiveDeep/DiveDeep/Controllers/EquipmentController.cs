@@ -4,6 +4,7 @@ using DiveDeep.Models;
 using System;
 using System.Globalization;
 using DiveDeep.Service;
+using Microsoft.AspNetCore.Http;
 
 namespace DiveDeep.Controllers
 {
@@ -48,7 +49,7 @@ namespace DiveDeep.Controllers
 
 
         [HttpPost]
-        public IActionResult Rent(int id, string start, string end, string? size)
+        public IActionResult Rent(int id, string start, string end, string? size, IFormCollection form)
         {
 
             Equipment equipmentToBeAdded = _equipmentRepository.GetById(id);

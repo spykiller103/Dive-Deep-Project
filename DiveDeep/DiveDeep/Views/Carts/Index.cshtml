@@ -45,6 +45,14 @@
                     </span>
                 </div>
 
+                @if (!string.IsNullOrWhiteSpace(item.SelectedSize))
+                {
+                    <div class="mb-2">
+                        <span class="text-white small">Størrelse: </span>
+                        <span class="text-info small">@item.SelectedSize</span>
+                    </div>
+                }
+
                 <div class="border-top border-dark pt-3">
                     <div class="d-flex align-items-end">
 
@@ -97,6 +105,27 @@
                         <span class="package-details">@equipment,</span>
                     }
                 </div>
+
+                @if (item.EquipmentSizes != null && item.EquipmentSizes.Count > 0)
+                {
+                    <div class="mb-3">
+                        <p class="text-white small mb-2">Valgte størrelser:</p>
+                        @foreach (var sizeEntry in item.EquipmentSizes)
+                        {
+                            <div class="mb-1">
+                                <span class="text-secondary small">@sizeEntry.Key: </span>
+                                <span class="text-info small">@sizeEntry.Value</span>
+                            </div>
+                        }
+                    </div>
+                }
+                else if (!string.IsNullOrWhiteSpace(item.SelectedSize))
+                {
+                    <div class="mb-2">
+                        <span class="text-white small">Størrelse: </span>
+                        <span class="text-info small">@item.SelectedSize</span>
+                    </div>
+                }
 
                 <div class="border-top border-dark pt-3">
                     <div class="d-flex align-items-end">

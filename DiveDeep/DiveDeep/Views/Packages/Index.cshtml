@@ -1,4 +1,4 @@
-﻿@model List<Package>
+@model List<Package>
 
 @section Title {
     <p class="mt-5"> <span class="special-text">LEJ PR DAG</span></p>
@@ -12,37 +12,36 @@
         <div class="col">
             <div class="card h-100">
                 <img src="@package.Image" class="card-img-top package-img" alt="...">
-                <div class="card-body border-top border-dark d-flex flex-column justify-content-between">
+                <div class="card-body border-top border-dark d-flex flex-column">
                     <div class="package-top">
-                        <p class="text-light mb-3">@package.Title</p>
-
-                        <div class="package-equipment">
-                            @foreach (string equipment in package.Equipment)
-                            {
-                                <p class="text-secondary mb-2">@equipment</p>
-                            }
-                        </div>
+                        <p class="text-light mb-1">@package.Title</p>
                     </div>
 
                     <form asp-controller="packages" asp-action="rent" method="post" class="w-100">
-                        <div class="btn-toolbar border-top border-dark mb-3" role="toolbar" aria-label="Toolbar with button groups">
-                            <div class="btn-group me-2 gap-2" role="group" aria-label="Size group">
-                                @{
-                                    List<string> sizes = package.SizeList ?? new List<string> { "S", "M", "L", "XL" };
-                                }
-                                <div class="btn-group" role="group">
-                                    @for (int i = 0; i < sizes.Count; i++)
+                        <div class="border-top border-dark mt-2 mb-3">
+                            @foreach (var equipmentItem in package.EquipmentItems)
+                            {
+                                <div class="mb-2">
+                                    <p class="text-white small mb-1">@equipmentItem.Name</p>
+                                    @if (equipmentItem.RequiresSize)
                                     {
-                                        string s = sizes[i];
-                                        string id = $"esize_{package.PackageId}_{s}";
-                                        string checkedAttr = i == 0 ? "checked" : "";
-                                        <input type="radio" class="btn-check" name="size" id="@id" value="@s" @checkedAttr />
-                                        <label class="btn btn-sm btn-outline-light me-1" for="@id">@s</label>
-                                }
-                            </div>
+                                        <div class="btn-group" role="group">
+                                            @for (int i = 0; i < equipmentItem.AvailableSizes.Count; i++)
+                                            {
+                                                string s = equipmentItem.AvailableSizes[i];
+                                                string id = $"size_{package.PackageId}_{equipmentItem.Name.Replace(" ", "_")}_{s}";
+                                                string checkedAttr = i == 0 ? "checked" : "";
+                                                string fieldName = $"equipmentSizes[{equipmentItem.Name}]";
+                                                <input type="radio" class="btn-check" name="@fieldName" id="@id" value="@s" @checkedAttr />
+                                                <label class="btn btn-sm btn-outline-light me-1" for="@id">@s</label>
+                                            }
+                                        </div>
+                                    }
+                                
+                                </div>
+                            }
                         </div>
-                    </div>
-                    <div class="package-footer mt-auto border-top border-dark">
+                    <div class="package-footer border-top border-dark">
                         <div class="align-items-center">
                             <div class="col-12">
                                 <label class="form-label text-white small mb-1">Lejeperiode</label>
