@@ -65,10 +65,15 @@ namespace DiveDeep.Controllers
             if (!_start || !_end)
             {
                 int key = id;
-                ModelState.AddModelError(key.ToString(), "Vælg venligst både start- og slutdato.");
 
-                List<Equipment> equipments = _equipmentRepository.GetAll();
-                return View("Index", equipments);
+                ModelState.AddModelError(
+                    key.ToString(),
+                    "Vælg venligst både start- og slutdato."
+                );
+
+                Equipment equipment = _equipmentRepository.GetById(id);
+
+                return View("Details", equipment);
             }
 
             int days = (endDate - startDate).Days + 1;
