@@ -21,28 +21,6 @@ namespace DiveDeep.Models
         public int? BookingId { get; set; }
         public Booking? Booking { get; set; } = null!;
 
-        [NotMapped]
-        public Dictionary<string, string>? EquipmentSizes { get; set; }
-
-        [NotMapped]
-        public string? SerializedEquipmentSizes 
-        { 
-            get => EquipmentSizes != null ? string.Join(";", EquipmentSizes.Select(kv => $"{kv.Key}:{kv.Value}")) : null;
-            set 
-            {
-                EquipmentSizes = new Dictionary<string, string>();
-                if (!string.IsNullOrWhiteSpace(value))
-                {
-                    foreach (var pair in value.Split(';'))
-                    {
-                        var parts = pair.Split(':');
-                        if (parts.Length == 2)
-                        {
-                            EquipmentSizes[parts[0]] = parts[1];
-                        }
-                    }
-                }
-            }
-        }
+        public List<CartItemEquipmentSize> EquipmentSizes { get; set; } = new List<CartItemEquipmentSize>();
     }
 }

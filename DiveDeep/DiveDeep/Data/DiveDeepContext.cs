@@ -9,6 +9,8 @@ namespace DiveDeep.Data
         public DbSet<Package> Packages { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Booking> Bookings { get; set; }
+        public DbSet<PackageEquipmentSizeRequirement> PackageEquipmentSizeRequirements { get; set; }
+        public DbSet<CartItemEquipmentSize> CartItemEquipmentSizes { get; set; }
 
         public DiveDeepContext(DbContextOptions contextOptions) : base(contextOptions)
         {
@@ -41,6 +43,18 @@ namespace DiveDeep.Data
                 .HasMany(a => a.Bookings)
                 .WithOne(b => b.ApplicationUser)
                 .HasForeignKey(b => b.ApplicationUserId)
+                .IsRequired();
+
+            modelBuilder.Entity<PackageEquipmentSizeRequirement>()
+                .HasOne(r => r.Package)
+                .WithMany(p => p.EquipmentSizeRequirements)
+                .HasForeignKey(r => r.PackageId)
+                .IsRequired();
+
+            modelBuilder.Entity<CartItemEquipmentSize>()
+                .HasOne(s => s.CartItem)
+                .WithMany(c => c.EquipmentSizes)
+                .HasForeignKey(s => s.CartItemId)
                 .IsRequired();
 
             modelBuilder.Entity<Equipment>().HasData
@@ -426,6 +440,89 @@ namespace DiveDeep.Data
                 ,
                 Sizes = "S,M,L,XL"
             });
+
+            // Seed package equipment size requirements
+            modelBuilder.Entity<PackageEquipmentSizeRequirement>().HasData(
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 1,
+                    EquipmentName = "BCD",
+                    AvailableSizes = "S,M,L,XL",
+                    RequiresSize = true,
+                    PackageId = 1
+                },
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 2,
+                    EquipmentName = "Dykkerdragt",
+                    AvailableSizes = "S,M,L,XL",
+                    RequiresSize = true,
+                    PackageId = 1
+                },
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 3,
+                    EquipmentName = "Regulatorsæt",
+                    AvailableSizes = "",
+                    RequiresSize = false,
+                    PackageId = 1
+                },
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 4,
+                    EquipmentName = "Tank",
+                    AvailableSizes = "",
+                    RequiresSize = false,
+                    PackageId = 1
+                },
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 5,
+                    EquipmentName = "Finner",
+                    AvailableSizes = "S,M,L,XL",
+                    RequiresSize = true,
+                    PackageId = 1
+                },
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 6,
+                    EquipmentName = "Maske",
+                    AvailableSizes = "",
+                    RequiresSize = false,
+                    PackageId = 1
+                },
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 7,
+                    EquipmentName = "Snorkel",
+                    AvailableSizes = "",
+                    RequiresSize = false,
+                    PackageId = 1
+                },
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 8,
+                    EquipmentName = "Finner",
+                    AvailableSizes = "S,M,L,XL",
+                    RequiresSize = true,
+                    PackageId = 2
+                },
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 9,
+                    EquipmentName = "Maske",
+                    AvailableSizes = "",
+                    RequiresSize = false,
+                    PackageId = 2
+                },
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 10,
+                    EquipmentName = "Snorkel",
+                    AvailableSizes = "",
+                    RequiresSize = false,
+                    PackageId = 2
+                });
         }
     }
 }

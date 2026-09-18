@@ -4,6 +4,7 @@ using DiveDeep.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiveDeep.Migrations
 {
     [DbContext(typeof(DiveDeepContext))]
-    partial class DiveDeepContextModelSnapshot : ModelSnapshot
+    [Migration("20260918095847_sizing2")]
+    partial class sizing2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,32 +163,6 @@ namespace DiveDeep.Migrations
                     b.ToTable("CartItems");
                 });
 
-            modelBuilder.Entity("DiveDeep.Models.CartItemEquipmentSize", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CartItemId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("EquipmentName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SelectedSize")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CartItemId");
-
-                    b.ToTable("CartItemEquipmentSizes");
-                });
-
             modelBuilder.Entity("DiveDeep.Models.Equipment", b =>
                 {
                     b.Property<int>("EquipmentId")
@@ -211,9 +188,6 @@ namespace DiveDeep.Migrations
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
-
-                    b.Property<string>("Sizes")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -372,7 +346,6 @@ namespace DiveDeep.Migrations
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Tanks/Tank.png",
                             Price = 170,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro 12 liter"
                         },
                         new
@@ -383,7 +356,6 @@ namespace DiveDeep.Migrations
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Tanks/Tank.png",
                             Price = 180,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro 15 liter"
                         },
                         new
@@ -394,7 +366,6 @@ namespace DiveDeep.Migrations
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Regulator/MK25EVO.png",
                             Price = 125,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Octopus R105/MK25EVO/S600"
                         },
                         new
@@ -405,7 +376,6 @@ namespace DiveDeep.Migrations
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Regulator/MK17.png",
                             Price = 100,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Octopus R095/MK17EVO/C370"
                         },
                         new
@@ -416,7 +386,6 @@ namespace DiveDeep.Migrations
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Regulator/MK25EVObt.png",
                             Price = 150,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Octopus S270/MK25EVO BT/A700 Carbon BT"
                         },
                         new
@@ -427,7 +396,6 @@ namespace DiveDeep.Migrations
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/Ghost.png",
                             Price = 50,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Ghost"
                         },
                         new
@@ -438,7 +406,6 @@ namespace DiveDeep.Migrations
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/DMask.png",
                             Price = 60,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro D-Mask"
                         },
                         new
@@ -449,7 +416,6 @@ namespace DiveDeep.Migrations
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/SpectraMini.png",
                             Price = 50,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Spectra Mini"
                         },
                         new
@@ -460,7 +426,6 @@ namespace DiveDeep.Migrations
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/CrystalVu.png",
                             Price = 75,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Crystal VU"
                         },
                         new
@@ -471,7 +436,6 @@ namespace DiveDeep.Migrations
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/Scout.png",
                             Price = 75,
-                            Sizes = "S,M,L,XL",
                             Title = "Fourth Element Scout Kontrast"
                         },
                         new
@@ -482,7 +446,6 @@ namespace DiveDeep.Migrations
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/ScoutEnchance.png",
                             Price = 75,
-                            Sizes = "S,M,L,XL",
                             Title = "Fourth Element Scout Enchance"
                         },
                         new
@@ -493,7 +456,6 @@ namespace DiveDeep.Migrations
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/Element.png",
                             Price = 75,
-                            Sizes = "S,M,L,XL",
                             Title = "Tusa Element"
                         },
                         new
@@ -504,7 +466,6 @@ namespace DiveDeep.Migrations
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Fins/JetFin.png",
                             Price = 50,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Jet Fin"
                         },
                         new
@@ -525,7 +486,6 @@ namespace DiveDeep.Migrations
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Fins/SeawingSupernova.png",
                             Price = 60,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Seawing Supernova"
                         },
                         new
@@ -536,7 +496,6 @@ namespace DiveDeep.Migrations
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Fins/Propulsion.png",
                             Price = 50,
-                            Sizes = "S,M,L,XL",
                             Title = "Seac Propulsion"
                         },
                         new
@@ -913,17 +872,6 @@ namespace DiveDeep.Migrations
                     b.Navigation("Package");
                 });
 
-            modelBuilder.Entity("DiveDeep.Models.CartItemEquipmentSize", b =>
-                {
-                    b.HasOne("DiveDeep.Models.CartItem", "CartItem")
-                        .WithMany("EquipmentSizes")
-                        .HasForeignKey("CartItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CartItem");
-                });
-
             modelBuilder.Entity("DiveDeep.Models.PackageEquipmentSizeRequirement", b =>
                 {
                     b.HasOne("DiveDeep.Models.Package", "Package")
@@ -994,11 +942,6 @@ namespace DiveDeep.Migrations
             modelBuilder.Entity("DiveDeep.Models.Booking", b =>
                 {
                     b.Navigation("CartItems");
-                });
-
-            modelBuilder.Entity("DiveDeep.Models.CartItem", b =>
-                {
-                    b.Navigation("EquipmentSizes");
                 });
 
             modelBuilder.Entity("DiveDeep.Models.Equipment", b =>

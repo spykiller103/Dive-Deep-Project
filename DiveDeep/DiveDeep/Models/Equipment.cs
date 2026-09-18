@@ -16,27 +16,6 @@ namespace DiveDeep.Models
 
         public List<CartItem> CartItems { get; set; }
 
-        [NotMapped]
         public string? Sizes { get; set; }
-
-        public List<string> SizeList
-        {
-            get
-            {
-                var sizedCategories = new[] { "BCD", "Dykkerdragt", "Finner" };
-
-                if (string.IsNullOrWhiteSpace(Category) || !sizedCategories.Any(c => string.Equals(c, Category, StringComparison.OrdinalIgnoreCase)))
-                {
-                    return new List<string>();
-                }
-
-                if (string.IsNullOrWhiteSpace(Sizes))
-                {
-                    return new List<string> { "S", "M", "L", "XL" };
-                }
-
-                return Sizes.Split(',').Select(s => s.Trim()).Where(s => s.Length > 0).ToList();
-            }
-        }
     }
 }

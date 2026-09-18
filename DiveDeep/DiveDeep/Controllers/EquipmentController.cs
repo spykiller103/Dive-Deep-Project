@@ -12,11 +12,13 @@ namespace DiveDeep.Controllers
     {
         private readonly CartService _cartService;
         private readonly IEquipmentRepository _equipmentRepository;
+        private readonly PackageService _packageService;
 
-        public EquipmentController(IEquipmentRepository equipmentRepository, CartService cartService)
+        public EquipmentController(IEquipmentRepository equipmentRepository, CartService cartService, PackageService packageService)
         {
             _equipmentRepository = equipmentRepository;
             _cartService = cartService;
+            _packageService = packageService;
         }
         public IActionResult Index(string? category)
         {

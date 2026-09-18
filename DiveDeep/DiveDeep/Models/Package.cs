@@ -16,60 +16,7 @@ namespace DiveDeep.Models
         public string Title { get; set; }
         public List<string> Equipment { get; set; }
         public string? Sizes { get; set; }
-
-        [NotMapped]
-        public Dictionary<string, List<string>> EquipmentSizeRequirements { get; set; } = new Dictionary<string, List<string>>();
-
-        public List<string> SizeList
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(Sizes))
-                {
-                    return new List<string> { "S", "M", "L", "XL" };
-                }
-
-                return Sizes.Split(',').Select(s => s.Trim()).Where(s => s.Length > 0).ToList();
-            }
-        }
         public List<CartItem> CartItems { get; set; }
-
-        [NotMapped]
-        public List<PackageEquipmentItem> EquipmentItems
-        {
-            get
-            {
-                var items = new List<PackageEquipmentItem>();
-                if (Equipment != null)
-                {
-                    foreach (var equipmentName in Equipment)
-                    {
-                        var sizes = GetSizesForEquipment(equipmentName);
-                        items.Add(new PackageEquipmentItem
-                        {
-                            Name = equipmentName,
-                            AvailableSizes = sizes,
-                            RequiresSize = sizes.Count > 0
-                        });
-                    }
-                }
-                return items;
-            }
-        }
-
-        private List<string> GetSizesForEquipment(string equipmentName)
-        {
-            var sizedCategories = new[] { "BCD", "Dykkerdragt", "Finner" };
-            
-            foreach (var category in sizedCategories)
-            {
-                if (equipmentName.IndexOf(category, StringComparison.OrdinalIgnoreCase) >= 0)
-                {
-                    return SizeList;
-                }
-            }
-            
-            return new List<string>();
-        }
+        public List<PackageEquipmentSizeRequirement> EquipmentSizeRequirements { get; set; } = new List<PackageEquipmentSizeRequirement>();
     }
 }

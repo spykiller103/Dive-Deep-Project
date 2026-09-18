@@ -1,4 +1,7 @@
 @model List<Package>
+@using DiveDeep.Models
+@using DiveDeep.Service
+@inject PackageService PackageService
 
 @section Title {
     <p class="mt-5"> <span class="special-text">LEJ PR DAG</span></p>
@@ -19,29 +22,34 @@
 
                     <form asp-controller="packages" asp-action="rent" method="post" class="w-100">
                         <div class="border-top border-dark mt-2 mb-3">
-                            @foreach (var equipmentItem in package.EquipmentItems)
+                            @{
+                                var equipmentItems = PackageService.GetEquipmentItems(package);
+                            }
+                            @foreach (var equipmentItem in equipmentItems)
                             {
                                 <div class="mb-2">
-                                    <p class="text-white small mb-1">@equipmentItem.Name</p>
+                                    <p class="text-white small mb-1">@equipmentItem.EquipmentName</p>
                                     @if (equipmentItem.RequiresSize)
                                     {
+                                        var sizes = equipmentItem.AvailableSizes.Split(',').Select(s => s.Trim()).Where(s => s.Length > 0).ToList();
                                         <div class="btn-group" role="group">
-                                            @for (int i = 0; i < equipmentItem.AvailableSizes.Count; i++)
+                                            @for (int i = 0; i < sizes.Count; i++)
                                             {
-                                                string s = equipmentItem.AvailableSizes[i];
-                                                string id = $"size_{package.PackageId}_{equipmentItem.Name.Replace(" ", "_")}_{s}";
+                                                string s = sizes[i];
+                                                string id = $"size_{package.PackageId}_{equipmentItem.EquipmentName.Replace(" ", "_")}_{s}";
                                                 string checkedAttr = i == 0 ? "checked" : "";
-                                                string fieldName = $"equipmentSizes[{equipmentItem.Name}]";
+                                                string fieldName = $"equipmentSizes[{equipmentItem.EquipmentName}]";
                                                 <input type="radio" class="btn-check" name="@fieldName" id="@id" value="@s" @checkedAttr />
                                                 <label class="btn btn-sm btn-outline-light me-1" for="@id">@s</label>
                                             }
                                         </div>
                                     }
-                                
+                             
+                                 
                                 </div>
                             }
                         </div>
-                    <div class="package-footer border-top border-dark">
+                    <div class="package-footer mt-auto border-top border-dark">
                         <div class="align-items-center">
                             <div class="col-12">
                                 <label class="form-label text-white small mb-1">Lejeperiode</label>

@@ -11,11 +11,13 @@ namespace DiveDeep.Controllers
     {
         private readonly IPackageRepository _packageRepository;
         private readonly CartService _cartService;
+        private readonly PackageService _packageService;
 
-        public PackagesController(IPackageRepository packageRepository, CartService cartService)
+        public PackagesController(IPackageRepository packageRepository, CartService cartService, PackageService packageService)
         {
             _packageRepository = packageRepository;
             _cartService = cartService;
+            _packageService = packageService;
         }
 
         public IActionResult Index()
@@ -64,18 +66,22 @@ namespace DiveDeep.Controllers
             };
 
             // Handle individual equipment sizes from the form
-            var equipmentSizes = new Dictionary<string, string>();
-            foreach (var key in form.Keys)
+            List<CartItemEquipmentSize> equipmentSizes = new List<CartItemEquipmentSize>();
+            foreach (string key in form.Keys)
             {
                 if (key.StartsWith("equipmentSizes["))
                 {
-                    var startIndex = "equipmentSizes[".Length;
-                    var endIndex = key.IndexOf("]");
-                    var equipmentName = key.Substring(startIndex, endIndex - startIndex);
-                    var selectedSize = form[key];
+                    int startIndex = "equipmentSizes[".Length;
+                    int endIndex = key.IndexOf("]");
+                    string equipmentName = key.Substring(startIndex, endIndex - startIndex);
+                    string selectedSize = form[key];
                     if (!string.IsNullOrWhiteSpace(selectedSize))
                     {
-                        equipmentSizes[equipmentName] = selectedSize;
+                        equipmentSizes.Add(new CartItemEquipmentSize
+                        {
+                            EquipmentName = equipmentName,
+                            SelectedSize = selectedSize
+                        });
                     }
                 }
             }
