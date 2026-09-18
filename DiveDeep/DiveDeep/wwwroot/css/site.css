@@ -404,6 +404,72 @@ ul.package-equipment li {
     margin-bottom: 8px;
 }
 
+/* Profile / Manage area: ensure controls and nav match site color palette (colors only) */
+/* Left nav (nav-pills) */
+.nav-pills .nav-link {
+    color: #00afcb; /* project accent */
+    background: transparent;
+    border-radius: 8px;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #00afcb !important; /* filled accent */
+    color: #ffffff !important; /* high contrast */
+}
+
+.nav-pills .nav-link:hover {
+    background-color: rgba(0,175,203,0.08);
+    color: #00eaf6;
+}
+
+/* Profile form inputs - force dark themed inputs with light text, including disabled state */
+#profile-form .form-control {
+    background-color: #071428 !important;
+    color: #E6F7FF !important;
+    border-color: rgba(255,255,255,0.06) !important;
+}
+
+#profile-form .form-control::placeholder {
+    color: #98a6b3 !important;
+    opacity: 0.9 !important;
+}
+
+/* Disabled username input should match dark theme but be readable */
+#profile-form .form-control[disabled],
+#profile-form .form-control:disabled {
+    background-color: rgba(255,255,255,0.03) !important;
+    color: #cfeafc !important;
+    opacity: 1 !important; /* override bootstrap dimming */
+}
+
+/* Labels and floating labels */
+#profile-form .form-label {
+    color: #cfeafc !important;
+}
+
+/* Save button in profile */
+#update-profile-button {
+    background-color: #00afcb !important;
+    color: #021217 !important;
+    border: 2px solid rgba(0,175,203,0.9) !important;
+}
+
+#update-profile-button:hover {
+    background-color: #008fa9 !important;
+    color: #FFFFFF !important;
+}
+/* Make "Back to profile" button match site accent (used in Bookings page) */
+a.btn.btn-primary[href^="/Identity/Account/Manage"] {
+    background-color: #00afcb !important;
+    color: #021217 !important;
+    border: 2px solid rgba(0,175,203,0.9) !important;
+}
+
+a.btn.btn-primary[href^="/Identity/Account/Manage"]:hover {
+    background-color: #008fa9 !important;
+    color: #FFFFFF !important;
+}
+
 .empty-cart {
     color: #c1d6ee;
     font-size: 16px;
@@ -473,6 +539,47 @@ ul.package-equipment li {
     height: 100px;
     width: 250px;
     border-radius: 20px;
+}
+
+/* Remove floating-label "pill" for manage/profile/email/change-password forms
+   Keep label text but remove the white rounded background and prevent it
+   from intercepting pointer events so it doesn't sit over inputs. */
+#email-form .form-floating > label,
+#profile-form .form-floating > label,
+#change-password-form .form-floating > label {
+    background: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    pointer-events: none !important;
+    color: #cfeafc !important;
+}
+
+#email-form .form-floating > label::before,
+#profile-form .form-floating > label::before,
+#change-password-form .form-floating > label::before,
+#email-form .form-floating > label::after,
+#profile-form .form-floating > label::after,
+#change-password-form .form-floating > label::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Specific fixes for email input group (disabled/current email) to ensure dark background and readable text */
+#email-form .input-group .form-control,
+#email-form .input-group .form-control[disabled],
+#email-form .input-group .form-control:disabled,
+#email-form .form-control-plaintext {
+    background-color: #071428 !important;
+    color: #E6F7FF !important;
+    border-color: rgba(255,255,255,0.06) !important;
+    opacity: 1 !important;
+}
+
+/* Override floating placeholder color in email form */
+#email-form .form-floating > .form-control-plaintext::placeholder,
+#email-form .form-floating > .form-control::placeholder {
+    color: #98a6b3 !important;
 }
 
 
