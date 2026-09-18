@@ -22,10 +22,10 @@
     <a class="btn btn-primary btn-sm btn-equipment" asp-controller="Equipment" asp-action="Index">Alt</a>
 </div>
 <br />
-<div class="row row-cols-1 row-cols-md-3 g-4 ">
+<div class="row row-cols-1 row-cols-md-3 g-4">
     @foreach (Equipment equipment in Model)
     {
-        <div class="col">
+        <div class="col equipment-item">
             <div class="card h-100">
                 <div id="img_container">
                     <a asp-controller="Equipment"
@@ -38,7 +38,7 @@
                     </a>
                 </div>
                 <div class="card-body d-flex flex-column">
-                    <p> <span class="special-text">@equipment.Category</span></p>
+                    <p> <span class="special-text equipment-category">@equipment.Category</span></p>
                     <p class="text-light equipment-title">@equipment.Title</p>
                     <p class="text-secondary">@equipment.Description</p>          
                 </div> <!-- .card-body -->
