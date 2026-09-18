@@ -126,7 +126,7 @@ nav {
     .search-result:hover {
         background: #1c2735;
     }
-    /*SearchBarFinished*/
+/*SearchBarFinished*/
 
 .borderBox {
     border-radius: 30px;
@@ -466,4 +466,24 @@ nav {
     height: 100px;
     width: 250px;
     border-radius: 20px;
+}
+
+/*Booking page*/
+.booking-card {
+    border: 0.2px solid;
+    border-color: rgba(27, 32, 45);
+    border-radius: 20px;
+    background-color: rgba(13, 18, 32);
+}
+
+.booking-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.booking-info {
+    display: flex;
+    gap: 20px;
+    margin-left: auto;
 }

@@ -33,35 +33,45 @@
 
 <h2 class="text-light mt-5">Lejer lige nu</h2>
 
-@foreach (var booking in Model.ActiveBookings)
+@foreach (Booking booking in Model.ActiveBookings)
 {
-    <div class="booking-card mt-3">
-
+    <div class="booking-card mt-3 p-3">
         <div class="booking-header">
-            <div>
-                @if (booking.CartItems.Any())
 
+            @if (booking.CartItems.Any())
+            {
+                var firstItem = booking.CartItems
+                    .FirstOrDefault(c => c.Package != null || c.Equipment != null);
+
+                var totalPrice = booking.CartItems
+                    .Sum(c => c.Package != null ? c.Package.Price * c.TotalDays : c.Equipment != null ? c.Equipment.Price * c.TotalDays : 0);
+
+                @if (firstItem?.BookingId != null)
                 {
-                    var firstItem = booking.CartItems
-                        .FirstOrDefault(c => c.Package != null || c.Equipment != null);
+                    CartItem lastItem = booking.CartItems
+                        .OrderBy(c => c.EndDate)
+                        .First();
 
-                    @if (firstItem?.Package != null)
-                    {
-                        <h3>@firstItem.Package.Title</h3>
-                    }
-                    else if (firstItem?.Equipment != null)
-                    {
-                        <h3>@firstItem.Equipment.Title</h3>
-                    }
+                    int daysLeft = (lastItem.EndDate.Date - DateTime.Today).Days + 1;
+                    
+                    <h3>DYK-@firstItem.BookingId</h3>
 
-                    <p>
-                        @booking.CartItems.Min(c => c.StartDate).ToString("d. MMMM yyyy")
-                        →
-                        @booking.CartItems.Max(c => c.EndDate).ToString("d. MMMM yyyy")
-                    </p>
+                    <div class="booking-info">
+                        <h3>@totalPrice kr.</h3>
+                        <h3>@daysLeft dag(e) tilbage</h3>
+                    </div>
                 }
-            </div>
+            }
         </div>
+
+        <p>
+            @booking.CartItems.Min(c => c.StartDate).ToString("d. MMMM yyyy")
+            →
+            @booking.CartItems.Max(c => c.EndDate).ToString("d. MMMM yyyy")
+        </p>
+
+        <hr />
+
 
         <div class="booking-items">
 
