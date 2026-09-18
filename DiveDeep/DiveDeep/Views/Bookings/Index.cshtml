@@ -1,24 +1,30 @@
-﻿﻿@using DiveDeep.ViewModels;
-@model BookingApplicationUserViewData;
+﻿    ﻿@using DiveDeep.ViewModels;
+    @model BookingApplicationUserViewData;
 
-@section Title {
-    <a class="btn btn-primary mt-3" href="/Identity/Account/Manage">Back to profile</a>
+    @section Title {
+        <a class="btn btn-primary mt-3" href="/Identity/Account/Manage">Back to profile</a>
 
-    <h1 class="mt-4 SiteTitles">@Model.ApplicationUser.FullName</h1>
-    <p>@Model.ApplicationUser.Email</p>
-}
+        <h1 class="mt-4 SiteTitles">@Model.ApplicationUser.FullName</h1>
+        <p>@Model.ApplicationUser.Email</p>
+    }
 
-<div class="row row-cols-1 row-cols-md-3 g-3 gap-3">
-    <div class="mt-4 profile-info">
+    <div class="row row-cols-1 row-cols-md-3 g-3 gap-3">
+        <div class="mt-4 profile-info">
+            <h3>Aktive lejemål</h3>
+            <p>@Model.ActiveBookingCount</p>
+        </div>
+
+        <div class="mt-4 profile-info">
+            <h3>Afsluttede lejemål</h3>
+            <p>@Model.CompletedBookingCount</p>
+        </div>
+
+        <div class="mt-4 profile-info">
+            <h3>Samlede lejeperioder</h3>
+            <p>@Model.TotalRentalPeriods</p>
+        </div>
     </div>
 
-    <div class="mt-4 profile-info">
-    </div>
+    <h2 class="text-light mt-5">Lejer lige nu</h2>
 
-    <div class="mt-4 profile-info">
-    </div>
-</div>
-
-<h2 class="text-light mt-5">Lejer lige nu</h2>
-
-<h2 class="text-light mt-5">Lejehistorik</h2>
+    <h2 class="text-light mt-5">Lejehistorik</h2>

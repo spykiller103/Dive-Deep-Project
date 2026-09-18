@@ -27,7 +27,9 @@ namespace DiveDeep.Persistence
         }
         public List<Booking> GetAll()
         {
-            return _context.Bookings.ToList();
+            return _context.Bookings
+                .Include(b => b.CartItems)
+                .ToList();
         }
 
         public Booking? GetById(int id)
