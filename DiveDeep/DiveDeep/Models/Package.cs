@@ -59,10 +59,8 @@ namespace DiveDeep.Models
 
         private List<string> GetSizesForEquipment(string equipmentName)
         {
-            // Equipment categories that require sizes
             var sizedCategories = new[] { "BCD", "Dykkerdragt", "Finner" };
             
-            // Check if this equipment name matches any of the sized categories
             foreach (var category in sizedCategories)
             {
                 if (equipmentName.IndexOf(category, StringComparison.OrdinalIgnoreCase) >= 0)
