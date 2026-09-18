@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DiveDeep.Data;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace DiveDeep.Models
 {
@@ -19,6 +21,12 @@ namespace DiveDeep.Models
 
         public int? BookingId { get; set; }
         public Booking? Booking { get; set; } = null!;
+
+
+        [Required]
+        public string ApplicationUserId { get; set; }
+        [ValidateNever]
+        public ApplicationUser ApplicationUser { get; set; }
 
     }
 }

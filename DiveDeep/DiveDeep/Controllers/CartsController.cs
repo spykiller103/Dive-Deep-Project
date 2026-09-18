@@ -24,9 +24,14 @@ namespace DiveDeep.Controllers
 
         public IActionResult Index()
         {
+            string userId = _userManager.GetUserId(User);
+
             List<CartItem> cartItems = _cartService.GetAll()
-                .Where(c => c.BookingId == null)
+                .Where(c => c.ApplicationUserId == userId && c.BookingId == null)
                 .ToList();
+
+
+
 
             return View(cartItems);
         }
@@ -34,16 +39,25 @@ namespace DiveDeep.Controllers
         [HttpPost]
         public IActionResult Checkout(List<int> cartItemIds)
         {
-            List<CartItem> cartItems = new();
+            //List<CartItem> cartItems = new();
 
-            string user = _userManager.GetUserId(User);
+            //string user = _userManager.GetUserId(User);
 
-            foreach (int id in cartItemIds)
-            {
-                cartItems.Add(_cartService.GetById(id));
-            }
+            //foreach (int id in cartItemIds)
+            //{
+            //    cartItems.Add(_cartService.GetById(id));
+            //}
+            string userId = _userManager.GetUserId(User);
 
-            Booking booking = _bookingRepository.Add(cartItems, user);
+            List<CartItem> cartItems = _cartService.GetAll()
+                .Where(c =>cartItemIds
+                .Contains(c.CartItemId) &&
+                    c.ApplicationUserId == userId &&
+                    c.BookingId == null)
+                .ToList();
+
+
+            Booking booking = _bookingRepository.Add(cartItems, userId);
 
             foreach (CartItem cartItem in cartItems)
             {

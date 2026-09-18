@@ -1,21 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using DiveDeep.Persistence;
+﻿using DiveDeep.Data;
 using DiveDeep.Models;
+using DiveDeep.Persistence;
+using DiveDeep.Service;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Globalization;
-using DiveDeep.Service;
 
 namespace DiveDeep.Controllers
 {
+    [Authorize]
     public class EquipmentController : Controller
     {
+
+        private readonly UserManager<ApplicationUser> _userManager;
+
         private readonly CartService _cartService;
         private readonly IEquipmentRepository _equipmentRepository;
 
-        public EquipmentController(IEquipmentRepository equipmentRepository, CartService cartService)
+        public EquipmentController(IEquipmentRepository equipmentRepository, CartService cartService, UserManager<ApplicationUser> userManager)
         {
             _equipmentRepository = equipmentRepository;
             _cartService = cartService;
+            _userManager = userManager;
         }
         public IActionResult Index(string? category)
         {
@@ -50,7 +58,7 @@ namespace DiveDeep.Controllers
         [HttpPost]
         public IActionResult Rent(int id, string start, string end, string? size)
         {
-
+            string userId = _userManager.GetUserId(User);
             Equipment equipmentToBeAdded = _equipmentRepository.GetById(id);
 
             DateTime startDate, endDate;
@@ -85,7 +93,7 @@ namespace DiveDeep.Controllers
 
             CartItem cartItem = new CartItem
             {
-                
+                ApplicationUserId = userId,
                 Equipment = equipmentToBeAdded,
                 StartDate = startDate,
                 EndDate = endDate,
