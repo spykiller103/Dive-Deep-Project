@@ -44,13 +44,13 @@ namespace DiveDeep.Controllers
             
             };
 
-            var bookingIds = vm.Bookings
-                .Select(b => (int?)b.BookingId)
-                .ToList(); //It is possible to use ToHashSet because its like a box that fast can check if the asked id is in there
-            vm.CartItems = _cartItemRepository.GetAll()
-                .Where(ci => bookingIds
-                .Contains(ci.BookingId))
-                .ToList();
+            //var bookingIds = vm.Bookings
+            //    .Select(b => (int?)b.BookingId)
+            //    .ToList(); //It is possible to use ToHashSet because its like a box that fast can check if the asked id is in there
+            //vm.CartItems = _cartItemRepository.GetAll()
+            //    .Where(ci => bookingIds
+            //    .Contains(ci.BookingId))
+            //    .ToList();
 
             return View(vm);
         }
