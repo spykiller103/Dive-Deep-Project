@@ -17,11 +17,12 @@ namespace DiveDeep.Controllers
         private readonly CartService _cartService;
         private readonly PackageService _packageService;
 
-        public PackagesController(IPackageRepository packageRepository, CartService cartService, PackageService packageService)
+        public PackagesController(IPackageRepository packageRepository, CartService cartService, PackageService packageService, UserManager<ApplicationUser> userManager)
         {
             _packageRepository = packageRepository;
             _cartService = cartService;
             _packageService = packageService;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -37,7 +38,7 @@ namespace DiveDeep.Controllers
             return View(package);
         }
 
-
+        [Authorize]
         [HttpPost]
         public IActionResult Rent(int id, string start, string end, string? size, IFormCollection form)
         {

@@ -21,11 +21,12 @@ namespace DiveDeep.Controllers
         private readonly IEquipmentRepository _equipmentRepository;
         private readonly PackageService _packageService;
 
-        public EquipmentController(IEquipmentRepository equipmentRepository, CartService cartService, PackageService packageService)
+        public EquipmentController(IEquipmentRepository equipmentRepository, CartService cartService, PackageService packageService, UserManager<ApplicationUser> userManager)
         {
             _equipmentRepository = equipmentRepository;
             _cartService = cartService;
             _packageService = packageService;
+            _userManager = userManager;
         }
         public IActionResult Index(string? category)
         {
