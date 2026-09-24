@@ -30,23 +30,12 @@ namespace DiveDeep.Controllers
                 .Where(c => c.ApplicationUserId == userId && c.BookingId == null)
                 .ToList();
 
-
-
-
             return View(cartItems);
         }
 
         [HttpPost]
         public IActionResult Checkout(List<int> cartItemIds)
         {
-            //List<CartItem> cartItems = new();
-
-            //string user = _userManager.GetUserId(User);
-
-            //foreach (int id in cartItemIds)
-            //{
-            //    cartItems.Add(_cartService.GetById(id));
-            //}
             string userId = _userManager.GetUserId(User);
 
             List<CartItem> cartItems = _cartService.GetAll()

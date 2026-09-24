@@ -744,7 +744,7 @@ namespace DiveDeep.Migrations
             modelBuilder.Entity("DiveDeep.Models.CartItem", b =>
                 {
                     b.HasOne("DiveDeep.Data.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("CartItems")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -824,6 +824,8 @@ namespace DiveDeep.Migrations
             modelBuilder.Entity("DiveDeep.Data.ApplicationUser", b =>
                 {
                     b.Navigation("Bookings");
+
+                    b.Navigation("CartItems");
                 });
 
             modelBuilder.Entity("DiveDeep.Models.Booking", b =>

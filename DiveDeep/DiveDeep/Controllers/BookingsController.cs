@@ -17,8 +17,6 @@ namespace DiveDeep.Controllers
         private readonly ICartItemRepository _cartItemRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-       // private string roleUser = "Bruger";
-       // private string roleAdmin = "Admin";
 
         public BookingsController(IBookingRepository bookingRepository, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, ICartItemRepository cartItemRepository)
         {
@@ -46,7 +44,7 @@ namespace DiveDeep.Controllers
 
             var bookingIds = vm.Bookings
                 .Select(b => (int?)b.BookingId)
-                .ToList(); //It is possible to use ToHashSet because its like a box that fast can check if the asked id is in there
+                .ToList();
             vm.CartItems = _cartItemRepository.GetAll()
                 .Where(ci => bookingIds
                 .Contains(ci.BookingId))

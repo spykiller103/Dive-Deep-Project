@@ -31,16 +31,6 @@ namespace DiveDeep
 
             var app = builder.Build();
 
-
-
-
-
-           // var roleManager = app.Services.GetService<RoleManager<IdentityRole>>();
-          
-
-
-
-
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
