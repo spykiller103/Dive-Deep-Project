@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiveDeep.Migrations
 {
     [DbContext(typeof(DiveDeepContext))]
-    [Migration("20260918141043_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260924065702_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -747,7 +747,7 @@ namespace DiveDeep.Migrations
             modelBuilder.Entity("DiveDeep.Models.CartItem", b =>
                 {
                     b.HasOne("DiveDeep.Data.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("CartItems")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -827,6 +827,8 @@ namespace DiveDeep.Migrations
             modelBuilder.Entity("DiveDeep.Data.ApplicationUser", b =>
                 {
                     b.Navigation("Bookings");
+
+                    b.Navigation("CartItems");
                 });
 
             modelBuilder.Entity("DiveDeep.Models.Booking", b =>

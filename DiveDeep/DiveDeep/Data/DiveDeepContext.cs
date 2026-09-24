@@ -43,6 +43,12 @@ namespace DiveDeep.Data
                 .HasForeignKey(b => b.ApplicationUserId)
                 .IsRequired();
 
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(a => a.CartItems)
+                .WithOne(c => c.ApplicationUser)
+                .HasForeignKey(c => c.ApplicationUserId)
+                .IsRequired();
+
             modelBuilder.Entity<Equipment>().HasData
             (
                 new Equipment
