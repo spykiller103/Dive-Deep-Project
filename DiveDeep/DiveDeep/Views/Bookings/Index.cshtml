@@ -1,5 +1,6 @@
-﻿@using DiveDeep.ViewModels;
-@model BookingApplicationUserViewData;
+```cshtml
+@using DiveDeep.ViewModels;
+@model BookingApplicationUserViewData
 
 @section Title {
     <a class="btn btn-primary mt-3" href="/Identity/Account/Manage">Back to profile</a>
@@ -33,36 +34,46 @@
 
 <h2 class="text-light mt-5">Lejer lige nu</h2>
 
-@foreach (Booking booking in Model.ActiveBookings)
+@foreach (var booking in Model.ActiveBookings)
 {
     <div class="booking-card mt-3 p-3">
+
         <div class="booking-header">
 
             @if (booking.CartItems.Any())
             {
-                CartItem? firstItem = booking.CartItems
+                var firstItem = booking.CartItems
                     .FirstOrDefault(c => c.Package != null || c.Equipment != null);
 
-                int totalPrice = booking.CartItems
-                    .Sum(c => c.Package != null ? c.Package.Price * c.TotalDays : c.Equipment != null ? c.Equipment.Price * c.TotalDays : 0);
+                var totalPrice = booking.CartItems.Sum(c =>
+                    c.Package != null
+                        ? c.Package.Price * c.TotalDays
+                        : c.Equipment != null
+                            ? c.Equipment.Price * c.TotalDays
+                            : 0);
 
-                @if (firstItem?.BookingId != null)
+                if (firstItem != null && firstItem.BookingId != 0)
                 {
-                    CartItem leastDayItem = booking.CartItems
+                    var leastDayItem = booking.CartItems
                         .OrderBy(c => c.EndDate)
                         .First();
 
-                    int daysLeft = (leastDayItem.EndDate.Date - DateTime.Today).Days + 1;
+                    var daysLeft =
+                        (leastDayItem.EndDate.Date - DateTime.Today).Days + 1;
 
                     <h3>DYK-@firstItem.BookingId</h3>
 
                     <div class="booking-info">
                         <h3>@totalPrice kr.</h3>
-                        <h3 class="badge rounded-pill px-3 py-2 package-label">@daysLeft dag(e) tilbage</h3>
+                        <h3 class="badge rounded-pill px-3 py-2 package-label">
+                            @daysLeft dag(e) tilbage
+                        </h3>
                     </div>
                 }
             }
+
         </div>
+
         <p>
             @booking.CartItems.Min(c => c.StartDate).ToString("d. MMMM yyyy")
             →
@@ -71,42 +82,84 @@
 
         <hr />
 
-
-
         <div class="booking-items">
 
-            @foreach (CartItem cartItem in booking.CartItems)
+            @foreach (var cartItem in booking.CartItems)
             {
                 <div>
+
                     @if (cartItem.Package != null)
                     {
                         <p>
-                            <span class="badge rounded-pill px-3 py-2 package-label">@cartItem.Package.Category </span>
+
+                            <span class="badge rounded-pill px-3 py-2 package-label">
+                                @cartItem.Package.Category
+                            </span>
+
                             @cartItem.Package.Title
+
                             <br />
 
-                            @foreach (string equipment in cartItem.Package.Equipment)
+                            @foreach (var equipment in cartItem.Package.Equipment)
                             {
-                                <span class="package-details">@equipment</span>
+                                <div class="mb-1">
 
-                            @if (booking.EquipmentSizes != null && booking.EquipmentSizes.Count > 0)
-                            {
-                                <div class="mb-3">
-                                    <p class="text-white small mb-2">Valgte størrelser:</p>
+                                    <span class="package-details">
+                                        @equipment
+                                    </span>
 
-                                    @foreach (var sizeEntry in booking.EquipmentSizes)
-                                    {
-                                        <div class="mb-1">
-                                            <span class="text-secondary small">@sizeEntry.EquipmentName: </span>
-                                            <span class="text-info small">@sizeEntry.SelectedSize</span>
-                                        </div>
+                                    @{
+                                        var sizeEntry = booking.EquipmentSizes?
+                                            .FirstOrDefault(s =>
+                                                s.EquipmentName.Equals(
+                                                    equipment,
+                                                    StringComparison.OrdinalIgnoreCase));
                                     }
-                                }
 
-                                <br />
+                                    @if (sizeEntry != null &&
+                                         !string.IsNullOrWhiteSpace(sizeEntry.SelectedSize))
+                                    {
+                                        <span class="text-info small ms-2">
+                                            (Størrelse: @sizeEntry.SelectedSize)
+                                        </span>
+                                    }
+
+                                </div>
                             }
+
                         </p>
                     }
+                    else if (cartItem.Equipment != null)
+                    {
+                        <p>
+
+                            <span class="badge rounded-pill px-3 py-2 equipment-label">
+                                Udstyr
+                            </span>
+
+                            @cartItem.Equipment.Title
+
+                            @if (!string.IsNullOrWhiteSpace(cartItem.SelectedSize))
+                            {
+                                <div class="mb-2">
+                                    <span class="text-white small">
+                                        Størrelse:
+                                    </span>
+
+                                    <span class="text-info small">
+                                        @cartItem.SelectedSize
+                                    </span>
+                                </div>
+                            }
+
+                        </p>
+                    }
+
+                    <div>
+                        @cartItem.TotalDays dage · afleveres
+                        @cartItem.EndDate.ToString("d. MMMM yyyy")
+                    </div>
+
                 </div>
             }
 
@@ -122,29 +175,28 @@
     <div class="booking-card mt-3">
 
         <div class="booking-header">
-            <div>
-                @if (booking.CartItems.Any())
 
+            @if (booking.CartItems.Any())
+            {
+                var firstItem = booking.CartItems
+                    .FirstOrDefault(c => c.Package != null || c.Equipment != null);
+
+                if (firstItem?.Package != null)
                 {
-                    var firstItem = booking.CartItems
-                        .FirstOrDefault(c => c.Package != null || c.Equipment != null);
-
-                    @if (firstItem?.Package != null)
-                    {
-                        <h3>@firstItem.Package.Title</h3>
-                    }
-                    else if (firstItem?.Equipment != null)
-                    {
-                        <h3>@firstItem.Equipment.Title</h3>
-                    }
-
-                    <p>
-                        @booking.CartItems.Min(c => c.StartDate).ToString("d. MMMM yyyy")
-                        →
-                        @booking.CartItems.Max(c => c.EndDate).ToString("d. MMMM yyyy")
-                    </p>
+                    <h3>@firstItem.Package.Title</h3>
                 }
-            </div>
+                else if (firstItem?.Equipment != null)
+                {
+                    <h3>@firstItem.Equipment.Title</h3>
+                }
+
+                <p>
+                    @booking.CartItems.Min(c => c.StartDate).ToString("d. MMMM yyyy")
+                    →
+                    @booking.CartItems.Max(c => c.EndDate).ToString("d. MMMM yyyy")
+                </p>
+            }
+
         </div>
 
         <div class="booking-items">
@@ -152,36 +204,77 @@
             @foreach (var item in booking.CartItems)
             {
                 <div class="booking-item">
+
                     @if (item.Package != null)
                     {
                         <p>
-                            <span class="badge rounded-pill px-3 py-2 package-label">@item.Package.Category </span>
+
+                            <span class="badge rounded-pill px-3 py-2 package-label">
+                                @item.Package.Category
+                            </span>
+
                             @item.Package.Title
 
                             <br />
 
-                            @foreach (string equipment in item.Package.Equipment)
+                            @foreach (var equipment in item.Package.Equipment)
                             {
-                                <span class="package-details">@equipment</span>
-                            }
+                                <div class="mb-1">
 
-                            @if (booking.EquipmentSizes != null && booking.EquipmentSizes.Count > 0)
-                            {
-                                <div class="mb-3">
-                                    <p class="text-white small mb-2">Valgte størrelser:</p>
+                                    <span class="package-details">
+                                        @equipment
+                                    </span>
 
-                                    @foreach (var sizeEntry in booking.EquipmentSizes)
-                                    {
-                                        <div class="mb-1">
-                                            <span class="text-secondary small">@sizeEntry.EquipmentName: </span>
-                                            <span class="text-info small">@sizeEntry.SelectedSize</span>
-                                        </div>
+                                    @{
+                                        var sizeEntry = booking.EquipmentSizes?
+                                            .FirstOrDefault(s =>
+                                                s.EquipmentName.Equals(
+                                                    equipment,
+                                                    StringComparison.OrdinalIgnoreCase));
                                     }
+
+                                    @if (sizeEntry != null &&
+                                         !string.IsNullOrWhiteSpace(sizeEntry.SelectedSize))
+                                    {
+                                        <span class="text-info small ms-2">
+                                            (Størrelse: @sizeEntry.SelectedSize)
+                                        </span>
+                                    }
+
                                 </div>
                             }
+
                         </p>
                     }
-                 
+                    else if (item.Equipment != null)
+                    {
+                        <p>
+
+                            <span class="badge rounded-pill px-3 py-2 equipment-label">
+                                Udstyr
+                            </span>
+
+                            @item.Equipment.Title
+
+                            <br />
+
+                            @if (!string.IsNullOrWhiteSpace(item.SelectedSize))
+                            {
+                                <div class="mb-2">
+
+                                    <span class="text-white small">
+                                        Størrelse:
+                                    </span>
+
+                                    <span class="text-info small">
+                                        @item.SelectedSize
+                                    </span>
+
+                                </div>
+                            }
+
+                        </p>
+                    }
 
                     <div>
                         @item.TotalDays dage · afleveres
@@ -203,29 +296,28 @@
     <div class="booking-card mt-3">
 
         <div class="booking-header">
-            <div>
-                @if (booking.CartItems.Any())
 
+            @if (booking.CartItems.Any())
+            {
+                var firstItem = booking.CartItems
+                    .FirstOrDefault(c => c.Package != null || c.Equipment != null);
+
+                if (firstItem?.Package != null)
                 {
-                    var firstItem = booking.CartItems
-                        .FirstOrDefault(c => c.Package != null || c.Equipment != null);
-
-                    @if (firstItem?.Package != null)
-                    {
-                        <h3>@firstItem.Package.Title</h3>
-                    }
-                    else if (firstItem?.Equipment != null)
-                    {
-                        <h3>@firstItem.Equipment.Title</h3>
-                    }
-
-                    <p>
-                        @booking.CartItems.Min(c => c.StartDate).ToString("d. MMMM yyyy")
-                        →
-                        @booking.CartItems.Max(c => c.EndDate).ToString("d. MMMM yyyy")
-                    </p>
+                    <h3>@firstItem.Package.Title</h3>
                 }
-            </div>
+                else if (firstItem?.Equipment != null)
+                {
+                    <h3>@firstItem.Equipment.Title</h3>
+                }
+
+                <p>
+                    @booking.CartItems.Min(c => c.StartDate).ToString("d. MMMM yyyy")
+                    →
+                    @booking.CartItems.Max(c => c.EndDate).ToString("d. MMMM yyyy")
+                </p>
+            }
+
         </div>
 
         <div class="booking-items">
@@ -233,49 +325,75 @@
             @foreach (var item in booking.CartItems)
             {
                 <div class="booking-item">
+
                     @if (item.Package != null)
                     {
                         <p>
-                            <span class="badge rounded-pill px-3 py-2 package-label">@item.Package.Category </span>
+
+                            <span class="badge rounded-pill px-3 py-2 package-label">
+                                @item.Package.Category
+                            </span>
+
                             @item.Package.Title
+
                             <br />
 
-                            @foreach (string equipment in item.Package.Equipment)
+                            @foreach (var equipment in item.Package.Equipment)
                             {
-                                <span class="package-details">@equipment</span>
-                            }
+                                <div class="mb-1">
 
-                            @if (booking.EquipmentSizes != null && booking.EquipmentSizes.Count > 0)
-                            {
-                                <div class="mb-3">
-                                    <p class="text-white small mb-2">Valgte størrelser:</p>
+                                    <span class="package-details">
+                                        @equipment
+                                    </span>
 
-                                    @foreach (var sizeEntry in booking.EquipmentSizes)
-                                    {
-                                        <div class="mb-1">
-                                            <span class="text-secondary small">@sizeEntry.EquipmentName: </span>
-                                            <span class="text-info small">@sizeEntry.SelectedSize</span>
-                                        </div>
+                                    @{
+                                        var sizeEntry = booking.EquipmentSizes?
+                                            .FirstOrDefault(s =>
+                                                s.EquipmentName.Equals(
+                                                    equipment,
+                                                    StringComparison.OrdinalIgnoreCase));
                                     }
+
+                                    @if (sizeEntry != null &&
+                                         !string.IsNullOrWhiteSpace(sizeEntry.SelectedSize))
+                                    {
+                                        <span class="text-info small ms-2">
+                                            (Størrelse: @sizeEntry.SelectedSize)
+                                        </span>
+                                    }
+
                                 </div>
                             }
-                         
+
                         </p>
                     }
                     else if (item.Equipment != null)
                     {
                         <p>
-                            <span class="badge rounded-pill px-3 py-2 equipment-label">Udstyr</span>
+
+                            <span class="badge rounded-pill px-3 py-2 equipment-label">
+                                Udstyr
+                            </span>
+
                             @item.Equipment.Title
+
                             <br />
 
                             @if (!string.IsNullOrWhiteSpace(item.SelectedSize))
                             {
                                 <div class="mb-2">
-                                    <span class="text-white small">Størrelse: </span>
-                                    <span class="text-info small">@item.SelectedSize</span>
+
+                                    <span class="text-white small">
+                                        Størrelse:
+                                    </span>
+
+                                    <span class="text-info small">
+                                        @item.SelectedSize
+                                    </span>
+
                                 </div>
                             }
+
                         </p>
                     }
 
