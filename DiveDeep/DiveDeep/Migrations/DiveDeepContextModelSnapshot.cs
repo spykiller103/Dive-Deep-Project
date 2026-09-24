@@ -128,6 +128,10 @@ namespace DiveDeep.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartItemId"));
 
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int?>("BookingId")
                         .HasColumnType("int");
 
@@ -150,6 +154,8 @@ namespace DiveDeep.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("CartItemId");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("BookingId");
 
@@ -737,6 +743,12 @@ namespace DiveDeep.Migrations
 
             modelBuilder.Entity("DiveDeep.Models.CartItem", b =>
                 {
+                    b.HasOne("DiveDeep.Data.ApplicationUser", "ApplicationUser")
+                        .WithMany("CartItems")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DiveDeep.Models.Booking", "Booking")
                         .WithMany("CartItems")
                         .HasForeignKey("BookingId");
@@ -748,6 +760,8 @@ namespace DiveDeep.Migrations
                     b.HasOne("DiveDeep.Models.Package", "Package")
                         .WithMany("CartItems")
                         .HasForeignKey("PackageId");
+
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Booking");
 
@@ -810,6 +824,8 @@ namespace DiveDeep.Migrations
             modelBuilder.Entity("DiveDeep.Data.ApplicationUser", b =>
                 {
                     b.Navigation("Bookings");
+
+                    b.Navigation("CartItems");
                 });
 
             modelBuilder.Entity("DiveDeep.Models.Booking", b =>
