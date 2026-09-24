@@ -1,8 +1,6 @@
 ﻿@using DiveDeep.Models;
 @model Equipment;
 
-
-
 @section Title
 {
 
@@ -37,37 +35,45 @@
                     </div>
 
                   
-                <div class="package-footer mt-auto border-top border-dark">
-                    <div class="align-items-center">
-                        <div class="col-12">
-                            <label class="form-label text-white small mb-1">Lejeperiode</label>
-                            <div class="input-daterange input-group">
-                                <input type="text" class="input-sm form-control" name="start" />
-                                <span class="input-group-addon custom-text">to</span>
-                                <input type="text" class="input-sm form-control" name="end" />
+                    <div class="package-footer mt-auto border-top border-dark">
+                        <div class="align-items-center">
+                            <div class="col-12">
+                                <label class="form-label text-white small mb-1">Lejeperiode</label>
+                                <div class="input-daterange input-group">
+                                    <input type="text" class="input-sm form-control" name="start" />
+                                    <span class="input-group-addon custom-text">to</span>
+                                    <input type="text" class="input-sm form-control" name="end" />
+
+                                </div>
+                                @{
+                                    int? key = Model.EquipmentId;
+                                    var dateErrors = ViewData.ModelState[key.ToString()]?.Errors;
+                                    if (dateErrors != null && dateErrors.Count > 0)
+                                    {
+                                        <div class="text-danger small mt-1">@dateErrors[0].ErrorMessage</div>
+                                    }
+                                }
 
                             </div>
-                            @{
-                                int? key = Model.EquipmentId;
-                                var dateErrors = ViewData.ModelState[key.ToString()]?.Errors;
-                                if (dateErrors != null && dateErrors.Count > 0)
-                                {
-                                    <div class="text-danger small mt-1">@dateErrors[0].ErrorMessage</div>
-                                }
-                            }
-
                         </div>
+
+                        <p class="text-white">@Model.Price<span class="text-info"> kr./dag</span></p>
+
+                        <input type="hidden" name="id" value="@Model.EquipmentId" />
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <button type="submit" class="btn btn-primary">Lej</button>
+                        }
+                        else
+                        {
+                            <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary">Lej</a>
+                        }
                     </div>
-
-                    <p class="text-white">@Model.Price<span class="text-info"> kr./dag</span></p>
-
-                    <input type="hidden" name="id" value="@Model.EquipmentId" />
-                    <button type="submit" class="btn btn-info btn-rent w-100">Lej</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
 </div>
 
