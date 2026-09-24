@@ -184,7 +184,10 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuller</button>
 
-                <button type="button" class="btn btn-danger" id="confirmEmptyCart">Tøm kurv</button>
+                <form asp-controller="Carts" asp-action="EmptyCart" method="post" class="d-inline">
+                   
+                    <button type="submit" class="btn btn-danger">Tøm kurv</button>
+                </form>
             </div>
         </div>
     </div>

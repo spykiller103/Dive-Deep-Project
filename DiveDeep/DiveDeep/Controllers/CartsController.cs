@@ -22,6 +22,23 @@ namespace DiveDeep.Controllers
             _bookingRepository = bookingRepository;
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EmptyCart()
+        {
+            // Delete all cart items that are not part of a booking
+            List<CartItem> cartItems = _cartService.GetAll()
+                .Where(c => c.BookingId == null)
+                .ToList();
+
+            foreach (var item in cartItems)
+            {
+                _cartService.Delete(item.CartItemId);
+            }
+
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Index()
         {
             string userId = _userManager.GetUserId(User);
