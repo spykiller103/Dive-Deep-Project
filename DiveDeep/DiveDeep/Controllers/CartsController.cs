@@ -53,5 +53,12 @@ namespace DiveDeep.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public IActionResult RemoveItem(int id)
+        {
+            _cartService.Delete(id);
+            return View();
+        }
     }
 }

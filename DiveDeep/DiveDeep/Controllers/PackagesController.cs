@@ -23,6 +23,14 @@ namespace DiveDeep.Controllers
             return View(packages);
         }
 
+        public IActionResult Details(int id)
+        {
+            Package package = _packageRepository.GetById(id);
+
+            return View(package);
+        }
+
+
         [HttpPost]
         public IActionResult Rent(int id, string start, string end, string? size)
         {
@@ -40,11 +48,15 @@ namespace DiveDeep.Controllers
             if (!_start || !_end)
             {
                 int key = id;
-                ModelState.AddModelError(key.ToString(), "Vælg venligst både start- og slutdato.");
 
-                List<Package> packages = _packageRepository.GetAll();
+                ModelState.AddModelError(
+                    key.ToString(),
+                    "Vælg venligst både start- og slutdato."
+                );
 
-                return View("Index", packages);
+                Package package = _packageRepository.GetById(id);
+
+                return View("Details", package);
             }
 
             int days = (endDate - startDate).Days + 1;
