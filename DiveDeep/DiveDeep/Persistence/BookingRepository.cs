@@ -19,9 +19,9 @@ namespace DiveDeep.Persistence
         {
             Booking booking = new Booking
             {
-                CartItems = cartItems,
                 ApplicationUserId = UserId
             };
+
             _context.Bookings.Add(booking);
             _context.SaveChanges();
 
@@ -48,6 +48,8 @@ namespace DiveDeep.Persistence
         public List<Booking> GetAll()
         {
             return _context.Bookings
+                .Include(b => b.CartItems)
+                    .ThenInclude(c => c.EquipmentSizes)
                 .Include(b => b.CartItems)
                     .ThenInclude(c => c.Package)
                 .Include(b => b.CartItems)

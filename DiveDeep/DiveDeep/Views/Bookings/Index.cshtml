@@ -88,7 +88,6 @@
                             @foreach (string equipment in cartItem.Package.Equipment)
                             {
                                 <span class="package-details">@equipment</span>
-                            }
 
                             @if (booking.EquipmentSizes != null && booking.EquipmentSizes.Count > 0)
                             {
@@ -102,29 +101,12 @@
                                             <span class="text-info small">@sizeEntry.SelectedSize</span>
                                         </div>
                                     }
-                                </div>
-                            }
-                            else if (!string.IsNullOrWhiteSpace(cartItem.SelectedSize))
-                            {
-                                <div class="mb-2">
-                                    <span class="text-white small">Størrelse: </span>
-                                    <span class="text-info small">@cartItem.SelectedSize</span>
-                                </div>
+                                }
+
+                                <br />
                             }
                         </p>
                     }
-                </div>
-
-                @if (!string.IsNullOrEmpty(cartItem.SelectedSize))
-                {
-                    <div>
-                        Størrelse: @cartItem.SelectedSize
-                    </div>
-                }
-
-                <div>
-                    @cartItem.TotalDays dage · afleveres
-                    @cartItem.EndDate.ToString("d. MMMM yyyy")
                 </div>
             }
 
@@ -175,6 +157,7 @@
                         <p>
                             <span class="badge rounded-pill px-3 py-2 package-label">@item.Package.Category </span>
                             @item.Package.Title
+
                             <br />
 
                             @foreach (string equipment in item.Package.Equipment)
@@ -194,13 +177,6 @@
                                             <span class="text-info small">@sizeEntry.SelectedSize</span>
                                         </div>
                                     }
-                                </div>
-                            }
-                            else if (!string.IsNullOrWhiteSpace(item.SelectedSize))
-                            {
-                                <div class="mb-2">
-                                    <span class="text-white small">Størrelse: </span>
-                                    <span class="text-info small">@item.SelectedSize</span>
                                 </div>
                             }
                         </p>
