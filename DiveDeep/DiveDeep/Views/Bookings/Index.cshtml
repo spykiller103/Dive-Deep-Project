@@ -88,43 +88,19 @@
                             @foreach (string equipment in cartItem.Package.Equipment)
                             {
                                 <span class="package-details">@equipment</span>
-                            }
 
-                            @if (cartItem.EquipmentSizes != null && cartItem.EquipmentSizes.Count > 0)
-                            {
-                                <div class="mb-3">
-                                    <p class="text-white small mb-2">Valgte størrelser:</p>
-
-                                    @foreach (var sizeEntry in cartItem.EquipmentSizes)
+                                @foreach (var sizeEntry in cartItem.EquipmentSizes)
+                                {
+                                    @if (equipment.Contains(sizeEntry.EquipmentName) || sizeEntry.EquipmentName.Contains(equipment))
                                     {
-                                        <div class="mb-1">
-                                            <span class="text-secondary small">@sizeEntry.EquipmentName: </span>
-                                            <span class="text-info small">@sizeEntry.SelectedSize</span>
-                                        </div>
+                                        <span class="package-details"> - @sizeEntry.SelectedSize</span>
                                     }
-                                </div>
-                            }
-                            else if (!string.IsNullOrWhiteSpace(cartItem.SelectedSize))
-                            {
-                                <div class="mb-2">
-                                    <span class="text-white small">Størrelse: </span>
-                                    <span class="text-info small">@cartItem.SelectedSize</span>
-                                </div>
+                                }
+
+                                <br />
                             }
                         </p>
                     }
-                </div>
-
-                @if (!string.IsNullOrEmpty(cartItem.SelectedSize))
-                {
-                    <div>
-                        Størrelse: @cartItem.SelectedSize
-                    </div>
-                }
-
-                <div>
-                    @cartItem.TotalDays dage · afleveres
-                    @cartItem.EndDate.ToString("d. MMMM yyyy")
                 </div>
             }
 
@@ -175,6 +151,7 @@
                         <p>
                             <span class="badge rounded-pill px-3 py-2 package-label">@item.Package.Category </span>
                             @item.Package.Title
+
                             <br />
 
                             @foreach (string equipment in item.Package.Equipment)
@@ -196,15 +173,9 @@
                                     }
                                 </div>
                             }
-                            else if (!string.IsNullOrWhiteSpace(item.SelectedSize))
-                            {
-                                <div class="mb-2">
-                                    <span class="text-white small">Størrelse: </span>
-                                    <span class="text-info small">@item.SelectedSize</span>
-                                </div>
-                            }
                         </p>
                     }
+
                     else if (item.Equipment != null)
                     {
                         <p>

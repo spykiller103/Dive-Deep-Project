@@ -25,6 +25,7 @@ namespace DiveDeep.Controllers
 
             List<Booking> bookings = _bookingRepository.GetAll()
                 .Where(b => b.ApplicationUserId == userId)
+
                 .ToList();
 
             DateTime today = DateTime.Today;

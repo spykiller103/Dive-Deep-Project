@@ -17,10 +17,18 @@ namespace DiveDeep.Persistence
         {
             Booking booking = new Booking
             {
-                CartItems = cartItems,
                 ApplicationUserId = UserId
             };
+
             _context.Bookings.Add(booking);
+            _context.SaveChanges();
+
+            foreach (CartItem cartItem in cartItems)
+            {
+                cartItem.BookingId = booking.BookingId;
+                _context.CartItems.Update(cartItem);
+            }
+
             _context.SaveChanges();
 
             return booking;
@@ -29,11 +37,11 @@ namespace DiveDeep.Persistence
         {
             return _context.Bookings
                 .Include(b => b.CartItems)
+                    .ThenInclude(c => c.EquipmentSizes)
+                .Include(b => b.CartItems)
                     .ThenInclude(c => c.Package)
                 .Include(b => b.CartItems)
                     .ThenInclude(c => c.Equipment)
-                .Include(b => b.CartItems)
-                    .ThenInclude(c => c.EquipmentSizes)
                 .ToList();
         }
 
