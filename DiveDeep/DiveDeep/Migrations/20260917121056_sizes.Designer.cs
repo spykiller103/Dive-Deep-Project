@@ -4,6 +4,7 @@ using DiveDeep.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiveDeep.Migrations
 {
     [DbContext(typeof(DiveDeepContext))]
-    partial class DiveDeepContextModelSnapshot : ModelSnapshot
+    [Migration("20260917121056_sizes")]
+    partial class sizes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,32 +163,6 @@ namespace DiveDeep.Migrations
                     b.ToTable("CartItems");
                 });
 
-            modelBuilder.Entity("DiveDeep.Models.CartItemEquipmentSize", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CartItemId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("EquipmentName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SelectedSize")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CartItemId");
-
-                    b.ToTable("CartItemEquipmentSizes");
-                });
-
             modelBuilder.Entity("DiveDeep.Models.Equipment", b =>
                 {
                     b.Property<int>("EquipmentId")
@@ -212,9 +189,6 @@ namespace DiveDeep.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<string>("Sizes")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -229,7 +203,7 @@ namespace DiveDeep.Migrations
                             EquipmentId = 1,
                             Amount = 5,
                             Category = "BCD",
-                            Description = "Let og komfortabel BCD med god pasform og stabilitet, velegnet til både begyndere og erfarne dykkere.",
+                            Description = "TEMP",
                             Image = "/Content/Images/Equipment/BCD/NavigatorLite.png",
                             Price = 125,
                             Title = "Scubapro Navigator Lite BCD"
@@ -239,7 +213,7 @@ namespace DiveDeep.Migrations
                             EquipmentId = 2,
                             Amount = 5,
                             Category = "BCD",
-                            Description = "En SCUBAPRO Glide BCD kombinerer komfort, stabilitet og nem opdriftskontrol. Det frontjusterbare design, Y-Fit-skuldre og integrerede vægtsystem sikrer en stabil og behagelig pasform under hele dykket.",
+                            Description = "TEMP",
                             Image = "/Content/Images/Equipment/BCD/GlideBCD.png",
                             Price = 140,
                             Title = "Scubapro BCD Glide"
@@ -249,7 +223,7 @@ namespace DiveDeep.Migrations
                             EquipmentId = 3,
                             Amount = 5,
                             Category = "BCD",
-                            Description = "SCUBAPRO Hydros Pro er en avanceret BCD med et fleksibelt og modulært design, der giver høj komfort, stabilitet og præcis opdriftskontrol under dykket.",
+                            Description = "TEMP",
                             Image = "/Content/Images/Equipment/BCD/HydrosPro.png",
                             Price = 200,
                             Title = "Scubapro BCD Hydros Pro"
@@ -259,7 +233,7 @@ namespace DiveDeep.Migrations
                             EquipmentId = 4,
                             Amount = 5,
                             Category = "BCD",
-                            Description = "SEAC Modular BCD er designet med fokus på fleksibilitet, komfort og stabilitet. Det modulære design giver en god pasform og gør den velegnet til både rekreativ dykning og forskellige dykkersituationer.",
+                            Description = "TEMP",
                             Image = "/Content/Images/Equipment/BCD/Modular.png",
                             Price = 145,
                             Title = "Seac BCD Modular"
@@ -269,7 +243,7 @@ namespace DiveDeep.Migrations
                             EquipmentId = 5,
                             Amount = 5,
                             Category = "Dykkerdragt",
-                            Description = "SCUBAPRO Definition er en 3 mm våddragt designet til høj komfort og bevægelsesfrihed. Det fleksible neoprenmateriale giver god pasform og hjælper med at holde kroppen varm under dykket.",
+                            Description = "Våddragt, 3 mm",
                             Image = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
                             Price = 100,
                             Title = "Scubapro Definition"
@@ -279,7 +253,7 @@ namespace DiveDeep.Migrations
                             EquipmentId = 6,
                             Amount = 5,
                             Category = "Dykkerdragt",
-                            Description = "SCUBAPRO Definition er en 5 mm våddragt, der kombinerer varmeisolering, komfort og bevægelsesfrihed. Det fleksible neoprenmateriale sikrer en behagelig pasform og god beskyttelse mod koldt vand.",
+                            Description = "Våddragt, 5 mm",
                             Image = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
                             Price = 100,
                             Title = "Scubapro Definition"
@@ -289,7 +263,7 @@ namespace DiveDeep.Migrations
                             EquipmentId = 7,
                             Amount = 5,
                             Category = "Dykkerdragt",
-                            Description = "SCUBAPRO Definition er en 7 mm våddragt designet til dykning i koldere vand. Det tykkere neopren giver effektiv varmeisolering, mens den fleksible konstruktion sikrer god komfort og bevægelsesfrihed under dykket.",
+                            Description = "Våddragt, 7 mm",
                             Image = "/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png",
                             Price = 100,
                             Title = "Scubapro Definition"
@@ -299,7 +273,7 @@ namespace DiveDeep.Migrations
                             EquipmentId = 8,
                             Amount = 5,
                             Category = "Dykkerdragt",
-                            Description = "Waterproof W5 er en 3,5 mm våddragt, der kombinerer god varmeisolering med fleksibilitet og komfort. Det elastiske neoprenmateriale giver en behagelig pasform og god bevægelsesfrihed under dykket.",
+                            Description = "Våddragt, 3.5 mm",
                             Image = "/Content/Images/Equipment/Divingsuits/Wetsuits/W5.png",
                             Price = 100,
                             Title = "Waterproof W5"
@@ -309,7 +283,7 @@ namespace DiveDeep.Migrations
                             EquipmentId = 9,
                             Amount = 5,
                             Category = "Dykkerdragt",
-                            Description = "Fourth Element Proteus er en 5 mm våddragt designet til effektiv varmeisolering og høj komfort. Det fleksible neoprenmateriale giver god bevægelsesfrihed og en tæt, behagelig pasform under dykket.",
+                            Description = "Våddragt, 5 mm",
                             Image = "/Content/Images/Equipment/Divingsuits/Wetsuits/ProteusF.png",
                             Price = 120,
                             Title = "Fourth Element Proteus"
@@ -319,7 +293,7 @@ namespace DiveDeep.Migrations
                             EquipmentId = 10,
                             Amount = 5,
                             Category = "Dykkerdragt",
-                            Description = "SCUBAPRO Exodry 4.0 er en robust tørdragt designet til dykning i koldt vand. Den vandtætte konstruktion hjælper med at holde dig tør og varm, mens den komfortable pasform giver god bevægelsesfrihed under dykket.",
+                            Description = "Tørdragt",
                             Image = "/Content/Images/Equipment/Divingsuits/Drysuits/Exodry4.png",
                             Price = 300,
                             Title = "Scubapro Exodry 4.0"
@@ -329,7 +303,7 @@ namespace DiveDeep.Migrations
                             EquipmentId = 11,
                             Amount = 5,
                             Category = "Dykkerdragt",
-                            Description = "Waterproof D7 Evo er en slidstærk tørdragt designet til krævende dykning i koldt vand. Den vandtætte konstruktion giver effektiv beskyttelse mod vand, mens det fleksible design sikrer god komfort og bevægelsesfrihed under dykket.",
+                            Description = "Tørdragt",
                             Image = "/Content/Images/Equipment/Divingsuits/Drysuits/D7Evo.png",
                             Price = 320,
                             Title = "Waterproof D7 Evo"
@@ -339,7 +313,7 @@ namespace DiveDeep.Migrations
                             EquipmentId = 12,
                             Amount = 5,
                             Category = "Dykkerdragt",
-                            Description = "SANTI E.Lite Plus er en let og slidstærk tørdragt designet til komfortabel dykning under forskellige forhold. Den robuste konstruktion beskytter mod vand, mens det fleksible materiale giver god bevægelsesfrihed og komfort under dykket.",
+                            Description = "Tørdragt",
                             Image = "/Content/Images/Equipment/Divingsuits/Drysuits/ELitePlus.png",
                             Price = 350,
                             Title = "Santi E.Lite Plus"
@@ -349,7 +323,7 @@ namespace DiveDeep.Migrations
                             EquipmentId = 13,
                             Amount = 5,
                             Category = "Tanke",
-                            Description = "SCUBAPRO 5 liters dykkertank er en kompakt og robust flaske, der er velegnet til kortere dyk og som ekstra luftforsyning. Den er nem at håndtere og transportere.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Tanks/Tank.png",
                             Price = 150,
                             Title = "Scubapro 5 liter"
@@ -359,7 +333,7 @@ namespace DiveDeep.Migrations
                             EquipmentId = 14,
                             Amount = 5,
                             Category = "Tanke",
-                            Description = "SCUBAPRO 10 liters dykkertank er en robust og alsidig flaske med god luftkapacitet til både rekreative og længere dyk. Det kompakte design gør den nem at håndtere og transportere.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Tanks/Tank.png",
                             Price = 160,
                             Title = "Scubapro 10 liter"
@@ -369,10 +343,9 @@ namespace DiveDeep.Migrations
                             EquipmentId = 15,
                             Amount = 5,
                             Category = "Tanke",
-                            Description = "SCUBAPRO 12 liters dykkertank er en robust flaske med høj luftkapacitet, velegnet til længere rekreative dyk. Den solide konstruktion sikrer pålidelig ydeevne og gør tanken velegnet til forskellige dykkeforhold.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Tanks/Tank.png",
                             Price = 170,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro 12 liter"
                         },
                         new
@@ -380,10 +353,9 @@ namespace DiveDeep.Migrations
                             EquipmentId = 16,
                             Amount = 5,
                             Category = "Tanke",
-                            Description = "SCUBAPRO 15 liters dykkertank er en robust flaske med stor luftkapacitet, ideel til længere dyk og dykkere med et højt luftforbrug. Den solide konstruktion sikrer pålidelighed og stabilitet under dykket.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Tanks/Tank.png",
                             Price = 180,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro 15 liter"
                         },
                         new
@@ -391,10 +363,9 @@ namespace DiveDeep.Migrations
                             EquipmentId = 17,
                             Amount = 5,
                             Category = "Regulatorsæt",
-                            Description = "SCUBAPRO Octopus R105/MK25EVO/S600 er et komplet regulatorsæt med høj ydeevne og pålidelig luftlevering. Sættet er designet til komfortabel vejrtrækning og stabil funktion under forskellige dykkeforhold.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Regulator/MK25EVO.png",
                             Price = 125,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Octopus R105/MK25EVO/S600"
                         },
                         new
@@ -402,10 +373,9 @@ namespace DiveDeep.Migrations
                             EquipmentId = 18,
                             Amount = 5,
                             Category = "Regulatorsæt",
-                            Description = "SCUBAPRO Octopus R095/MK17EVO/C370 er et pålideligt regulatorsæt, der giver en jævn og komfortabel luftlevering under dykket. Det robuste design sikrer stabil ydeevne og gør sættet velegnet til rekreativ dykning.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Regulator/MK17.png",
                             Price = 100,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Octopus R095/MK17EVO/C370"
                         },
                         new
@@ -413,10 +383,9 @@ namespace DiveDeep.Migrations
                             EquipmentId = 19,
                             Amount = 5,
                             Category = "Regulatorsæt",
-                            Description = "SCUBAPRO Octopus S270/MK25EVO BT/A700 Carbon BT er et avanceret regulatorsæt med høj ydeevne og jævn luftlevering. Det robuste design og materialer i høj kvalitet sikrer komfortabel vejrtrækning og pålidelig funktion under dykket.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Regulator/MK25EVObt.png",
                             Price = 150,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Octopus S270/MK25EVO BT/A700 Carbon BT"
                         },
                         new
@@ -424,10 +393,9 @@ namespace DiveDeep.Migrations
                             EquipmentId = 20,
                             Amount = 5,
                             Category = "Maske/Snorkel",
-                            Description = "SCUBAPRO Ghost er en komfortabel dykkermaske med lav volumen og et bredt synsfelt. Den tætsluttende silikonefacial giver en behagelig pasform og sikrer klart udsyn under vandet.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/Ghost.png",
                             Price = 50,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Ghost"
                         },
                         new
@@ -435,10 +403,9 @@ namespace DiveDeep.Migrations
                             EquipmentId = 21,
                             Amount = 5,
                             Category = "Maske/Snorkel",
-                            Description = "SCUBAPRO D-Mask er en komfortabel dykkermaske med et moderne design og bredt synsfelt. Den bløde silikonefacial sikrer en tæt og behagelig pasform, mens det hærdede glas giver klart udsyn under vandet.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/DMask.png",
                             Price = 60,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro D-Mask"
                         },
                         new
@@ -446,10 +413,9 @@ namespace DiveDeep.Migrations
                             EquipmentId = 22,
                             Amount = 5,
                             Category = "Maske/Snorkel",
-                            Description = "SCUBAPRO Spectra Mini er en kompakt og komfortabel dykkermaske designet til mindre ansigter. Det brede synsfelt og den bløde silikonefacial sikrer klart udsyn og en tæt, behagelig pasform under vandet.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/SpectraMini.png",
                             Price = 50,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Spectra Mini"
                         },
                         new
@@ -457,10 +423,9 @@ namespace DiveDeep.Migrations
                             EquipmentId = 23,
                             Amount = 5,
                             Category = "Maske/Snorkel",
-                            Description = "SCUBAPRO Crystal VU er en komfortabel dykkermaske med stort synsfelt og fremragende udsyn under vandet. Den bløde silikonefacial sikrer en tæt og behagelig pasform, mens det robuste glas giver et klart og naturligt udsyn.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/CrystalVu.png",
                             Price = 75,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Crystal VU"
                         },
                         new
@@ -468,10 +433,9 @@ namespace DiveDeep.Migrations
                             EquipmentId = 24,
                             Amount = 5,
                             Category = "Maske/Snorkel",
-                            Description = "Fourth Element Scout Kontrast er en komfortabel dykkermaske designet til klart og præcist udsyn under vandet. Det kontrastfremhævende design og den tætsluttende silikonefacial giver god pasform og komfort under dykket.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/Scout.png",
                             Price = 75,
-                            Sizes = "S,M,L,XL",
                             Title = "Fourth Element Scout Kontrast"
                         },
                         new
@@ -482,7 +446,6 @@ namespace DiveDeep.Migrations
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/ScoutEnchance.png",
                             Price = 75,
-                            Sizes = "S,M,L,XL",
                             Title = "Fourth Element Scout Enchance"
                         },
                         new
@@ -490,10 +453,9 @@ namespace DiveDeep.Migrations
                             EquipmentId = 26,
                             Amount = 5,
                             Category = "Maske/Snorkel",
-                            Description = "TUSA Element er en komfortabel dykkermaske med et enkelt og funktionelt design. Den bløde silikonefacial sikrer en tæt pasform, mens det klare glas giver et godt og naturligt udsyn under vandet.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/Element.png",
                             Price = 75,
-                            Sizes = "S,M,L,XL",
                             Title = "Tusa Element"
                         },
                         new
@@ -501,10 +463,9 @@ namespace DiveDeep.Migrations
                             EquipmentId = 27,
                             Amount = 5,
                             Category = "Finner",
-                            Description = "SCUBAPRO Jet Fin er en robust og klassisk dykkerfinne med et kraftfuldt design, der giver effektiv fremdrift og god kontrol i vandet. Den solide konstruktion gør den velegnet til både rekreativ og krævende dykning.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Fins/JetFin.png",
                             Price = 50,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Jet Fin"
                         },
                         new
@@ -512,7 +473,7 @@ namespace DiveDeep.Migrations
                             EquipmentId = 28,
                             Amount = 5,
                             Category = "Finner",
-                            Description = "SCUBAPRO GO Travel er en let og kompakt dykkerfinne designet til rejser og nem transport. Det fleksible design giver god fremdrift og komfort, samtidig med at finnerne er nemme at pakke og tage med på farten.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Fins/TravelFins.png",
                             Price = 50,
                             Title = "Scubapro GO travel"
@@ -522,10 +483,9 @@ namespace DiveDeep.Migrations
                             EquipmentId = 29,
                             Amount = 5,
                             Category = "Finner",
-                            Description = "SCUBAPRO Seawing Supernova er en kraftfuld dykkerfinne med innovativt design, der giver effektiv fremdrift og god kontrol i vandet. Den fleksible konstruktion sikrer en behagelig og energieffektiv svømning under dykket.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Fins/SeawingSupernova.png",
                             Price = 60,
-                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Seawing Supernova"
                         },
                         new
@@ -533,10 +493,9 @@ namespace DiveDeep.Migrations
                             EquipmentId = 30,
                             Amount = 5,
                             Category = "Finner",
-                            Description = "SEAC Propulsion er en kraftfuld dykkerfinne designet til effektiv fremdrift og god kontrol i vandet. Den robuste og fleksible konstruktion giver komfortabel svømning og stabil ydeevne under dykket.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Fins/Propulsion.png",
                             Price = 50,
-                            Sizes = "S,M,L,XL",
                             Title = "Seac Propulsion"
                         },
                         new
@@ -544,7 +503,7 @@ namespace DiveDeep.Migrations
                             EquipmentId = 31,
                             Amount = 5,
                             Category = "Finner",
-                            Description = "SEAC ALA er en let og komfortabel dykkerfinne designet til effektiv fremdrift og god manøvredygtighed. Den fleksible konstruktion giver en behagelig svømmeoplevelse og stabil kontrol under dykket.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Fins/ALA.png",
                             Price = 50,
                             Title = "Seac ALA"
@@ -554,7 +513,7 @@ namespace DiveDeep.Migrations
                             EquipmentId = 32,
                             Amount = 5,
                             Category = "Finner",
-                            Description = "Fourth Element Tech er en robust dykkerfinne designet til teknisk dykning og krævende forhold. Den stive konstruktion giver kraftfuld fremdrift, præcis kontrol og effektiv svømning under vandet.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Fins/TechFins.png",
                             Price = 75,
                             Title = "Fourth Element Tech"
@@ -564,7 +523,7 @@ namespace DiveDeep.Migrations
                             EquipmentId = 33,
                             Amount = 5,
                             Category = "Finner",
-                            Description = "Fourth Element Rec Fin er en alsidig og komfortabel dykkerfinne designet til rekreativ dykning. Den fleksible konstruktion giver effektiv fremdrift, god kontrol og en behagelig svømmeoplevelse under vandet.",
+                            Description = "N/A",
                             Image = "/Content/Images/Equipment/Fins/RecFins.png",
                             Price = 80,
                             Title = "Fourth Element Rec Fin"
@@ -630,117 +589,6 @@ namespace DiveDeep.Migrations
                             Price = 100,
                             Sizes = "S,M,L,XL",
                             Title = "Komplet snorkelsæt"
-                        });
-                });
-
-            modelBuilder.Entity("DiveDeep.Models.PackageEquipmentSizeRequirement", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AvailableSizes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EquipmentName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PackageId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("RequiresSize")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PackageId");
-
-                    b.ToTable("PackageEquipmentSizeRequirements");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AvailableSizes = "S,M,L,XL",
-                            EquipmentName = "BCD",
-                            PackageId = 1,
-                            RequiresSize = true
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AvailableSizes = "S,M,L,XL",
-                            EquipmentName = "Dykkerdragt",
-                            PackageId = 1,
-                            RequiresSize = true
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AvailableSizes = "",
-                            EquipmentName = "Regulatorsæt",
-                            PackageId = 1,
-                            RequiresSize = false
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AvailableSizes = "",
-                            EquipmentName = "Tank",
-                            PackageId = 1,
-                            RequiresSize = false
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AvailableSizes = "S,M,L,XL",
-                            EquipmentName = "Finner",
-                            PackageId = 1,
-                            RequiresSize = true
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AvailableSizes = "",
-                            EquipmentName = "Maske",
-                            PackageId = 1,
-                            RequiresSize = false
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AvailableSizes = "",
-                            EquipmentName = "Snorkel",
-                            PackageId = 1,
-                            RequiresSize = false
-                        },
-                        new
-                        {
-                            Id = 8,
-                            AvailableSizes = "S,M,L,XL",
-                            EquipmentName = "Finner",
-                            PackageId = 2,
-                            RequiresSize = true
-                        },
-                        new
-                        {
-                            Id = 9,
-                            AvailableSizes = "",
-                            EquipmentName = "Maske",
-                            PackageId = 2,
-                            RequiresSize = false
-                        },
-                        new
-                        {
-                            Id = 10,
-                            AvailableSizes = "",
-                            EquipmentName = "Snorkel",
-                            PackageId = 2,
-                            RequiresSize = false
                         });
                 });
 
@@ -913,28 +761,6 @@ namespace DiveDeep.Migrations
                     b.Navigation("Package");
                 });
 
-            modelBuilder.Entity("DiveDeep.Models.CartItemEquipmentSize", b =>
-                {
-                    b.HasOne("DiveDeep.Models.CartItem", "CartItem")
-                        .WithMany("EquipmentSizes")
-                        .HasForeignKey("CartItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CartItem");
-                });
-
-            modelBuilder.Entity("DiveDeep.Models.PackageEquipmentSizeRequirement", b =>
-                {
-                    b.HasOne("DiveDeep.Models.Package", "Package")
-                        .WithMany("EquipmentSizeRequirements")
-                        .HasForeignKey("PackageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Package");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -996,11 +822,6 @@ namespace DiveDeep.Migrations
                     b.Navigation("CartItems");
                 });
 
-            modelBuilder.Entity("DiveDeep.Models.CartItem", b =>
-                {
-                    b.Navigation("EquipmentSizes");
-                });
-
             modelBuilder.Entity("DiveDeep.Models.Equipment", b =>
                 {
                     b.Navigation("CartItems");
@@ -1009,8 +830,6 @@ namespace DiveDeep.Migrations
             modelBuilder.Entity("DiveDeep.Models.Package", b =>
                 {
                     b.Navigation("CartItems");
-
-                    b.Navigation("EquipmentSizeRequirements");
                 });
 #pragma warning restore 612, 618
         }

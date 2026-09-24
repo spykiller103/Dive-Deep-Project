@@ -1,4 +1,7 @@
-﻿@model List<Package>
+@model List<Package>
+@using DiveDeep.Models
+@using DiveDeep.Service
+@inject PackageService PackageService
 
 @section Title {
 	<p class="mt-5"> <span class="special-text">LEJ PR DAG</span></p>
@@ -6,34 +9,66 @@
 	<p class="mb-5">Lej præcis det du mangler - fra maske til regulator</p>
 }
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
-	@foreach (Package package in Model)
-	{
-		<div class="col equipment-item">
-			<div class="card h-100">
-				<div id="img_container">
-					<a asp-controller="Packages"
-					   asp-action="Details"
-					   asp-route-id="@package.PackageId">
+<div class="row row-cols-1 row-cols-md-3 g-4 ">
+    @foreach (Package package in Model)
+    {
+        <div class="col">
+            <div class="card h-100">
+                <img src="@package.Image" class="card-img-top package-img" alt="...">
+                <div class="card-body border-top border-dark d-flex flex-column">
+                    <div class="package-top">
+                        <p class="text-light mb-1">@package.Title</p>
+                    </div>
 
-						<img src="@package.Image"
-							 class="card-img-top package-img"
-							 alt="Equipment" />
-					</a>
-				</div>
-				<div class="card-body d-flex flex-column">
-					<p> <span class="special-text equipment-category">@package.Category</span></p>
-					<p class="text-light equipment-title">@package.Title</p>
-					<div class="package-equipment">
-						@foreach (string equipment in package.Equipment)
-						{
-							<p class="text-secondary mb-2">@equipment</p>
-						}
-					</div>
-					
-				</div> <!-- .card-body -->
-			</div> <!-- .card -->
-		</div>
-	}
-</div>
+                    <form asp-controller="packages" asp-action="rent" method="post" class="w-100">
+                        <div class="border-top border-dark mt-2 mb-3">
+                            @{
+                                var equipmentItems = PackageService.GetEquipmentItems(package);
+                            }
+                            @foreach (var equipmentItem in equipmentItems)
+                            {
+                                <div class="mb-2">
+                                    <p class="text-white small mb-1">@equipmentItem.EquipmentName</p>
+                                    @if (equipmentItem.RequiresSize)
+                                    {
+                                        var sizes = equipmentItem.AvailableSizes.Split(',').Select(s => s.Trim()).Where(s => s.Length > 0).ToList();
+                                        <div class="btn-group" role="group">
+                                            @for (int i = 0; i < sizes.Count; i++)
+                                            {
+                                                string s = sizes[i];
+                                                string id = $"size_{package.PackageId}_{equipmentItem.EquipmentName.Replace(" ", "_")}_{s}";
+                                                string checkedAttr = i == 0 ? "checked" : "";
+                                                string fieldName = $"equipmentSizes[{equipmentItem.EquipmentName}]";
+                                                <input type="radio" class="btn-check" name="@fieldName" id="@id" value="@s" @checkedAttr />
+                                                <label class="btn btn-sm btn-outline-light me-1" for="@id">@s</label>
+                                            }
+                                        </div>
+                                    }
+                             
+                                 
+                                </div>
+                            }
+                        </div>
+                    <div class="package-footer mt-auto border-top border-dark">
+                        <div class="align-items-center">
+                            <div class="col-12">
+                                <label class="form-label text-white small mb-1">Lejeperiode</label>
+                                <div class="input-daterange input-group">
+                                    <input type="text" class="input-sm form-control" name="start" />
+                                    <span class="input-group-addon custom-text">to</span>
+                                    <input type="text" class="input-sm form-control" name="end" />
+
+        
+                                </div>
+                                    @{
+                                        int? key = package.PackageId;
+                                        var dateErrors = ViewData.ModelState[key.ToString()]?.Errors;
+                                        if (dateErrors != null && dateErrors.Count > 0)
+                                        {
+                                            <div class="text-danger small mt-1">@dateErrors[0].ErrorMessage</div>
+                                        }
+                                    }
+
+                            </div>
+                        </div>
 

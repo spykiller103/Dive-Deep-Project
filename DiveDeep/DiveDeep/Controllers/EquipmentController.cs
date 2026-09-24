@@ -4,6 +4,7 @@ using DiveDeep.Models;
 using System;
 using System.Globalization;
 using DiveDeep.Service;
+using Microsoft.AspNetCore.Http;
 
 namespace DiveDeep.Controllers
 {
@@ -11,11 +12,13 @@ namespace DiveDeep.Controllers
     {
         private readonly CartService _cartService;
         private readonly IEquipmentRepository _equipmentRepository;
+        private readonly PackageService _packageService;
 
-        public EquipmentController(IEquipmentRepository equipmentRepository, CartService cartService)
+        public EquipmentController(IEquipmentRepository equipmentRepository, CartService cartService, PackageService packageService)
         {
             _equipmentRepository = equipmentRepository;
             _cartService = cartService;
+            _packageService = packageService;
         }
         public IActionResult Index(string? category)
         {
@@ -48,7 +51,7 @@ namespace DiveDeep.Controllers
 
 
         [HttpPost]
-        public IActionResult Rent(int id, string start, string end, string? size)
+        public IActionResult Rent(int id, string start, string end, string? size, IFormCollection form)
         {
 
             Equipment equipmentToBeAdded = _equipmentRepository.GetById(id);

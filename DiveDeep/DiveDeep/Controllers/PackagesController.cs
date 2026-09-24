@@ -3,6 +3,7 @@ using DiveDeep.Persistence;
 using DiveDeep.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
+using Microsoft.AspNetCore.Http;
 
 namespace DiveDeep.Controllers
 {
@@ -10,11 +11,13 @@ namespace DiveDeep.Controllers
     {
         private readonly IPackageRepository _packageRepository;
         private readonly CartService _cartService;
+        private readonly PackageService _packageService;
 
-        public PackagesController(IPackageRepository packageRepository, CartService cartService)
+        public PackagesController(IPackageRepository packageRepository, CartService cartService, PackageService packageService)
         {
             _packageRepository = packageRepository;
             _cartService = cartService;
+            _packageService = packageService;
         }
 
         public IActionResult Index()
@@ -32,7 +35,7 @@ namespace DiveDeep.Controllers
 
 
         [HttpPost]
-        public IActionResult Rent(int id, string start, string end, string? size)
+        public IActionResult Rent(int id, string start, string end, string? size, IFormCollection form)
         {
             Package packagesToBeAdded = _packageRepository.GetById(id);
 
@@ -74,8 +77,34 @@ namespace DiveDeep.Controllers
                 TotalDays = days
             };
 
-            if (!string.IsNullOrWhiteSpace(size))
+            // Handle individual equipment sizes from the form
+            List<CartItemEquipmentSize> equipmentSizes = new List<CartItemEquipmentSize>();
+            foreach (string key in form.Keys)
             {
+                if (key.StartsWith("equipmentSizes["))
+                {
+                    int startIndex = "equipmentSizes[".Length;
+                    int endIndex = key.IndexOf("]");
+                    string equipmentName = key.Substring(startIndex, endIndex - startIndex);
+                    string selectedSize = form[key];
+                    if (!string.IsNullOrWhiteSpace(selectedSize))
+                    {
+                        equipmentSizes.Add(new CartItemEquipmentSize
+                        {
+                            EquipmentName = equipmentName,
+                            SelectedSize = selectedSize
+                        });
+                    }
+                }
+            }
+
+            if (equipmentSizes.Count > 0)
+            {
+                cartItem.EquipmentSizes = equipmentSizes;
+            }
+            else if (!string.IsNullOrWhiteSpace(size))
+            {
+                // Fallback for backward compatibility
                 cartItem.SelectedSize = size;
             }
 

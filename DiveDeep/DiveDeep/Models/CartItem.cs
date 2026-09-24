@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DiveDeep.Models
 {
@@ -20,5 +21,6 @@ namespace DiveDeep.Models
         public int? BookingId { get; set; }
         public Booking? Booking { get; set; } = null!;
 
+        public List<CartItemEquipmentSize> EquipmentSizes { get; set; } = new List<CartItemEquipmentSize>();
     }
 }
