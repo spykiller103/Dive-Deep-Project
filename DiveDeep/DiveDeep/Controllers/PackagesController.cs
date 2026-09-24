@@ -9,7 +9,6 @@ using System.Globalization;
 
 namespace DiveDeep.Controllers
 {
-    [Authorize]
     public class PackagesController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -29,6 +28,7 @@ namespace DiveDeep.Controllers
             return View(packages);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Rent(int id, string start, string end, string? size)
         {

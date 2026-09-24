@@ -10,7 +10,6 @@ using System.Globalization;
 
 namespace DiveDeep.Controllers
 {
-    [Authorize]
     public class EquipmentController : Controller
     {
 
@@ -54,7 +53,7 @@ namespace DiveDeep.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
+        [Authorize]
         [HttpPost]
         public IActionResult Rent(int id, string start, string end, string? size)
         {
