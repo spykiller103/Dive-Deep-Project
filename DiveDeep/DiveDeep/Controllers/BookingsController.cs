@@ -29,8 +29,7 @@ namespace DiveDeep.Controllers
         {
             string userId = _userManager.GetUserId(User);
             
-           // ApplicationUser appUser = await _userManager.GetUserAsync(User);
-           // bool doesRoleExist = await _roleManager.RoleExistsAsync(roleUser);
+          
 
             BookingApplicationUserViewData vm = new BookingApplicationUserViewData
             {
@@ -42,14 +41,7 @@ namespace DiveDeep.Controllers
             
             };
 
-            //var bookingIds = vm.Bookings
-            //    .Select(b => (int?)b.BookingId)
-            //    .ToList(); //It is possible to use ToHashSet because its like a box that fast can check if the asked id is in there
-            //vm.CartItems = _cartItemRepository.GetAll()
-            //    .Where(ci => bookingIds
-            //    .Contains(ci.BookingId))
-            //    .ToList();
-
+           
             return View(vm);
         }
     }
