@@ -46,7 +46,7 @@ namespace DiveDeep.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
+        [Authorize(Roles ="Admin")]
         [HttpPost]
         public IActionResult Rent(int id, string start, string end, string? size)
         {
