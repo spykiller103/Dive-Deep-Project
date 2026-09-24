@@ -36,6 +36,7 @@ namespace DiveDeep.Persistence
             return _context.CartItems
              .Include(c => c.Equipment)
              .Include(c => c.Package)
+             .Include(c => c.EquipmentSizes)
              .ToList();
         }
 
@@ -44,6 +45,7 @@ namespace DiveDeep.Persistence
             return _context.CartItems
               .Include(c => c.Equipment)
               .Include(c => c.Package)
+              .Include(c => c.EquipmentSizes)
               .FirstOrDefault(c => c.CartItemId == id);
         }
 

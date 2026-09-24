@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
+using Microsoft.AspNetCore.Http;
 
 namespace DiveDeep.Controllers
 {
@@ -14,12 +15,13 @@ namespace DiveDeep.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IPackageRepository _packageRepository;
         private readonly CartService _cartService;
+        private readonly PackageService _packageService;
 
-        public PackagesController(IPackageRepository packageRepository, CartService cartService, UserManager<ApplicationUser> userManager)
+        public PackagesController(IPackageRepository packageRepository, CartService cartService, PackageService packageService)
         {
             _packageRepository = packageRepository;
             _cartService = cartService;
-            _userManager = userManager;
+            _packageService = packageService;
         }
 
         public IActionResult Index()
@@ -28,9 +30,16 @@ namespace DiveDeep.Controllers
             return View(packages);
         }
 
-        [Authorize]
+        public IActionResult Details(int id)
+        {
+            Package package = _packageRepository.GetById(id);
+
+            return View(package);
+        }
+
+
         [HttpPost]
-        public IActionResult Rent(int id, string start, string end, string? size)
+        public IActionResult Rent(int id, string start, string end, string? size, IFormCollection form)
         {
             string userId = _userManager.GetUserId(User);
             Package packagesToBeAdded = _packageRepository.GetById(id);
@@ -47,11 +56,15 @@ namespace DiveDeep.Controllers
             if (!_start || !_end)
             {
                 int key = id;
-                ModelState.AddModelError(key.ToString(), "Vælg venligst både start- og slutdato.");
 
-                List<Package> packages = _packageRepository.GetAll();
+                ModelState.AddModelError(
+                    key.ToString(),
+                    "Vælg venligst både start- og slutdato."
+                );
 
-                return View("Index", packages);
+                Package package = _packageRepository.GetById(id);
+
+                return View("Details", package);
             }
 
             int days = (endDate - startDate).Days + 1;
@@ -70,8 +83,34 @@ namespace DiveDeep.Controllers
                 ApplicationUserId = userId
             };
 
-            if (!string.IsNullOrWhiteSpace(size))
+            // Handle individual equipment sizes from the form
+            List<CartItemEquipmentSize> equipmentSizes = new List<CartItemEquipmentSize>();
+            foreach (string key in form.Keys)
             {
+                if (key.StartsWith("equipmentSizes["))
+                {
+                    int startIndex = "equipmentSizes[".Length;
+                    int endIndex = key.IndexOf("]");
+                    string equipmentName = key.Substring(startIndex, endIndex - startIndex);
+                    string selectedSize = form[key];
+                    if (!string.IsNullOrWhiteSpace(selectedSize))
+                    {
+                        equipmentSizes.Add(new CartItemEquipmentSize
+                        {
+                            EquipmentName = equipmentName,
+                            SelectedSize = selectedSize
+                        });
+                    }
+                }
+            }
+
+            if (equipmentSizes.Count > 0)
+            {
+                cartItem.EquipmentSizes = equipmentSizes;
+            }
+            else if (!string.IsNullOrWhiteSpace(size))
+            {
+                // Fallback for backward compatibility
                 cartItem.SelectedSize = size;
             }
 

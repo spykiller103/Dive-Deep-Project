@@ -23,35 +23,39 @@
     <div class="mb-4 mt-4">
         <div class="package-box position-relative">
 
-            <button type="button"
-                    class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
-                    data-bs-toggle="modal"
-                    data-bs-target="#removeModal">
-            </button>
+            <form asp-controller="Carts" asp-action="RemoveItem" method="post">
+                <input type="hidden" name="cartItemIds" value="@item.CartItemId" />
+
+                <button type="submit"
+                        class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+                        data-bs-toggle="modal"
+                        data-bs-target="#removeModal">
+                </button>
+            </form>
 
             @if (item.Equipment != null)
             {
-                <span class="badge rounded-pill px-3 py-2 equipment-label">
-                    Udstyr
-                </span>
+                <span class="badge rounded-pill px-3 py-2 equipment-label">Udstyr</span>
 
-                <h2 class="package-title">
-                    @item.Equipment.Title
-                </h2>
+                <h2 class="package-title">@item.Equipment.Title</h2>
 
                 <div class="mb-3">
-                    <span class="package-details">
-                        @item.Equipment.Category
-                    </span>
+                    <span class="package-details">@item.Equipment.Category</span>
                 </div>
+
+                @if (!string.IsNullOrWhiteSpace(item.SelectedSize))
+                {
+                    <div class="mb-2">
+                        <span class="text-white small">Størrelse: </span>
+                        <span class="text-info small">@item.SelectedSize</span>
+                    </div>
+                }
 
                 <div class="border-top border-dark pt-3">
                     <div class="d-flex align-items-end">
 
                         <div class="col-md-2">
-                            <label class="col-form-label custom-footer-text2">
-                                Antal
-                            </label>
+                            <label class="col-form-label custom-footer-text2">Antal</label>
 
                             <div class="input-group">
                                 <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
@@ -97,6 +101,27 @@
                         <span class="package-details">@equipment,</span>
                     }
                 </div>
+
+                @if (item.EquipmentSizes != null && item.EquipmentSizes.Count > 0)
+                {
+                    <div class="mb-3">
+                        <p class="text-white small mb-2">Valgte størrelser:</p>
+                        @foreach (var sizeEntry in item.EquipmentSizes)
+                        {
+                            <div class="mb-1">
+                                <span class="text-secondary small">@sizeEntry.EquipmentName: </span>
+                                <span class="text-info small">@sizeEntry.SelectedSize</span>
+                            </div>
+                        }
+                    </div>
+                }
+                else if (!string.IsNullOrWhiteSpace(item.SelectedSize))
+                {
+                    <div class="mb-2">
+                        <span class="text-white small">Størrelse: </span>
+                        <span class="text-info small">@item.SelectedSize</span>
+                    </div>
+                }
 
                 <div class="border-top border-dark pt-3">
                     <div class="d-flex align-items-end">
