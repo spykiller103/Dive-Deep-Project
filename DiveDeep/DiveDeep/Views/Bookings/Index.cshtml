@@ -40,30 +40,29 @@
 
             @if (booking.CartItems.Any())
             {
-                var firstItem = booking.CartItems
+                CartItem? firstItem = booking.CartItems
                     .FirstOrDefault(c => c.Package != null || c.Equipment != null);
 
-                var totalPrice = booking.CartItems
+                int totalPrice = booking.CartItems
                     .Sum(c => c.Package != null ? c.Package.Price * c.TotalDays : c.Equipment != null ? c.Equipment.Price * c.TotalDays : 0);
 
                 @if (firstItem?.BookingId != null)
                 {
-                    CartItem lastItem = booking.CartItems
+                    CartItem leastDayItem = booking.CartItems
                         .OrderBy(c => c.EndDate)
                         .First();
 
-                    int daysLeft = (lastItem.EndDate.Date - DateTime.Today).Days + 1;
-                    
+                    int daysLeft = (leastDayItem.EndDate.Date - DateTime.Today).Days + 1;
+
                     <h3>DYK-@firstItem.BookingId</h3>
 
                     <div class="booking-info">
                         <h3>@totalPrice kr.</h3>
-                        <h3>@daysLeft dag(e) tilbage</h3>
+                        <h3 class="badge rounded-pill px-3 py-2 package-label">@daysLeft dag(e) tilbage</h3>
                     </div>
                 }
             }
         </div>
-
         <p>
             @booking.CartItems.Min(c => c.StartDate).ToString("d. MMMM yyyy")
             →
@@ -73,24 +72,59 @@
         <hr />
 
 
+
         <div class="booking-items">
 
-            @foreach (var item in booking.CartItems)
+            @foreach (CartItem cartItem in booking.CartItems)
             {
-                <div class="booking-item">
-
-                    @if (!string.IsNullOrEmpty(item.SelectedSize))
+                <div>
+                    @if (cartItem.Package != null)
                     {
-                        <div>
-                            Størrelse: @item.SelectedSize
-                        </div>
+                        <p>
+                            <span class="badge rounded-pill px-3 py-2 package-label">@cartItem.Package.Category </span>
+                            @cartItem.Package.Title
+                            <br />
+
+                            @foreach (string equipment in cartItem.Package.Equipment)
+                            {
+                                <span class="package-details">@equipment</span>
+                            }
+
+                            @if (cartItem.EquipmentSizes != null && cartItem.EquipmentSizes.Count > 0)
+                            {
+                                <div class="mb-3">
+                                    <p class="text-white small mb-2">Valgte størrelser:</p>
+
+                                    @foreach (var sizeEntry in cartItem.EquipmentSizes)
+                                    {
+                                        <div class="mb-1">
+                                            <span class="text-secondary small">@sizeEntry.EquipmentName: </span>
+                                            <span class="text-info small">@sizeEntry.SelectedSize</span>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                            else if (!string.IsNullOrWhiteSpace(cartItem.SelectedSize))
+                            {
+                                <div class="mb-2">
+                                    <span class="text-white small">Størrelse: </span>
+                                    <span class="text-info small">@cartItem.SelectedSize</span>
+                                </div>
+                            }
+                        </p>
                     }
+                </div>
 
+                @if (!string.IsNullOrEmpty(cartItem.SelectedSize))
+                {
                     <div>
-                        @item.TotalDays dage · afleveres
-                        @item.EndDate.ToString("d. MMMM yyyy")
+                        Størrelse: @cartItem.SelectedSize
                     </div>
+                }
 
+                <div>
+                    @cartItem.TotalDays dage · afleveres
+                    @cartItem.EndDate.ToString("d. MMMM yyyy")
                 </div>
             }
 

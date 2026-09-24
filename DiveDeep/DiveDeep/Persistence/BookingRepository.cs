@@ -29,9 +29,11 @@ namespace DiveDeep.Persistence
         {
             return _context.Bookings
                 .Include(b => b.CartItems)
-                    .ThenInclude(ci => ci.Package)
+                    .ThenInclude(c => c.Package)
                 .Include(b => b.CartItems)
-                    .ThenInclude(ci => ci.Equipment)
+                    .ThenInclude(c => c.Equipment)
+                .Include(b => b.CartItems)
+                    .ThenInclude(c => c.EquipmentSizes)
                 .ToList();
         }
 

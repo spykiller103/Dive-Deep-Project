@@ -23,7 +23,7 @@ namespace DiveDeep.Controllers
         {
             string userId = _userManager.GetUserId(User);
 
-            var bookings = _bookingRepository.GetAll()
+            List<Booking> bookings = _bookingRepository.GetAll()
                 .Where(b => b.ApplicationUserId == userId)
                 .ToList();
 
@@ -48,8 +48,7 @@ namespace DiveDeep.Controllers
 
             BookingApplicationUserViewData vm = new BookingApplicationUserViewData
             {
-                ApplicationUser = _userManager.Users
-                    .FirstOrDefault(u => u.Id == userId),
+                ApplicationUser = _userManager.Users.FirstOrDefault(u => u.Id == userId),
 
                 Bookings = bookings,
 
