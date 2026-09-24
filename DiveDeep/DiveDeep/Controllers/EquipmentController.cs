@@ -1,21 +1,32 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using DiveDeep.Persistence;
+﻿using DiveDeep.Data;
 using DiveDeep.Models;
+using DiveDeep.Persistence;
+using DiveDeep.Service;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Globalization;
 using DiveDeep.Service;
+using Microsoft.AspNetCore.Http;
 
 namespace DiveDeep.Controllers
 {
     public class EquipmentController : Controller
     {
+
+        private readonly UserManager<ApplicationUser> _userManager;
+
         private readonly CartService _cartService;
         private readonly IEquipmentRepository _equipmentRepository;
+        private readonly PackageService _packageService;
 
-        public EquipmentController(IEquipmentRepository equipmentRepository, CartService cartService)
+        public EquipmentController(IEquipmentRepository equipmentRepository, CartService cartService, PackageService packageService, UserManager<ApplicationUser> userManager)
         {
             _equipmentRepository = equipmentRepository;
             _cartService = cartService;
+            _packageService = packageService;
+            _userManager = userManager;
         }
         public IActionResult Index(string? category)
         {
@@ -46,11 +57,11 @@ namespace DiveDeep.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
+        [Authorize]
         [HttpPost]
-        public IActionResult Rent(int id, string start, string end, string? size)
+        public IActionResult Rent(int id, string start, string end, string? size, IFormCollection form)
         {
-
+            string userId = _userManager.GetUserId(User);
             Equipment equipmentToBeAdded = _equipmentRepository.GetById(id);
 
             DateTime startDate, endDate;
@@ -65,10 +76,15 @@ namespace DiveDeep.Controllers
             if (!_start || !_end)
             {
                 int key = id;
-                ModelState.AddModelError(key.ToString(), "Vælg venligst både start- og slutdato.");
 
-                List<Equipment> equipments = _equipmentRepository.GetAll();
-                return View("Index", equipments);
+                ModelState.AddModelError(
+                    key.ToString(),
+                    "Vælg venligst både start- og slutdato."
+                );
+
+                Equipment equipment = _equipmentRepository.GetById(id);
+
+                return View("Details", equipment);
             }
 
             int days = (endDate - startDate).Days + 1;
@@ -80,7 +96,7 @@ namespace DiveDeep.Controllers
 
             CartItem cartItem = new CartItem
             {
-                
+                ApplicationUserId = userId,
                 Equipment = equipmentToBeAdded,
                 StartDate = startDate,
                 EndDate = endDate,

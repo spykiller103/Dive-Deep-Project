@@ -1,20 +1,28 @@
-﻿using DiveDeep.Models;
+﻿using DiveDeep.Data;
+using DiveDeep.Models;
 using DiveDeep.Persistence;
 using DiveDeep.Service;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
+using Microsoft.AspNetCore.Http;
 
 namespace DiveDeep.Controllers
 {
     public class PackagesController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IPackageRepository _packageRepository;
         private readonly CartService _cartService;
+        private readonly PackageService _packageService;
 
-        public PackagesController(IPackageRepository packageRepository, CartService cartService)
+        public PackagesController(IPackageRepository packageRepository, CartService cartService, PackageService packageService, UserManager<ApplicationUser> userManager)
         {
             _packageRepository = packageRepository;
             _cartService = cartService;
+            _packageService = packageService;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -23,9 +31,18 @@ namespace DiveDeep.Controllers
             return View(packages);
         }
 
-        [HttpPost]
-        public IActionResult Rent(int id, string start, string end, string? size)
+        public IActionResult Details(int id)
         {
+            Package package = _packageRepository.GetById(id);
+
+            return View(package);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult Rent(int id, string start, string end, string? size, IFormCollection form)
+        {
+            string userId = _userManager.GetUserId(User);
             Package packagesToBeAdded = _packageRepository.GetById(id);
 
             DateTime startDate, endDate;
@@ -40,11 +57,15 @@ namespace DiveDeep.Controllers
             if (!_start || !_end)
             {
                 int key = id;
-                ModelState.AddModelError(key.ToString(), "Vælg venligst både start- og slutdato.");
 
-                List<Package> packages = _packageRepository.GetAll();
+                ModelState.AddModelError(
+                    key.ToString(),
+                    "Vælg venligst både start- og slutdato."
+                );
 
-                return View("Index", packages);
+                Package package = _packageRepository.GetById(id);
+
+                return View("Details", package);
             }
 
             int days = (endDate - startDate).Days + 1;
@@ -59,11 +80,38 @@ namespace DiveDeep.Controllers
                 Package = packagesToBeAdded,
                 StartDate = startDate,
                 EndDate = endDate,
-                TotalDays = days
+                TotalDays = days,
+                ApplicationUserId = userId
             };
 
-            if (!string.IsNullOrWhiteSpace(size))
+            // Handle individual equipment sizes from the form
+            List<CartItemEquipmentSize> equipmentSizes = new List<CartItemEquipmentSize>();
+            foreach (string key in form.Keys)
             {
+                if (key.StartsWith("equipmentSizes["))
+                {
+                    int startIndex = "equipmentSizes[".Length;
+                    int endIndex = key.IndexOf("]");
+                    string equipmentName = key.Substring(startIndex, endIndex - startIndex);
+                    string selectedSize = form[key];
+                    if (!string.IsNullOrWhiteSpace(selectedSize))
+                    {
+                        equipmentSizes.Add(new CartItemEquipmentSize
+                        {
+                            EquipmentName = equipmentName,
+                            SelectedSize = selectedSize
+                        });
+                    }
+                }
+            }
+
+            if (equipmentSizes.Count > 0)
+            {
+                cartItem.EquipmentSizes = equipmentSizes;
+            }
+            else if (!string.IsNullOrWhiteSpace(size))
+            {
+                // Fallback for backward compatibility
                 cartItem.SelectedSize = size;
             }
 
