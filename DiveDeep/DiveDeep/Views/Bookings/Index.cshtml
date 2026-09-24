@@ -90,12 +90,12 @@
                                 <span class="package-details">@equipment</span>
                             }
 
-                            @if (cartItem.EquipmentSizes != null && cartItem.EquipmentSizes.Count > 0)
+                            @if (booking.EquipmentSizes != null && booking.EquipmentSizes.Count > 0)
                             {
                                 <div class="mb-3">
                                     <p class="text-white small mb-2">Valgte størrelser:</p>
 
-                                    @foreach (var sizeEntry in cartItem.EquipmentSizes)
+                                    @foreach (var sizeEntry in booking.EquipmentSizes)
                                     {
                                         <div class="mb-1">
                                             <span class="text-secondary small">@sizeEntry.EquipmentName: </span>
@@ -182,12 +182,12 @@
                                 <span class="package-details">@equipment</span>
                             }
 
-                            @if (item.EquipmentSizes != null && item.EquipmentSizes.Count > 0)
+                            @if (booking.EquipmentSizes != null && booking.EquipmentSizes.Count > 0)
                             {
                                 <div class="mb-3">
                                     <p class="text-white small mb-2">Valgte størrelser:</p>
 
-                                    @foreach (var sizeEntry in item.EquipmentSizes)
+                                    @foreach (var sizeEntry in booking.EquipmentSizes)
                                     {
                                         <div class="mb-1">
                                             <span class="text-secondary small">@sizeEntry.EquipmentName: </span>
@@ -205,22 +205,7 @@
                             }
                         </p>
                     }
-                    else if (item.Equipment != null)
-                    {
-                        <p>
-                            <span class="badge rounded-pill px-3 py-2 equipment-label">Udstyr</span>
-                            @item.Equipment.Title
-                            <br />
-
-                            @if (!string.IsNullOrWhiteSpace(item.SelectedSize))
-                            {
-                                <div class="mb-2">
-                                    <span class="text-white small">Størrelse: </span>
-                                    <span class="text-info small">@item.SelectedSize</span>
-                                </div>
-                            }
-                        </p>
-                    }
+                 
 
                     <div>
                         @item.TotalDays dage · afleveres
@@ -284,12 +269,12 @@
                                 <span class="package-details">@equipment</span>
                             }
 
-                            @if (item.EquipmentSizes != null && item.EquipmentSizes.Count > 0)
+                            @if (booking.EquipmentSizes != null && booking.EquipmentSizes.Count > 0)
                             {
                                 <div class="mb-3">
                                     <p class="text-white small mb-2">Valgte størrelser:</p>
 
-                                    @foreach (var sizeEntry in item.EquipmentSizes)
+                                    @foreach (var sizeEntry in booking.EquipmentSizes)
                                     {
                                         <div class="mb-1">
                                             <span class="text-secondary small">@sizeEntry.EquipmentName: </span>
@@ -298,13 +283,7 @@
                                     }
                                 </div>
                             }
-                            else if (!string.IsNullOrWhiteSpace(item.SelectedSize))
-                            {
-                                <div class="mb-2">
-                                    <span class="text-white small">Størrelse: </span>
-                                    <span class="text-info small">@item.SelectedSize</span>
-                                </div>
-                            }
+                         
                         </p>
                     }
                     else if (item.Equipment != null)

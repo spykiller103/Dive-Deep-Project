@@ -8,6 +8,7 @@ namespace DiveDeep.Models
     {
         public int BookingId { get; set; }
         public List<CartItem> CartItems { get; set; } = new();
+        public List<BookingEquipmentSize> EquipmentSizes { get; set; } = new List<BookingEquipmentSize>();
 
 
         [Required]
