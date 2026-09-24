@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Globalization;
+using DiveDeep.Service;
+using Microsoft.AspNetCore.Http;
 
 namespace DiveDeep.Controllers
 {
@@ -17,11 +19,13 @@ namespace DiveDeep.Controllers
 
         private readonly CartService _cartService;
         private readonly IEquipmentRepository _equipmentRepository;
+        private readonly PackageService _packageService;
 
-        public EquipmentController(IEquipmentRepository equipmentRepository, CartService cartService, UserManager<ApplicationUser> userManager)
+        public EquipmentController(IEquipmentRepository equipmentRepository, CartService cartService, PackageService packageService, UserManager<ApplicationUser> userManager)
         {
             _equipmentRepository = equipmentRepository;
             _cartService = cartService;
+            _packageService = packageService;
             _userManager = userManager;
         }
         public IActionResult Index(string? category)
@@ -55,7 +59,7 @@ namespace DiveDeep.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult Rent(int id, string start, string end, string? size)
+        public IActionResult Rent(int id, string start, string end, string? size, IFormCollection form)
         {
             string userId = _userManager.GetUserId(User);
             Equipment equipmentToBeAdded = _equipmentRepository.GetById(id);

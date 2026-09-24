@@ -7,7 +7,5 @@ namespace DiveDeep.ViewModels
     {
         public List<Booking> Bookings { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
-
-        public List<CartItem> CartItems { get; set; }
     }
 }

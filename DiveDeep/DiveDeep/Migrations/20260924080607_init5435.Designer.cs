@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiveDeep.Migrations
 {
     [DbContext(typeof(DiveDeepContext))]
-    [Migration("20260924065702_init")]
-    partial class init
+    [Migration("20260924080607_init5435")]
+    partial class init5435
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -169,6 +169,32 @@ namespace DiveDeep.Migrations
                     b.ToTable("CartItems");
                 });
 
+            modelBuilder.Entity("DiveDeep.Models.CartItemEquipmentSize", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CartItemId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EquipmentName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SelectedSize")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartItemId");
+
+                    b.ToTable("CartItemEquipmentSizes");
+                });
+
             modelBuilder.Entity("DiveDeep.Models.Equipment", b =>
                 {
                     b.Property<int>("EquipmentId")
@@ -194,6 +220,9 @@ namespace DiveDeep.Migrations
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
+
+                    b.Property<string>("Sizes")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -352,6 +381,7 @@ namespace DiveDeep.Migrations
                             Description = "SCUBAPRO 12 liters dykkertank er en robust flaske med høj luftkapacitet, velegnet til længere rekreative dyk. Den solide konstruktion sikrer pålidelig ydeevne og gør tanken velegnet til forskellige dykkeforhold.",
                             Image = "/Content/Images/Equipment/Tanks/Tank.png",
                             Price = 170,
+                            Sizes = "S,M,L,XL",
                             Title = "Scubapro 12 liter"
                         },
                         new
@@ -362,6 +392,7 @@ namespace DiveDeep.Migrations
                             Description = "SCUBAPRO 15 liters dykkertank er en robust flaske med stor luftkapacitet, ideel til længere dyk og dykkere med et højt luftforbrug. Den solide konstruktion sikrer pålidelighed og stabilitet under dykket.",
                             Image = "/Content/Images/Equipment/Tanks/Tank.png",
                             Price = 180,
+                            Sizes = "S,M,L,XL",
                             Title = "Scubapro 15 liter"
                         },
                         new
@@ -372,6 +403,7 @@ namespace DiveDeep.Migrations
                             Description = "SCUBAPRO Octopus R105/MK25EVO/S600 er et komplet regulatorsæt med høj ydeevne og pålidelig luftlevering. Sættet er designet til komfortabel vejrtrækning og stabil funktion under forskellige dykkeforhold.",
                             Image = "/Content/Images/Equipment/Regulator/MK25EVO.png",
                             Price = 125,
+                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Octopus R105/MK25EVO/S600"
                         },
                         new
@@ -382,6 +414,7 @@ namespace DiveDeep.Migrations
                             Description = "SCUBAPRO Octopus R095/MK17EVO/C370 er et pålideligt regulatorsæt, der giver en jævn og komfortabel luftlevering under dykket. Det robuste design sikrer stabil ydeevne og gør sættet velegnet til rekreativ dykning.",
                             Image = "/Content/Images/Equipment/Regulator/MK17.png",
                             Price = 100,
+                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Octopus R095/MK17EVO/C370"
                         },
                         new
@@ -392,6 +425,7 @@ namespace DiveDeep.Migrations
                             Description = "SCUBAPRO Octopus S270/MK25EVO BT/A700 Carbon BT er et avanceret regulatorsæt med høj ydeevne og jævn luftlevering. Det robuste design og materialer i høj kvalitet sikrer komfortabel vejrtrækning og pålidelig funktion under dykket.",
                             Image = "/Content/Images/Equipment/Regulator/MK25EVObt.png",
                             Price = 150,
+                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Octopus S270/MK25EVO BT/A700 Carbon BT"
                         },
                         new
@@ -402,6 +436,7 @@ namespace DiveDeep.Migrations
                             Description = "SCUBAPRO Ghost er en komfortabel dykkermaske med lav volumen og et bredt synsfelt. Den tætsluttende silikonefacial giver en behagelig pasform og sikrer klart udsyn under vandet.",
                             Image = "/Content/Images/Equipment/Masks/Ghost.png",
                             Price = 50,
+                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Ghost"
                         },
                         new
@@ -412,6 +447,7 @@ namespace DiveDeep.Migrations
                             Description = "SCUBAPRO D-Mask er en komfortabel dykkermaske med et moderne design og bredt synsfelt. Den bløde silikonefacial sikrer en tæt og behagelig pasform, mens det hærdede glas giver klart udsyn under vandet.",
                             Image = "/Content/Images/Equipment/Masks/DMask.png",
                             Price = 60,
+                            Sizes = "S,M,L,XL",
                             Title = "Scubapro D-Mask"
                         },
                         new
@@ -422,6 +458,7 @@ namespace DiveDeep.Migrations
                             Description = "SCUBAPRO Spectra Mini er en kompakt og komfortabel dykkermaske designet til mindre ansigter. Det brede synsfelt og den bløde silikonefacial sikrer klart udsyn og en tæt, behagelig pasform under vandet.",
                             Image = "/Content/Images/Equipment/Masks/SpectraMini.png",
                             Price = 50,
+                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Spectra Mini"
                         },
                         new
@@ -432,6 +469,7 @@ namespace DiveDeep.Migrations
                             Description = "SCUBAPRO Crystal VU er en komfortabel dykkermaske med stort synsfelt og fremragende udsyn under vandet. Den bløde silikonefacial sikrer en tæt og behagelig pasform, mens det robuste glas giver et klart og naturligt udsyn.",
                             Image = "/Content/Images/Equipment/Masks/CrystalVu.png",
                             Price = 75,
+                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Crystal VU"
                         },
                         new
@@ -442,6 +480,7 @@ namespace DiveDeep.Migrations
                             Description = "Fourth Element Scout Kontrast er en komfortabel dykkermaske designet til klart og præcist udsyn under vandet. Det kontrastfremhævende design og den tætsluttende silikonefacial giver god pasform og komfort under dykket.",
                             Image = "/Content/Images/Equipment/Masks/Scout.png",
                             Price = 75,
+                            Sizes = "S,M,L,XL",
                             Title = "Fourth Element Scout Kontrast"
                         },
                         new
@@ -452,6 +491,7 @@ namespace DiveDeep.Migrations
                             Description = "N/A",
                             Image = "/Content/Images/Equipment/Masks/ScoutEnchance.png",
                             Price = 75,
+                            Sizes = "S,M,L,XL",
                             Title = "Fourth Element Scout Enchance"
                         },
                         new
@@ -462,6 +502,7 @@ namespace DiveDeep.Migrations
                             Description = "TUSA Element er en komfortabel dykkermaske med et enkelt og funktionelt design. Den bløde silikonefacial sikrer en tæt pasform, mens det klare glas giver et godt og naturligt udsyn under vandet.",
                             Image = "/Content/Images/Equipment/Masks/Element.png",
                             Price = 75,
+                            Sizes = "S,M,L,XL",
                             Title = "Tusa Element"
                         },
                         new
@@ -472,6 +513,7 @@ namespace DiveDeep.Migrations
                             Description = "SCUBAPRO Jet Fin er en robust og klassisk dykkerfinne med et kraftfuldt design, der giver effektiv fremdrift og god kontrol i vandet. Den solide konstruktion gør den velegnet til både rekreativ og krævende dykning.",
                             Image = "/Content/Images/Equipment/Fins/JetFin.png",
                             Price = 50,
+                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Jet Fin"
                         },
                         new
@@ -492,6 +534,7 @@ namespace DiveDeep.Migrations
                             Description = "SCUBAPRO Seawing Supernova er en kraftfuld dykkerfinne med innovativt design, der giver effektiv fremdrift og god kontrol i vandet. Den fleksible konstruktion sikrer en behagelig og energieffektiv svømning under dykket.",
                             Image = "/Content/Images/Equipment/Fins/SeawingSupernova.png",
                             Price = 60,
+                            Sizes = "S,M,L,XL",
                             Title = "Scubapro Seawing Supernova"
                         },
                         new
@@ -502,6 +545,7 @@ namespace DiveDeep.Migrations
                             Description = "SEAC Propulsion er en kraftfuld dykkerfinne designet til effektiv fremdrift og god kontrol i vandet. Den robuste og fleksible konstruktion giver komfortabel svømning og stabil ydeevne under dykket.",
                             Image = "/Content/Images/Equipment/Fins/Propulsion.png",
                             Price = 50,
+                            Sizes = "S,M,L,XL",
                             Title = "Seac Propulsion"
                         },
                         new
@@ -582,6 +626,7 @@ namespace DiveDeep.Migrations
                             Equipment = "[\"BCD\",\"Dykkerdragt\",\"Regulators\\u00E6t\",\"Tank\",\"Finner\",\"Maske\",\"Snorkel\"]",
                             Image = "/Content/Images/Packages/Package1.png",
                             Price = 750,
+                            Sizes = "S,M,L,XL",
                             Title = "Komplet dykkersæt"
                         },
                         new
@@ -592,7 +637,119 @@ namespace DiveDeep.Migrations
                             Equipment = "[\"Finner\",\"Maske\",\"Snorkel\"]",
                             Image = "/Content/Images/Packages/Package2.png",
                             Price = 100,
+                            Sizes = "S,M,L,XL",
                             Title = "Komplet snorkelsæt"
+                        });
+                });
+
+            modelBuilder.Entity("DiveDeep.Models.PackageEquipmentSizeRequirement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AvailableSizes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EquipmentName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PackageId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("RequiresSize")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PackageId");
+
+                    b.ToTable("PackageEquipmentSizeRequirements");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AvailableSizes = "S,M,L,XL",
+                            EquipmentName = "BCD",
+                            PackageId = 1,
+                            RequiresSize = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AvailableSizes = "S,M,L,XL",
+                            EquipmentName = "Dykkerdragt",
+                            PackageId = 1,
+                            RequiresSize = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AvailableSizes = "",
+                            EquipmentName = "Regulatorsæt",
+                            PackageId = 1,
+                            RequiresSize = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AvailableSizes = "",
+                            EquipmentName = "Tank",
+                            PackageId = 1,
+                            RequiresSize = false
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AvailableSizes = "S,M,L,XL",
+                            EquipmentName = "Finner",
+                            PackageId = 1,
+                            RequiresSize = true
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AvailableSizes = "",
+                            EquipmentName = "Maske",
+                            PackageId = 1,
+                            RequiresSize = false
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AvailableSizes = "",
+                            EquipmentName = "Snorkel",
+                            PackageId = 1,
+                            RequiresSize = false
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AvailableSizes = "S,M,L,XL",
+                            EquipmentName = "Finner",
+                            PackageId = 2,
+                            RequiresSize = true
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AvailableSizes = "",
+                            EquipmentName = "Maske",
+                            PackageId = 2,
+                            RequiresSize = false
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AvailableSizes = "",
+                            EquipmentName = "Snorkel",
+                            PackageId = 2,
+                            RequiresSize = false
                         });
                 });
 
@@ -773,6 +930,28 @@ namespace DiveDeep.Migrations
                     b.Navigation("Package");
                 });
 
+            modelBuilder.Entity("DiveDeep.Models.CartItemEquipmentSize", b =>
+                {
+                    b.HasOne("DiveDeep.Models.CartItem", "CartItem")
+                        .WithMany("EquipmentSizes")
+                        .HasForeignKey("CartItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CartItem");
+                });
+
+            modelBuilder.Entity("DiveDeep.Models.PackageEquipmentSizeRequirement", b =>
+                {
+                    b.HasOne("DiveDeep.Models.Package", "Package")
+                        .WithMany("EquipmentSizeRequirements")
+                        .HasForeignKey("PackageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Package");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -836,6 +1015,11 @@ namespace DiveDeep.Migrations
                     b.Navigation("CartItems");
                 });
 
+            modelBuilder.Entity("DiveDeep.Models.CartItem", b =>
+                {
+                    b.Navigation("EquipmentSizes");
+                });
+
             modelBuilder.Entity("DiveDeep.Models.Equipment", b =>
                 {
                     b.Navigation("CartItems");
@@ -844,6 +1028,8 @@ namespace DiveDeep.Migrations
             modelBuilder.Entity("DiveDeep.Models.Package", b =>
                 {
                     b.Navigation("CartItems");
+
+                    b.Navigation("EquipmentSizeRequirements");
                 });
 #pragma warning restore 612, 618
         }

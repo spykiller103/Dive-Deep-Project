@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DiveDeep.Models
 {
@@ -15,23 +16,7 @@ namespace DiveDeep.Models
         public string Title { get; set; }
         public List<string> Equipment { get; set; }
         public string? Sizes { get; set; }
-
-
-        public List<string> SizeList
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(Sizes))
-                {
-                    return new List<string> { "S", "M", "L", "XL" };
-                }
-
-                return Sizes.Split(',').Select(s => s.Trim()).Where(s => s.Length > 0).ToList();
-            }
-        }
         public List<CartItem> CartItems { get; set; }
-
-
-       
+        public List<PackageEquipmentSizeRequirement> EquipmentSizeRequirements { get; set; } = new List<PackageEquipmentSizeRequirement>();
     }
 }

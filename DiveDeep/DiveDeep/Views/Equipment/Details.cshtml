@@ -1,4 +1,6 @@
-﻿@using DiveDeep.Models;
+@using DiveDeep.Models
+@using DiveDeep.Service
+@inject PackageService PackageService
 @model Equipment;
 
 @section Title
@@ -20,7 +22,7 @@
                 <div class="package-footer mt-auto border-top border-dark">
                     <div class="mb-2">
                         @{
-                            List<string> sizes = Model.SizeList ?? new List<string> { "S", "M", "L", "XL" };
+                            List<string> sizes = PackageService.GetSizeList(Model.Sizes);
                         }
                         <div class="btn-group" role="group">
                             @for (int i = 0; i < sizes.Count; i++)
@@ -28,7 +30,7 @@
                                 string s = sizes[i];
                                 string id = $"esize_{Model.EquipmentId}_{s}";
                                 string checkedAttr = i == 0 ? "checked" : "";
-                                <input type="radio" class="btn-check" name="size" id="@id" autocomplete="off" value="@s" @checkedAttr />
+                                <input type="radio" class="btn-check" name="size" id="@id" value="@s" @checkedAttr />
                                 <label class="btn btn-sm btn-outline-light me-1" for="@id">@s</label>
                             }
                         </div>
@@ -76,7 +78,6 @@
     </div>
 
 </div>
-
 
 
 

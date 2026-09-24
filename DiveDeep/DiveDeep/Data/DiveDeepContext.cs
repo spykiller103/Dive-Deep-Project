@@ -9,6 +9,8 @@ namespace DiveDeep.Data
         public DbSet<Package> Packages { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Booking> Bookings { get; set; }
+        public DbSet<PackageEquipmentSizeRequirement> PackageEquipmentSizeRequirements { get; set; }
+        public DbSet<CartItemEquipmentSize> CartItemEquipmentSizes { get; set; }
 
         public DiveDeepContext(DbContextOptions contextOptions) : base(contextOptions)
         {
@@ -43,6 +45,18 @@ namespace DiveDeep.Data
                 .HasForeignKey(b => b.ApplicationUserId)
                 .IsRequired();
 
+            modelBuilder.Entity<PackageEquipmentSizeRequirement>()
+                .HasOne(r => r.Package)
+                .WithMany(p => p.EquipmentSizeRequirements)
+                .HasForeignKey(r => r.PackageId)
+                .IsRequired();
+
+            modelBuilder.Entity<CartItemEquipmentSize>()
+                .HasOne(s => s.CartItem)
+                .WithMany(c => c.EquipmentSizes)
+                .HasForeignKey(s => s.CartItemId)
+                .IsRequired();
+
             modelBuilder.Entity<ApplicationUser>()
                 .HasMany(a => a.CartItems)
                 .WithOne(c => c.ApplicationUser)
@@ -59,7 +73,7 @@ namespace DiveDeep.Data
                     Title = "Scubapro Navigator Lite BCD",
                     Description = "Let og komfortabel BCD med god pasform og stabilitet, velegnet til både begyndere og erfarne dykkere.",
                     Price = 125,
-                    Sizes = "S,M,L,XL"
+
                 },
 
             new Equipment
@@ -70,7 +84,7 @@ namespace DiveDeep.Data
                 Title = "Scubapro BCD Glide",
                 Description = "En SCUBAPRO Glide BCD kombinerer komfort, stabilitet og nem opdriftskontrol. Det frontjusterbare design, Y-Fit-skuldre og integrerede vægtsystem sikrer en stabil og behagelig pasform under hele dykket.",
                 Price = 140,
-                Sizes = "S,M,L,XL"
+
             },
             new Equipment
             {
@@ -80,7 +94,7 @@ namespace DiveDeep.Data
                 Title = "Scubapro BCD Hydros Pro",
                 Description = "SCUBAPRO Hydros Pro er en avanceret BCD med et fleksibelt og modulært design, der giver høj komfort, stabilitet og præcis opdriftskontrol under dykket.",
                 Price = 200,
-                Sizes = "S,M,L,XL"
+
             },
             new Equipment
             {
@@ -90,7 +104,7 @@ namespace DiveDeep.Data
                 Title = "Seac BCD Modular",
                 Description = "SEAC Modular BCD er designet med fokus på fleksibilitet, komfort og stabilitet. Det modulære design giver en god pasform og gør den velegnet til både rekreativ dykning og forskellige dykkersituationer.",
                 Price = 145,
-                Sizes = "S,M,L,XL"
+
             },
 
             new Equipment
@@ -101,7 +115,7 @@ namespace DiveDeep.Data
                 Title = "Scubapro Definition",
                 Description = "SCUBAPRO Definition er en 3 mm våddragt designet til høj komfort og bevægelsesfrihed. Det fleksible neoprenmateriale giver god pasform og hjælper med at holde kroppen varm under dykket.",
                 Price = 100,
-                Sizes = "S,M,L,XL"
+
             },
 
 
@@ -113,7 +127,7 @@ namespace DiveDeep.Data
                 Title = "Scubapro Definition",
                 Description = "SCUBAPRO Definition er en 5 mm våddragt, der kombinerer varmeisolering, komfort og bevægelsesfrihed. Det fleksible neoprenmateriale sikrer en behagelig pasform og god beskyttelse mod koldt vand.",
                 Price = 100,
-                Sizes = "S,M,L,XL"
+
             },
              new Equipment
              {
@@ -123,7 +137,7 @@ namespace DiveDeep.Data
                  Title = "Scubapro Definition",
                  Description = "SCUBAPRO Definition er en 7 mm våddragt designet til dykning i koldere vand. Det tykkere neopren giver effektiv varmeisolering, mens den fleksible konstruktion sikrer god komfort og bevægelsesfrihed under dykket.",
                  Price = 100,
-                 Sizes = "S,M,L,XL"
+
              },
 
               new Equipment
@@ -134,7 +148,7 @@ namespace DiveDeep.Data
                   Title = "Waterproof W5",
                   Description = "Waterproof W5 er en 3,5 mm våddragt, der kombinerer god varmeisolering med fleksibilitet og komfort. Det elastiske neoprenmateriale giver en behagelig pasform og god bevægelsesfrihed under dykket.",
                   Price = 100,
-                  Sizes = "S,M,L,XL"
+
               },
 
                new Equipment
@@ -145,7 +159,7 @@ namespace DiveDeep.Data
                    Title = "Fourth Element Proteus",
                    Description = "Fourth Element Proteus er en 5 mm våddragt designet til effektiv varmeisolering og høj komfort. Det fleksible neoprenmateriale giver god bevægelsesfrihed og en tæt, behagelig pasform under dykket.",
                    Price = 120,
-                   Sizes = "S,M,L,XL"
+
                },
 
             new Equipment
@@ -156,7 +170,7 @@ namespace DiveDeep.Data
                 Title = "Scubapro Exodry 4.0",
                 Description = "SCUBAPRO Exodry 4.0 er en robust tørdragt designet til dykning i koldt vand. Den vandtætte konstruktion hjælper med at holde dig tør og varm, mens den komfortable pasform giver god bevægelsesfrihed under dykket.",
                 Price = 300,
-                Sizes = "S,M,L,XL"
+
             },
             new Equipment
             {
@@ -166,7 +180,7 @@ namespace DiveDeep.Data
                 Title = "Waterproof D7 Evo",
                 Description = "Waterproof D7 Evo er en slidstærk tørdragt designet til krævende dykning i koldt vand. Den vandtætte konstruktion giver effektiv beskyttelse mod vand, mens det fleksible design sikrer god komfort og bevægelsesfrihed under dykket.",
                 Price = 320,
-                Sizes = "S,M,L,XL"
+
             },
 
               new Equipment
@@ -177,7 +191,7 @@ namespace DiveDeep.Data
                   Title = "Santi E.Lite Plus",
                   Description = "SANTI E.Lite Plus er en let og slidstærk tørdragt designet til komfortabel dykning under forskellige forhold. Den robuste konstruktion beskytter mod vand, mens det fleksible materiale giver god bevægelsesfrihed og komfort under dykket.",
                   Price = 350,
-                  Sizes = "S,M,L,XL"
+
               },
 
              new Equipment
@@ -188,7 +202,7 @@ namespace DiveDeep.Data
                  Title = "Scubapro 5 liter",
                  Description = "SCUBAPRO 5 liters dykkertank er en kompakt og robust flaske, der er velegnet til kortere dyk og som ekstra luftforsyning. Den er nem at håndtere og transportere.",
                  Price = 150,
-                 Sizes = "S,M,L,XL"
+
              },
               new Equipment
               {
@@ -198,7 +212,7 @@ namespace DiveDeep.Data
                   Title = "Scubapro 10 liter",
                   Description = "SCUBAPRO 10 liters dykkertank er en robust og alsidig flaske med god luftkapacitet til både rekreative og længere dyk. Det kompakte design gør den nem at håndtere og transportere.",
                   Price = 160,
-                  Sizes = "S,M,L,XL"
+
               },
              new Equipment
              {
@@ -370,7 +384,7 @@ namespace DiveDeep.Data
                    Title = "Seac ALA",
                    Description = "SEAC ALA er en let og komfortabel dykkerfinne designet til effektiv fremdrift og god manøvredygtighed. Den fleksible konstruktion giver en behagelig svømmeoplevelse og stabil kontrol under dykket.",
                    Price = 50,
-                   Sizes = "S,M,L,XL"
+
                },
             new Equipment
             {
@@ -380,7 +394,7 @@ namespace DiveDeep.Data
                 Title = "Fourth Element Tech",
                 Description = "Fourth Element Tech er en robust dykkerfinne designet til teknisk dykning og krævende forhold. Den stive konstruktion giver kraftfuld fremdrift, præcis kontrol og effektiv svømning under vandet.",
                 Price = 75,
-                Sizes = "S,M,L,XL"
+
             },
             new Equipment
             {
@@ -390,7 +404,7 @@ namespace DiveDeep.Data
                 Title = "Fourth Element Rec Fin",
                 Description = "Fourth Element Rec Fin er en alsidig og komfortabel dykkerfinne designet til rekreativ dykning. Den fleksible konstruktion giver effektiv fremdrift, god kontrol og en behagelig svømmeoplevelse under vandet.",
                 Price = 80,
-                Sizes = "S,M,L,XL"
+
             });
 
             modelBuilder.Entity<Package>().HasData
@@ -412,6 +426,8 @@ namespace DiveDeep.Data
                 "Maske",
                 "Snorkel"
                 }
+                    ,
+                    Sizes = "S,M,L,XL"
                 },
 
             new Package
@@ -427,7 +443,92 @@ namespace DiveDeep.Data
                     "Maske",
                     "Snorkel"
                 }
+                ,
+                Sizes = "S,M,L,XL"
             });
+
+            // Seed package equipment size requirements
+            modelBuilder.Entity<PackageEquipmentSizeRequirement>().HasData(
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 1,
+                    EquipmentName = "BCD",
+                    AvailableSizes = "S,M,L,XL",
+                    RequiresSize = true,
+                    PackageId = 1
+                },
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 2,
+                    EquipmentName = "Dykkerdragt",
+                    AvailableSizes = "S,M,L,XL",
+                    RequiresSize = true,
+                    PackageId = 1
+                },
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 3,
+                    EquipmentName = "Regulatorsæt",
+                    AvailableSizes = "",
+                    RequiresSize = false,
+                    PackageId = 1
+                },
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 4,
+                    EquipmentName = "Tank",
+                    AvailableSizes = "",
+                    RequiresSize = false,
+                    PackageId = 1
+                },
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 5,
+                    EquipmentName = "Finner",
+                    AvailableSizes = "S,M,L,XL",
+                    RequiresSize = true,
+                    PackageId = 1
+                },
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 6,
+                    EquipmentName = "Maske",
+                    AvailableSizes = "",
+                    RequiresSize = false,
+                    PackageId = 1
+                },
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 7,
+                    EquipmentName = "Snorkel",
+                    AvailableSizes = "",
+                    RequiresSize = false,
+                    PackageId = 1
+                },
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 8,
+                    EquipmentName = "Finner",
+                    AvailableSizes = "S,M,L,XL",
+                    RequiresSize = true,
+                    PackageId = 2
+                },
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 9,
+                    EquipmentName = "Maske",
+                    AvailableSizes = "",
+                    RequiresSize = false,
+                    PackageId = 2
+                },
+                new PackageEquipmentSizeRequirement
+                {
+                    Id = 10,
+                    EquipmentName = "Snorkel",
+                    AvailableSizes = "",
+                    RequiresSize = false,
+                    PackageId = 2
+                });
         }
     }
 }
