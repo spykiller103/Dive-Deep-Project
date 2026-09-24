@@ -29,12 +29,6 @@ namespace DiveDeep.Controllers
                     .Where(b => b.ApplicationUserId == userId)
                     .ToList()
             };
-                .Select(b => (int?)b.BookingId)
-                .ToList();
-            vm.CartItems = _cartItemRepository.GetAll()
-                .Where(ci => bookingIds
-                .Contains(ci.BookingId))
-                .ToList();
 
             return View(vm);
         }
