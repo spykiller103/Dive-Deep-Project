@@ -507,16 +507,24 @@ nav {
     margin-left: auto;
 }
 
-/* Date Picker Custom Colors */
+/* Date Picker Custom Colors - White Theme */
+.input-daterange input,
+.input-daterange input:focus {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+}
+
 .datepicker {
-    background-color: #0d1420 !important;
-    border: 1px solid #1f2a3a !important;
+    background-color: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
     border-radius: 8px !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
 }
 
     .datepicker table tr td span,
     .datepicker table tr td {
-        color: #cfeafc !important;
+        color: #374151 !important;
     }
 
         .datepicker table tr td.active,
@@ -524,44 +532,45 @@ nav {
         .datepicker table tr td.selected,
         .datepicker table tr td.selected:hover {
             background-color: #00afcb !important;
-            color: #021217 !important;
+            color: #ffffff !important;
             border-radius: 4px !important;
         }
 
         .datepicker table tr td.today,
         .datepicker table tr td.today:hover {
-            background-color: rgba(0, 175, 203, 0.2) !important;
-            color: #00eaf6 !important;
+            background-color: rgba(0, 175, 203, 0.15) !important;
+            color: #008fa9 !important;
             border-radius: 4px !important;
+            font-weight: 600 !important;
         }
 
         .datepicker table tr td.day:hover,
         .datepicker table tr td span:hover {
-            background-color: rgba(255, 255, 255, 0.1) !important;
+            background-color: #f3f4f6 !important;
             border-radius: 4px !important;
         }
 
         .datepicker table tr td.disabled,
         .datepicker table tr td.disabled:hover {
-            color: #6b7280 !important;
+            color: #9ca3af !important;
         }
 
     .datepicker .datepicker-switch,
     .datepicker .prev,
     .datepicker .next,
     .datepicker tfoot tr th {
-        color: #cfeafc !important;
+        color: #374151 !important;
     }
 
         .datepicker .datepicker-switch:hover,
         .datepicker .prev:hover,
         .datepicker .next:hover {
-            background-color: rgba(255, 255, 255, 0.05) !important;
+            background-color: #f3f4f6 !important;
             border-radius: 4px !important;
         }
 
     .datepicker thead tr th {
-        color: #00e5ff !important;
+        color: #00afcb !important;
         font-weight: 600 !important;
     }
 
