@@ -4,7 +4,7 @@
 
     <div class="cart-header">
         <div>
-            <p class="mt-5"> <span class="special-text">Antal ting i kurv</span></p>
+            <p class="mt-5"> <span style="font-style:italic" class="text-dark">Antal ting i kurv</span></p>
             <h1 class="SiteTitles">DIN KURV</h1>
 
         </div>
@@ -35,7 +35,7 @@
 
             @if (item.Equipment != null)
             {
-                <span class="badge rounded-pill px-3 py-2 equipment-label">Udstyr</span>
+                <span class="badge rounded-pill px-3 py-2 package-label">Udstyr</span>
 
                 <h2 class="package-title">@item.Equipment.Title</h2>
 
@@ -46,8 +46,8 @@
                 @if (!string.IsNullOrWhiteSpace(item.SelectedSize))
                 {
                     <div class="mb-2">
-                        <span class="text-white small">Størrelse: </span>
-                        <span class="text-info small">@item.SelectedSize</span>
+                        <span class="text-dark small">Størrelse: </span>
+                        <span class="text-secondary small">@item.SelectedSize</span>
                     </div>
                 }
 
@@ -70,14 +70,14 @@
                         <div>
                             <label class="col-form-label">Dagspris</label>
 
-                            <p class="mb-0 custom-text">@item.Equipment.Price kr./dag</p>
+                            <p class="mb-0 text-dark">@item.Equipment.Price kr./dag</p>
                         </div>
 
                         <div class="ms-auto d-flex flex-column align-items-end">
                             <label class="mb-1">@item.TotalDays dag(e) x @item.Equipment.Price kr.</label>
 
                             <div>
-                                <span class="text-white fs-3">@(item.Equipment.Price * item.TotalDays)</span>
+                                <span class="text-dark fs-3">@(item.Equipment.Price * item.TotalDays)</span>
 
                                 <span class="fs-4 fw-bolder">kr.</span>
                             </div>
@@ -105,12 +105,12 @@
                 @if (item.EquipmentSizes != null && item.EquipmentSizes.Count > 0)
                 {
                     <div class="mb-3">
-                        <p class="text-white small mb-2">Valgte størrelser:</p>
+                        <p class="text-dark small mb-2">Valgte størrelser:</p>
                         @foreach (var sizeEntry in item.EquipmentSizes)
                         {
                             <div class="mb-1">
-                                <span class="text-secondary small">@sizeEntry.EquipmentName: </span>
-                                <span class="text-info small">@sizeEntry.SelectedSize</span>
+                                <span class="text-dark small">@sizeEntry.EquipmentName: </span>
+                                <span class="text-secondary small">@sizeEntry.SelectedSize</span>
                             </div>
                         }
                     </div>
@@ -118,8 +118,8 @@
                 else if (!string.IsNullOrWhiteSpace(item.SelectedSize))
                 {
                     <div class="mb-2">
-                        <span class="text-white small">Størrelse: </span>
-                        <span class="text-info small">@item.SelectedSize</span>
+                        <span class="text-dark small">Størrelse: </span>
+                        <span class="text-secondary small">@item.SelectedSize</span>
                     </div>
                 }
 
@@ -143,7 +143,7 @@
                                 Dagspris
                             </label>
 
-                            <p class="mb-0 custom-text">
+                            <p class="mb-0 text-dark">
                                 @item.Package.Price kr./dag
                             </p>
                         </div>
@@ -154,7 +154,7 @@
                             </label>
 
                             <div>
-                                <span class="text-white fs-3">
+                                <span class="text-dark fs-3">
                                     @(item.Package.Price * item.TotalDays)
                                 </span>
 
