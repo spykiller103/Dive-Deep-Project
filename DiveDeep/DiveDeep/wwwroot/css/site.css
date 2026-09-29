@@ -490,9 +490,9 @@ nav {
 /*Booking page*/
 .booking-card {
     border: 0.2px solid;
-    border-color: rgba(27, 32, 45);
+    border-color: black;
     border-radius: 20px;
-    background-color: rgba(13, 18, 32);
+    background-color: white;
 }
 
 .booking-header {
