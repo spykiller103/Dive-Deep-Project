@@ -8,11 +8,11 @@
 
 }
 
-<div class="col">
+<div class="col mt-4">
 	<div class="card h-100">
 		<div class="card-body d-flex flex-column">
-			<p> <span class="special-text">Title: @Model.Title</span></p>
-			<p> <span class="special-text">Varenummer: @Model.PackageId</span></p>
+			<p> <span class="text-dark">Title: @Model.Title</span></p>
+			<p> <span class="text-dark">Varenummer: @Model.PackageId</span></p>
 			<img src="@Model.Image"
 				 class="card-img-top package-img"
 				 alt="Equipment" />
@@ -25,14 +25,14 @@
 			</div>
 
 			<form asp-controller="Packages" asp-action="rent" method="post" class="w-100">
-				<div class="border-top border-dark mt-2 mb-3">
+				<div class="text-dark border-top border-dark mt-2 mb-3">
 					@{
 						var equipmentItems = PackageService.GetEquipmentItems(Model);
 					}
 					@foreach (PackageEquipmentSizeRequirement equipmentItem in equipmentItems)
 					{
-						<div class="mb-2">
-							<p class="text-white small mb-1">@equipmentItem.EquipmentName</p>
+						<div class="text-dark mb-2">
+							<p class="text-dark small mb-1">@equipmentItem.EquipmentName</p>
 							@if (equipmentItem.RequiresSize)
 							{
 								var sizes = equipmentItem.AvailableSizes.Split(',').Select(s => s.Trim()).Where(s => s.Length > 0).ToList();
@@ -44,7 +44,7 @@
 										string checkedAttr = i == 0 ? "checked" : "";
 										string fieldName = $"equipmentSizes[{equipmentItem.EquipmentName}]";
 										<input type="radio" class="btn-check" name="@fieldName" id="@id" value="@s" @checkedAttr />
-										<label class="btn btn-sm btn-outline-light me-1" for="@id">@s</label>
+										<label class="btn btn-sm btn-outline-dark me-1" for="@id">@s</label>
 									}
 								</div>
 							}
@@ -56,10 +56,10 @@
 				<div class="package-footer mt-auto border-top border-dark">
 					<div class="align-items-center">
 						<div class="col-12">
-							<label class="form-label text-white small mb-1">Lejeperiode</label>
+							<label class="form-label text-dark small mb-1">Lejeperiode</label>
 							<div class="input-daterange input-group">
 								<input type="text" class="input-sm form-control" name="start" />
-								<span class="input-group-addon custom-text">to</span>
+								<span class="input-group-addon text-dark">to</span>
 								<input type="text" class="input-sm form-control" name="end" />
 
         
@@ -75,7 +75,7 @@
 
 						</div>
 					</div>
-					<div class="price text-white mb-3">@Model.Price<span class="text-info"> kr./dag</span></div>
+					<div class="price text-dark mb-3">@Model.Price<span class="text-dark"> kr./dag</span></div>
 
 					<input type="hidden" name="id" value="@Model.PackageId" />
 					<button type="submit" class="btn btn-info btn-rent w-100">Lej</button>

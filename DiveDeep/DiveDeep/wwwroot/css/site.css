@@ -13,13 +13,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    background-color: #071428;
-    color: #cfeafc;
-}
-
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-    color: var(--bs-secondary-color);
-    text-align: end;
+    background-color: white;
 }
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
@@ -28,15 +22,16 @@ body {
 
 /*Design for every site*/
 .custom-text {
-    color: #FFFFFF !important;
+    color: white !important;
 }
 
 .custom-background {
-    background: rgb(5, 8, 15);
+    background: #1C3144;
+    color: white;
 }
 
 .SiteTitles {
-    color: #FFFFFF;
+    color: black;
     font-weight: bold;
     font-size: 60px;
 }
@@ -69,7 +64,7 @@ nav {
     }
 
     .searchBar:focus {
-        background: rgb(12, 18, 28);
+        background: rgb(42, 66, 107);
         outline: none;
         box-shadow: none;
     }
@@ -146,39 +141,6 @@ nav {
     margin-left: 20px;
 }
 
-/* Empty cart modal: adjust only colors so text is readable; keep confirm (.btn-danger) red */
-#emptyCartModal .modal-content {
-    background-color: #ffffff !important; /* ensure light backdrop for modal content */
-    color: #072028 !important; /* dark teal/near-black for general text */
-}
-
-#emptyCartModal .modal-header .modal-title {
-    color: #072028 !important; /* strong contrast for title */
-}
-
-#emptyCartModal .modal-body {
-    color: #0d3b47 !important; /* readable, slightly softer than title */
-}
-
-#emptyCartModal .modal-footer .btn-secondary {
-    color: #ffffff !important; /* ensure cancel button text is readable */
-}
-
-/* Style the Log in submit button on the Identity login page only (colors + hover) */
-#account #login-submit {
-    background-color: #00afcb !important; /* project teal */
-    color: #021217 !important; /* dark text for contrast */
-    border: 2px solid rgba(0, 175, 203, 0.9) !important;
-    box-shadow: 0 0 0 4px rgba(0, 175, 203, 0.08) inset, 0 6px 18px rgba(0, 175, 203, 0.12) !important;
-}
-
-#account #login-submit:hover {
-    background-color: #008fa9 !important; /* slightly darker on hover */
-    color: #FFFFFF !important; /* ensure contrast on hover */
-    border-color: rgba(0, 143, 169, 0.95) !important;
-    box-shadow: 0 0 0 6px rgba(0, 143, 169, 0.12) inset, 0 8px 22px rgba(0, 143, 169, 0.18) !important;
-}
-
 .cartBox {
     padding: 10px;
     padding-bottom: 15px;
@@ -243,9 +205,8 @@ nav {
 
 .form-control,
 .form-control:focus {
-    background-color: #02040a;
-    color: #FFFFFF;
-    border-color: rgb(12, 18, 28);
+    color: black;
+    border-color: black;
 }
 
 .ContactInput::placeholder {
@@ -254,8 +215,8 @@ nav {
 }
 
 .ContactSelect {
-    background-color: #02040a;
-    color: #FFFFFF;
+    background-color: white;
+    color: black;
     border-color: rgb(12, 18, 28);
     width: 100%;
     height: 40px;
@@ -263,8 +224,9 @@ nav {
 }
 
 .ContactBox {
-    background-color: #07101a;
-    border: 1px solid #0f2230;
+    outline:solid;
+    outline-color: black;
+    border: 1px solid black;
     border-radius: 16px;
     padding: 24px;
     box-sizing: border-box;
@@ -292,8 +254,8 @@ nav {
 
 
 .ContactBox1 {
-    background-color: #07101a;
-    border: 1px solid #0f2230;
+    background-color: white;
+    border: 1px solid black;
     border-radius: 16px;
     box-sizing: border-box;
     width: 100%;
@@ -329,7 +291,7 @@ nav {
     width: 40px;
     height: 40px;
     min-width: 40px;
-    background-color: #1b2a3a;
+    background-color: white;
     border-radius: 8px;
 }
 
@@ -344,7 +306,7 @@ nav {
 }
 
 .InfoTitle {
-    color: #ffffff;
+    color: black;
     margin: 0;
     font-weight: 600;
 }
@@ -357,19 +319,18 @@ nav {
 
 
 .btn-equipment {
-    background: rgb(0, 173, 200);
-    Color: rgb(3, 6, 12);
+    background: #3F88C5;
+    Color: #EFEFD0;
 }
 
 .card {
-    background-color: rgb(13, 18, 32);
+    outline:double;
     color: #E6F7FF;
 }
 
-/* Ensure any .text-secondary inside cards (used for descriptions) is high-contrast */
-.card .text-secondary {
-    color: #E6F7FF !important;
-}
+    .card .text-secondary {
+        color: black !important;
+    }
 
 
 .employee-cards {
@@ -397,16 +358,6 @@ nav {
     margin-top: 4px;
 }
 
-/* Force very high-contrast text for package/equipment descriptions (use specific selectors and !important to override other rules) */
-.package-equipment,
-.package-equipment p,
-.package-equipment li,
-.package-box .package-equipment,
-.package-box .package-equipment p,
-.package-box .package-equipment li,
-ul.package-equipment li {
-    color: #FFFFFF !important;
-}
 
     .package-equipment p {
         line-height: 1.6;
@@ -455,63 +406,15 @@ ul.package-equipment li {
     border-radius: 8px;
 }
 
-.nav-pills .nav-link.active {
-    background-color: #00afcb !important; /* filled accent */
-    color: #ffffff !important; /* high contrast */
-}
+    .nav-pills .nav-link.active {
+        background-color: #00afcb !important; /* filled accent */
+        color: #ffffff !important; /* high contrast */
+    }
 
-.nav-pills .nav-link:hover {
-    background-color: rgba(0,175,203,0.08);
-    color: #00eaf6;
-}
-
-/* Profile form inputs - force dark themed inputs with light text, including disabled state */
-#profile-form .form-control {
-    background-color: #071428 !important;
-    color: #E6F7FF !important;
-    border-color: rgba(255,255,255,0.06) !important;
-}
-
-#profile-form .form-control::placeholder {
-    color: #98a6b3 !important;
-    opacity: 0.9 !important;
-}
-
-/* Disabled username input should match dark theme but be readable */
-#profile-form .form-control[disabled],
-#profile-form .form-control:disabled {
-    background-color: rgba(255,255,255,0.03) !important;
-    color: #cfeafc !important;
-    opacity: 1 !important; /* override bootstrap dimming */
-}
-
-/* Labels and floating labels */
-#profile-form .form-label {
-    color: #cfeafc !important;
-}
-
-/* Save button in profile */
-#update-profile-button {
-    background-color: #00afcb !important;
-    color: #021217 !important;
-    border: 2px solid rgba(0,175,203,0.9) !important;
-}
-
-#update-profile-button:hover {
-    background-color: #008fa9 !important;
-    color: #FFFFFF !important;
-}
-/* Make "Back to profile" button match site accent (used in Bookings page) */
-a.btn.btn-primary[href^="/Identity/Account/Manage"] {
-    background-color: #00afcb !important;
-    color: #021217 !important;
-    border: 2px solid rgba(0,175,203,0.9) !important;
-}
-
-a.btn.btn-primary[href^="/Identity/Account/Manage"]:hover {
-    background-color: #008fa9 !important;
-    color: #FFFFFF !important;
-}
+    .nav-pills .nav-link:hover {
+        background-color: rgba(0,175,203,0.08);
+        color: #00eaf6;
+    }
 
 .empty-cart {
     color: #c1d6ee;
@@ -587,9 +490,9 @@ a.btn.btn-primary[href^="/Identity/Account/Manage"]:hover {
 /*Booking page*/
 .booking-card {
     border: 0.2px solid;
-    border-color: rgba(27, 32, 45);
+    border-color: black;
     border-radius: 20px;
-    background-color: rgba(13, 18, 32);
+    background-color: white;
 }
 
 .booking-header {
@@ -603,3 +506,75 @@ a.btn.btn-primary[href^="/Identity/Account/Manage"]:hover {
     gap: 20px;
     margin-left: auto;
 }
+
+/* Date Picker Custom Colors - White Theme */
+.input-daterange input,
+.input-daterange input:focus {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+}
+
+.datepicker {
+    background-color: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+    .datepicker table tr td span,
+    .datepicker table tr td {
+        color: #374151 !important;
+    }
+
+        .datepicker table tr td.active,
+        .datepicker table tr td.active:hover,
+        .datepicker table tr td.selected,
+        .datepicker table tr td.selected:hover {
+            background-color: #00afcb !important;
+            color: #ffffff !important;
+            border-radius: 4px !important;
+        }
+
+        .datepicker table tr td.today,
+        .datepicker table tr td.today:hover {
+            background-color: rgba(0, 175, 203, 0.15) !important;
+            color: #008fa9 !important;
+            border-radius: 4px !important;
+            font-weight: 600 !important;
+        }
+
+        .datepicker table tr td.day:hover,
+        .datepicker table tr td span:hover {
+            background-color: #f3f4f6 !important;
+            border-radius: 4px !important;
+        }
+
+        .datepicker table tr td.disabled,
+        .datepicker table tr td.disabled:hover {
+            color: #9ca3af !important;
+        }
+
+    .datepicker .datepicker-switch,
+    .datepicker .prev,
+    .datepicker .next,
+    .datepicker tfoot tr th {
+        color: #374151 !important;
+    }
+
+        .datepicker .datepicker-switch:hover,
+        .datepicker .prev:hover,
+        .datepicker .next:hover {
+            background-color: #f3f4f6 !important;
+            border-radius: 4px !important;
+        }
+
+    .datepicker thead tr th {
+        color: #00afcb !important;
+        font-weight: 600 !important;
+    }
+
+    .datepicker tfoot tr th {
+        color: #00afcb !important;
+        font-weight: 600 !important;
+    }

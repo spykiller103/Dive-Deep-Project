@@ -8,18 +8,18 @@
 
 }
 
-<div class="col">
+<div class="col mt-4">
     <div class="card h-100">
         <div class="card-body d-flex flex-column">
-            <p> <span class="special-text">Title: @Model.Title</span></p>
-            <p> <span class="special-text">Varenummer: @Model.EquipmentId</span></p>
+            <p> <span class="text-dark">Title: @Model.Title</span></p>
+            <p> <span class="text-dark">Varenummer: @Model.EquipmentId</span></p>
             <img src="@Model.Image"
                  class="card-img-top package-img"
                  alt="Equipment" />
             <p class="text-secondary">@Model.Description</p>
             <form asp-controller="equipment" asp-action="rent" method="post" class="w-100">
 
-                <div class="package-footer mt-auto border-top border-dark">
+                <div class="text-dark package-footer mt-auto border-top border-dark">
                     <div class="mb-2">
                         @{
                             List<string> sizes = PackageService.GetSizeList(Model.Sizes);
@@ -31,52 +31,51 @@
                                 string id = $"esize_{Model.EquipmentId}_{s}";
                                 string checkedAttr = i == 0 ? "checked" : "";
                                 <input type="radio" class="btn-check" name="size" id="@id" value="@s" @checkedAttr />
-                                <label class="btn btn-sm btn-outline-light me-1" for="@id">@s</label>
+                                <label class="btn btn-sm btn-outline-dark me-1" for="@id">@s</label>
                             }
                         </div>
                     </div>
+                </div>
 
                   
-                    <div class="package-footer mt-auto border-top border-dark">
-                        <div class="align-items-center">
-                            <div class="col-12">
-                                <label class="form-label text-white small mb-1">Lejeperiode</label>
-                                <div class="input-daterange input-group">
-                                    <input type="text" class="input-sm form-control" name="start" />
-                                    <span class="input-group-addon custom-text">to</span>
-                                    <input type="text" class="input-sm form-control" name="end" />
-
-                                </div>
-                                @{
-                                    int? key = Model.EquipmentId;
-                                    var dateErrors = ViewData.ModelState[key.ToString()]?.Errors;
-                                    if (dateErrors != null && dateErrors.Count > 0)
-                                    {
-                                        <div class="text-danger small mt-1">@dateErrors[0].ErrorMessage</div>
-                                    }
-                                }
+                <div class="package-footer mt-auto border-top border-dark">
+                    <div class="align-items-center">
+                        <div class="col-12">
+                            <label class="form-label text-white small mb-1">Lejeperiode</label>
+                            <div class="input-daterange input-group">
+                                <input type="text" class="input-sm form-control" name="start" />
+                                <span class="input-group-addon custom-text">to</span>
+                                <input type="text" class="input-sm form-control" name="end" />
 
                             </div>
+                            @{
+                                int? key = Model.EquipmentId;
+                                var dateErrors = ViewData.ModelState[key.ToString()]?.Errors;
+                                if (dateErrors != null && dateErrors.Count > 0)
+                                {
+                                    <div class="text-danger small mt-1">@dateErrors[0].ErrorMessage</div>
+                                }
+                            }
+
                         </div>
-
-                        <p class="text-white">@Model.Price<span class="text-info"> kr./dag</span></p>
-
-                        <input type="hidden" name="id" value="@Model.EquipmentId" />
-
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <button type="submit" class="btn btn-primary">Lej</button>
-                        }
-                        else
-                        {
-                            <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary">Lej</a>
-                        }
                     </div>
-                </form>
-            </div>
+
+                    <p class="text-dark mb-3">@Model.Price<span class="text-dark mb-3"> kr./dag</span></p>
+
+                    <input type="hidden" name="id" value="@Model.EquipmentId" />
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <button type="submit" class="btn btn-primary">Lej</button>
+                    }
+                    else
+                    {
+                        <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary">Lej</a>
+                    }
+                </div>
+            </form>
         </div>
     </div>
-
 </div>
 
 
