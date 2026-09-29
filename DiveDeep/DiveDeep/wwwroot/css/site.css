@@ -225,7 +225,8 @@ nav {
 }
 
 .ContactBox {
-    background-color: #07101a;
+    outline:solid;
+    outline-color: #07101a;
     border: 1px solid #0f2230;
     border-radius: 16px;
     padding: 24px;
@@ -416,54 +417,6 @@ nav {
         color: #00eaf6;
     }
 
-/* Profile form inputs - force dark themed inputs with light text, including disabled state */
-#profile-form .form-control {
-    background-color: #071428 !important;
-    color: #E6F7FF !important;
-    border-color: rgba(255,255,255,0.06) !important;
-}
-
-    #profile-form .form-control::placeholder {
-        color: #98a6b3 !important;
-        opacity: 0.9 !important;
-    }
-
-    /* Disabled username input should match dark theme but be readable */
-    #profile-form .form-control[disabled],
-    #profile-form .form-control:disabled {
-        background-color: rgba(255,255,255,0.03) !important;
-        color: #cfeafc !important;
-        opacity: 1 !important; /* override bootstrap dimming */
-    }
-
-/* Labels and floating labels */
-#profile-form .form-label {
-    color: #cfeafc !important;
-}
-
-/* Save button in profile */
-#update-profile-button {
-    background-color: #00afcb !important;
-    color: #021217 !important;
-    border: 2px solid rgba(0,175,203,0.9) !important;
-}
-
-    #update-profile-button:hover {
-        background-color: #008fa9 !important;
-        color: #FFFFFF !important;
-    }
-/* Make "Back to profile" button match site accent (used in Bookings page) */
-a.btn.btn-primary[href^="/Identity/Account/Manage"] {
-    background-color: #00afcb !important;
-    color: #021217 !important;
-    border: 2px solid rgba(0,175,203,0.9) !important;
-}
-
-    a.btn.btn-primary[href^="/Identity/Account/Manage"]:hover {
-        background-color: #008fa9 !important;
-        color: #FFFFFF !important;
-    }
-
 .empty-cart {
     color: #c1d6ee;
     font-size: 16px;
@@ -554,3 +507,66 @@ a.btn.btn-primary[href^="/Identity/Account/Manage"] {
     gap: 20px;
     margin-left: auto;
 }
+
+/* Date Picker Custom Colors */
+.datepicker {
+    background-color: #0d1420 !important;
+    border: 1px solid #1f2a3a !important;
+    border-radius: 8px !important;
+}
+
+    .datepicker table tr td span,
+    .datepicker table tr td {
+        color: #cfeafc !important;
+    }
+
+        .datepicker table tr td.active,
+        .datepicker table tr td.active:hover,
+        .datepicker table tr td.selected,
+        .datepicker table tr td.selected:hover {
+            background-color: #00afcb !important;
+            color: #021217 !important;
+            border-radius: 4px !important;
+        }
+
+        .datepicker table tr td.today,
+        .datepicker table tr td.today:hover {
+            background-color: rgba(0, 175, 203, 0.2) !important;
+            color: #00eaf6 !important;
+            border-radius: 4px !important;
+        }
+
+        .datepicker table tr td.day:hover,
+        .datepicker table tr td span:hover {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            border-radius: 4px !important;
+        }
+
+        .datepicker table tr td.disabled,
+        .datepicker table tr td.disabled:hover {
+            color: #6b7280 !important;
+        }
+
+    .datepicker .datepicker-switch,
+    .datepicker .prev,
+    .datepicker .next,
+    .datepicker tfoot tr th {
+        color: #cfeafc !important;
+    }
+
+        .datepicker .datepicker-switch:hover,
+        .datepicker .prev:hover,
+        .datepicker .next:hover {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            border-radius: 4px !important;
+        }
+
+    .datepicker thead tr th {
+        color: #00e5ff !important;
+        font-weight: 600 !important;
+    }
+
+    .datepicker tfoot tr th {
+        color: #00afcb !important;
+        font-weight: 600 !important;
+    }
