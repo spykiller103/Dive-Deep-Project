@@ -225,8 +225,8 @@ nav {
 
 .ContactBox {
     outline:solid;
-    outline-color: #07101a;
-    border: 1px solid #0f2230;
+    outline-color: black;
+    border: 1px solid black;
     border-radius: 16px;
     padding: 24px;
     box-sizing: border-box;
@@ -254,8 +254,8 @@ nav {
 
 
 .ContactBox1 {
-    background-color: #07101a;
-    border: 1px solid #0f2230;
+    background-color: white;
+    border: 1px solid black;
     border-radius: 16px;
     box-sizing: border-box;
     width: 100%;
@@ -291,7 +291,7 @@ nav {
     width: 40px;
     height: 40px;
     min-width: 40px;
-    background-color: #1b2a3a;
+    background-color: white;
     border-radius: 8px;
 }
 
@@ -306,7 +306,7 @@ nav {
 }
 
 .InfoTitle {
-    color: #ffffff;
+    color: black;
     margin: 0;
     font-weight: 600;
 }
