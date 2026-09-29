@@ -1,0 +1,112 @@
+﻿@model DiveDeep.Models.Equipment
+
+@{
+    ViewData["Title"] = "Rediger udstyr";
+}
+
+@section Title {
+    <h1 class="mt-4 mb-4">Rediger udstyr</h1>
+}
+
+<div class="border rounded p-4 shadow-sm">
+
+   
+    <form asp-controller="Admin"
+          asp-action="UpdateEquipment"
+          method="post">
+
+        <!-- Gemmer ID'et på det udstyr vi redigerer -->
+        <input type="hidden" asp-for="EquipmentId" />
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <!-- Titel -->
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label">Titel</label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <!-- Kategori -->
+        <div class="mb-3">
+            <label asp-for="Category" class="form-label">Kategori</label>
+
+            <select asp-for="Category" class="form-select">
+                <option value="">Vælg kategori</option>
+                <option value="Maske">Maske</option>
+                <option value="Finner">Finner</option>
+                <option value="Dragt">Dragt</option>
+                <option value="Flaske">Flaske</option>
+                <option value="Regulator">Regulator</option>
+                <option value="Vest">Vest</option>
+                <option value="Tilbehør">Tilbehør</option>
+            </select>
+
+            <span asp-validation-for="Category" class="text-danger"></span>
+        </div>
+
+        <!-- Beskrivelse -->
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Beskrivelse</label>
+
+            <textarea asp-for="Description"
+                      class="form-control"
+                      rows="4"></textarea>
+
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+
+        <!-- Pris -->
+        <div class="mb-3">
+            <label asp-for="Price" class="form-label">Pris</label>
+
+            <input asp-for="Price"
+                   class="form-control"
+                   type="number"
+                   min="0" />
+
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <!-- Antal -->
+        <div class="mb-3">
+            <label asp-for="Amount" class="form-label">Antal</label>
+
+            <select asp-for="Amount" class="form-select">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </div>
+
+        <!-- Billede er bevidst udeladt for nu -->
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-dark">
+                Gem ændringer
+            </button>
+          
+
+            <a asp-controller="Admin"
+               asp-action="Index"
+               class="btn btn-secondary">
+                Annuller
+            </a>
+        </div>
+
+    </form>
+    
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
