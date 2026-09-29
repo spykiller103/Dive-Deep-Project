@@ -24,7 +24,7 @@ namespace DiveDeep.Controllers
             return View();
         }
         [HttpGet]
-        public  IActionResult Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -34,15 +34,19 @@ namespace DiveDeep.Controllers
             var equipment = _equipmentRepository.GetAll();
             return View(equipment);
         }
+      
         [HttpPost]
         public async Task<IActionResult> CreateEquipment(Equipment equipment)
         {
             if (!ModelState.IsValid)
             {
-                return View("Create",equipment);
+
+                return View("Create", equipment);
             }
+
             await _equipmentRepository.CreateEquipment(equipment);
-            return RedirectToAction(nameof(Create));
+
+            return RedirectToAction(nameof(Index));
         }
         [HttpGet]
         public IActionResult UpdateEquipment(int id)
@@ -58,29 +62,20 @@ namespace DiveDeep.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateEquipment(Equipment equipment)
         {
-            Console.WriteLine("POST UpdateEquipment blev kaldt!");
-
-            foreach (var error in ModelState)
-            {
-                foreach (var message in error.Value.Errors)
-                {
-                    Console.WriteLine($"FEJL i {error.Key}: {message.ErrorMessage}");
-                }
-            }
-
             if (!ModelState.IsValid)
             {
-                Console.WriteLine("ModelState er IKKE valid!");
                 return View(equipment);
             }
-
-            Console.WriteLine("ModelState er valid!");
-
             await _equipmentRepository.UpdateEquipment(equipment);
 
-            Console.WriteLine("UpdateEquipment repository er færdig!");
-
             return RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteEquipment(int id)
+        {
+            await _equipmentRepository.DeleteEquipment(id);
+
+            return RedirectToAction(nameof(Update));
         }
 
     }
