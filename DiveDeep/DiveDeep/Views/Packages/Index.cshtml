@@ -4,7 +4,7 @@
 @inject PackageService PackageService
 
 @section Title {
-	<p class="mt-5"> <span class="special-text">LEJ PR DAG</span></p>
+	<p class="mt-5"> <span style="font-style:italic">LEJ PR DAG</span></p>
 	<h1 class="SiteTitles">Dykker­pakker</h1>
 	<p class="mb-5">Lej præcis det du mangler - fra maske til regulator</p>
 }
@@ -17,7 +17,7 @@
                 <img src="@package.Image" class="card-img-top package-img" alt="...">
                 <div class="card-body border-top border-dark d-flex flex-column">
                     <div class="package-top">
-                        <p class="text-light mb-1">@package.Title</p>
+                        <p class="text-secondary equipment-title mb-1">@package.Title</p>
                     </div>
 
                     <form asp-controller="packages" asp-action="rent" method="post" class="w-100">
@@ -28,7 +28,7 @@
                             @foreach (var equipmentItem in equipmentItems)
                             {
                                 <div class="mb-2">
-                                    <p class="text-white small mb-1">@equipmentItem.EquipmentName</p>
+                                    <p class="small mb-1">@equipmentItem.EquipmentName</p>
                                     @if (equipmentItem.RequiresSize)
                                     {
                                         var sizes = equipmentItem.AvailableSizes.Split(',').Select(s => s.Trim()).Where(s => s.Length > 0).ToList();

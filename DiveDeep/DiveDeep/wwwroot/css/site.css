@@ -13,13 +13,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    background-color: #071428;
-    color: #cfeafc;
-}
-
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-    color: var(--bs-secondary-color);
-    text-align: end;
+    background-color: white;
 }
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
@@ -28,15 +22,16 @@ body {
 
 /*Design for every site*/
 .custom-text {
-    color: #FFFFFF !important;
+    color: white !important;
 }
 
 .custom-background {
-    background: rgb(5, 8, 15);
+    background: #1C3144;
+    color: white;
 }
 
 .SiteTitles {
-    color: #FFFFFF;
+    color: black;
     font-weight: bold;
     font-size: 60px;
 }
@@ -144,39 +139,6 @@ nav {
 
 .login {
     margin-left: 20px;
-}
-
-/* Empty cart modal: adjust only colors so text is readable; keep confirm (.btn-danger) red */
-#emptyCartModal .modal-content {
-    background-color: #ffffff !important; /* ensure light backdrop for modal content */
-    color: #072028 !important; /* dark teal/near-black for general text */
-}
-
-#emptyCartModal .modal-header .modal-title {
-    color: #072028 !important; /* strong contrast for title */
-}
-
-#emptyCartModal .modal-body {
-    color: #0d3b47 !important; /* readable, slightly softer than title */
-}
-
-#emptyCartModal .modal-footer .btn-secondary {
-    color: #ffffff !important; /* ensure cancel button text is readable */
-}
-
-/* Style the Log in submit button on the Identity login page only (colors + hover) */
-#account #login-submit {
-    background-color: #00afcb !important; /* project teal */
-    color: #021217 !important; /* dark text for contrast */
-    border: 2px solid rgba(0, 175, 203, 0.9) !important;
-    box-shadow: 0 0 0 4px rgba(0, 175, 203, 0.08) inset, 0 6px 18px rgba(0, 175, 203, 0.12) !important;
-}
-
-#account #login-submit:hover {
-    background-color: #008fa9 !important; /* slightly darker on hover */
-    color: #FFFFFF !important; /* ensure contrast on hover */
-    border-color: rgba(0, 143, 169, 0.95) !important;
-    box-shadow: 0 0 0 6px rgba(0, 143, 169, 0.12) inset, 0 8px 22px rgba(0, 143, 169, 0.18) !important;
 }
 
 .cartBox {
@@ -357,19 +319,18 @@ nav {
 
 
 .btn-equipment {
-    background: rgb(0, 173, 200);
-    Color: rgb(3, 6, 12);
+    background: #3F88C5;
+    Color: #EFEFD0;
 }
 
 .card {
-    background-color: rgb(13, 18, 32);
+    outline:double;
     color: #E6F7FF;
 }
 
-/* Ensure any .text-secondary inside cards (used for descriptions) is high-contrast */
-.card .text-secondary {
-    color: #E6F7FF !important;
-}
+    .card .text-secondary {
+        color: black !important;
+    }
 
 
 .employee-cards {
@@ -397,16 +358,6 @@ nav {
     margin-top: 4px;
 }
 
-/* Force very high-contrast text for package/equipment descriptions (use specific selectors and !important to override other rules) */
-.package-equipment,
-.package-equipment p,
-.package-equipment li,
-.package-box .package-equipment,
-.package-box .package-equipment p,
-.package-box .package-equipment li,
-ul.package-equipment li {
-    color: #FFFFFF !important;
-}
 
     .package-equipment p {
         line-height: 1.6;
@@ -455,15 +406,15 @@ ul.package-equipment li {
     border-radius: 8px;
 }
 
-.nav-pills .nav-link.active {
-    background-color: #00afcb !important; /* filled accent */
-    color: #ffffff !important; /* high contrast */
-}
+    .nav-pills .nav-link.active {
+        background-color: #00afcb !important; /* filled accent */
+        color: #ffffff !important; /* high contrast */
+    }
 
-.nav-pills .nav-link:hover {
-    background-color: rgba(0,175,203,0.08);
-    color: #00eaf6;
-}
+    .nav-pills .nav-link:hover {
+        background-color: rgba(0,175,203,0.08);
+        color: #00eaf6;
+    }
 
 /* Profile form inputs - force dark themed inputs with light text, including disabled state */
 #profile-form .form-control {
@@ -472,18 +423,18 @@ ul.package-equipment li {
     border-color: rgba(255,255,255,0.06) !important;
 }
 
-#profile-form .form-control::placeholder {
-    color: #98a6b3 !important;
-    opacity: 0.9 !important;
-}
+    #profile-form .form-control::placeholder {
+        color: #98a6b3 !important;
+        opacity: 0.9 !important;
+    }
 
-/* Disabled username input should match dark theme but be readable */
-#profile-form .form-control[disabled],
-#profile-form .form-control:disabled {
-    background-color: rgba(255,255,255,0.03) !important;
-    color: #cfeafc !important;
-    opacity: 1 !important; /* override bootstrap dimming */
-}
+    /* Disabled username input should match dark theme but be readable */
+    #profile-form .form-control[disabled],
+    #profile-form .form-control:disabled {
+        background-color: rgba(255,255,255,0.03) !important;
+        color: #cfeafc !important;
+        opacity: 1 !important; /* override bootstrap dimming */
+    }
 
 /* Labels and floating labels */
 #profile-form .form-label {
@@ -497,10 +448,10 @@ ul.package-equipment li {
     border: 2px solid rgba(0,175,203,0.9) !important;
 }
 
-#update-profile-button:hover {
-    background-color: #008fa9 !important;
-    color: #FFFFFF !important;
-}
+    #update-profile-button:hover {
+        background-color: #008fa9 !important;
+        color: #FFFFFF !important;
+    }
 /* Make "Back to profile" button match site accent (used in Bookings page) */
 a.btn.btn-primary[href^="/Identity/Account/Manage"] {
     background-color: #00afcb !important;
@@ -508,10 +459,10 @@ a.btn.btn-primary[href^="/Identity/Account/Manage"] {
     border: 2px solid rgba(0,175,203,0.9) !important;
 }
 
-a.btn.btn-primary[href^="/Identity/Account/Manage"]:hover {
-    background-color: #008fa9 !important;
-    color: #FFFFFF !important;
-}
+    a.btn.btn-primary[href^="/Identity/Account/Manage"]:hover {
+        background-color: #008fa9 !important;
+        color: #FFFFFF !important;
+    }
 
 .empty-cart {
     color: #c1d6ee;
