@@ -31,7 +31,7 @@
 </div>
 
 
-<h2 class="text-light mt-5">Lejer lige nu</h2>
+<h2 class="text-dark mt-5">Lejer lige nu</h2>
 
 @foreach (Booking? booking in Model.ActiveBookings)
 {
@@ -99,13 +99,13 @@
                             @if (booking.EquipmentSizes != null && booking.EquipmentSizes.Count > 0)
                             {
                                 <div class="mb-3">
-                                    <p class="text-white small mb-2">Størrelser:</p>
+                                    <p class="text-dark small mb-2">Størrelser:</p>
 
                                     @foreach (BookingEquipmentSize? sizeEntry in booking.EquipmentSizes)
                                     {
                                         <div class="mb-1">
-                                            <span class="text-secondary small">@sizeEntry.EquipmentName: </span>
-                                            <span class="text-info small">@sizeEntry.SelectedSize</span>
+                                            <span class="text-dark small">@sizeEntry.EquipmentName: </span>
+                                            <span class="text-secondary small">@sizeEntry.SelectedSize</span>
                                         </div>
                                     }
                                 </div>
@@ -130,11 +130,11 @@
                             @if (!string.IsNullOrWhiteSpace(cartItem.SelectedSize))
                             {
                                 <div class="mb-2">
-                                    <span class="text-white small">
+                                    <span class="text-dark small">
                                         Størrelse:
                                     </span>
 
-                                    <span class="text-info small">
+                                    <span class="text-secondary small">
                                         @cartItem.SelectedSize
                                     </span>
                                 </div>
@@ -155,7 +155,7 @@
 }
 
 
-<h2 class="text-light mt-5">Kommende lejemål</h2>
+<h2 class="text-dark mt-5">Kommende lejemål</h2>
 
 @foreach (Booking? booking in Model.UpcomingBookings)
 {
@@ -223,13 +223,13 @@
                             @if (booking.EquipmentSizes != null && booking.EquipmentSizes.Count > 0)
                             {
                                 <div class="mb-3">
-                                    <p class="text-white small mb-2">Størrelser:</p>
+                                    <p class="text-dark small mb-2">Størrelser:</p>
 
                                     @foreach (BookingEquipmentSize? sizeEntry in booking.EquipmentSizes)
                                     {
                                         <div class="mb-1">
-                                            <span class="text-secondary small">@sizeEntry.EquipmentName: </span>
-                                            <span class="text-info small">@sizeEntry.SelectedSize</span>
+                                            <span class="text-dark small">@sizeEntry.EquipmentName: </span>
+                                            <span class="text-secondary small">@sizeEntry.SelectedSize</span>
                                         </div>
                                     }
                                 </div>
@@ -254,11 +254,11 @@
                             @if (!string.IsNullOrWhiteSpace(cartItem.SelectedSize))
                             {
                                 <div class="mb-2">
-                                    <span class="text-white small">
+                                    <span class="text-dark small">
                                         Størrelse:
                                     </span>
 
-                                    <span class="text-info small">
+                                    <span class="text-secondary small">
                                         @cartItem.SelectedSize
                                     </span>
                                 </div>
@@ -279,7 +279,7 @@
 }
 
 
-<h2 class="text-light mt-5">Lejehistorik</h2>
+<h2 class="text-dark mt-5">Lejehistorik</h2>
 
 @foreach (Booking? booking in Model.CompletedBookings)
 {
@@ -347,13 +347,13 @@
                             @if (booking.EquipmentSizes != null && booking.EquipmentSizes.Count > 0)
                             {
                                 <div class="mb-3">
-                                    <p class="text-white small mb-2">Størrelser:</p>
+                                    <p class="text-dark small mb-2">Størrelser:</p>
 
                                     @foreach (BookingEquipmentSize? sizeEntry in booking.EquipmentSizes)
                                     {
                                         <div class="mb-1">
-                                            <span class="text-secondary small">@sizeEntry.EquipmentName: </span>
-                                            <span class="text-info small">@sizeEntry.SelectedSize</span>
+                                            <span class="text-dark small">@sizeEntry.EquipmentName: </span>
+                                            <span class="text-secondary small">@sizeEntry.SelectedSize</span>
                                         </div>
                                     }
                                 </div>
@@ -378,11 +378,11 @@
                             @if (!string.IsNullOrWhiteSpace(cartItem.SelectedSize))
                             {
                                 <div class="mb-2">
-                                    <span class="text-white small">
+                                    <span class="text-dark small">
                                         Størrelse:
                                     </span>
 
-                                    <span class="text-info small">
+                                    <span class="text-secondary small">
                                         @cartItem.SelectedSize
                                     </span>
                                 </div>
