@@ -1,0 +1,239 @@
+﻿@section Title {
+    <h1>Dykkerforhold</h1>
+}
+
+<div class="container mt-4">
+
+
+    <p>
+        Indtast en lokation i Danmark for at se de aktuelle forhold for dykning.
+    </p>
+
+    <form asp-controller="DivingConditions" asp-action="SearchByLocation" method="get">
+
+        <div class="mb-3">
+
+            <label for="location" class="form-label">
+                Lokation
+            </label>
+
+            <input type="text"
+                   id="location"
+                   name="location"
+                   class="form-control"
+                   placeholder="F.eks. Odense"
+                   required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Se dykkerforhold
+        </button>
+
+    </form>
+
+    <form asp-controller="DivingConditions" asp-action="SearchByCords" method="get">
+
+        <div class="row mb-3 mt-4">
+            <div class="col-md-6">
+                <label for="latitude" class="form-label">
+                    Latitude
+                </label>
+
+                <input type="number"
+                       step="any"
+                       id="latitude"
+                       name="latitude"
+                       class="form-control"
+                       placeholder="Latitude: 55.39594"
+                       required />
+            </div>
+
+            <div class="col-md-6">
+                <label for="longitude" class="form-label">
+                    Longitude
+                </label>
+
+                <input type="number"
+                       step="any"
+                       id="longitude"
+                       name="longitude"
+                       class="form-control"
+                       placeholder="Longitude: 10.38831"
+                       required />
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Se dykkerforhold
+        </button>
+
+    </form>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-warning mt-4">
+            @ViewBag.Message
+        </div>
+    }
+
+    @if (ViewBag.LocationName != null)
+    {
+        <div class="mt-5">
+
+            <h2>Dykkerforhold for @ViewBag.LocationName</h2>
+
+            <hr />
+
+            <h3>Lokation</h3>
+
+            <p>
+                <strong>Lokation:</strong>
+                @ViewBag.LocationName
+            </p>
+
+            <p>
+                <strong>Latitude:</strong>
+                @ViewBag.Latitude
+            </p>
+
+            <p>
+                <strong>Longitude:</strong>
+                @ViewBag.Longitude
+            </p>
+
+            <hr />
+
+            <h3>Vejrforhold</h3>
+
+            <p>
+                <strong>Vindhastighed:</strong>
+
+                @if (ViewBag.WindSpeed != null)
+                {
+                    <span>@ViewBag.WindSpeed m/s</span>
+                }
+                else
+                {
+                    <span>Ingen data</span>
+                }
+            </p>
+
+            <p>
+                <strong>Nedbør:</strong>
+
+                @if (ViewBag.Precipitation != null)
+                {
+                    <span>@ViewBag.Precipitation mm/t</span>
+                }
+                else
+                {
+                    <span>Ingen data</span>
+                }
+            </p>
+
+            <p>
+                <strong>Tordenvejr:</strong>
+
+                @if (ViewBag.IsThunderstorm == true)
+                {
+                    <span>Ja</span>
+                }
+                else
+                {
+                    <span>Nej</span>
+                }
+            </p>
+
+
+            @if (ViewBag.IsThunderstorm == true)
+            {
+                <div class="alert alert-danger">
+                    <strong>Advarsel:</strong>
+                    Tordenvejr kan være livsfarligt. Al dykning frarådes.
+                </div>
+            }
+
+            <hr />
+
+            <h3>Vandforhold</h3>
+
+            <p>
+                <strong>Bølgehøjde:</strong>
+
+                @if (ViewBag.WaveHeight != null)
+                {
+                    <span>@ViewBag.WaveHeight m</span>
+                }
+                else
+                {
+                    <span>Ingen data</span>
+                }
+            </p>
+
+            <p>
+                <strong>Vandtemperatur:</strong>
+
+                @if (ViewBag.WaterTemperature != null)
+                {
+                    <span>@ViewBag.WaterTemperature °C</span>
+                }
+                else
+                {
+                    <span>Ingen data</span>
+                }
+            </p>
+
+            <hr />
+
+            @if (ViewBag.IsSuitableForDiving == true)
+            {
+                <div class="alert alert-success">
+                    Forholdene er gode til dykning.
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-warning">
+
+                    <strong>
+                        Forholdene er ikke ideelle til dykning.
+                    </strong>
+
+                    @if (ViewBag.Reasons != null)
+                    {
+                        <ul class="mt-2 mb-0">
+
+                            @foreach (var reason in ViewBag.Reasons)
+                            {
+                                <li>@reason</li>
+                            }
+
+                        </ul>
+                    }
+                </div>
+            }
+
+            <hr />
+
+            <h3>Anbefalet dragt</h3>
+
+            @if (ViewBag.RecommendedSuit != null)
+            {
+                <p>
+                    På baggrund af vandtemperaturen anbefales:
+                </p>
+
+                <p>
+                    <strong>@ViewBag.RecommendedSuit</strong>
+                </p>
+            }
+            else
+            {
+                <p>
+                    Der kunne ikke findes en vandtemperatur,
+                    og derfor kan der ikke anbefales en dragt.
+                </p>
+            }
+        </div>
+    }
+</div>
