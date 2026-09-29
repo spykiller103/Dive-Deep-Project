@@ -1,17 +1,31 @@
-﻿
-@section Title {
- 
+﻿@{
+    ViewData["Title"] = "Admin";
 }
 
-<div class="row row-cols-1 row-cols-md-3 g-3 gap-3">
-    <form asp-controller="Admin" asp-action="Create">
-    <button id="CreateEquipment" type="submit" class="nav-link btn btn-link custom-text border-0">Opret udstyr</button>
-    </form>
-</div>
+@section Title {
+    <div class="mt-4 mb-4"> <h1>Administration</h1> <p>Administrer udstyr</p> </div>
+}
 
-<div  class="row row-cols-1 row-cols-md-3 g-3 gap-3" > 
-    <form asp-controller="Admin" asp-action="Update">
-        <button id="UpdateEquipment" type="submit" class="nav-link btn btn-link custom-text border-0">Tilpas udstyr</button>
+<div class="border rounded p-4 shadow-sm" style="max-width: 500px; margin: 0 auto;">
 
-    </form>
+    
+    <div class="d-grid gap-3">
+
+        <a asp-controller="Admin"
+           asp-action="Create"
+           class="btn btn-dark">
+            <i class="bi bi-plus-lg"></i>
+            Opret udstyr
+        </a>
+
+        <a asp-controller="Admin"
+           asp-action="Update"
+           class="btn btn-dark">
+            <i class="bi bi-pencil-square"></i>
+            Tilpas udstyr
+        </a>
+
+    </div>
+    
+
 </div>

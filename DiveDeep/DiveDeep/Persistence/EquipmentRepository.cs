@@ -40,7 +40,7 @@ namespace DiveDeep.Persistence
                 .ToList();
         }
 
-        public async Task<Equipment> CreateNewEquipment(Equipment equipment)
+        public async Task<Equipment> CreateEquipment(Equipment equipment)
         {
             _context.Equipments.Add(equipment);
             await _context.SaveChangesAsync();

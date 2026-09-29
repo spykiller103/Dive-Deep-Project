@@ -10,23 +10,24 @@ namespace DiveDeep.Controllers
     public class AdminController : Controller
     {
 
-        private readonly IAdminService _adminService;
+   
         private readonly IEquipmentRepository _equipmentRepository;
 
-        public AdminController(IAdminService adminService, IEquipmentRepository equipmentRepository)
+        public AdminController( IEquipmentRepository equipmentRepository)
         {
-            _adminService = adminService;
+           
             _equipmentRepository = equipmentRepository;
         }
         public IActionResult Index()
         {
             return View();
         }
-        public async Task<IActionResult> CreateEquipment()
+        public async Task<IActionResult> Create()
         {
             return View();
         }
-        public async Task<IActionResult> UpdateEquipment()
+        
+        public async Task<IActionResult> Update()
         {
             var equipment = _equipmentRepository.GetAll();
             return View(equipment);

@@ -3,7 +3,7 @@ using DiveDeep.Persistence;
 
 namespace DiveDeep.Service
 {
-    public class AdminService : IAdminService
+    public class AdminService 
     {
         private readonly IEquipmentRepository _equipmentRepository;
 
@@ -12,9 +12,9 @@ namespace DiveDeep.Service
             _equipmentRepository = equipmentRepository;
         }
 
-        public async Task<Equipment> CreateNewEquipment(Equipment equipment)
+        public async Task<Equipment> CreateEquipment(Equipment equipment)
         {
-            return await _equipmentRepository.CreateNewEquipment(equipment);
+            return await _equipmentRepository.CreateEquipment(equipment);
             
         }
 
