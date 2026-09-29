@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiveDeep.Migrations
 {
     [DbContext(typeof(DiveDeepContext))]
-    [Migration("20260924112854_AddBookingEquipmentSize")]
-    partial class AddBookingEquipmentSize
+    [Migration("20260929083410_init1")]
+    partial class init1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
