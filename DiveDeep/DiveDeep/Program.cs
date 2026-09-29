@@ -25,6 +25,7 @@ namespace DiveDeep
                
             builder.Services.AddScoped<ICartItemRepository, CartItemRepository>();
             builder.Services.AddScoped<IEquipmentRepository, EquipmentRepository>();
+            builder.Services.AddScoped<IAdminService, AdminService>();
             builder.Services.AddScoped<IPackageRepository, PackageRepository>();
             builder.Services.AddScoped<IBookingRepository, BookingRepository>();
             builder.Services.AddScoped<IPackageEquipmentSizeRequirementRepository, PackageEquipmentSizeRequirementRepository>();
