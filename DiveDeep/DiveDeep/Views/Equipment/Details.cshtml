@@ -31,7 +31,7 @@
                                 string id = $"esize_{Model.EquipmentId}_{s}";
                                 string checkedAttr = i == 0 ? "checked" : "";
                                 <input type="radio" class="btn-check" name="size" id="@id" value="@s" @checkedAttr />
-                                <label class="btn btn-sm btn-outline-light me-1" for="@id">@s</label>
+                                <label class="btn btn-sm btn-outline-dark me-1" for="@id">@s</label>
                             }
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                         </div>
                     </div>
 
-                    <p class="text-white">@Model.Price<span class="text-info"> kr./dag</span></p>
+                    <p class="text-dark mb-3">@Model.Price<span class="text-dark mb-3"> kr./dag</span></p>
 
                     <input type="hidden" name="id" value="@Model.EquipmentId" />
 
