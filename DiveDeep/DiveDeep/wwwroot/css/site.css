@@ -64,7 +64,7 @@ nav {
     }
 
     .searchBar:focus {
-        background: rgb(12, 18, 28);
+        background: rgb(42, 66, 107);
         outline: none;
         box-shadow: none;
     }
