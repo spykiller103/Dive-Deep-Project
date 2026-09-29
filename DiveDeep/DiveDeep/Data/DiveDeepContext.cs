@@ -11,6 +11,7 @@ namespace DiveDeep.Data
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<PackageEquipmentSizeRequirement> PackageEquipmentSizeRequirements { get; set; }
         public DbSet<CartItemEquipmentSize> CartItemEquipmentSizes { get; set; }
+        public DbSet<BookingEquipmentSize> BookingEquipmentSizes { get; set; }
 
         public DiveDeepContext(DbContextOptions contextOptions) : base(contextOptions)
         {
@@ -55,6 +56,12 @@ namespace DiveDeep.Data
                 .HasOne(s => s.CartItem)
                 .WithMany(c => c.EquipmentSizes)
                 .HasForeignKey(s => s.CartItemId)
+                .IsRequired();
+
+            modelBuilder.Entity<BookingEquipmentSize>()
+                .HasOne(s => s.Booking)
+                .WithMany(b => b.EquipmentSizes)
+                .HasForeignKey(s => s.BookingId)
                 .IsRequired();
 
             modelBuilder.Entity<ApplicationUser>()

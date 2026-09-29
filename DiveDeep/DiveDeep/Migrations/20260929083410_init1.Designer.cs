@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiveDeep.Migrations
 {
     [DbContext(typeof(DiveDeepContext))]
-    [Migration("20260924080607_init5435")]
-    partial class init5435
+    [Migration("20260929083410_init1")]
+    partial class init1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -121,6 +121,32 @@ namespace DiveDeep.Migrations
                     b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Bookings");
+                });
+
+            modelBuilder.Entity("DiveDeep.Models.BookingEquipmentSize", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BookingId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EquipmentName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SelectedSize")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookingId");
+
+                    b.ToTable("BookingEquipmentSizes");
                 });
 
             modelBuilder.Entity("DiveDeep.Models.CartItem", b =>
@@ -901,6 +927,17 @@ namespace DiveDeep.Migrations
                     b.Navigation("ApplicationUser");
                 });
 
+            modelBuilder.Entity("DiveDeep.Models.BookingEquipmentSize", b =>
+                {
+                    b.HasOne("DiveDeep.Models.Booking", "Booking")
+                        .WithMany("EquipmentSizes")
+                        .HasForeignKey("BookingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Booking");
+                });
+
             modelBuilder.Entity("DiveDeep.Models.CartItem", b =>
                 {
                     b.HasOne("DiveDeep.Data.ApplicationUser", "ApplicationUser")
@@ -1013,6 +1050,8 @@ namespace DiveDeep.Migrations
             modelBuilder.Entity("DiveDeep.Models.Booking", b =>
                 {
                     b.Navigation("CartItems");
+
+                    b.Navigation("EquipmentSizes");
                 });
 
             modelBuilder.Entity("DiveDeep.Models.CartItem", b =>

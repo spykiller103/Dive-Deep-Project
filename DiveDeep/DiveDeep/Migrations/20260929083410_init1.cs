@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DiveDeep.Migrations
 {
     /// <inheritdoc />
-    public partial class init5435 : Migration
+    public partial class init1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -242,6 +242,27 @@ namespace DiveDeep.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BookingEquipmentSizes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EquipmentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SelectedSize = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BookingId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookingEquipmentSizes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BookingEquipmentSizes_Bookings_BookingId",
+                        column: x => x.BookingId,
+                        principalTable: "Bookings",
+                        principalColumn: "BookingId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CartItems",
                 columns: table => new
                 {
@@ -409,6 +430,11 @@ namespace DiveDeep.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BookingEquipmentSizes_BookingId",
+                table: "BookingEquipmentSizes",
+                column: "BookingId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Bookings_ApplicationUserId",
                 table: "Bookings",
                 column: "ApplicationUserId");
@@ -461,6 +487,9 @@ namespace DiveDeep.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "BookingEquipmentSizes");
 
             migrationBuilder.DropTable(
                 name: "CartItemEquipmentSizes");

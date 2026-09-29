@@ -126,7 +126,7 @@ nav {
     .search-result:hover {
         background: #1c2735;
     }
-    /*SearchBarFinished*/
+/*SearchBarFinished*/
 
 .borderBox {
     border-radius: 30px;
@@ -584,45 +584,22 @@ a.btn.btn-primary[href^="/Identity/Account/Manage"]:hover {
     border-radius: 20px;
 }
 
-/* Remove floating-label "pill" for manage/profile/email/change-password forms
-   Keep label text but remove the white rounded background and prevent it
-   from intercepting pointer events so it doesn't sit over inputs. */
-#email-form .form-floating > label,
-#profile-form .form-floating > label,
-#change-password-form .form-floating > label {
-    background: transparent !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    pointer-events: none !important;
-    color: #cfeafc !important;
+/*Booking page*/
+.booking-card {
+    border: 0.2px solid;
+    border-color: rgba(27, 32, 45);
+    border-radius: 20px;
+    background-color: rgba(13, 18, 32);
 }
 
-#email-form .form-floating > label::before,
-#profile-form .form-floating > label::before,
-#change-password-form .form-floating > label::before,
-#email-form .form-floating > label::after,
-#profile-form .form-floating > label::after,
-#change-password-form .form-floating > label::after {
-    display: none !important;
-    content: none !important;
+.booking-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
-/* Specific fixes for email input group (disabled/current email) to ensure dark background and readable text */
-#email-form .input-group .form-control,
-#email-form .input-group .form-control[disabled],
-#email-form .input-group .form-control:disabled,
-#email-form .form-control-plaintext {
-    background-color: #071428 !important;
-    color: #E6F7FF !important;
-    border-color: rgba(255,255,255,0.06) !important;
-    opacity: 1 !important;
+.booking-info {
+    display: flex;
+    gap: 20px;
+    margin-left: auto;
 }
-
-/* Override floating placeholder color in email form */
-#email-form .form-floating > .form-control-plaintext::placeholder,
-#email-form .form-floating > .form-control::placeholder {
-    color: #98a6b3 !important;
-}
-
-

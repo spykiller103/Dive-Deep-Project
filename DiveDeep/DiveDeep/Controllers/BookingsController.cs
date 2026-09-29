@@ -11,23 +11,56 @@ namespace DiveDeep.Controllers
     public class BookingsController : Controller
     {
         private readonly IBookingRepository _bookingRepository;
+        private readonly ICartItemRepository _cartItemRepository;
         private readonly UserManager<ApplicationUser> _userManager;
-        public BookingsController(IBookingRepository bookingRepository, UserManager<ApplicationUser> userManager)
+        public BookingsController(IBookingRepository bookingRepository, ICartItemRepository cartItemRepository, UserManager<ApplicationUser> userManager)
         {
             _bookingRepository = bookingRepository;
+            _cartItemRepository = cartItemRepository;
             _userManager = userManager;
         }
         public IActionResult Index()
         {
             string userId = _userManager.GetUserId(User);
 
+            List<Booking> bookings = _bookingRepository.GetAll()
+                .Where(b => b.ApplicationUserId == userId)
+
+                .ToList();
+
+            DateTime today = DateTime.Today;
+
+            var activeBookings = bookings
+                .Where(b => b.CartItems.Any(c =>
+                    c.StartDate.Date <= today &&
+                    c.EndDate.Date >= today))
+                .ToList();
+
+            var upcomingBookings = bookings
+                .Where(b => b.CartItems.Any(c =>
+                    c.StartDate.Date > today))
+                .ToList();
+
+            var completedBookings = bookings
+                .Where(b => b.CartItems.Any() &&
+                            b.CartItems.All(c =>
+                                c.EndDate.Date < today))
+                .ToList();
+
             BookingApplicationUserViewData vm = new BookingApplicationUserViewData
             {
                 ApplicationUser = _userManager.Users.FirstOrDefault(u => u.Id == userId),
 
-                Bookings = _bookingRepository.GetAll()
-                    .Where(b => b.ApplicationUserId == userId)
-                    .ToList()
+                Bookings = bookings,
+
+                ActiveBookingCount = activeBookings.Count,
+                UpcomingBookingCount = upcomingBookings.Count,
+                CompletedBookingCount = completedBookings.Count,
+                TotalRentalPeriods = bookings.Count,
+
+                ActiveBookings = activeBookings,
+                UpcomingBookings = upcomingBookings,
+                CompletedBookings = completedBookings
             };
 
             return View(vm);
