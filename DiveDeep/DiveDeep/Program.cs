@@ -29,8 +29,13 @@ namespace DiveDeep
             builder.Services.AddScoped<IBookingRepository, BookingRepository>();
             builder.Services.AddScoped<IPackageEquipmentSizeRequirementRepository, PackageEquipmentSizeRequirementRepository>();
             builder.Services.AddScoped<ICartItemEquipmentSizeRepository, CartItemEquipmentSizeRepository>();
+            builder.Services.AddScoped<IDivingConditionsHttpService, DivingConditionsHttpService>();
             builder.Services.AddScoped<CartService>();
             builder.Services.AddScoped<PackageService>();
+
+            builder.Services.AddHttpClient("OpenMeteoWeather", client => { client.BaseAddress = new Uri("https://api.open-meteo.com/"); });
+            builder.Services.AddHttpClient("OpenMeteoGeocoding", client => { client.BaseAddress = new Uri("https://geocoding-api.open-meteo.com/"); });
+            builder.Services.AddHttpClient("OpenMeteoMarine", client => { client.BaseAddress = new Uri("https://marine-api.open-meteo.com/"); });
 
             var app = builder.Build();
 
