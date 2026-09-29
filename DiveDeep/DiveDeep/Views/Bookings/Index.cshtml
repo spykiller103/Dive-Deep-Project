@@ -1,4 +1,3 @@
-```cshtml
 @using DiveDeep.ViewModels;
 @model BookingApplicationUserViewData
 
@@ -34,7 +33,7 @@
 
 <h2 class="text-light mt-5">Lejer lige nu</h2>
 
-@foreach (var booking in Model.ActiveBookings)
+@foreach (Booking? booking in Model.ActiveBookings)
 {
     <div class="booking-card mt-3 p-3">
 
@@ -42,10 +41,10 @@
 
             @if (booking.CartItems.Any())
             {
-                var firstItem = booking.CartItems
+                CartItem? firstItem = booking.CartItems
                     .FirstOrDefault(c => c.Package != null || c.Equipment != null);
 
-                var totalPrice = booking.CartItems.Sum(c =>
+                int totalPrice = booking.CartItems.Sum(c =>
                     c.Package != null
                         ? c.Package.Price * c.TotalDays
                         : c.Equipment != null
@@ -54,11 +53,11 @@
 
                 if (firstItem != null && firstItem.BookingId != 0)
                 {
-                    var leastDayItem = booking.CartItems
+                    CartItem? leastDayItem = booking.CartItems
                         .OrderBy(c => c.EndDate)
                         .First();
 
-                    var daysLeft =
+                    int daysLeft =
                         (leastDayItem.EndDate.Date - DateTime.Today).Days + 1;
 
                     <h3>DYK-@firstItem.BookingId</h3>
@@ -84,7 +83,22 @@
 
         <div class="booking-items">
 
-            @foreach (var cartItem in booking.CartItems)
+            @if (booking.EquipmentSizes != null && booking.EquipmentSizes.Count > 0)
+            {
+                <div class="mb-3">
+                    <p class="text-white small mb-2">Valgte størrelser:</p>
+
+                    @foreach (BookingEquipmentSize? sizeEntry in booking.EquipmentSizes)
+                    {
+                        <div class="mb-1">
+                            <span class="text-secondary small">@sizeEntry.EquipmentName: </span>
+                            <span class="text-info small">@sizeEntry.SelectedSize</span>
+                        </div>
+                    }
+                </div>
+            }
+
+            @foreach (CartItem? cartItem in booking.CartItems)
             {
                 <div>
 
@@ -100,31 +114,9 @@
 
                             <br />
 
-                            @foreach (var equipment in cartItem.Package.Equipment)
+                            @foreach (string? equipment in cartItem.Package.Equipment)
                             {
-                                <div class="mb-1">
-
-                                    <span class="package-details">
-                                        @equipment
-                                    </span>
-
-                                    @{
-                                        var sizeEntry = booking.EquipmentSizes?
-                                            .FirstOrDefault(s =>
-                                                s.EquipmentName.Equals(
-                                                    equipment,
-                                                    StringComparison.OrdinalIgnoreCase));
-                                    }
-
-                                    @if (sizeEntry != null &&
-                                         !string.IsNullOrWhiteSpace(sizeEntry.SelectedSize))
-                                    {
-                                        <span class="text-info small ms-2">
-                                            (Størrelse: @sizeEntry.SelectedSize)
-                                        </span>
-                                    }
-
-                                </div>
+                                <span class="package-details">@equipment</span>
                             }
 
                         </p>
@@ -170,7 +162,7 @@
 
 <h2 class="text-light mt-5">Kommende lejemål</h2>
 
-@foreach (var booking in Model.UpcomingBookings)
+@foreach (Booking? booking in Model.UpcomingBookings)
 {
     <div class="booking-card mt-3">
 
@@ -178,7 +170,7 @@
 
             @if (booking.CartItems.Any())
             {
-                var firstItem = booking.CartItems
+                CartItem? firstItem = booking.CartItems
                     .FirstOrDefault(c => c.Package != null || c.Equipment != null);
 
                 if (firstItem?.Package != null)
@@ -201,7 +193,22 @@
 
         <div class="booking-items">
 
-            @foreach (var item in booking.CartItems)
+            @if (booking.EquipmentSizes != null && booking.EquipmentSizes.Count > 0)
+            {
+                <div class="mb-3">
+                    <p class="text-white small mb-2">Valgte størrelser:</p>
+
+                    @foreach (BookingEquipmentSize? sizeEntry in booking.EquipmentSizes)
+                    {
+                        <div class="mb-1">
+                            <span class="text-secondary small">@sizeEntry.EquipmentName: </span>
+                            <span class="text-info small">@sizeEntry.SelectedSize</span>
+                        </div>
+                    }
+                </div>
+            }
+
+            @foreach (CartItem? item in booking.CartItems)
             {
                 <div class="booking-item">
 
@@ -217,31 +224,9 @@
 
                             <br />
 
-                            @foreach (var equipment in item.Package.Equipment)
+                            @foreach (string? equipment in item.Package.Equipment)
                             {
-                                <div class="mb-1">
-
-                                    <span class="package-details">
-                                        @equipment
-                                    </span>
-
-                                    @{
-                                        var sizeEntry = booking.EquipmentSizes?
-                                            .FirstOrDefault(s =>
-                                                s.EquipmentName.Equals(
-                                                    equipment,
-                                                    StringComparison.OrdinalIgnoreCase));
-                                    }
-
-                                    @if (sizeEntry != null &&
-                                         !string.IsNullOrWhiteSpace(sizeEntry.SelectedSize))
-                                    {
-                                        <span class="text-info small ms-2">
-                                            (Størrelse: @sizeEntry.SelectedSize)
-                                        </span>
-                                    }
-
-                                </div>
+                                <span class="package-details">@equipment</span>
                             }
 
                         </p>
@@ -291,7 +276,7 @@
 
 <h2 class="text-light mt-5">Lejehistorik</h2>
 
-@foreach (var booking in Model.CompletedBookings)
+@foreach (Booking? booking in Model.CompletedBookings)
 {
     <div class="booking-card mt-3">
 
@@ -299,7 +284,7 @@
 
             @if (booking.CartItems.Any())
             {
-                var firstItem = booking.CartItems
+                CartItem? firstItem = booking.CartItems
                     .FirstOrDefault(c => c.Package != null || c.Equipment != null);
 
                 if (firstItem?.Package != null)
@@ -322,7 +307,22 @@
 
         <div class="booking-items">
 
-            @foreach (var item in booking.CartItems)
+            @if (booking.EquipmentSizes != null && booking.EquipmentSizes.Count > 0)
+            {
+                <div class="mb-3">
+                    <p class="text-white small mb-2">Valgte størrelser:</p>
+
+                    @foreach (var sizeEntry in booking.EquipmentSizes)
+                    {
+                        <div class="mb-1">
+                            <span class="text-secondary small">@sizeEntry.EquipmentName: </span>
+                            <span class="text-info small">@sizeEntry.SelectedSize</span>
+                        </div>
+                    }
+                </div>
+            }
+
+            @foreach (CartItem? item in booking.CartItems)
             {
                 <div class="booking-item">
 
@@ -340,29 +340,7 @@
 
                             @foreach (var equipment in item.Package.Equipment)
                             {
-                                <div class="mb-1">
-
-                                    <span class="package-details">
-                                        @equipment
-                                    </span>
-
-                                    @{
-                                        var sizeEntry = booking.EquipmentSizes?
-                                            .FirstOrDefault(s =>
-                                                s.EquipmentName.Equals(
-                                                    equipment,
-                                                    StringComparison.OrdinalIgnoreCase));
-                                    }
-
-                                    @if (sizeEntry != null &&
-                                         !string.IsNullOrWhiteSpace(sizeEntry.SelectedSize))
-                                    {
-                                        <span class="text-info small ms-2">
-                                            (Størrelse: @sizeEntry.SelectedSize)
-                                        </span>
-                                    }
-
-                                </div>
+                                <span class="package-details">@equipment</span>
                             }
 
                         </p>
