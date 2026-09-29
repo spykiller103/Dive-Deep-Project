@@ -1,4 +1,5 @@
-﻿using DiveDeep.Models;
+﻿using DiveDeep.Service;
+using DiveDeep.Models;
 using System.Text.Json;
 
 namespace DiveDeep.Service
@@ -29,7 +30,7 @@ namespace DiveDeep.Service
             return result?.Result?.FirstOrDefault();
         }
 
-        async Task<OpenMeteoMarineResponse?> IDivingConditionsHttpService.GetMarineAsync(double latitude, double longitude)
+        public async Task<OpenMeteoMarineResponse?> GetMarineAsync(double latitude, double longitude)
         {
             var client = _clientFactory.CreateClient("OpenMeteoMarine");
 
@@ -48,7 +49,7 @@ namespace DiveDeep.Service
             return result;
         }
 
-        async Task<OpenMeteoWeatherResponse?> IDivingConditionsHttpService.GetWeatherAsync(double latitude, double longitude)
+        public async Task<OpenMeteoWeatherResponse?> GetWeatherAsync(double latitude, double longitude)
         {
             var client = _clientFactory.CreateClient("OpenMeteoWeather");
 

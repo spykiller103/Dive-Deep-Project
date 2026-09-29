@@ -4,12 +4,13 @@ namespace DiveDeep.Models
 {
     public class CurrentWeather
     {
-            [JsonPropertyName("wind_speed_10m")]
-            public double WindSpeed { get; set; }
+        [JsonPropertyName("wind_speed_10m")]
+        public double WindSpeed { get; set; }
 
-            public double Precipitation { get; set; }
+        [JsonPropertyName("precipitation")]
+        public double Precipitation { get; set; }
 
-            [JsonPropertyName("weather_code")]
-            public int WeatherCode { get; set; }
+        [JsonPropertyName("weather_code")]
+        public int WeatherCode { get; set; }
     }
 }

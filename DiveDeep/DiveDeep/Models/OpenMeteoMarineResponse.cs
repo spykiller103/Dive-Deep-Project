@@ -4,7 +4,8 @@ namespace DiveDeep.Models
 {
     public class OpenMeteoMarineResponse
     {
-        public CurrentMarine? current { get; set; }
+        [JsonPropertyName("current")]
+        public CurrentMarine? Current { get; set; }
     }
 
 }
