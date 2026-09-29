@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Admin";
+}
+
+@section Title {
+    <div class="mt-4 mb-4"> <h1>Administration</h1> <p>Administrer udstyr</p> </div>
+}
+
+<div class="border rounded p-4 shadow-sm" style="max-width: 500px; margin: 0 auto;">
+
+    
+    <div class="d-grid gap-3">
+
+        <a asp-controller="Admin"
+           asp-action="Create"
+           class="btn btn-dark">
+            <i class="bi bi-plus-lg"></i>
+            Opret udstyr
+        </a>
+
+        <a asp-controller="Admin"
+           asp-action="Update"
+           class="btn btn-dark">
+            <i class="bi bi-pencil-square"></i>
+            Tilpas udstyr
+        </a>
+
+    </div>
+    
+
+</div>

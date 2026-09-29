@@ -13,9 +13,9 @@
     <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
     <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
     <li class="nav-item"><a class="nav-link" asp-controller="Bookings" asp-action="Index">Bookings</a></li>
-    @if (User.Identity.IsAuthenticated)
+    @if (User.IsInRole("Admin"))
     {
-    <li class="nav-item"><a class="nav-link" asp-controller="Admin" asp-action="Index" hidden="hidden">Admin</a></li>
+    <li class="nav-item"><a class="nav-link" asp-controller="Admin" asp-action="Index">Admin</a></li>
         
     }
   

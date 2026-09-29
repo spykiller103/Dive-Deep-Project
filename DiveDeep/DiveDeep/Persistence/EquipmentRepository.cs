@@ -40,6 +40,56 @@ namespace DiveDeep.Persistence
                 .ToList();
         }
 
+        public async Task<Equipment> CreateEquipment(Equipment equipment)
+        {
+            _context.Equipments.Add(equipment);
+            await _context.SaveChangesAsync();
+
+            return equipment;
+        }
+        public async Task<Equipment> UpdateEquipment(Equipment equipment)
+        {
+
+            var existing = await _context.Equipments
+                .FindAsync(equipment.EquipmentId);
+            if (existing != null)
+            {
+                existing.Title = equipment.Title;
+                existing.Description = equipment.Description;
+                existing.Category = equipment.Category;
+               
+                existing.Price = equipment.Price;
+                existing.Amount = equipment.Amount;
+             
+
+
+                await _context.SaveChangesAsync();
+            }
+            return existing ?? equipment;
+        }
        
+        public async Task DeleteEquipment(int id)
+        {
+            var equipment = await _context.Equipments
+            .FindAsync(id);
+
+
+            if (equipment != null)
+            {
+                var cartItems = await _context.CartItems
+                    .Where(c => c.EquipmentId == id)
+                    .ToListAsync();
+
+                _context.CartItems.RemoveRange(cartItems);
+
+                _context.Equipments.Remove(equipment);
+
+                await _context.SaveChangesAsync();
+            }
+
+
+}
+
+
     }
 }
