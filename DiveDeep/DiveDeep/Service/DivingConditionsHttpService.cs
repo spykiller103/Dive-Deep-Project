@@ -1,6 +1,8 @@
-﻿using DiveDeep.Service;
+﻿using Azure;
 using DiveDeep.Models;
+using DiveDeep.Service;
 using System.Text.Json;
+using System.Globalization;
 
 namespace DiveDeep.Service
 {
@@ -13,21 +15,24 @@ namespace DiveDeep.Service
             _clientFactory = clientFactory;
         }
 
-        public async Task<OpenMeteoLocation?> GetLocationAsync(string location)
+        public async Task<OpenMeteoLocation?> GetLocationByNameAsync(string location)
         {
-            var client = _clientFactory.CreateClient("OpenMeteoGeocoding");
+            HttpClient client = _clientFactory.CreateClient("OpenMeteoGeocoding");
 
-            string url = $"v1/search?name={location}&count=1&countryCode=DK";
+            OpenMeteoLocationResponse? response = await client.GetFromJsonAsync<OpenMeteoLocationResponse>
+                ($"v1/search?name={location}&count=1&countryCode=DK");
 
-            HttpResponseMessage response = await client.GetAsync(url);
+            return response?.Results?.FirstOrDefault();
+        }
 
-            response.EnsureSuccessStatusCode();
+        public async Task<OpenMeteoMarineResponse?> GetLocationByCordsAsync(double latitude, double longitude)
+        {
+            HttpClient client = _clientFactory.CreateClient("OpenMeteoMarine");
 
-            string json = await response.Content.ReadAsStringAsync();
+            OpenMeteoMarineResponse? response = await client.GetFromJsonAsync<OpenMeteoMarineResponse>(
+                $"v1/marine?latitude={latitude.ToString(CultureInfo.InvariantCulture)}&longitude={longitude.ToString(CultureInfo.InvariantCulture)}&current=wave_height,sea_surface_temperature&cell_selection=sea");
 
-            OpenMeteoLocationResponse? result = JsonSerializer.Deserialize<OpenMeteoLocationResponse>(json);
-
-            return result?.Result?.FirstOrDefault();
+            return response;
         }
 
         public async Task<OpenMeteoMarineResponse?> GetMarineAsync(double latitude, double longitude)

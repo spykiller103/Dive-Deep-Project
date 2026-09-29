@@ -4,13 +4,12 @@
 
 <div class="container mt-4">
 
-    <h1>Dykkerforhold</h1>
 
     <p>
         Indtast en lokation i Danmark for at se de aktuelle forhold for dykning.
     </p>
 
-    <form asp-controller="DivingConditions" asp-action="Search" method="get">
+    <form asp-controller="DivingConditions" asp-action="SearchByLocation" method="get">
 
         <div class="mb-3">
 
@@ -24,6 +23,44 @@
                    class="form-control"
                    placeholder="F.eks. Odense"
                    required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Se dykkerforhold
+        </button>
+
+    </form>
+
+    <form asp-controller="DivingConditions" asp-action="SearchByCords" method="get">
+
+        <div class="row mb-3 mt-4">
+            <div class="col-md-6">
+                <label for="latitude" class="form-label">
+                    Latitude
+                </label>
+
+                <input type="number"
+                       step="any"
+                       id="latitude"
+                       name="latitude"
+                       class="form-control"
+                       placeholder="Latitude: 55.39594"
+                       required />
+            </div>
+
+            <div class="col-md-6">
+                <label for="longitude" class="form-label">
+                    Longitude
+                </label>
+
+                <input type="number"
+                       step="any"
+                       id="longitude"
+                       name="longitude"
+                       class="form-control"
+                       placeholder="Longitude: 10.38831"
+                       required />
+            </div>
         </div>
 
         <button type="submit" class="btn btn-primary">

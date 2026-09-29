@@ -4,7 +4,6 @@ namespace DiveDeep.Models
 {
     public class OpenMeteoLocationResponse
     {
-        [JsonPropertyName("result")]
-        public List <OpenMeteoLocation>? Result { get; set; }
+        public List<OpenMeteoLocation>? Results { get; set; }
     }
 }

@@ -4,7 +4,8 @@ namespace DiveDeep.Service
 {
     public interface IDivingConditionsHttpService
     {
-        Task<OpenMeteoLocation?> GetLocationAsync(string location);
+        Task<OpenMeteoLocation?> GetLocationByNameAsync(string location);
+        Task<OpenMeteoMarineResponse?> GetLocationByCordsAsync(double latitude, double longitude);
         Task<OpenMeteoWeatherResponse?> GetWeatherAsync(double latitude, double longitude);
         Task<OpenMeteoMarineResponse?> GetMarineAsync(double latitude, double longitude);
     }

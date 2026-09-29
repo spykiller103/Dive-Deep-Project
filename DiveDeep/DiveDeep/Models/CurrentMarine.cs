@@ -7,7 +7,7 @@ namespace DiveDeep.Models
         [JsonPropertyName("wave_height")]
         public double? WaveHeight { get; set; }
 
-        [JsonPropertyName("sea_surface_tempature")]
+        [JsonPropertyName("sea_surface_temperature")]
         public double? WaterTemperature { get; set; }
     }
 }
