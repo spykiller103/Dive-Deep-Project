@@ -39,7 +39,7 @@ namespace DiveDeep
             builder.Services.AddHttpClient("OpenMeteoWeather", client => { client.BaseAddress = new Uri("https://api.open-meteo.com/"); });
             builder.Services.AddHttpClient("OpenMeteoGeocoding", client => { client.BaseAddress = new Uri("https://geocoding-api.open-meteo.com/"); });
             builder.Services.AddHttpClient("OpenMeteoMarine", client => { client.BaseAddress = new Uri("https://marine-api.open-meteo.com/"); });
-            builder.Services.AddHttpClient("api", client => { client.BaseAddress = new Uri("https://localhost:7272/api/"); });
+            builder.Services.AddHttpClient("Api", client => { client.BaseAddress = new Uri("https://localhost:7272/api/"); });
 
 
             var app = builder.Build();

@@ -31,7 +31,7 @@ namespace DiveDeep.Controllers
 
         public async Task<IActionResult> Index()
         {
-            using var httpClient = _httpClientFactory.CreateClient("api");
+            using var httpClient = _httpClientFactory.CreateClient("Api");
 
             try
             {
