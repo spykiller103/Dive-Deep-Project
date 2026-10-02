@@ -1,0 +1,155 @@
+﻿@model Booking
+
+@{
+    ViewData["Title"] = $"Booking-{Model.BookingId}";
+}
+
+@section Title {
+    <h1 class="mt-4">[Booking-@Model.BookingId](mailto:Booking-@Model.BookingId)</h1>
+}
+
+<div class="mb-4">
+    <h3>Bookingoplysninger</h3>
+
+    
+    <p>
+        <strong>Bruger:</strong>
+        @Model.ApplicationUser?.Email
+    </p>
+    
+
+</div>
+
+<hr />
+
+<h3>Lejede ting</h3>
+
+@if (!Model.CartItems.Any())
+{
+    <p>Der er ingen ting i denne booking.</p>
+}
+else
+{
+    foreach (var item in Model.CartItems)
+    {
+
+        <div class="border rounded p-4 mb-4">
+
+            
+            @if (item.Equipment != null)
+            {
+                <h4>@item.Equipment.Title</h4>
+
+                <p>
+                    <strong>Type:</strong> Udstyr
+                </p>
+
+                <p>
+                    <strong>Beskrivelse:</strong>
+                    @item.Equipment.Description
+                </p>
+
+                <p>
+                    <strong>Pris pr. dag:</strong>
+                    @item.Equipment.Price kr.
+                </p>
+            }
+            else if (item.Package != null)
+            {
+                <h4>@item.Package.Title</h4>
+
+                <p>
+                    <strong>Type:</strong> Pakke
+                </p>
+
+                <p>
+                    <strong>Pris pr. dag:</strong>
+                    @item.Package.Price kr.
+                </p>
+            }
+
+            <hr />
+
+            <p>
+                <strong>Startdato:</strong>
+                @item.StartDate.ToString("d. MMMM yyyy")
+            </p>
+
+            <p>
+                <strong>Slutdato:</strong>
+                @item.EndDate.ToString("d. MMMM yyyy")
+            </p>
+
+            <p>
+                <strong>Antal dage:</strong>
+                @item.TotalDays
+            </p>
+
+            @if (!string.IsNullOrEmpty(item.SelectedSize))
+            {
+                <p>
+                    <strong>Størrelse:</strong>
+                    @item.SelectedSize
+                </p>
+            }
+
+            @if (item.EquipmentSizes.Any())
+            {
+                <h5>Valgte størrelser</h5>
+
+                <ul>
+                    @foreach (var size in item.EquipmentSizes)
+                    {
+                        <li>
+                            @size.EquipmentName -
+                            @size.SelectedSize
+                        </li>
+                    }
+                </ul>
+            }
+
+            <div class="mt-3">
+                <button class="btn btn-primary">
+                    Rediger
+                </button>
+                <form asp-controller="Admin"
+                      asp-action="DeleteBookingAsync"
+                      asp-route-id="@Model.BookingId"
+                      method="post"
+                      style="display:inline;">
+
+                    <button type="submit"
+                            class="btn btn-link text-danger">
+                        Slet
+                    </button>
+
+                </form>
+            </div>
+
+        </div>
+    }
+
+
+}
+
+<hr />
+
+@{
+    var totalPrice = Model.CartItems.Sum(c =>
+    c.Package != null
+    ? c.Package.Price * c.TotalDays
+    : c.Equipment != null
+    ? c.Equipment.Price * c.TotalDays
+    : 0);
+}
+
+<div class="mb-4">
+    <h3>Samlet pris</h3>
+    <h4>@totalPrice kr.</h4>
+</div>
+
+<a asp-controller="Admin"
+   asp-action="EditBooking"
+   class="btn btn-secondary">
+    Tilbage til bookings
+</a>

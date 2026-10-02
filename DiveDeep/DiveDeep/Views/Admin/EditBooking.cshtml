@@ -1,0 +1,74 @@
+﻿@model List<Booking>
+
+@{
+    ViewData["Title"] = "Bookings";
+}
+
+@section Title {
+    <h1 class="mt-4">Alle bookings</h1>
+}
+
+<div class="d-flex flex-wrap gap-3">
+
+    
+    <table class="table">
+        <tr>
+            <th>Booking</th>
+            <th>Bruger</th>
+            <th>Startdato</th>
+            <th>Slutdato</th>
+            <th>Pris</th>
+            <th></th>
+        </tr>
+
+        @foreach (var booking in Model)
+        {
+            var firstItem = booking.CartItems
+                .FirstOrDefault(c => c.Package != null || c.Equipment != null);
+
+            var totalPrice = booking.CartItems.Sum(c =>
+                c.Package != null
+                    ? c.Package.Price * c.TotalDays
+                    : c.Equipment != null
+                        ? c.Equipment.Price * c.TotalDays
+                        : 0);
+
+            <tr>
+                <td>
+                    @if (firstItem != null)
+                    {
+                        <span>Booking-@firstItem.BookingId</span>
+                    }
+                </td>
+
+                <td>
+                    @booking.ApplicationUser?.Email
+                </td>
+
+                <td>
+                    @booking.CartItems.Min(c => c.StartDate).ToString("d. MMMM yyyy")
+                </td>
+
+                <td>
+                    @booking.CartItems.Max(c => c.EndDate).ToString("d. MMMM yyyy")
+                </td>
+
+                <td>
+                    @totalPrice kr.
+                </td>
+
+                <td>
+                    <a asp-controller="Admin"
+                       asp-action="EditBookingDetails"
+                       asp-route-id="@booking.BookingId"
+                       class="btn btn-link">
+                        Se booking
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+    
+
+</div>

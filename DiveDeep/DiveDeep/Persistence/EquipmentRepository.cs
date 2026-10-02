@@ -3,6 +3,7 @@ using DiveDeep.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace DiveDeep.Persistence
 {
@@ -40,14 +41,14 @@ namespace DiveDeep.Persistence
                 .ToList();
         }
 
-        public async Task<Equipment> CreateEquipment(Equipment equipment)
+        public async Task<Equipment> CreateEquipmentAsync(Equipment equipment)
         {
             _context.Equipments.Add(equipment);
             await _context.SaveChangesAsync();
 
             return equipment;
         }
-        public async Task<Equipment> UpdateEquipment(Equipment equipment)
+        public async Task<Equipment> UpdateEquipmentAsync(Equipment equipment)
         {
 
             var existing = await _context.Equipments
@@ -68,7 +69,7 @@ namespace DiveDeep.Persistence
             return existing ?? equipment;
         }
        
-        public async Task DeleteEquipment(int id)
+        public async Task DeleteEquipmentAsync(int id)
         {
             var equipment = await _context.Equipments
             .FindAsync(id);
@@ -86,7 +87,7 @@ namespace DiveDeep.Persistence
 
                 await _context.SaveChangesAsync();
             }
-
+           
 
 }
 

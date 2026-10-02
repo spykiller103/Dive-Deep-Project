@@ -12,11 +12,13 @@ namespace DiveDeep.Controllers
 
 
         private readonly IEquipmentRepository _equipmentRepository;
+        private readonly IBookingRepository _bookingRepository;
 
-        public AdminController(IEquipmentRepository equipmentRepository)
+        public AdminController(IEquipmentRepository equipmentRepository, IBookingRepository bookingRepository)
         {
 
             _equipmentRepository = equipmentRepository;
+            _bookingRepository = bookingRepository;
         }
         [HttpGet]
         public IActionResult Index()
@@ -34,9 +36,15 @@ namespace DiveDeep.Controllers
             var equipment = _equipmentRepository.GetAll();
             return View(equipment);
         }
-      
+        [HttpGet]
+        public async Task<IActionResult> EditBooking()
+        {
+            List<Booking> bookings = await _bookingRepository.GetAllBookingsForAdminAsync();
+            return View(bookings);
+        }
+
         [HttpPost]
-        public async Task<IActionResult> CreateEquipment(Equipment equipment)
+        public async Task<IActionResult> CreateEquipmentAsync(Equipment equipment)
         {
             if (!ModelState.IsValid)
             {
@@ -44,7 +52,7 @@ namespace DiveDeep.Controllers
                 return View("Create", equipment);
             }
 
-            await _equipmentRepository.CreateEquipment(equipment);
+            await _equipmentRepository.CreateEquipmentAsync(equipment);
 
             return RedirectToAction(nameof(Index));
         }
@@ -60,23 +68,41 @@ namespace DiveDeep.Controllers
         }
         //Saves the updated changes
         [HttpPost]
-        public async Task<IActionResult> UpdateEquipment(Equipment equipment)
+        public async Task<IActionResult> UpdateEquipmentAsync(Equipment equipment)
         {
             if (!ModelState.IsValid)
             {
                 return View(equipment);
             }
-            await _equipmentRepository.UpdateEquipment(equipment);
+
+            await _equipmentRepository.UpdateEquipmentAsync(equipment);
 
             return RedirectToAction(nameof(Index));
         }
         [HttpPost]
-        public async Task<IActionResult> DeleteEquipment(int id)
+        public async Task<IActionResult> DeleteEquipmentAsync(int id)
         {
-            await _equipmentRepository.DeleteEquipment(id);
+            await _equipmentRepository.DeleteEquipmentAsync(id);
 
             return RedirectToAction(nameof(Update));
         }
+        [HttpPost]
+        public async Task<IActionResult> DeleteBookingAsync(int id)
+        {
+            await _bookingRepository.DeleteBookingAsync(id);
+            return RedirectToAction(nameof(EditBooking));
+        }
+        [HttpGet]
+        public async Task<IActionResult> EditBookingDetails(int id)
+        {
+            Booking? booking = await _bookingRepository.GetBookingByIdAsync(id);
+            if(booking == null)
+            {
+                return NotFound();
+            }
+            return View(booking);
+        }
 
+        
     }
 }

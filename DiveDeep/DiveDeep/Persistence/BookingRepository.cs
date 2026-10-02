@@ -54,8 +54,8 @@ namespace DiveDeep.Persistence
                     .ThenInclude(c => c.Package)
                 .Include(b => b.CartItems)
                     .ThenInclude(c => c.Equipment)
-                .Include(b => b.CartItems)
-                    .ThenInclude(c => c.EquipmentSizes)
+                //.Include(b => b.CartItems)
+                //    .ThenInclude(c => c.EquipmentSizes)
                 .Include(b => b.EquipmentSizes)
                 .ToList();
         }
@@ -69,6 +69,57 @@ namespace DiveDeep.Persistence
                     .ThenInclude(ci => ci.Equipment)
                 .Include(b => b.EquipmentSizes)
                 .FirstOrDefault(b => b.BookingId == id);
+        }
+
+        public async Task DeleteBookingAsync(int id)
+        {
+            var booking = await _context.Bookings
+                .FindAsync(id);
+            if (booking != null)
+            {
+                var cartItems = await _context.CartItems
+                    .Where(c => c.BookingId == id)
+                    .ToListAsync();
+
+                _context.CartItems.RemoveRange(cartItems);
+                _context.Bookings.Remove(booking);
+                await _context.SaveChangesAsync();
+            }
+
+        }
+
+        public async Task<List<Booking>> GetAllBookingsForAdminAsync()
+        {
+            return await _context.Bookings
+                .Include(b => b.ApplicationUser)
+
+               .Include(b => b.CartItems)
+                   .ThenInclude(c => c.EquipmentSizes)
+               .Include(b => b.CartItems)
+                   .ThenInclude(c => c.Package)
+               .Include(b => b.CartItems)
+                   .ThenInclude(c => c.Equipment)
+               .Include(b => b.EquipmentSizes)
+               .ToListAsync();
+        }
+
+        public async Task<Booking?> GetBookingByIdAsync(int id)
+        {
+            return await _context.Bookings
+            .Include(b => b.ApplicationUser)
+
+             .Include(b => b.CartItems)
+            .ThenInclude(c => c.Package)
+
+       .Include(b => b.CartItems)
+           .ThenInclude(c => c.Equipment)
+
+       .Include(b => b.CartItems)
+           .ThenInclude(c => c.EquipmentSizes)
+
+       .Include(b => b.EquipmentSizes)
+
+       .FirstOrDefaultAsync(b => b.BookingId == id);
         }
     }
 }
