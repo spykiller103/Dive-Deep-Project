@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using Microsoft.AspNetCore.Http;
+using System.Text.Json;
 
 namespace DiveDeep.Controllers
 {
@@ -16,21 +17,34 @@ namespace DiveDeep.Controllers
         private readonly IPackageRepository _packageRepository;
         private readonly CartService _cartService;
         private readonly PackageService _packageService;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public PackagesController(IPackageRepository packageRepository, CartService cartService, PackageService packageService, UserManager<ApplicationUser> userManager)
+        public PackagesController
+            (IPackageRepository packageRepository, CartService cartService, PackageService packageService, UserManager<ApplicationUser> userManager, IHttpClientFactory httpClientFactory)
         {
             _packageRepository = packageRepository;
             _cartService = cartService;
             _packageService = packageService;
             _userManager = userManager;
+            _httpClientFactory = httpClientFactory;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<Package> packages = _packageRepository.GetAll();
-            return View(packages);
-        }
+            using var httpClient = _httpClientFactory.CreateClient("api");
 
+            try
+            {
+                List<Package> response = await httpClient.GetFromJsonAsync<List<Package>>("WebApiPackages");
+
+                return View(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        /*
         public IActionResult Details(int id)
         {
             Package package = _packageRepository.GetById(id);
@@ -119,5 +133,6 @@ namespace DiveDeep.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        */
     }
 }

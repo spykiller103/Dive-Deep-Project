@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DiveDeep.Models;
+using DiveDeep.Persistence;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiveDeep.WebApiControllers
@@ -7,5 +9,19 @@ namespace DiveDeep.WebApiControllers
     [ApiController]
     public class WebApiPackagesController : ControllerBase
     {
+        private readonly IPackageRepository _packageRepository;
+
+        public WebApiPackagesController(IPackageRepository packageRepository)
+        {
+            _packageRepository = packageRepository;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllAsync()
+        {
+            List<Package> packages = await _packageRepository.GetAllAsync();
+
+            return Ok(packages);
+        }
     }
 }
