@@ -58,88 +58,25 @@ namespace DiveDeep.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        /*
+
         [Authorize]
         [HttpPost]
-        public IActionResult Rent(int id, string start, string end, string? size, IFormCollection form)
+        public async Task<IActionResult> Rent(int id, string start, string end, string? size, IFormCollection form)
         {
             string userId = _userManager.GetUserId(User);
-            Package packagesToBeAdded = _packageRepository.GetById(id);
 
-            DateTime startDate, endDate;
-            bool _start = DateTime.TryParseExact(start,
-                new[] { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" },
-                CultureInfo.InvariantCulture, DateTimeStyles.None, out startDate);
+            using var httpClient = _httpClientFactory.CreateClient("Api");
 
-            bool _end = DateTime.TryParseExact(end,
-                new[] { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" },
-                CultureInfo.InvariantCulture, DateTimeStyles.None, out endDate);
-
-            if (!_start || !_end)
+            try
             {
-                int key = id;
-
-                ModelState.AddModelError(
-                    key.ToString(),
-                    "Vælg venligst både start- og slutdato."
-                );
-
-                Package package = _packageRepository.GetById(id);
-
-                return View("Details", package);
+                var test = await httpClient.PostAsync($"WebApiPackages?id={id}&start={start}&end={end}&size={size}&userId={userId}", null);
             }
-
-            int days = (endDate - startDate).Days + 1;
-
-            if (days < 1)
+            catch (Exception ex)
             {
-                days = 1;
+                return BadRequest(ex.Message);
             }
-
-            CartItem cartItem = new CartItem
-            {
-                Package = packagesToBeAdded,
-                StartDate = startDate,
-                EndDate = endDate,
-                TotalDays = days,
-                ApplicationUserId = userId
-            };
-
-            // Handle individual equipment sizes from the form
-            List<CartItemEquipmentSize> equipmentSizes = new List<CartItemEquipmentSize>();
-            foreach (string key in form.Keys)
-            {
-                if (key.StartsWith("equipmentSizes["))
-                {
-                    int startIndex = "equipmentSizes[".Length;
-                    int endIndex = key.IndexOf("]");
-                    string equipmentName = key.Substring(startIndex, endIndex - startIndex);
-                    string selectedSize = form[key];
-                    if (!string.IsNullOrWhiteSpace(selectedSize))
-                    {
-                        equipmentSizes.Add(new CartItemEquipmentSize
-                        {
-                            EquipmentName = equipmentName,
-                            SelectedSize = selectedSize
-                        });
-                    }
-                }
-            }
-
-            if (equipmentSizes.Count > 0)
-            {
-                cartItem.EquipmentSizes = equipmentSizes;
-            }
-            else if (!string.IsNullOrWhiteSpace(size))
-            {
-                // Fallback for backward compatibility
-                cartItem.SelectedSize = size;
-            }
-
-            _cartService.Add(cartItem);
-
             return RedirectToAction(nameof(Index));
         }
-        */
+
     }
 }
