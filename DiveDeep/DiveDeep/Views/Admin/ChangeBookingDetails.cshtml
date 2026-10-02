@@ -1,0 +1,127 @@
+﻿@model DiveDeep.Models.CartItem
+
+@{
+    ViewData["Title"] = "Rediger leje";
+}
+
+@section Title {
+    <h1 class="mt-4 mb-4">Rediger leje</h1>
+}
+
+<div class="border rounded p-4 shadow-sm">
+
+    @if (Model.Equipment != null)
+    {
+        <h3>@Model.Equipment.Title</h3>
+
+        <p>
+            <strong>Type:</strong> Udstyr
+        </p>
+
+        <p>
+            <strong>Pris pr. dag:</strong>
+            @Model.Equipment.Price kr.
+        </p>
+    }
+    else if (Model.Package != null)
+    {
+        <h3>@Model.Package.Title</h3>
+
+        <p>
+            <strong>Type:</strong> Pakke
+        </p>
+
+        <p>
+            <strong>Pris pr. dag:</strong>
+            @Model.Package.Price kr.
+        </p>
+    }
+
+    <hr />
+
+    <form asp-controller="Admin"
+          asp-action="UpdateBookingCartItem"
+          method="post">
+
+        <input type="hidden" asp-for="CartItemId" />
+
+        <input type="hidden"
+               name="bookingId"
+               value="@ViewBag.BookingId" />
+
+        <div asp-validation-summary="ModelOnly"
+             class="text-danger"></div>
+
+        <!-- Startdato -->
+        <div class="mb-3">
+            <label asp-for="StartDate" class="form-label">
+                Startdato
+            </label>
+
+            <input asp-for="StartDate"
+                   class="form-control"
+                   type="date" />
+
+            <span asp-validation-for="StartDate"
+                  class="text-danger"></span>
+        </div>
+
+        <!-- Slutdato -->
+        <div class="mb-3">
+            <label asp-for="EndDate" class="form-label">
+                Slutdato
+            </label>
+
+            <input asp-for="EndDate"
+                   class="form-control"
+                   type="date" />
+
+            <span asp-validation-for="EndDate"
+                  class="text-danger"></span>
+        </div>
+
+        <!-- Størrelse -->
+        @if (!string.IsNullOrEmpty(Model.SelectedSize))
+        {
+            <div class="mb-3">
+                <label asp-for="SelectedSize" class="form-label">
+                    Størrelse
+                </label>
+
+                <select asp-for="SelectedSize" class="form-select">
+                    <option value="">Vælg størrelse</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                </select>
+
+                <span asp-validation-for="SelectedSize"
+                      class="text-danger"></span>
+            </div>
+        }
+
+        <div class="mt-4">
+
+            <button type="submit" class="btn btn-dark">
+                Gem ændringer
+            </button>
+
+            <a asp-controller="Admin"
+               asp-action="EditBookingDetails"
+               asp-route-id="@ViewBag.BookingId"
+               class="btn btn-secondary">
+                Annuller
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

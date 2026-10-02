@@ -7,11 +7,13 @@ namespace DiveDeep.Service
     {
         private readonly IEquipmentRepository _equipmentRepository;
         private readonly IBookingRepository _bookingRepository;
+        private readonly ICartItemRepository _cartItemRepository;
 
-        public AdminService(IEquipmentRepository equipmentRepository, IBookingRepository bookingRepository)
+        public AdminService(IEquipmentRepository equipmentRepository, IBookingRepository bookingRepository, ICartItemRepository cartItemRepository)
         {
             _equipmentRepository = equipmentRepository;
             _bookingRepository = bookingRepository;
+            _cartItemRepository = cartItemRepository;
         }
 
         public async Task<Equipment> CreateEquipmentAsync(Equipment equipment)
@@ -38,5 +40,15 @@ namespace DiveDeep.Service
         {
            return await _bookingRepository.GetBookingByIdAsync(id);
         }
+        public async Task DeleteCartItem(int id)
+        {
+            await _cartItemRepository.DeleteCartItemAsync(id);
+        }
+
+        public async Task<CartItem> UpdateCartItemAsync(CartItem cartItem)
+        {
+            return  await _cartItemRepository.UpdateCartItemAsync(cartItem);
+        }
+
     }
 }

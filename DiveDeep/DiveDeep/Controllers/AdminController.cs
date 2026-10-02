@@ -13,12 +13,14 @@ namespace DiveDeep.Controllers
 
         private readonly IEquipmentRepository _equipmentRepository;
         private readonly IBookingRepository _bookingRepository;
+        private readonly ICartItemRepository _cartItemRepository;
 
-        public AdminController(IEquipmentRepository equipmentRepository, IBookingRepository bookingRepository)
+        public AdminController(IEquipmentRepository equipmentRepository, IBookingRepository bookingRepository, ICartItemRepository cartItemRepository)
         {
 
             _equipmentRepository = equipmentRepository;
             _bookingRepository = bookingRepository;
+            _cartItemRepository = cartItemRepository;
         }
         [HttpGet]
         public IActionResult Index()
@@ -103,6 +105,41 @@ namespace DiveDeep.Controllers
             return View(booking);
         }
 
-        
+        [HttpPost]
+        public async Task<IActionResult> DeleteCartItems(int id, int bookingId)
+        {
+            await _cartItemRepository.DeleteCartItemAsync(id);
+            return RedirectToAction(nameof(EditBookingDetails), new { id = bookingId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateCartItem(int id, int bookingId)
+        {
+            CartItem? cartItem = await _cartItemRepository.GetById(id);
+            if (cartItem == null)
+            {
+                return NotFound();
+            }
+            ViewBag.BookingId = bookingId;
+
+            return View("ChangeBookingDetails",cartItem);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateBookingCartItem(CartItem cartItem, int bookingId)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    ViewBag.BookingId = bookingId;
+            //    return View("ChangeBookingDetails", cartItem);
+            //}
+
+            await _cartItemRepository.UpdateCartItemAsync(cartItem);
+
+            return RedirectToAction(nameof(EditBookingDetails), new { id = bookingId });
+            
+                
+        }
     }
 }

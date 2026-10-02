@@ -14,9 +14,9 @@ namespace DiveDeep.Service
             _equipmentSizeRepository = equipmentSizeRepository;
         }
 
-        public CartItem? GetById(int id)
+        public async Task<CartItem?> GetById(int id)
         {
-            return _cartItemRepository.GetById(id);
+            return await _cartItemRepository.GetById(id);
         }
 
         public List<CartItem> GetAll()

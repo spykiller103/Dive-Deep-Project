@@ -10,7 +10,6 @@
 
 <div class="d-flex flex-wrap gap-3">
 
-    
     <table class="table">
         <tr>
             <th>Booking</th>
@@ -23,10 +22,9 @@
 
         @foreach (var booking in Model)
         {
-            var firstItem = booking.CartItems
-                .FirstOrDefault(c => c.Package != null || c.Equipment != null);
+            var cartItems = booking.CartItems ?? new List<CartItem>();
 
-            var totalPrice = booking.CartItems.Sum(c =>
+            var totalPrice = cartItems.Sum(c =>
                 c.Package != null
                     ? c.Package.Price * c.TotalDays
                     : c.Equipment != null
@@ -35,10 +33,7 @@
 
             <tr>
                 <td>
-                    @if (firstItem != null)
-                    {
-                        <span>Booking-@firstItem.BookingId</span>
-                    }
+                    Booking-@booking.BookingId
                 </td>
 
                 <td>
@@ -46,11 +41,17 @@
                 </td>
 
                 <td>
-                    @booking.CartItems.Min(c => c.StartDate).ToString("d. MMMM yyyy")
+                    @if (cartItems.Any())
+                    {
+                        @cartItems.Min(c => c.StartDate).ToString("d. MMMM yyyy")
+                    }
                 </td>
 
                 <td>
-                    @booking.CartItems.Max(c => c.EndDate).ToString("d. MMMM yyyy")
+                    @if (cartItems.Any())
+                    {
+                        @cartItems.Max(c => c.EndDate).ToString("d. MMMM yyyy")
+                    }
                 </td>
 
                 <td>
@@ -64,11 +65,18 @@
                        class="btn btn-link">
                         Se booking
                     </a>
+                    <form asp-controller="Admin"
+                        asp-action="DeleteBooking"
+                        asp-route-id="@booking.BookingId"
+                        method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-link text-danger">
+                            Slet 
+                        </button>
+                    </form>
                 </td>
             </tr>
         }
-
     </table>
-    
 
 </div>
+

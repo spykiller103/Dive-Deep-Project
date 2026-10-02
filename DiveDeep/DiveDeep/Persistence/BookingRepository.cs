@@ -91,6 +91,7 @@ namespace DiveDeep.Persistence
         public async Task<List<Booking>> GetAllBookingsForAdminAsync()
         {
             return await _context.Bookings
+                .Where(b => b.CartItems.Any())
                 .Include(b => b.ApplicationUser)
 
                .Include(b => b.CartItems)

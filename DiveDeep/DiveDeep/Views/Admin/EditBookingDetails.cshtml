@@ -5,7 +5,7 @@
 }
 
 @section Title {
-    <h1 class="mt-4">[Booking-@Model.BookingId](mailto:Booking-@Model.BookingId)</h1>
+    <h1 class="mt-4">(mailto:Booking-@Model.BookingId)</h1>
 }
 
 <div class="mb-4">
@@ -16,8 +16,8 @@
         <strong>Bruger:</strong>
         @Model.ApplicationUser?.Email
     </p>
-    
 
+    
 </div>
 
 <hr />
@@ -109,12 +109,17 @@ else
             }
 
             <div class="mt-3">
-                <button class="btn btn-primary">
+                <a asp-controller="Admin"
+                   asp-action="UpdateCartItem"
+                   asp-route-id="@item.CartItemId"
+                   asp-route-bookingId="@Model.BookingId"
+                   class="btn btn-primary">
                     Rediger
-                </button>
+                </a>
                 <form asp-controller="Admin"
-                      asp-action="DeleteBookingAsync"
-                      asp-route-id="@Model.BookingId"
+                      asp-action="DeleteCartItems"
+                      asp-route-id="@item.CartItemId"
+                      asp-route-bookingId="@Model.BookingId"
                       method="post"
                       style="display:inline;">
 

@@ -23,12 +23,28 @@ namespace DiveDeep.Persistence
             _context.SaveChanges();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            CartItem cartItem = GetById(id);
+            CartItem? cartItem = await GetById(id);
 
+            if(cartItem != null)
+            {
             _context.CartItems.Remove(cartItem);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+
+            }
+        }
+
+        public async Task DeleteCartItemAsync(int id)
+        {
+            var cartItem = await _context.CartItems.FindAsync(id);
+            if (cartItem != null)
+            {
+              
+                _context.CartItems.Remove(cartItem);
+                await _context.SaveChangesAsync();
+            }
+
         }
 
         public List<CartItem> GetAll()
@@ -40,13 +56,13 @@ namespace DiveDeep.Persistence
              .ToList();
         }
 
-        public CartItem? GetById(int id)
+        public async Task<CartItem?> GetById(int id)
         {
-            return _context.CartItems
+            return await _context.CartItems
               .Include(c => c.Equipment)
               .Include(c => c.Package)
               .Include(c => c.EquipmentSizes)
-              .FirstOrDefault(c => c.CartItemId == id);
+              .FirstOrDefaultAsync(c => c.CartItemId == id);
         }
 
         public void Update(CartItem cartItem)
@@ -54,5 +70,22 @@ namespace DiveDeep.Persistence
             _context.CartItems.Update(cartItem);
             _context.SaveChanges();
         }
+
+        public async Task<CartItem> UpdateCartItemAsync(CartItem cartItem)
+        {
+
+            var existing = await _context.CartItems
+                .FindAsync(cartItem.CartItemId);
+            if (existing != null)
+            {
+                existing.StartDate = cartItem.StartDate;
+                existing.EndDate = cartItem.EndDate;
+                existing.SelectedSize = cartItem.SelectedSize;
+
+                await _context.SaveChangesAsync();
+            }
+            return existing ?? cartItem;
+        }
+    
     }
 }
