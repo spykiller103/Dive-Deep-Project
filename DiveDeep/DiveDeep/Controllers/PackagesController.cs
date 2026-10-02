@@ -44,14 +44,21 @@ namespace DiveDeep.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        /*
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            Package package = _packageRepository.GetById(id);
+            using var httpClient = _httpClientFactory.CreateClient("Api");
 
-            return View(package);
+            try
+            {
+                Package response = await httpClient.GetFromJsonAsync<Package>($"WebApiPackages/{id}");
+                return View(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
-
+        /*
         [Authorize]
         [HttpPost]
         public IActionResult Rent(int id, string start, string end, string? size, IFormCollection form)

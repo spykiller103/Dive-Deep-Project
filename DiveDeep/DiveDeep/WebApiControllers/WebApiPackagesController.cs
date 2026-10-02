@@ -20,8 +20,23 @@ namespace DiveDeep.WebApiControllers
         public async Task<IActionResult> GetAllAsync()
         {
             List<Package> packages = await _packageRepository.GetAllAsync();
-
             return Ok(packages);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetSpecefic(int id)
+        {
+            if (id <= 0)
+                return BadRequest();
+
+            Package package = await _packageRepository.GetByIdAsync(id);
+
+            if (package == null)
+                return NotFound();
+
+            return Ok(package);
+        }
+
+        [HttpPost]
     }
 }
