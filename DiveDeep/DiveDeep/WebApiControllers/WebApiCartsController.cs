@@ -33,7 +33,7 @@ namespace DiveDeep.WebApiControllers
         {
             // Delete all cart items that are not part of a booking and only for the logged in user
             
-            List<CartItem> cartItems = await _cartService.GetAll()
+            List<CartItem> cartItems = (await _cartService.GetAllAsync())
                 .Where(c => c.BookingId == null)
                 .ToList();
 

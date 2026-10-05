@@ -108,7 +108,7 @@ namespace DiveDeep.WebApiControllers
                 cartItem.SelectedSize = size;
             }
 
-            _cartService.Add(cartItem);
+            await _cartService.AddAsync(cartItem);
 
             return Ok();
         }
