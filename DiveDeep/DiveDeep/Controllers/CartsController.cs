@@ -45,11 +45,11 @@ namespace DiveDeep.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             string userId = _userManager.GetUserId(User);
 
-            List<CartItem> cartItems = _cartService.GetAll()
+            List<CartItem> cartItems = (await _cartService.GetAllAsync())
                 .Where(c => c.ApplicationUserId == userId && c.BookingId == null)
                 .ToList();
 
@@ -57,11 +57,11 @@ namespace DiveDeep.Controllers
         }
 
         [HttpPost]
-        public IActionResult Checkout(List<int> cartItemIds)
+        public async Task<IActionResult> Checkout(List<int> cartItemIds)
         {
             string userId = _userManager.GetUserId(User);
 
-            List<CartItem> cartItems = _cartService.GetAll()
+            List<CartItem> cartItems = (await _cartService.GetAllAsync())
                 .Where(c => cartItemIds
                 .Contains(c.CartItemId) &&
                     c.ApplicationUserId == userId &&
@@ -74,16 +74,16 @@ namespace DiveDeep.Controllers
             foreach (CartItem cartItem in cartItems)
             {
                 cartItem.BookingId = booking.BookingId;
-                _cartService.Update(cartItem);
+                await _cartService.UpdateAsync(cartItem);
             }
 
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public IActionResult RemoveItem(int id)
+        public async Task<IActionResult> RemoveItemAsync(int id)
         {
-            _cartService.Delete(id);
+            await _cartService.DeleteAsync(id);
             return View();
         }
     }

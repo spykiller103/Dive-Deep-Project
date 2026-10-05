@@ -6,7 +6,7 @@ namespace DiveDeep.Persistence
     {
         Task<List<Equipment>> GetAllAsync();
         Task<Equipment?> GetByIdAsync(int id);
-        List<Equipment> GetByCategoryAsync(string category);
+        Task<List<Equipment>> GetByCategoryAsync(string category);
 
         Task<Equipment> CreateEquipmentAsync(Equipment equipment);
         Task<Equipment> UpdateEquipmentAsync(Equipment equipment);

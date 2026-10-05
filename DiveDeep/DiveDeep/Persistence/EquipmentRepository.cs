@@ -15,43 +15,43 @@ namespace DiveDeep.Persistence
             _context = context;
         }
 
-        public async Task<List<Equipment>> GetAll()
+        public async Task<List<Equipment>> GetAllAsync()
         {
             return await _context.Equipments
                 .ToListAsync();
         }
 
-        public async Task<Equipment?> GetById(int id)
+        public async Task<Equipment?> GetByIdAsync(int id)
         {
             return await _context.Equipments
                 .FirstOrDefaultAsync(e => e.EquipmentId == id);
         }
 
-        public List<Equipment> GetByCategory(string category)
+        public async Task<List<Equipment>> GetByCategoryAsync(string category)
         {
             if (string.IsNullOrWhiteSpace(category))
             {
-                return _context.Equipments
-                    .ToList();
+                return await _context.Equipments
+                    .ToListAsync();
             }
 
             string equipmentCategory = category;
 
-            return _context.Equipments
+            return await _context.Equipments
                 .Where(e => !string.IsNullOrEmpty(e.Category) &&
                             e.Category == equipmentCategory)
-                .ToList();
+                .ToListAsync();
         }
 
-        public async Task<Equipment> CreateEquipment(Equipment equipment)
+        public async Task<Equipment> CreateEquipmentAsync(Equipment equipment)
         {
-            _context.Equipments.Add(equipment);
+            await _context.Equipments.AddAsync(equipment);
             await _context.SaveChangesAsync();
 
             return equipment;
         }
 
-        public async Task<Equipment> UpdateEquipment(Equipment equipment)
+        public async Task<Equipment> UpdateEquipmentAsync(Equipment equipment)
         {
             var existing = await _context.Equipments
                 .FindAsync(equipment.EquipmentId);
@@ -70,7 +70,7 @@ namespace DiveDeep.Persistence
             return existing ?? equipment;
         }
 
-        public async Task DeleteEquipment(int id)
+        public async Task DeleteEquipmentAsync(int id)
         {
             var equipment = await _context.Equipments
                 .FindAsync(id);
