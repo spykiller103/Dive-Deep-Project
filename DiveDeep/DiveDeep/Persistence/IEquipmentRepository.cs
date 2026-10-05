@@ -4,12 +4,12 @@ namespace DiveDeep.Persistence
 {
     public interface IEquipmentRepository
     {
-        Task<List<Equipment>> GetAll();
-        Task<Equipment?> GetById(int id);
-        List<Equipment> GetByCategory(string category);
+        Task<List<Equipment>> GetAllAsync();
+        Task<Equipment?> GetByIdAsync(int id);
+        List<Equipment> GetByCategoryAsync(string category);
 
-        Task<Equipment> CreateEquipment(Equipment equipment);
-        Task<Equipment> UpdateEquipment(Equipment equipment);
-        Task DeleteEquipment(int id);
+        Task<Equipment> CreateEquipmentAsync(Equipment equipment);
+        Task<Equipment> UpdateEquipmentAsync(Equipment equipment);
+        Task DeleteEquipmentAsync(int id);
     }
 }

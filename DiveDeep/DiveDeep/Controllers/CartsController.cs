@@ -17,32 +17,29 @@ namespace DiveDeep.Controllers
         private readonly DiveDeepContext _context;
         private readonly IBookingRepository _bookingRepository;
 
-        public CartsController(CartService cartService, IBookingRepository bookingRepository, UserManager<ApplicationUser> userManager, DiveDeepContext context)
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public CartsController(CartService cartService, IBookingRepository bookingRepository, UserManager<ApplicationUser> userManager, DiveDeepContext context, IHttpClientFactory httpClientFactory)
         {
             _cartService = cartService;
             _userManager = userManager;
             _context = context;
             _bookingRepository = bookingRepository;
+            _httpClientFactory = httpClientFactory;
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EmptyCart()
         {
-            // Delete all cart items that are not part of a booking and only for the logged in user
-            List<CartItem> cartItems = _cartService.GetAll()
-                .Where(c => c.BookingId == null)
-                .ToList();
-            ApplicationUser user = await _userManager.GetUserAsync(User);
-           if(user != null)
-            {
-               var userCartItems = await _context.CartItems
-                        .Where(c => c.ApplicationUserId == user.Id) 
-                        .ToListAsync();
-                _context.CartItems.RemoveRange(userCartItems); //RemoveRange tracks items in the deleted state until DBContext.SaveChanges() is called
+            using var httpClient = _httpClientFactory.CreateClient("Api");
 
-                await _context.SaveChangesAsync();
-               
+            try
+            {
+                httpClient.PostAsync("WebApiCarts", null);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
 
             return RedirectToAction("Index");
@@ -65,7 +62,7 @@ namespace DiveDeep.Controllers
             string userId = _userManager.GetUserId(User);
 
             List<CartItem> cartItems = _cartService.GetAll()
-                .Where(c =>cartItemIds
+                .Where(c => cartItemIds
                 .Contains(c.CartItemId) &&
                     c.ApplicationUserId == userId &&
                     c.BookingId == null)

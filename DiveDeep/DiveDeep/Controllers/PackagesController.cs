@@ -13,19 +13,10 @@ namespace DiveDeep.Controllers
 {
     public class PackagesController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IPackageRepository _packageRepository;
-        private readonly CartService _cartService;
-        private readonly PackageService _packageService;
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public PackagesController
-            (IPackageRepository packageRepository, CartService cartService, PackageService packageService, UserManager<ApplicationUser> userManager, IHttpClientFactory httpClientFactory)
+        public PackagesController(IHttpClientFactory httpClientFactory)
         {
-            _packageRepository = packageRepository;
-            _cartService = cartService;
-            _packageService = packageService;
-            _userManager = userManager;
             _httpClientFactory = httpClientFactory;
         }
 

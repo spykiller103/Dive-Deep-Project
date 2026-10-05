@@ -3,10 +3,10 @@ namespace DiveDeep.Persistence
 {
     public interface ICartItemRepository
     {
-        void Add(CartItem cartItem);
-        void Delete(int id);
-        List<CartItem> GetAll();
-        CartItem? GetById(int id);
-        void Update(CartItem cartItem);
+        Task AddAsync(CartItem cartItem);
+        Task DeleteAsync(int id);
+        Task<List<CartItem>> GetAllAsync();
+        Task<CartItem>? GetByIdAsync(int id);
+        Task UpdateAsync(CartItem cartItem);
     }
 }

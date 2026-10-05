@@ -31,7 +31,7 @@ namespace DiveDeep.WebApiControllers
         public async Task<IActionResult> GetAllAsync()
         {
             List<Equipment> equipment =
-                await _equipmentRepository.GetAll();
+                await _equipmentRepository.GetAllAsync();
 
             return Ok(equipment);
         }
@@ -43,7 +43,7 @@ namespace DiveDeep.WebApiControllers
                 return BadRequest();
 
             Equipment equipment =
-                await _equipmentRepository.GetById(id);
+                await _equipmentRepository.GetByIdAsync(id);
 
             if (equipment == null)
                 return NotFound();
@@ -61,7 +61,7 @@ namespace DiveDeep.WebApiControllers
             string userId)
         {
             Equipment equipmentToBeAdded =
-                await _equipmentRepository.GetById(id);
+                await _equipmentRepository.GetByIdAsync(id);
 
             if (equipmentToBeAdded == null)
                 return NotFound();

@@ -15,44 +15,44 @@ namespace DiveDeep.Persistence
             _context = context;
         }
 
-        public void Add(CartItem cartItem)
+        public async Task AddAsync(CartItem cartItem)
         {
             if (cartItem == null) return;
 
-            _context.CartItems.Add(cartItem);
-            _context.SaveChanges();
+            await _context.CartItems.AddAsync(cartItem);
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            CartItem cartItem = GetById(id);
+            CartItem cartItem = await GetByIdAsync(id);
 
             _context.CartItems.Remove(cartItem);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public List<CartItem> GetAll()
+        public async Task<List<CartItem>> GetAllAsync()
         {
-            return _context.CartItems
+            return await _context.CartItems
              .Include(c => c.Equipment)
              .Include(c => c.Package)
              .Include(c => c.EquipmentSizes)
-             .ToList();
+             .ToListAsync();
         }
 
-        public CartItem? GetById(int id)
+        public async Task<CartItem?> GetByIdAsync(int id)
         {
-            return _context.CartItems
+            return await _context.CartItems
               .Include(c => c.Equipment)
               .Include(c => c.Package)
               .Include(c => c.EquipmentSizes)
-              .FirstOrDefault(c => c.CartItemId == id);
+              .FirstOrDefaultAsync(c => c.CartItemId == id);
         }
 
-        public void Update(CartItem cartItem)
+        public async Task UpdateAsync(CartItem cartItem)
         {
             _context.CartItems.Update(cartItem);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }
