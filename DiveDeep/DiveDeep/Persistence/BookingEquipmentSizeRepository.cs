@@ -13,43 +13,43 @@ namespace DiveDeep.Persistence
             _context = context;
         }
 
-        public List<BookingEquipmentSize> GetAll()
+        public async Task<List<BookingEquipmentSize>> GetAllAsync()
         {
-            return _context.BookingEquipmentSizes.ToList();
+            return await _context.BookingEquipmentSizes.ToListAsync();
         }
 
-        public List<BookingEquipmentSize> GetByBookingId(int bookingId)
+        public async Task<List<BookingEquipmentSize>> GetByBookingIdAsync(int bookingId)
         {
-            return _context.BookingEquipmentSizes
+            return await _context.BookingEquipmentSizes
                 .Where(s => s.BookingId == bookingId)
-                .ToList();
+                .ToListAsync();
         }
 
-        public BookingEquipmentSize? GetById(int id)
+        public async Task<BookingEquipmentSize?> GetByIdAsync(int id)
         {
-            return _context.BookingEquipmentSizes
-                .FirstOrDefault(s => s.Id == id);
+            return await _context.BookingEquipmentSizes
+                .FirstOrDefaultAsync(s => s.Id == id);
         }
 
-        public void Add(BookingEquipmentSize equipmentSize)
+        public async Task AddAsync(BookingEquipmentSize equipmentSize)
         {
-            _context.BookingEquipmentSizes.Add(equipmentSize);
-            _context.SaveChanges();
+            await _context.BookingEquipmentSizes.AddAsync(equipmentSize);
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(BookingEquipmentSize equipmentSize)
+        public async Task UpdateAsync(BookingEquipmentSize equipmentSize)
         {
             _context.BookingEquipmentSizes.Update(equipmentSize);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            var equipmentSize = GetById(id);
+            var equipmentSize = await GetByIdAsync(id);
             if (equipmentSize != null)
             {
                 _context.BookingEquipmentSizes.Remove(equipmentSize);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
     }

@@ -16,64 +16,65 @@ namespace DiveDeep.Persistence
             _context = context;
         }
 
-        public List<Equipment> GetAll()
+        public async Task<List<Equipment>> GetAllAsync()
         {
-            return _context.Equipments
-                .ToList();
+            return await _context.Equipments
+                .ToListAsync();
         }
 
-        public Equipment? GetById(int id)
+        public async Task<Equipment?> GetByIdAsync(int id)
         {
-            return _context.Equipments
-                .FirstOrDefault(e => e.EquipmentId == id);
+            return await _context.Equipments
+                .FirstOrDefaultAsync(e => e.EquipmentId == id);
         }
 
-        public List<Equipment> GetByCategory(string category)
+        public async Task<List<Equipment>> GetByCategoryAsync(string category)
         {
             if (string.IsNullOrWhiteSpace(category))
             {
-                return GetAll();
+                return await _context.Equipments
+                    .ToListAsync();
             }
 
             string equipmentCategory = category;
-            return _context.Equipments
-                .Where(e => !string.IsNullOrEmpty(e.Category) && e.Category == equipmentCategory)
-                .ToList();
+
+            return await _context.Equipments
+                .Where(e => !string.IsNullOrEmpty(e.Category) &&
+                            e.Category == equipmentCategory)
+                .ToListAsync();
         }
 
         public async Task<Equipment> CreateEquipmentAsync(Equipment equipment)
         {
-            _context.Equipments.Add(equipment);
+            await _context.Equipments.AddAsync(equipment);
             await _context.SaveChangesAsync();
 
             return equipment;
         }
+
         public async Task<Equipment> UpdateEquipmentAsync(Equipment equipment)
         {
-
             var existing = await _context.Equipments
                 .FindAsync(equipment.EquipmentId);
+
             if (existing != null)
             {
                 existing.Title = equipment.Title;
                 existing.Description = equipment.Description;
                 existing.Category = equipment.Category;
-               
                 existing.Price = equipment.Price;
                 existing.Amount = equipment.Amount;
-             
-
 
                 await _context.SaveChangesAsync();
             }
+
             return existing ?? equipment;
         }
-       
+
         public async Task DeleteEquipmentAsync(int id)
         {
             var equipment = await _context.Equipments
-            .FindAsync(id);
-
+                .FindAsync(id);
 
             if (equipment != null)
             {
@@ -87,10 +88,6 @@ namespace DiveDeep.Persistence
 
                 await _context.SaveChangesAsync();
             }
-           
-
-}
-
-
+        }
     }
 }

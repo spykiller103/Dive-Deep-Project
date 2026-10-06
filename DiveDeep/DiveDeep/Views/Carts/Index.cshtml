@@ -24,13 +24,9 @@
         <div class="package-box position-relative">
 
             <form asp-controller="Carts" asp-action="RemoveItem" method="post">
-                <input type="hidden" name="cartItemIds" value="@item.CartItemId" />
+                <input type="hidden" name="id" value="@item.CartItemId" />
 
-                <button type="submit"
-                        class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
-                        data-bs-toggle="modal"
-                        data-bs-target="#removeModal">
-                </button>
+                <button type="submit"class="btn-close btn-close-black position-absolute top-0 end-0 m-3"></button>
             </form>
 
             @if (item.Equipment != null)
@@ -185,7 +181,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuller</button>
 
                 <form asp-controller="Carts" asp-action="EmptyCart" method="post" class="d-inline">
-                   
+
                     <button type="submit" class="btn btn-danger">Tøm kurv</button>
                 </form>
             </div>

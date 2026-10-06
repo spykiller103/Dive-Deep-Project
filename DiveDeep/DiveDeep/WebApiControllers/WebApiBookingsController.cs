@@ -2,27 +2,29 @@
 using DiveDeep.Models;
 using DiveDeep.Persistence;
 using DiveDeep.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace DiveDeep.Controllers
+namespace DiveDeep.WebApiControllers
 {
-    public class BookingsController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class WebApiBookingsController : ControllerBase
     {
         private readonly IBookingRepository _bookingRepository;
         private readonly ICartItemRepository _cartItemRepository;
         private readonly UserManager<ApplicationUser> _userManager;
-        public BookingsController(IBookingRepository bookingRepository, ICartItemRepository cartItemRepository, UserManager<ApplicationUser> userManager)
+        public WebApiBookingsController(IBookingRepository bookingRepository, ICartItemRepository cartItemRepository, UserManager<ApplicationUser> userManager)
         {
             _bookingRepository = bookingRepository;
             _cartItemRepository = cartItemRepository;
             _userManager = userManager;
         }
-        public async Task<IActionResult> Index()
-        {
-            string userId = _userManager.GetUserId(User);
 
+        [HttpGet("{userid}")]
+        public async Task<IActionResult> Index(string userId)
+        {
             List<Booking> bookings = (await _bookingRepository.GetAllAsync())
                 .Where(b => b.ApplicationUserId == userId)
                 .ToList();
@@ -48,7 +50,7 @@ namespace DiveDeep.Controllers
 
             BookingApplicationUserViewData vm = new BookingApplicationUserViewData
             {
-                ApplicationUser = _userManager.Users.FirstOrDefault(u => u.Id == userId),
+                ApplicationUser = await _userManager.FindByIdAsync(userId),
 
                 Bookings = bookings,
 
@@ -62,7 +64,8 @@ namespace DiveDeep.Controllers
                 CompletedBookings = completedBookings
             };
 
-            return View(vm);
+            return Ok(vm);
         }
+
     }
 }

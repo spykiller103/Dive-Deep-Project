@@ -15,16 +15,15 @@ namespace DiveDeep.Persistence
             _context = context;
         }
 
-        public List<Package> GetAll()
+        public async Task<List<Package>> GetAllAsync()
         {
-            return _context.Packages
-                .ToList();
+            return await _context.Packages.ToListAsync();
         }
 
-        public Package? GetById(int id)
+        public async Task<Package?> GetByIdAsync(int id)
         {
-            return _context.Packages
-                .FirstOrDefault(p => p.PackageId == id);
+            return await _context.Packages
+                .FirstOrDefaultAsync(p => p.PackageId == id);
         }
 
     }

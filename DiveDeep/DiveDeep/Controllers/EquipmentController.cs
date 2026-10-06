@@ -5,110 +5,82 @@ using DiveDeep.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Globalization;
-using DiveDeep.Service;
+using System.Net.Http.Json;
 using Microsoft.AspNetCore.Http;
 
 namespace DiveDeep.Controllers
 {
     public class EquipmentController : Controller
     {
-
         private readonly UserManager<ApplicationUser> _userManager;
-
         private readonly CartService _cartService;
         private readonly IEquipmentRepository _equipmentRepository;
         private readonly PackageService _packageService;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public EquipmentController(IEquipmentRepository equipmentRepository, CartService cartService, PackageService packageService, UserManager<ApplicationUser> userManager)
+        public EquipmentController(
+            IEquipmentRepository equipmentRepository,
+            CartService cartService,
+            PackageService packageService,
+            UserManager<ApplicationUser> userManager,
+            IHttpClientFactory httpClientFactory)
         {
             _equipmentRepository = equipmentRepository;
             _cartService = cartService;
             _packageService = packageService;
             _userManager = userManager;
+            _httpClientFactory = httpClientFactory;
         }
-        public IActionResult Index(string? category)
+
+        public async Task<IActionResult> Index()
         {
-            List<Equipment> equipment;
-            if (string.IsNullOrWhiteSpace(category))
+            using var httpClient = _httpClientFactory.CreateClient("Api");
+
+            try
             {
-                equipment = _equipmentRepository.GetAll();
+                List<Equipment> response = await httpClient.GetFromJsonAsync<List<Equipment>>("WebApiEquipment");
+
+                return View(response);
             }
-            else
+            catch (Exception ex)
             {
-                equipment = _equipmentRepository.GetByCategory(category);
+                return BadRequest(ex.Message);
             }
-
-            return View(equipment);
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            Equipment equipment = _equipmentRepository.GetById(id);
+            using var httpClient = _httpClientFactory.CreateClient("Api");
 
-            return View(equipment);
-        }
+            try
+            {
+                Equipment response = await httpClient.GetFromJsonAsync<Equipment>($"WebApiEquipment/{id}");
 
-
-        [HttpPost]
-        public IActionResult Reload(int buttonID)
-        {
-            return RedirectToAction(nameof(Index));
+                return View(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [Authorize]
         [HttpPost]
-        public IActionResult Rent(int id, string start, string end, string? size, IFormCollection form)
+        public async Task<IActionResult> Rent(int id, string start, string end, 
+            string? size, IFormCollection form)
         {
             string userId = _userManager.GetUserId(User);
-            Equipment equipmentToBeAdded = _equipmentRepository.GetById(id);
 
-            DateTime startDate, endDate;
-            bool _start = DateTime.TryParseExact(start,
-                new[] { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" },
-                CultureInfo.InvariantCulture, DateTimeStyles.None, out startDate);
+            using var httpClient = _httpClientFactory.CreateClient("Api");
 
-            bool _end = DateTime.TryParseExact(end,
-                new[] { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" },
-                CultureInfo.InvariantCulture, DateTimeStyles.None, out endDate);
-
-            if (!_start || !_end)
+            try
             {
-                int key = id;
-
-                ModelState.AddModelError(
-                    key.ToString(),
-                    "Vælg venligst både start- og slutdato."
-                );
-
-                Equipment equipment = _equipmentRepository.GetById(id);
-
-                return View("Details", equipment);
+                var test = await httpClient.PostAsync($"WebApiEquipment?id={id}&start={start}&end={end}&size={size}&userId={userId}", null);
             }
-
-            int days = (endDate - startDate).Days + 1;
-
-            if (days < 1)
+            catch (Exception ex)
             {
-                days = 1;
+                return BadRequest(ex.Message);
             }
-
-            CartItem cartItem = new CartItem
-            {
-                ApplicationUserId = userId,
-                Equipment = equipmentToBeAdded,
-                StartDate = startDate,
-                EndDate = endDate,
-                TotalDays = days
-            };
-
-            if (!string.IsNullOrWhiteSpace(size))
-            {
-                cartItem.SelectedSize = size;
-            }
-
-            _cartService.Add(cartItem);
 
             return RedirectToAction(nameof(Index));
         }

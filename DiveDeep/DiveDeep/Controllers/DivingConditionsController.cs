@@ -1,16 +1,21 @@
-﻿using DiveDeep.Models;
+﻿using DiveDeep.DTOs;
+using DiveDeep.Models;
 using DiveDeep.Service;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
+using System.Globalization;
 
 namespace DiveDeep.Controllers
 {
     public class DivingConditionsController : Controller
     {
         private readonly IDivingConditionsHttpService _openMeteoService;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public DivingConditionsController(IDivingConditionsHttpService openMeteoService)
+        public DivingConditionsController(IDivingConditionsHttpService openMeteoService, IHttpClientFactory httpClientFactory)
         {
             _openMeteoService = openMeteoService;
+            _httpClientFactory = httpClientFactory;
         }
 
         public IActionResult Index()
@@ -21,95 +26,34 @@ namespace DiveDeep.Controllers
         [HttpGet]
         public async Task<IActionResult> SearchByLocation(string location)
         {
-            if (string.IsNullOrWhiteSpace(location))
+            using var httpClient = _httpClientFactory.CreateClient("Api");
+
+            HttpResponseMessage response =
+                await httpClient.GetAsync($"WebApiDivingConditions/location/{location}");
+
+            if (!response.IsSuccessStatusCode)
             {
-                ViewBag.Message = "Du skal indtaste en lokation.";
+                ViewBag.Message = await response.Content.ReadAsStringAsync();
                 return View("Index");
             }
 
-            OpenMeteoLocation? result =
-                await _openMeteoService.GetLocationByNameAsync(location);
+            DivingConditionsDTO result = await response.Content.ReadFromJsonAsync<DivingConditionsDTO>();
 
-            if (result == null)
-            {
-                ViewBag.Message = "Lokationen kunne ikke findes.";
-                return View("Index");
-            }
+            ViewBag.LocationName = result.Location.Name;
+            ViewBag.Latitude = result.Location.Latitude;
+            ViewBag.Longitude = result.Location.Longitude;
 
-            OpenMeteoWeatherResponse? weather = await _openMeteoService.GetWeatherAsync(result.Latitude, result.Longitude);
+            ViewBag.WindSpeed = result.Weather?.Current?.WindSpeed;
+            ViewBag.Precipitation = result.Weather?.Current?.Precipitation;
+            ViewBag.WeatherCode = result.Weather?.Current?.WeatherCode;
 
-            OpenMeteoMarineResponse? marine = await _openMeteoService.GetMarineAsync(result.Latitude, result.Longitude);
+            ViewBag.WaveHeight = result.Marine?.Current?.WaveHeight;
+            ViewBag.WaterTemperature = result.Marine?.Current?.WaterTemperature;
 
-            bool isThunderstorm =
-                weather?.Current?.WeatherCode == 95 || //tordenvejr
-                weather?.Current?.WeatherCode == 96 || //tordenvejr
-                weather?.Current?.WeatherCode == 99; //tordenvejr
-
-            List<string> reasons = new List<string>();
-
-            if (weather?.Current?.WindSpeed >= 8)
-            {
-                reasons.Add("Vindhastigheden er for høj.");
-            }
-
-            if (marine?.Current?.WaveHeight >= 1.5)
-            {
-                reasons.Add("Bølgehøjden er for høj.");
-            }
-
-            if (weather?.Current?.Precipitation >= 2)
-            {
-                reasons.Add("Der er for meget nedbør.");
-            }
-
-            if (isThunderstorm)
-            {
-                reasons.Add("Der er tordenvejr. Al dykning frarådes.");
-            }
-
-            bool isSuitableForDiving = reasons.Count == 0;
-
-            string? recommendedSuit = null;
-
-            if (marine?.Current?.WaterTemperature != null)
-            {
-                double waterTemperature = marine.Current.WaterTemperature.Value;
-
-                if (waterTemperature > 24)
-                {
-                    recommendedSuit = "Våddragt (3mm)";
-                }
-                else if (waterTemperature >= 18)
-                {
-                    recommendedSuit = "Våddragt (5mm)";
-                }
-                else if (waterTemperature >= 10)
-                {
-                    recommendedSuit = "Våddragt (7mm)";
-                }
-                else
-                {
-                    recommendedSuit = "Tørdragt";
-                }
-            }
-
-            ViewBag.LocationName = result.Name;
-            ViewBag.Latitude = result.Latitude;
-            ViewBag.Longitude = result.Longitude;
-
-            ViewBag.WindSpeed = weather?.Current?.WindSpeed;
-            ViewBag.Precipitation = weather?.Current?.Precipitation;
-            ViewBag.WeatherCode = weather?.Current?.WeatherCode;
-
-            ViewBag.WaveHeight = marine?.Current?.WaveHeight;
-            ViewBag.WaterTemperature = marine?.Current?.WaterTemperature;
-
-            ViewBag.IsThunderstorm = isThunderstorm;
-
-            ViewBag.IsSuitableForDiving = isSuitableForDiving;
-            ViewBag.Reasons = reasons;
-
-            ViewBag.RecommendedSuit = recommendedSuit;
+            ViewBag.IsThunderstorm = result.IsThunderstorm;
+            ViewBag.IsSuitableForDiving = result.IsSuitableForDiving;
+            ViewBag.Reasons = result.Reasons;
+            ViewBag.RecommendedSuit = result.RecommendedSuit;
 
             return View("Index");
         }
@@ -117,94 +61,35 @@ namespace DiveDeep.Controllers
         [HttpGet]
         public async Task<IActionResult> SearchByCords(double latitude, double longitude)
         {
-            if (latitude == null || longitude == null)
+            using var httpClient = _httpClientFactory.CreateClient("Api");
+
+            HttpResponseMessage response = await httpClient.GetAsync($"WebApiDivingConditions/cords/{latitude.ToString(CultureInfo.InvariantCulture)}/{longitude.ToString(CultureInfo.InvariantCulture)}");
+
+
+            if (!response.IsSuccessStatusCode)
             {
-                ViewBag.Message = "Du skal indtaste koordinator.";
+                ViewBag.Message = await response.Content.ReadAsStringAsync();
                 return View("Index");
             }
 
-            OpenMeteoMarineResponse? result =await _openMeteoService.GetLocationByCordsAsync(latitude, longitude);
+            DivingConditionsDTO result = await response.Content.ReadFromJsonAsync<DivingConditionsDTO>();
 
-            if (result == null)
-            {
-                ViewBag.Message = "Lokationen kunne ikke findes.";
-                return View("Index");
-            }
+            ViewBag.LocationName = $"{result.Latitude}, {result.Longitude}";
 
-            OpenMeteoWeatherResponse? weather = await _openMeteoService.GetWeatherAsync(latitude, longitude);
+            ViewBag.Latitude = result.Latitude;
+            ViewBag.Longitude = result.Longitude;
 
-            OpenMeteoMarineResponse? marine = await _openMeteoService.GetMarineAsync(latitude, longitude);
+            ViewBag.WindSpeed = result.Weather?.Current?.WindSpeed;
+            ViewBag.Precipitation = result.Weather?.Current?.Precipitation;
+            ViewBag.WeatherCode = result.Weather?.Current?.WeatherCode;
 
-            bool isThunderstorm =
-                weather?.Current?.WeatherCode == 95 || //tordenvejr
-                weather?.Current?.WeatherCode == 96 || //tordenvejr
-                weather?.Current?.WeatherCode == 99; //tordenvejr
+            ViewBag.WaveHeight = result.Marine?.Current?.WaveHeight;
+            ViewBag.WaterTemperature = result.Marine?.Current?.WaterTemperature;
 
-            List<string> reasons = new List<string>();
-
-            if (weather?.Current?.WindSpeed >= 8)
-            {
-                reasons.Add("Vindhastigheden er for høj.");
-            }
-
-            if (marine?.Current?.WaveHeight >= 1.5)
-            {
-                reasons.Add("Bølgehøjden er for høj.");
-            }
-
-            if (weather?.Current?.Precipitation >= 2)
-            {
-                reasons.Add("Der er for meget nedbør.");
-            }
-
-            if (isThunderstorm)
-            {
-                reasons.Add("Der er tordenvejr. Al dykning frarådes.");
-            }
-
-            bool isSuitableForDiving = reasons.Count == 0;
-
-            string? recommendedSuit = null;
-
-            if (marine?.Current?.WaterTemperature != null)
-            {
-                double waterTemperature = marine.Current.WaterTemperature.Value;
-
-                if (waterTemperature > 24)
-                {
-                    recommendedSuit = "Våddragt (3mm)";
-                }
-                else if (waterTemperature >= 18)
-                {
-                    recommendedSuit = "Våddragt (5mm)";
-                }
-                else if (waterTemperature >= 10)
-                {
-                    recommendedSuit = "Våddragt (7mm)";
-                }
-                else
-                {
-                    recommendedSuit = "Tørdragt";
-                }
-            }
-            ViewBag.LocationName = $"{latitude}, {longitude}";
-
-            ViewBag.Latitude = latitude;
-            ViewBag.Longitude = longitude;
-
-            ViewBag.WindSpeed = weather?.Current?.WindSpeed;
-            ViewBag.Precipitation = weather?.Current?.Precipitation;
-            ViewBag.WeatherCode = weather?.Current?.WeatherCode;
-
-            ViewBag.WaveHeight = marine?.Current?.WaveHeight;
-            ViewBag.WaterTemperature = marine?.Current?.WaterTemperature;
-
-            ViewBag.IsThunderstorm = isThunderstorm;
-
-            ViewBag.IsSuitableForDiving = isSuitableForDiving;
-            ViewBag.Reasons = reasons;
-
-            ViewBag.RecommendedSuit = recommendedSuit;
+            ViewBag.IsThunderstorm = result.IsThunderstorm;
+            ViewBag.IsSuitableForDiving = result.IsSuitableForDiving;
+            ViewBag.Reasons = result.Reasons;
+            ViewBag.RecommendedSuit = result.RecommendedSuit;
 
             return View("Index");
         }

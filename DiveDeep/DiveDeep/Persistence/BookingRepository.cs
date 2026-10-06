@@ -15,22 +15,22 @@ namespace DiveDeep.Persistence
             _context = context;
             _bookingEquipmentSizeRepository = bookingEquipmentSizeRepository;
         }
-        public Booking Add(List<CartItem> cartItems, string UserId)
+        public async Task<Booking> AddAsync(List<CartItem> cartItems, string UserId)
         {
             Booking booking = new Booking
             {
                 ApplicationUserId = UserId
             };
 
-            _context.Bookings.Add(booking);
-            _context.SaveChanges();
+            await _context.Bookings.AddAsync(booking);
+            await _context.SaveChangesAsync();
 
             // Copy equipment sizes from cart items to booking equipment sizes
             foreach (var cartItem in cartItems)
             {
                 if (cartItem.EquipmentSizes != null && cartItem.EquipmentSizes.Count > 0)
                 {
-                    foreach (var equipmentSize in cartItem.EquipmentSizes)
+                    foreach (CartItemEquipmentSize equipmentSize in cartItem.EquipmentSizes)
                     {
                         BookingEquipmentSize bookingEquipmentSize = new BookingEquipmentSize
                         {
@@ -38,16 +38,16 @@ namespace DiveDeep.Persistence
                             SelectedSize = equipmentSize.SelectedSize,
                             BookingId = booking.BookingId
                         };
-                        _bookingEquipmentSizeRepository.Add(bookingEquipmentSize);
+                        await _bookingEquipmentSizeRepository.AddAsync(bookingEquipmentSize);
                     }
                 }
             }
 
             return booking;
         }
-        public List<Booking> GetAll()
+        public async Task<List<Booking>> GetAllAsync()
         {
-            return _context.Bookings
+            return await _context.Bookings
                 .Include(b => b.CartItems)
                     .ThenInclude(c => c.EquipmentSizes)
                 .Include(b => b.CartItems)
@@ -57,18 +57,18 @@ namespace DiveDeep.Persistence
                 //.Include(b => b.CartItems)
                 //    .ThenInclude(c => c.EquipmentSizes)
                 .Include(b => b.EquipmentSizes)
-                .ToList();
+                .ToListAsync();
         }
 
-        public Booking? GetById(int id)
+        public async Task<Booking?> GetByIdAsync(int id)
         {
-            return _context.Bookings
+            return await _context.Bookings
                 .Include(b => b.CartItems)
                     .ThenInclude(ci => ci.Package)
                 .Include(b => b.CartItems)
                     .ThenInclude(ci => ci.Equipment)
                 .Include(b => b.EquipmentSizes)
-                .FirstOrDefault(b => b.BookingId == id);
+                .FirstOrDefaultAsync(b => b.BookingId == id);
         }
 
         public async Task DeleteBookingAsync(int id)

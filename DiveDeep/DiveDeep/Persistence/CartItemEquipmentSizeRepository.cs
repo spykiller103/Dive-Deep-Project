@@ -13,43 +13,43 @@ namespace DiveDeep.Persistence
             _context = context;
         }
 
-        public List<CartItemEquipmentSize> GetAll()
+        public async Task<List<CartItemEquipmentSize>> GetAllAsync()
         {
-            return _context.CartItemEquipmentSizes.ToList();
+            return await _context.CartItemEquipmentSizes.ToListAsync();
         }
 
-        public List<CartItemEquipmentSize> GetByCartItemId(int cartItemId)
+        public async Task<List<CartItemEquipmentSize>> GetByCartItemIdAsync(int cartItemId)
         {
-            return _context.CartItemEquipmentSizes
+            return await _context.CartItemEquipmentSizes
                 .Where(s => s.CartItemId == cartItemId)
-                .ToList();
+                .ToListAsync();
         }
 
-        public CartItemEquipmentSize? GetById(int id)
+        public async Task<CartItemEquipmentSize?> GetByIdAsync(int id)
         {
-            return _context.CartItemEquipmentSizes
-                .FirstOrDefault(s => s.Id == id);
+            return await _context.CartItemEquipmentSizes
+                .FirstOrDefaultAsync(s => s.Id == id);
         }
 
-        public void Add(CartItemEquipmentSize equipmentSize)
+        public async Task AddAsync(CartItemEquipmentSize equipmentSize)
         {
-            _context.CartItemEquipmentSizes.Add(equipmentSize);
-            _context.SaveChanges();
+            await _context.CartItemEquipmentSizes.AddAsync(equipmentSize);
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(CartItemEquipmentSize equipmentSize)
+        public async Task UpdateAsync(CartItemEquipmentSize equipmentSize)
         {
             _context.CartItemEquipmentSizes.Update(equipmentSize);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            var equipmentSize = GetById(id);
+            var equipmentSize = await GetByIdAsync(id);
             if (equipmentSize != null)
             {
                 _context.CartItemEquipmentSizes.Remove(equipmentSize);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
     }

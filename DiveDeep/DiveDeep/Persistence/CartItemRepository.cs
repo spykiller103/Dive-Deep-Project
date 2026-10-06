@@ -15,48 +15,34 @@ namespace DiveDeep.Persistence
             _context = context;
         }
 
-        public void Add(CartItem cartItem)
+        public async Task AddAsync(CartItem cartItem)
         {
             if (cartItem == null) return;
 
-            _context.CartItems.Add(cartItem);
-            _context.SaveChanges();
+            await _context.CartItems.AddAsync(cartItem);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            CartItem? cartItem = await GetById(id);
+            CartItem cartItem = await GetByIdAsync(id);
 
             if(cartItem != null)
             {
             _context.CartItems.Remove(cartItem);
             await _context.SaveChangesAsync();
-
-            }
         }
 
-        public async Task DeleteCartItemAsync(int id)
+        public async Task<List<CartItem>> GetAllAsync()
         {
-            var cartItem = await _context.CartItems.FindAsync(id);
-            if (cartItem != null)
-            {
-              
-                _context.CartItems.Remove(cartItem);
-                await _context.SaveChangesAsync();
-            }
-
-        }
-
-        public List<CartItem> GetAll()
-        {
-            return _context.CartItems
+            return await _context.CartItems
              .Include(c => c.Equipment)
              .Include(c => c.Package)
              .Include(c => c.EquipmentSizes)
-             .ToList();
+             .ToListAsync();
         }
 
-        public async Task<CartItem?> GetById(int id)
+        public async Task<CartItem?> GetByIdAsync(int id)
         {
             return await _context.CartItems
               .Include(c => c.Equipment)
@@ -65,10 +51,10 @@ namespace DiveDeep.Persistence
               .FirstOrDefaultAsync(c => c.CartItemId == id);
         }
 
-        public void Update(CartItem cartItem)
+        public async Task UpdateAsync(CartItem cartItem)
         {
             _context.CartItems.Update(cartItem);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public async Task<CartItem> UpdateCartItemAsync(CartItem cartItem)

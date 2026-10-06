@@ -3,8 +3,8 @@ namespace DiveDeep.Persistence
 {
     public interface IPackageRepository
     {
-        List<Package> GetAll();
-        Package? GetById(int id);
-     
+        Task<List<Package>> GetAllAsync();
+        Task<Package?> GetByIdAsync(int id);
+
     }
 }

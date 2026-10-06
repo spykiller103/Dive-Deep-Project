@@ -14,21 +14,21 @@ namespace DiveDeep.Service
             _equipmentSizeRepository = equipmentSizeRepository;
         }
 
-        public async Task<CartItem?> GetById(int id)
+        public async Task<CartItem?> GetByIdAsync(int id)
         {
-            return await _cartItemRepository.GetById(id);
+            return await _cartItemRepository.GetByIdAsync(id);
         }
 
-        public List<CartItem> GetAll()
+        public async Task<List<CartItem>> GetAllAsync()
         {
-            return _cartItemRepository.GetAll();
+            return await _cartItemRepository.GetAllAsync();
         }
 
 
 
-        public void Add(CartItem cartItem)
+        public async Task AddAsync(CartItem cartItem)
         {
-            _cartItemRepository.Add(cartItem);
+            await _cartItemRepository.AddAsync(cartItem);
             
             // Add equipment sizes if they exist
             if (cartItem.EquipmentSizes != null && cartItem.EquipmentSizes.Count > 0)
@@ -41,22 +41,22 @@ namespace DiveDeep.Service
                 {
                     equipmentSize.CartItemId = cartItem.CartItemId;
                     equipmentSize.Id = 0; // Let database auto-generate the ID
-                    _equipmentSizeRepository.Add(equipmentSize);
+                    await _equipmentSizeRepository.AddAsync(equipmentSize);
                 }
             }
         }
 
-        public void Update(CartItem cartItem)
+        public async Task UpdateAsync(CartItem cartItem)
         {
-            _cartItemRepository.Update(cartItem);
+            await _cartItemRepository.UpdateAsync(cartItem);
             
             // Update equipment sizes
-            List<CartItemEquipmentSize> existingSizes = _equipmentSizeRepository.GetByCartItemId(cartItem.CartItemId);
+            List<CartItemEquipmentSize> existingSizes = await _equipmentSizeRepository.GetByCartItemIdAsync(cartItem.CartItemId);
             
             // Remove old sizes
             foreach (CartItemEquipmentSize? existingSize in existingSizes)
             {
-                _equipmentSizeRepository.Delete(existingSize.Id);
+                await _equipmentSizeRepository.DeleteAsync(existingSize.Id);
             }
             
             // Add new sizes
@@ -65,21 +65,21 @@ namespace DiveDeep.Service
                 foreach (CartItemEquipmentSize? equipmentSize in cartItem.EquipmentSizes)
                 {
                     equipmentSize.CartItemId = cartItem.CartItemId;
-                    _equipmentSizeRepository.Add(equipmentSize);
+                    await _equipmentSizeRepository.AddAsync(equipmentSize);
                 }
             }
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             // Delete associated equipment sizes first
-            List<CartItemEquipmentSize> equipmentSizes = _equipmentSizeRepository.GetByCartItemId(id);
+            List<CartItemEquipmentSize> equipmentSizes = await _equipmentSizeRepository.GetByCartItemIdAsync(id);
             foreach (CartItemEquipmentSize? equipmentSize in equipmentSizes)
             {
-                _equipmentSizeRepository.Delete(equipmentSize.Id);
+                await _equipmentSizeRepository.DeleteAsync(equipmentSize.Id);
             }
             
-            _cartItemRepository.Delete(id);
+            await _cartItemRepository.DeleteAsync(id);
         }
     }
 }
