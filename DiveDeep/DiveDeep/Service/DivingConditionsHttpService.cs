@@ -27,27 +27,12 @@ namespace DiveDeep.Service
 
         public async Task<OpenMeteoMarineResponse?> GetLocationByCordsAsync(double latitude, double longitude)
         {
-            var client = _clientFactory.CreateClient("OpenMeteoMarine");
+            HttpClient client = _clientFactory.CreateClient("OpenMeteoMarine");
 
-            string url = FormattableString.Invariant(
-                $"v1/marine?latitude={latitude}&longitude={longitude}&current=wave_height,sea_surface_temperature&cell_selection=sea"
-            );
+            OpenMeteoMarineResponse? response = await client.GetFromJsonAsync<OpenMeteoMarineResponse>(
+                $"v1/marine?latitude={latitude.ToString(CultureInfo.InvariantCulture)}&longitude={longitude.ToString(CultureInfo.InvariantCulture)}&current=wave_height,sea_surface_temperature&cell_selection=sea");
 
-            HttpResponseMessage response = await client.GetAsync(url);
-
-            string json = await response.Content.ReadAsStringAsync();
-
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception(
-                    $"Open-Meteo fejl {response.StatusCode}: {json}"
-                );
-            }
-
-            OpenMeteoMarineResponse? result =
-                JsonSerializer.Deserialize<OpenMeteoMarineResponse>(json);
-
-            return result;
+            return response;
         }
 
         public async Task<OpenMeteoMarineResponse?> GetMarineAsync(double latitude, double longitude)
