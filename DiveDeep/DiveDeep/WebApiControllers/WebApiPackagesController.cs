@@ -15,15 +15,13 @@ namespace DiveDeep.WebApiControllers
     [ApiController]
     public class WebApiPackagesController : ControllerBase
     {
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IPackageRepository _packageRepository;
         private readonly CartService _cartService;
 
-        public WebApiPackagesController(IPackageRepository packageRepository, CartService cartService, UserManager<ApplicationUser> userManager)
+        public WebApiPackagesController(IPackageRepository packageRepository, CartService cartService)
         {
             _packageRepository = packageRepository;
             _cartService = cartService;
-            _userManager = userManager;
         }
 
         [HttpGet]

@@ -17,16 +17,14 @@ namespace DiveDeep.Controllers
     {
         private readonly CartService _cartService;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly DiveDeepContext _context;
         private readonly IBookingRepository _bookingRepository;
 
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public CartsController(CartService cartService, IBookingRepository bookingRepository, UserManager<ApplicationUser> userManager, DiveDeepContext context, IHttpClientFactory httpClientFactory)
+        public CartsController(CartService cartService, IBookingRepository bookingRepository, UserManager<ApplicationUser> userManager, IHttpClientFactory httpClientFactory)
         {
             _cartService = cartService;
             _userManager = userManager;
-            _context = context;
             _bookingRepository = bookingRepository;
             _httpClientFactory = httpClientFactory;
         }
@@ -40,7 +38,7 @@ namespace DiveDeep.Controllers
             try
             {
                 List<CartItem> response = await httpClient.GetFromJsonAsync<List<CartItem>>($"WebApiCarts/{userId}");
-                
+
                 return View(response);
             }
             catch (Exception ex)
@@ -82,7 +80,7 @@ namespace DiveDeep.Controllers
                 .ToList();
 
 
-            Booking booking = _bookingRepository.Add(cartItems, userId);
+            Booking booking = await _bookingRepository.AddAsync(cartItems, userId);
 
             foreach (CartItem cartItem in cartItems)
             {
@@ -96,8 +94,19 @@ namespace DiveDeep.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveItemAsync(int id)
         {
-            await _cartService.DeleteAsync(id);
-            return View();
+            using var httpClient = _httpClientFactory.CreateClient("Api");
+
+            try
+            {
+                await httpClient.DeleteAsync($"WebApiCarts/{id}");
+                return RedirectToAction("Index");
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
     }
 }

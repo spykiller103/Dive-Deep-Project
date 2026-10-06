@@ -4,11 +4,11 @@ namespace DiveDeep.Persistence
 {
     public interface IBookingEquipmentSizeRepository
     {
-        List<BookingEquipmentSize> GetAll();
-        List<BookingEquipmentSize> GetByBookingId(int bookingId);
-        BookingEquipmentSize? GetById(int id);
-        void Add(BookingEquipmentSize equipmentSize);
-        void Update(BookingEquipmentSize equipmentSize);
-        void Delete(int id);
+        Task<List<BookingEquipmentSize>> GetAllAsync();
+        Task<List<BookingEquipmentSize>> GetByBookingIdAsync(int bookingId);
+        Task<BookingEquipmentSize?> GetByIdAsync(int id);
+        Task AddAsync(BookingEquipmentSize equipmentSize);
+        Task UpdateAsync(BookingEquipmentSize equipmentSize);
+        Task DeleteAsync(int id);
     }
 }
