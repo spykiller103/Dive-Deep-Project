@@ -34,6 +34,18 @@ namespace DiveDeep.Persistence
             }
         }
 
+        public async Task AdminDeleteCartItemAsync(int id)
+        {
+            var cartItem = await _context.CartItems.FindAsync(id);
+            if (cartItem != null)
+            {
+
+                _context.CartItems.Remove(cartItem);
+                await _context.SaveChangesAsync();
+            }
+
+        }
+
         public async Task<List<CartItem>> GetAllAsync()
         {
             return await _context.CartItems
@@ -58,11 +70,11 @@ namespace DiveDeep.Persistence
             await _context.SaveChangesAsync();
         }
 
-        public async Task<CartItem> UpdateCartItemAsync(CartItem cartItem)
+        public async Task<CartItem> AdminUpdateCartItemAsync(CartItem cartItem)
         {
 
-            var existing = await _context.CartItems
-                .FindAsync(cartItem.CartItemId);
+            CartItem? existing = await _context.CartItems.FindAsync(cartItem.CartItemId);
+
             if (existing != null)
             {
                 existing.StartDate = cartItem.StartDate;

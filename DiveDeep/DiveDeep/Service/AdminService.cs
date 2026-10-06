@@ -42,12 +42,12 @@ namespace DiveDeep.Service
         }
         public async Task DeleteCartItem(int id)
         {
-            await _cartItemRepository.DeleteCartItemAsync(id);
+            await _cartItemRepository.AdminDeleteCartItemAsync(id);
         }
 
         public async Task<CartItem> UpdateCartItemAsync(CartItem cartItem)
         {
-            return  await _cartItemRepository.UpdateCartItemAsync(cartItem);
+            return  await _cartItemRepository.AdminUpdateCartItemAsync(cartItem);
         }
 
     }
