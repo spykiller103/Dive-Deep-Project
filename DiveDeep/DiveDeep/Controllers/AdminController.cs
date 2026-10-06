@@ -58,7 +58,7 @@ namespace DiveDeep.Controllers
             }
             return View(equipment);
         }
-        //Saves the updated changes
+
         [HttpPost]
         public async Task<IActionResult> UpdateEquipment(Equipment equipment)
         {
