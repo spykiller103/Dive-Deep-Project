@@ -15,15 +15,13 @@ namespace DiveDeep.WebApiControllers
     [ApiController]
     public class WebApiPackagesController : ControllerBase
     {
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IPackageRepository _packageRepository;
         private readonly CartService _cartService;
 
-        public WebApiPackagesController(IPackageRepository packageRepository, CartService cartService, UserManager<ApplicationUser> userManager)
+        public WebApiPackagesController(IPackageRepository packageRepository, CartService cartService)
         {
             _packageRepository = packageRepository;
             _cartService = cartService;
-            _userManager = userManager;
         }
 
         [HttpGet]
@@ -48,7 +46,7 @@ namespace DiveDeep.WebApiControllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RentAsync([FromHeader] int id, string start, string end, string? size, IFormCollection form, string userId)
+        public async Task<IActionResult> RentAsync([FromQuery] int id, string start, string end, string? size, IFormCollection form, string userId)
         {   
             Package packagesToBeAdded = await _packageRepository.GetByIdAsync(id);
 

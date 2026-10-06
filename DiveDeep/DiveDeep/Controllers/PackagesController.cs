@@ -13,11 +13,14 @@ namespace DiveDeep.Controllers
 {
     public class PackagesController : Controller
     {
+
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public PackagesController(IHttpClientFactory httpClientFactory)
+        public PackagesController( IHttpClientFactory httpClientFactory, UserManager<ApplicationUser> userManager)
         {
             _httpClientFactory = httpClientFactory;
+            _userManager = userManager; 
         }
 
         public async Task<IActionResult> Index()
@@ -52,20 +55,28 @@ namespace DiveDeep.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Rent(int id, string start, string end, string? size, IFormCollection form)
+        public async Task<IActionResult> Rent(
+            int id,
+            string start,
+            string end,
+            string? size,
+            IFormCollection form)
         {
-            //string userId = _userManager.GetUserId(User);
+            string userId = _userManager.GetUserId(User);
 
             using var httpClient = _httpClientFactory.CreateClient("Api");
 
             try
             {
-                var test = await httpClient.PostAsync($"WebApiPackages?id={id}&start={start}&end={end}&size={size}&", null);
+                var test = await httpClient.PostAsync(
+                    $"WebApiPackages?id={id}&start={start}&end={end}&size={size}&userId={userId}",
+                    null);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
+
             return RedirectToAction(nameof(Index));
         }
 
