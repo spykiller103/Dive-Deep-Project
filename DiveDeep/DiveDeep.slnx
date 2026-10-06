@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="DiveDeep/DiveDeep.csproj" />
+  <Project Path="DiveDeepUnitTest/DiveDeepUnitTest.csproj" Id="bf798a35-2d25-45bd-a405-1171b6528f2c" />
 </Solution>
