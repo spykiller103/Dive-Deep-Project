@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Mapster;
+using DiveDeep.DTOs;
 
 namespace DiveDeep.WebApiControllers
 {
@@ -26,6 +28,7 @@ namespace DiveDeep.WebApiControllers
             _context = context;
             _bookingRepository = bookingRepository;
         }
+        
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetUserCart(string userId)
         {
@@ -33,7 +36,9 @@ namespace DiveDeep.WebApiControllers
                 .Where(c => c.ApplicationUserId == userId && c.BookingId == null)
                 .ToList();
 
-            return Ok(cartItems);
+            List<CartItemDTO> cartItemDTOs = cartItems.Adapt<List<CartItemDTO>>();
+
+            return Ok(cartItemDTOs);
         }
 
         [HttpPost("{userId}")]

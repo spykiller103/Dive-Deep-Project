@@ -1,8 +1,10 @@
 ﻿using Azure;
 using DiveDeep.Data;
+using DiveDeep.DTOs;
 using DiveDeep.Models;
 using DiveDeep.Persistence;
 using DiveDeep.Service;
+using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +40,7 @@ namespace DiveDeep.Controllers
             try
             {
                 List<CartItem> response = await httpClient.GetFromJsonAsync<List<CartItem>>($"WebApiCarts/{userId}");
+                
                 return View(response);
             }
             catch (Exception ex)
