@@ -125,6 +125,13 @@ namespace DiveDeep.Controllers
             return RedirectToAction(nameof(Update));
         }
 
+        public async Task<IActionResult> EditBooking()
+        {
+            List<Booking> bookings = await _bookingRepository.GetAllBookingsForAdminAsync();
+            return View(bookings);
+        }
+
+
 
         [HttpPost]
         public async Task<IActionResult> DeleteBookingAsync(int id)
