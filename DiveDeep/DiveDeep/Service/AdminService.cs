@@ -14,18 +14,18 @@ namespace DiveDeep.Service
 
         public async Task<Equipment> CreateEquipment(Equipment equipment)
         {
-            return await _equipmentRepository.CreateEquipment(equipment);
+            return await _equipmentRepository.CreateEquipmentAsync(equipment);
             
         }
 
         public async Task DeleteEquipment(int id)
         {
-            await _equipmentRepository.DeleteEquipment(id);
+            await _equipmentRepository.DeleteEquipmentAsync(id);
         }
 
         public async Task<Equipment> UpdateEquipment(Equipment equipment)
         {
-            return await _equipmentRepository.UpdateEquipment(equipment);
+            return await _equipmentRepository.UpdateEquipmentAsync(equipment);
         }
     }
 }

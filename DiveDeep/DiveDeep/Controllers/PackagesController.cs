@@ -13,19 +13,10 @@ namespace DiveDeep.Controllers
 {
     public class PackagesController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IPackageRepository _packageRepository;
-        private readonly CartService _cartService;
-        private readonly PackageService _packageService;
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public PackagesController
-            (IPackageRepository packageRepository, CartService cartService, PackageService packageService, UserManager<ApplicationUser> userManager, IHttpClientFactory httpClientFactory)
+        public PackagesController(IHttpClientFactory httpClientFactory)
         {
-            _packageRepository = packageRepository;
-            _cartService = cartService;
-            _packageService = packageService;
-            _userManager = userManager;
             _httpClientFactory = httpClientFactory;
         }
 
@@ -63,13 +54,13 @@ namespace DiveDeep.Controllers
         [HttpPost]
         public async Task<IActionResult> Rent(int id, string start, string end, string? size, IFormCollection form)
         {
-            string userId = _userManager.GetUserId(User);
+            //string userId = _userManager.GetUserId(User);
 
             using var httpClient = _httpClientFactory.CreateClient("Api");
 
             try
             {
-                var test = await httpClient.PostAsync($"WebApiPackages?id={id}&start={start}&end={end}&size={size}&userId={userId}", null);
+                var test = await httpClient.PostAsync($"WebApiPackages?id={id}&start={start}&end={end}&size={size}&", null);
             }
             catch (Exception ex)
             {

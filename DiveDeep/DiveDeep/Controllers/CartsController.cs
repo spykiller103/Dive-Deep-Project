@@ -1,4 +1,5 @@
-﻿using DiveDeep.Data;
+﻿using Azure;
+using DiveDeep.Data;
 using DiveDeep.Models;
 using DiveDeep.Persistence;
 using DiveDeep.Service;
@@ -17,55 +18,61 @@ namespace DiveDeep.Controllers
         private readonly DiveDeepContext _context;
         private readonly IBookingRepository _bookingRepository;
 
-        public CartsController(CartService cartService, IBookingRepository bookingRepository, UserManager<ApplicationUser> userManager, DiveDeepContext context)
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public CartsController(CartService cartService, IBookingRepository bookingRepository, UserManager<ApplicationUser> userManager, DiveDeepContext context, IHttpClientFactory httpClientFactory)
         {
             _cartService = cartService;
             _userManager = userManager;
             _context = context;
             _bookingRepository = bookingRepository;
+            _httpClientFactory = httpClientFactory;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            string userId = _userManager.GetUserId(User);
+
+            using var httpClient = _httpClientFactory.CreateClient("Api");
+
+            try
+            {
+                List<CartItem> response = await httpClient.GetFromJsonAsync<List<CartItem>>($"WebApiCarts/{userId}");
+                return View(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EmptyCart()
         {
-            // Delete all cart items that are not part of a booking and only for the logged in user
-            List<CartItem> cartItems = _cartService.GetAll()
-                .Where(c => c.BookingId == null)
-                .ToList();
-            ApplicationUser user = await _userManager.GetUserAsync(User);
-           if(user != null)
-            {
-               var userCartItems = await _context.CartItems
-                        .Where(c => c.ApplicationUserId == user.Id) 
-                        .ToListAsync();
-                _context.CartItems.RemoveRange(userCartItems); //RemoveRange tracks items in the deleted state until DBContext.SaveChanges() is called
+            string userId = _userManager.GetUserId(User);
 
-                await _context.SaveChangesAsync();
-               
+            using var httpClient = _httpClientFactory.CreateClient("Api");
+
+            try
+            {
+                await httpClient.PostAsync($"WebApiCarts/{userId}", null);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
 
             return RedirectToAction("Index");
         }
 
-        public IActionResult Index()
-        {
-            string userId = _userManager.GetUserId(User);
-
-            List<CartItem> cartItems = _cartService.GetAll()
-                .Where(c => c.ApplicationUserId == userId && c.BookingId == null)
-                .ToList();
-
-            return View(cartItems);
-        }
-
         [HttpPost]
-        public IActionResult Checkout(List<int> cartItemIds)
+        public async Task<IActionResult> Checkout(List<int> cartItemIds)
         {
             string userId = _userManager.GetUserId(User);
 
-            List<CartItem> cartItems = _cartService.GetAll()
-                .Where(c =>cartItemIds
+            List<CartItem> cartItems = (await _cartService.GetAllAsync())
+                .Where(c => cartItemIds
                 .Contains(c.CartItemId) &&
                     c.ApplicationUserId == userId &&
                     c.BookingId == null)
@@ -77,16 +84,16 @@ namespace DiveDeep.Controllers
             foreach (CartItem cartItem in cartItems)
             {
                 cartItem.BookingId = booking.BookingId;
-                _cartService.Update(cartItem);
+                await _cartService.UpdateAsync(cartItem);
             }
 
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public IActionResult RemoveItem(int id)
+        public async Task<IActionResult> RemoveItemAsync(int id)
         {
-            _cartService.Delete(id);
+            await _cartService.DeleteAsync(id);
             return View();
         }
     }

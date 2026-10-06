@@ -31,7 +31,7 @@ namespace DiveDeep.Controllers
         [HttpGet]
         public IActionResult Update()
         {
-            var equipment = _equipmentRepository.GetAll();
+            var equipment = _equipmentRepository.GetAllAsync();
             return View(equipment);
         }
       
@@ -44,14 +44,14 @@ namespace DiveDeep.Controllers
                 return View("Create", equipment);
             }
 
-            await _equipmentRepository.CreateEquipment(equipment);
+            await _equipmentRepository.CreateEquipmentAsync(equipment);
 
             return RedirectToAction(nameof(Index));
         }
         [HttpGet]
         public IActionResult UpdateEquipment(int id)
         {
-            var equipment = _equipmentRepository.GetById(id);
+            var equipment = _equipmentRepository.GetByIdAsync(id);
             if (equipment == null)
             {
                 return NotFound();
@@ -66,14 +66,14 @@ namespace DiveDeep.Controllers
             {
                 return View(equipment);
             }
-            await _equipmentRepository.UpdateEquipment(equipment);
+            await _equipmentRepository.UpdateEquipmentAsync(equipment);
 
             return RedirectToAction(nameof(Index));
         }
         [HttpPost]
         public async Task<IActionResult> DeleteEquipment(int id)
         {
-            await _equipmentRepository.DeleteEquipment(id);
+            await _equipmentRepository.DeleteEquipmentAsync(id);
 
             return RedirectToAction(nameof(Update));
         }

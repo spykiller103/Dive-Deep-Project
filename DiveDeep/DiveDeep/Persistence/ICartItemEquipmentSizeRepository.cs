@@ -4,11 +4,11 @@ namespace DiveDeep.Persistence
 {
     public interface ICartItemEquipmentSizeRepository
     {
-        List<CartItemEquipmentSize> GetAll();
-        List<CartItemEquipmentSize> GetByCartItemId(int cartItemId);
-        CartItemEquipmentSize? GetById(int id);
-        void Add(CartItemEquipmentSize equipmentSize);
-        void Update(CartItemEquipmentSize equipmentSize);
-        void Delete(int id);
+        Task<List<CartItemEquipmentSize>> GetAllAsync();
+        Task<List<CartItemEquipmentSize>> GetByCartItemIdAsync(int cartItemId);
+        Task<CartItemEquipmentSize?> GetByIdAsync(int id);
+        Task AddAsync(CartItemEquipmentSize equipmentSize);
+        Task UpdateAsync(CartItemEquipmentSize equipmentSize);
+        Task DeleteAsync(int id);
     }
 }
