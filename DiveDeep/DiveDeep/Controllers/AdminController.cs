@@ -15,19 +15,16 @@ namespace DiveDeep.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        [HttpGet]
         public async Task<IActionResult> Index()
         {
             return View();
         }
 
-        [HttpGet]
         public async Task<IActionResult> Create()
         {
             return View();
         }
 
-        [HttpGet]
         public async Task<IActionResult> Update()
         {
             using var httpClient = _httpClientFactory.CreateClient("Api");
@@ -66,7 +63,7 @@ namespace DiveDeep.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet]
+
         public async Task<IActionResult> UpdateEquipment(int id)
         {
             using var httpClient = _httpClientFactory.CreateClient("Api");
@@ -110,6 +107,7 @@ namespace DiveDeep.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
         [HttpPost]
         public async Task<IActionResult> DeleteEquipmentAsync(int id)
         {
@@ -126,5 +124,62 @@ namespace DiveDeep.Controllers
 
             return RedirectToAction(nameof(Update));
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteBookingAsync(int id)
+        {
+            await _bookingRepository.DeleteBookingAsync(id);
+            return RedirectToAction(nameof(EditBooking));
+        }
+        
+
+        public async Task<IActionResult> EditBookingDetails(int id)
+        {
+            Booking? booking = await _bookingRepository.GetBookingByIdAsync(id);
+            if (booking == null)
+            {
+                return NotFound();
+            }
+            return View(booking);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteCartItems(int id, int bookingId)
+        {
+            await _cartItemRepository.DeleteCartItemAsync(id);
+            return RedirectToAction(nameof(EditBookingDetails), new { id = bookingId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateCartItem(int id, int bookingId)
+        {
+            CartItem? cartItem = await _cartItemRepository.GetById(id);
+            if (cartItem == null)
+            {
+                return NotFound();
+            }
+            ViewBag.BookingId = bookingId;
+
+            return View("ChangeBookingDetails", cartItem);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateBookingCartItem(CartItem cartItem, int bookingId)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    ViewBag.BookingId = bookingId;
+            //    return View("ChangeBookingDetails", cartItem);
+            //}
+
+            await _cartItemRepository.UpdateCartItemAsync(cartItem);
+
+            return RedirectToAction(nameof(EditBookingDetails), new { id = bookingId });
+
+
+        }
+
     }
 }
