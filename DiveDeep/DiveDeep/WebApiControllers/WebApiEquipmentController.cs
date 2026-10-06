@@ -30,6 +30,7 @@ namespace DiveDeep.WebApiControllers
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
+
             List<Equipment> equipment =
                 await _equipmentRepository.GetAllAsync();
 
