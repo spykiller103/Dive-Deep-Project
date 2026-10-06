@@ -8,7 +8,5 @@ namespace DiveDeep.Persistence
         Task<List<Booking>> GetAllAsync();
         Task<Booking?> GetByIdAsync(int id);
         Task DeleteBookingAsync(int id);
-        Task<List<Booking>> GetAllBookingsForAdminAsync();
-        Task<Booking?> GetBookingByIdAsync(int id);
     }
 }

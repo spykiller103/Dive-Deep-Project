@@ -8,23 +8,27 @@ namespace DiveDeep.WebApiControllers
     [ApiController]
     public class WebApiAdminController : ControllerBase
     {
+        private readonly IBookingRepository _bookingRepository;
         private readonly IEquipmentRepository _equipmentRepository;
+        private readonly ICartItemRepository _cartItemRepository;
 
-        public WebApiAdminController(IEquipmentRepository equipmentRepository)
+        public WebApiAdminController(IEquipmentRepository equipmentRepository, IBookingRepository bookingRepository, ICartItemRepository cartItemRepository)
         {
             _equipmentRepository = equipmentRepository;
+            _bookingRepository = bookingRepository;
+            _cartItemRepository = cartItemRepository;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
+        [HttpGet("equipment")]
+        public async Task<IActionResult> GetAllEquipmentAsync()
         {
             List<Equipment> equipment = await _equipmentRepository.GetAllAsync();
 
             return Ok(equipment);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetSpecific(int id)
+        [HttpGet("equipment/{id}")]
+        public async Task<IActionResult> GetSpecificEquipmentAsync(int id)
         {
             if (id <= 0)
             {
@@ -41,8 +45,8 @@ namespace DiveDeep.WebApiControllers
             return Ok(equipment);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateEquipment(Equipment equipment)
+        [HttpPost("equipment")]
+        public async Task<IActionResult> CreateEquipmentAsync(Equipment equipment)
         {
             if (!ModelState.IsValid)
             {
@@ -54,8 +58,8 @@ namespace DiveDeep.WebApiControllers
             return Ok();
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateEquipment(int id, Equipment equipment)
+        [HttpPut("equipment/{id}")]
+        public async Task<IActionResult> UpdateEquipmentAsync(int id, Equipment equipment)
         {
             if (id <= 0)
             {
@@ -76,8 +80,8 @@ namespace DiveDeep.WebApiControllers
             return Ok();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEquipment(int id)
+        [HttpDelete("equipment/{id}")]
+        public async Task<IActionResult> DeleteEquipmentAsync(int id)
         {
             if (id <= 0)
             {
@@ -92,6 +96,105 @@ namespace DiveDeep.WebApiControllers
             }
 
             await _equipmentRepository.DeleteEquipmentAsync(id);
+
+            return Ok();
+        }
+
+        [HttpGet("booking")]
+        public async Task<IActionResult> GetAllBookingsAsync()
+        {
+            List<Booking> bookings = await _bookingRepository.GetAllAsync();
+            return Ok(bookings);
+        }
+
+        [HttpDelete("booking/{id}")]
+        public async Task<IActionResult> DeleteBookingAsync(int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
+            Booking booking = await _bookingRepository.GetByIdAsync(id);
+
+            if (booking == null)
+            {
+                return NotFound();
+            }
+
+            await _bookingRepository.DeleteBookingAsync(id);
+
+            return Ok();
+        }
+
+
+        [HttpGet("booking/{id}")]
+        public async Task<IActionResult> EditBookingDetailsAsync(int id)
+        {
+            Booking? booking = await _bookingRepository.GetByIdAsync(id);
+
+            if (booking == null)
+                return NotFound();
+
+            return Ok(booking);
+        }
+
+        [HttpDelete("cartitem/{id}")]
+        public async Task<IActionResult> DeleteCartItemAsync(int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
+            CartItem cartItem = await _cartItemRepository.GetByIdAsync(id);
+
+            if (cartItem == null)
+            {
+                return NotFound();
+            }
+
+            await _cartItemRepository.DeleteAsync(id);
+
+            return Ok();
+        }
+
+        [HttpGet("cartitem/{id}")]
+        public async Task<IActionResult> GetCartItemAsync(int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
+            CartItem cartItem = await _cartItemRepository.GetByIdAsync(id);
+
+            if (cartItem == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(cartItem);
+        }
+
+        [HttpPut("cartitem/{id}")]
+        public async Task<IActionResult> UpdateBookingCartItemAsync(int id, CartItem cartItem)
+        {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
+            CartItem existingCartItem = await _cartItemRepository.GetByIdAsync(id);
+
+            if (existingCartItem == null)
+            {
+                return NotFound();
+            }
+
+            cartItem.CartItemId = id;
+
+            await _cartItemRepository.AdminUpdateCartItemAsync(cartItem);
 
             return Ok();
         }

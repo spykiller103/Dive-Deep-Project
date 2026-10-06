@@ -34,18 +34,6 @@ namespace DiveDeep.Persistence
             }
         }
 
-        public async Task AdminDeleteCartItemAsync(int id)
-        {
-            var cartItem = await _context.CartItems.FindAsync(id);
-            if (cartItem != null)
-            {
-
-                _context.CartItems.Remove(cartItem);
-                await _context.SaveChangesAsync();
-            }
-
-        }
-
         public async Task<List<CartItem>> GetAllAsync()
         {
             return await _context.CartItems

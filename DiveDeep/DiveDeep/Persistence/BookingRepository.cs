@@ -45,28 +45,32 @@ namespace DiveDeep.Persistence
 
             return booking;
         }
+
         public async Task<List<Booking>> GetAllAsync()
         {
             return await _context.Bookings
-                .Include(b => b.CartItems)
-                    .ThenInclude(c => c.EquipmentSizes)
-                .Include(b => b.CartItems)
-                    .ThenInclude(c => c.Package)
-                .Include(b => b.CartItems)
-                    .ThenInclude(c => c.Equipment)
-                //.Include(b => b.CartItems)
-                //    .ThenInclude(c => c.EquipmentSizes)
-                .Include(b => b.EquipmentSizes)
-                .ToListAsync();
+                .Where(b => b.CartItems.Any())
+                .Include(b => b.ApplicationUser)
+               .Include(b => b.CartItems)
+                   .ThenInclude(c => c.EquipmentSizes)
+               .Include(b => b.CartItems)
+                   .ThenInclude(c => c.Package)
+               .Include(b => b.CartItems)
+                   .ThenInclude(c => c.Equipment)
+               .Include(b => b.EquipmentSizes)
+               .ToListAsync();
         }
 
         public async Task<Booking?> GetByIdAsync(int id)
         {
             return await _context.Bookings
+                .Include(b => b.ApplicationUser)
                 .Include(b => b.CartItems)
-                    .ThenInclude(ci => ci.Package)
+                    .ThenInclude(c => c.Package)
                 .Include(b => b.CartItems)
-                    .ThenInclude(ci => ci.Equipment)
+                    .ThenInclude(c => c.Equipment)
+                .Include(b => b.CartItems)
+                    .ThenInclude(c => c.EquipmentSizes)
                 .Include(b => b.EquipmentSizes)
                 .FirstOrDefaultAsync(b => b.BookingId == id);
         }
@@ -85,42 +89,6 @@ namespace DiveDeep.Persistence
                 _context.Bookings.Remove(booking);
                 await _context.SaveChangesAsync();
             }
-
-        }
-
-        public async Task<List<Booking>> GetAllBookingsForAdminAsync()
-        {
-            return await _context.Bookings
-                .Where(b => b.CartItems.Any())
-                .Include(b => b.ApplicationUser)
-
-               .Include(b => b.CartItems)
-                   .ThenInclude(c => c.EquipmentSizes)
-               .Include(b => b.CartItems)
-                   .ThenInclude(c => c.Package)
-               .Include(b => b.CartItems)
-                   .ThenInclude(c => c.Equipment)
-               .Include(b => b.EquipmentSizes)
-               .ToListAsync();
-        }
-
-        public async Task<Booking?> GetBookingByIdAsync(int id)
-        {
-            return await _context.Bookings
-            .Include(b => b.ApplicationUser)
-
-             .Include(b => b.CartItems)
-            .ThenInclude(c => c.Package)
-
-       .Include(b => b.CartItems)
-           .ThenInclude(c => c.Equipment)
-
-       .Include(b => b.CartItems)
-           .ThenInclude(c => c.EquipmentSizes)
-
-       .Include(b => b.EquipmentSizes)
-
-       .FirstOrDefaultAsync(b => b.BookingId == id);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DiveDeep.Models;
+using DiveDeep.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Json;
@@ -9,10 +10,14 @@ namespace DiveDeep.Controllers
     public class AdminController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly ICartItemRepository _cartItemRepository;
+        private IBookingRepository _bookingRepository;
 
-        public AdminController(IHttpClientFactory httpClientFactory)
+        public AdminController(IHttpClientFactory httpClientFactory, ICartItemRepository cartItemRepository, IBookingRepository bookingRepository)
         {
+            _cartItemRepository = cartItemRepository;
             _httpClientFactory = httpClientFactory;
+            _bookingRepository = bookingRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -31,7 +36,7 @@ namespace DiveDeep.Controllers
 
             try
             {
-                List<Equipment> equipment = await httpClient.GetFromJsonAsync<List<Equipment>>("WebApiAdmin");
+                List<Equipment> equipment = await httpClient.GetFromJsonAsync<List<Equipment>>("WebApiAdmin/equipment");
 
                 return View(equipment);
             }
@@ -53,7 +58,7 @@ namespace DiveDeep.Controllers
 
             try
             {
-                await httpClient.PostAsJsonAsync("WebApiAdmin", equipment);
+                await httpClient.PostAsJsonAsync("WebApiAdmin/equipment", equipment);
             }
             catch (Exception ex)
             {
@@ -70,7 +75,7 @@ namespace DiveDeep.Controllers
 
             try
             {
-                Equipment equipment = await httpClient.GetFromJsonAsync<Equipment>($"WebApiAdmin/{id}");
+                Equipment equipment = await httpClient.GetFromJsonAsync<Equipment>($"WebApiAdmin/equipment/{id}");
 
                 if (equipment == null)
                 {
@@ -97,7 +102,7 @@ namespace DiveDeep.Controllers
 
             try
             {
-                await httpClient.PutAsJsonAsync($"WebApiAdmin/{equipment.EquipmentId}",equipment);
+                await httpClient.PutAsJsonAsync($"WebApiAdmin/equipment/{equipment.EquipmentId}", equipment);
             }
             catch (Exception ex)
             {
@@ -115,7 +120,7 @@ namespace DiveDeep.Controllers
 
             try
             {
-                await httpClient.DeleteAsync($"WebApiAdmin/{id}");
+                await httpClient.DeleteAsync($"WebApiAdmin/equipment/{id}");
             }
             catch (Exception ex)
             {
@@ -127,65 +132,111 @@ namespace DiveDeep.Controllers
 
         public async Task<IActionResult> EditBooking()
         {
-            List<Booking> bookings = await _bookingRepository.GetAllBookingsForAdminAsync();
-            return View(bookings);
-        }
+            using var httpClient = _httpClientFactory.CreateClient("Api");
 
+            try
+            {
+                List<Booking>? bookings = await httpClient.GetFromJsonAsync<List<Booking>>($"WebApiAdmin/booking");
+
+                return View(bookings);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
 
         [HttpPost]
         public async Task<IActionResult> DeleteBookingAsync(int id)
         {
-            await _bookingRepository.DeleteBookingAsync(id);
+            using var httpClient = _httpClientFactory.CreateClient("Api");
+
+            try
+            {
+                await httpClient.DeleteAsync($"WebApiAdmin/booking/{id}");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
             return RedirectToAction(nameof(EditBooking));
         }
-        
+
 
         public async Task<IActionResult> EditBookingDetails(int id)
         {
-            Booking? booking = await _bookingRepository.GetBookingByIdAsync(id);
-            if (booking == null)
+            using var httpClient = _httpClientFactory.CreateClient("Api");
+
+            try
             {
-                return NotFound();
+                Booking booking = await httpClient.GetFromJsonAsync<Booking>($"WebApiAdmin/booking/{id}");
+
+                return View(booking);
             }
-            return View(booking);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteCartItems(int id, int bookingId)
+        public async Task<IActionResult> DeleteCartItemAsync(int id, int bookingId)
         {
-            await _cartItemRepository.DeleteCartItemAsync(id);
-            return RedirectToAction(nameof(EditBookingDetails), new { id = bookingId });
+            using var httpClient = _httpClientFactory.CreateClient("Api");
+
+            try
+            {
+                await httpClient.DeleteAsync($"WebApiCarts/cartitem/{id}");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return RedirectToAction(nameof(EditBooking), new { id = bookingId });
         }
 
-        [HttpGet]
         public async Task<IActionResult> UpdateCartItem(int id, int bookingId)
         {
-            CartItem? cartItem = await _cartItemRepository.GetById(id);
-            if (cartItem == null)
+            using var httpClient = _httpClientFactory.CreateClient("Api");
+
+            try
             {
-                return NotFound();
+                CartItem cartItem = await httpClient.GetFromJsonAsync<CartItem>($"WebApiCarts/cartitem/{id}");
+
+                ViewBag.BookingId = bookingId;
+
+                return View("ChangeBookingDetails", cartItem);
             }
-            ViewBag.BookingId = bookingId;
-
-            return View("ChangeBookingDetails", cartItem);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
-
 
         [HttpPost]
         public async Task<IActionResult> UpdateBookingCartItem(CartItem cartItem, int bookingId)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    ViewBag.BookingId = bookingId;
-            //    return View("ChangeBookingDetails", cartItem);
-            //}
+            if (!ModelState.IsValid)
+            {
+                ViewBag.BookingId = bookingId;
+                return View("ChangeBookingDetails", cartItem);
+            }
 
-            await _cartItemRepository.UpdateCartItemAsync(cartItem);
+            using var httpClient = _httpClientFactory.CreateClient("Api");
+
+            try
+            {
+                await httpClient.PutAsJsonAsync($"WebApiCarts/cartitem/{cartItem.CartItemId}", cartItem);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
             return RedirectToAction(nameof(EditBookingDetails), new { id = bookingId });
-
-
         }
 
     }

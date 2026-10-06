@@ -9,7 +9,6 @@ namespace DiveDeep.Persistence
         Task<CartItem>? GetByIdAsync(int id);
         Task UpdateAsync(CartItem cartItem);
 
-        Task AdminDeleteCartItemAsync(int id);
         Task<CartItem> AdminUpdateCartItemAsync(CartItem cartItem);
     }
 }

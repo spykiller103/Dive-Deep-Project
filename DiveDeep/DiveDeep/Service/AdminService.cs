@@ -38,11 +38,11 @@ namespace DiveDeep.Service
         }
         public async Task<Booking?> GetBookingByIdAsync(int id)
         {
-           return await _bookingRepository.GetBookingByIdAsync(id);
+           return await _bookingRepository.GetByIdAsync(id);
         }
         public async Task DeleteCartItem(int id)
         {
-            await _cartItemRepository.AdminDeleteCartItemAsync(id);
+            await _cartItemRepository.DeleteAsync(id);
         }
 
         public async Task<CartItem> UpdateCartItemAsync(CartItem cartItem)
