@@ -19,13 +19,12 @@ namespace DiveDeep.Controllers
             _cartItemRepository = cartItemRepository;
             _userManager = userManager;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             string userId = _userManager.GetUserId(User);
 
-            List<Booking> bookings = _bookingRepository.GetAll()
+            List<Booking> bookings = (await _bookingRepository.GetAllAsync())
                 .Where(b => b.ApplicationUserId == userId)
-
                 .ToList();
 
             DateTime today = DateTime.Today;

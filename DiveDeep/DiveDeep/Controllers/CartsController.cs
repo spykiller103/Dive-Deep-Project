@@ -17,16 +17,14 @@ namespace DiveDeep.Controllers
     {
         private readonly CartService _cartService;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly DiveDeepContext _context;
         private readonly IBookingRepository _bookingRepository;
 
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public CartsController(CartService cartService, IBookingRepository bookingRepository, UserManager<ApplicationUser> userManager, DiveDeepContext context, IHttpClientFactory httpClientFactory)
+        public CartsController(CartService cartService, IBookingRepository bookingRepository, UserManager<ApplicationUser> userManager, IHttpClientFactory httpClientFactory)
         {
             _cartService = cartService;
             _userManager = userManager;
-            _context = context;
             _bookingRepository = bookingRepository;
             _httpClientFactory = httpClientFactory;
         }
@@ -40,7 +38,7 @@ namespace DiveDeep.Controllers
             try
             {
                 List<CartItem> response = await httpClient.GetFromJsonAsync<List<CartItem>>($"WebApiCarts/{userId}");
-                
+
                 return View(response);
             }
             catch (Exception ex)
@@ -59,7 +57,7 @@ namespace DiveDeep.Controllers
 
             try
             {
-                await httpClient.PostAsync($"WebApiCarts/{userId}", null);
+                await httpClient.DeleteAsync($"WebApiCarts/empty/{userId}");
             }
             catch (Exception ex)
             {
@@ -74,20 +72,15 @@ namespace DiveDeep.Controllers
         {
             string userId = _userManager.GetUserId(User);
 
-            List<CartItem> cartItems = (await _cartService.GetAllAsync())
-                .Where(c => cartItemIds
-                .Contains(c.CartItemId) &&
-                    c.ApplicationUserId == userId &&
-                    c.BookingId == null)
-                .ToList();
+            using var httpClient = _httpClientFactory.CreateClient("Api");
 
-
-            Booking booking = _bookingRepository.Add(cartItems, userId);
-
-            foreach (CartItem cartItem in cartItems)
+            try
             {
-                cartItem.BookingId = booking.BookingId;
-                await _cartService.UpdateAsync(cartItem);
+                await httpClient.PostAsJsonAsync($"WebApiCarts/{userId}", cartItemIds);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
 
             return RedirectToAction("Index");
@@ -96,8 +89,19 @@ namespace DiveDeep.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveItemAsync(int id)
         {
-            await _cartService.DeleteAsync(id);
-            return View();
+            using var httpClient = _httpClientFactory.CreateClient("Api");
+
+            try
+            {
+                await httpClient.DeleteAsync($"WebApiCarts/{id}");
+                return RedirectToAction("Index");
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
     }
 }

@@ -66,12 +66,8 @@ namespace DiveDeep.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Rent(
-            int id,
-            string start,
-            string end,
-            string? size,
-            IFormCollection form)
+        public async Task<IActionResult> Rent(int id, string start, string end, 
+            string? size, IFormCollection form)
         {
             string userId = _userManager.GetUserId(User);
 
