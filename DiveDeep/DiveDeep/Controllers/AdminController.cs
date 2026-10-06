@@ -1,62 +1,91 @@
 ﻿using DiveDeep.Models;
-using DiveDeep.Persistence;
-using DiveDeep.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Json;
 
 namespace DiveDeep.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
+        private readonly IHttpClientFactory _httpClientFactory;
 
-
-        private readonly IEquipmentRepository _equipmentRepository;
-
-        public AdminController(IEquipmentRepository equipmentRepository)
+        public AdminController(IHttpClientFactory httpClientFactory)
         {
-
-            _equipmentRepository = equipmentRepository;
+            _httpClientFactory = httpClientFactory;
         }
+
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return View();
         }
+
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             return View();
         }
+
         [HttpGet]
-        public IActionResult Update()
+        public async Task<IActionResult> Update()
         {
-            var equipment = _equipmentRepository.GetAllAsync();
-            return View(equipment);
+            using var httpClient = _httpClientFactory.CreateClient("Api");
+
+            try
+            {
+                List<Equipment> equipment = await httpClient.GetFromJsonAsync<List<Equipment>>("WebApiAdmin");
+
+                return View(equipment);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
-      
+
         [HttpPost]
         public async Task<IActionResult> CreateEquipment(Equipment equipment)
         {
             if (!ModelState.IsValid)
             {
-
                 return View("Create", equipment);
             }
 
-            await _equipmentRepository.CreateEquipmentAsync(equipment);
+            using var httpClient = _httpClientFactory.CreateClient("Api");
+
+            try
+            {
+                await httpClient.PostAsJsonAsync("WebApiAdmin", equipment);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
             return RedirectToAction(nameof(Index));
         }
+
         [HttpGet]
-        public IActionResult UpdateEquipment(int id)
+        public async Task<IActionResult> UpdateEquipment(int id)
         {
-            var equipment = _equipmentRepository.GetByIdAsync(id);
-            if (equipment == null)
+            using var httpClient = _httpClientFactory.CreateClient("Api");
+
+            try
             {
-                return NotFound();
+                Equipment equipment = await httpClient.GetFromJsonAsync<Equipment>($"WebApiAdmin/{id}");
+
+                if (equipment == null)
+                {
+                    return NotFound();
+                }
+
+                return View(equipment);
             }
-            return View(equipment);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
@@ -66,17 +95,36 @@ namespace DiveDeep.Controllers
             {
                 return View(equipment);
             }
-            await _equipmentRepository.UpdateEquipmentAsync(equipment);
+
+            using var httpClient = _httpClientFactory.CreateClient("Api");
+
+            try
+            {
+                await httpClient.PutAsJsonAsync($"WebApiAdmin/{equipment.EquipmentId}",equipment);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
             return RedirectToAction(nameof(Index));
         }
+
         [HttpPost]
         public async Task<IActionResult> DeleteEquipment(int id)
         {
-            await _equipmentRepository.DeleteEquipmentAsync(id);
+            using var httpClient = _httpClientFactory.CreateClient("Api");
+
+            try
+            {
+                await httpClient.DeleteAsync($"WebApiAdmin/{id}");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
             return RedirectToAction(nameof(Update));
         }
-
     }
 }
