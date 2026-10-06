@@ -2,14 +2,16 @@
 using DiveDeep.Models;
 using DiveDeep.Persistence;
 using DiveDeep.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
-namespace DiveDeep.WebApiControllers
+namespace DiveDeep.Controllers
 {
-    [Route("api/[controller]")]
+
     [ApiController]
+    [Route("api/[controller]")]
     public class WebApiBookingsController : ControllerBase
     {
         private readonly IBookingRepository _bookingRepository;
@@ -22,12 +24,18 @@ namespace DiveDeep.WebApiControllers
             _userManager = userManager;
         }
 
-        [HttpGet("{userid}")]
+
+        [HttpGet("{userId}")]
         public async Task<IActionResult> Index(string userId)
         {
+            if (userId == null)
+            {
+                return NotFound();
+            }
+
             List<Booking> bookings = (await _bookingRepository.GetAllAsync())
-                .Where(b => b.ApplicationUserId == userId)
-                .ToList();
+                            .Where(b => b.ApplicationUserId == userId)
+                            .ToList();
 
             DateTime today = DateTime.Today;
 
@@ -48,9 +56,10 @@ namespace DiveDeep.WebApiControllers
                                 c.EndDate.Date < today))
                 .ToList();
 
+
             BookingApplicationUserViewData vm = new BookingApplicationUserViewData
             {
-                ApplicationUser = await _userManager.FindByIdAsync(userId),
+                ApplicationUser = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId),
 
                 Bookings = bookings,
 
@@ -66,6 +75,5 @@ namespace DiveDeep.WebApiControllers
 
             return Ok(vm);
         }
-
     }
 }
