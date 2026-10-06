@@ -27,10 +27,11 @@ namespace DiveDeep.Persistence
         {
             CartItem cartItem = await GetByIdAsync(id);
 
-            if(cartItem != null)
+            if (cartItem != null)
             {
-            _context.CartItems.Remove(cartItem);
-            await _context.SaveChangesAsync();
+                _context.CartItems.Remove(cartItem);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task<List<CartItem>> GetAllAsync()
@@ -72,6 +73,7 @@ namespace DiveDeep.Persistence
             }
             return existing ?? cartItem;
         }
-    
+
     }
 }
+
