@@ -49,7 +49,7 @@ namespace DiveDeep.WebApiControllers
             if (equipment == null)
                 return NotFound();
 
-            r   eturn Ok(equipment);
+            return Ok(equipment);
         }
 
         [HttpPost]
