@@ -38,8 +38,7 @@ namespace DiveDeep.Controllers
 
             try
             {
-                List<Equipment> response =
-                    await httpClient.GetFromJsonAsync<List<Equipment>>("WebApiEquipment");
+                List<Equipment> response = await httpClient.GetFromJsonAsync<List<Equipment>>("WebApiEquipment");
 
                 return View(response);
             }
@@ -55,8 +54,7 @@ namespace DiveDeep.Controllers
 
             try
             {
-                Equipment response =
-                    await httpClient.GetFromJsonAsync<Equipment>($"WebApiEquipment/{id}");
+                Equipment response = await httpClient.GetFromJsonAsync<Equipment>($"WebApiEquipment/{id}");
 
                 return View(response);
             }
@@ -81,9 +79,7 @@ namespace DiveDeep.Controllers
 
             try
             {
-                var test = await httpClient.PostAsync(
-                    $"WebApiEquipment?id={id}&start={start}&end={end}&size={size}&userId={userId}",
-                    null);
+                var test = await httpClient.PostAsync($"WebApiEquipment?id={id}&start={start}&end={end}&size={size}&userId={userId}", null);
             }
             catch (Exception ex)
             {
