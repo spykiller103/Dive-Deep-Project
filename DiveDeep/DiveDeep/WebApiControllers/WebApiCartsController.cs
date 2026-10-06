@@ -38,7 +38,7 @@ namespace DiveDeep.WebApiControllers
             return Ok(cartItemDTOs);
         }
 
-        [HttpPost("{userId}")]
+        [HttpDelete("empty/{userId}")]
         public async Task<IActionResult> EmptyCart(string userId)
         {
             if (userId != null)
@@ -79,15 +79,16 @@ namespace DiveDeep.WebApiControllers
 
 
         [HttpPost("{userId}")]
-        public async Task<IActionResult> Checkout(List<int> cartItemIds, string userId)
+        public async Task<IActionResult> Checkout([FromBody] List<int> cartItemIds, string userId)
         {
             List<CartItem> cartItems = (await _cartService.GetAllAsync())
-                .Where(c => cartItemIds
-                .Contains(c.CartItemId) &&
-                    c.ApplicationUserId == userId &&
-                    c.BookingId == null)
+                .Where(c => cartItemIds.Contains(c.CartItemId) &&
+                            c.ApplicationUserId == userId &&
+                            c.BookingId == null)
                 .ToList();
 
+            if (cartItems.Count == 0)
+                return BadRequest();
 
             Booking booking = await _bookingRepository.AddAsync(cartItems, userId);
 
@@ -96,6 +97,7 @@ namespace DiveDeep.WebApiControllers
                 cartItem.BookingId = booking.BookingId;
                 await _cartService.UpdateAsync(cartItem);
             }
+
             return Ok();
         }
     }

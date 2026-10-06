@@ -57,7 +57,7 @@ namespace DiveDeep.Controllers
 
             try
             {
-                await httpClient.PostAsync($"WebApiCarts/{userId}", null);
+                await httpClient.DeleteAsync($"WebApiCarts/empty/{userId}");
             }
             catch (Exception ex)
             {
@@ -72,20 +72,15 @@ namespace DiveDeep.Controllers
         {
             string userId = _userManager.GetUserId(User);
 
-            List<CartItem> cartItems = (await _cartService.GetAllAsync())
-                .Where(c => cartItemIds
-                .Contains(c.CartItemId) &&
-                    c.ApplicationUserId == userId &&
-                    c.BookingId == null)
-                .ToList();
+            using var httpClient = _httpClientFactory.CreateClient("Api");
 
-
-            Booking booking = await _bookingRepository.AddAsync(cartItems, userId);
-
-            foreach (CartItem cartItem in cartItems)
+            try
             {
-                cartItem.BookingId = booking.BookingId;
-                await _cartService.UpdateAsync(cartItem);
+                await httpClient.PostAsJsonAsync($"WebApiCarts/{userId}", cartItemIds);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
 
             return RedirectToAction("Index");
