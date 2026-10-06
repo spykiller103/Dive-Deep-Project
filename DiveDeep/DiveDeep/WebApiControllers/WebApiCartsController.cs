@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DiveDeep.WebApiControllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class WebApiCartsController : ControllerBase
@@ -27,22 +26,23 @@ namespace DiveDeep.WebApiControllers
             _context = context;
             _bookingRepository = bookingRepository;
         }
-
-        [HttpPost]
-        public async Task<IActionResult> EmptyCart()
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetUserCart(string userId)
         {
-            // Delete all cart items that are not part of a booking and only for the logged in user
-            
             List<CartItem> cartItems = (await _cartService.GetAllAsync())
-                .Where(c => c.BookingId == null)
+                .Where(c => c.ApplicationUserId == userId && c.BookingId == null)
                 .ToList();
 
-            ApplicationUser user = await _userManager.GetUserAsync(User);
-            
-            if (user != null)
+            return Ok(cartItems);
+        }
+
+        [HttpPost("{userId}")]
+        public async Task<IActionResult> EmptyCart(string userId)
+        {
+            if (userId != null)
             {
-                var userCartItems = await _context.CartItems
-                         .Where(c => c.ApplicationUserId == user.Id)
+                List<CartItem> userCartItems = await _context.CartItems
+                         .Where(c => c.ApplicationUserId == userId)
                          .ToListAsync();
 
                 _context.CartItems.RemoveRange(userCartItems);

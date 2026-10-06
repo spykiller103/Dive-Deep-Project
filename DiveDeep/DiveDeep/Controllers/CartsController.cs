@@ -1,4 +1,5 @@
-﻿using DiveDeep.Data;
+﻿using Azure;
+using DiveDeep.Data;
 using DiveDeep.Models;
 using DiveDeep.Persistence;
 using DiveDeep.Service;
@@ -28,14 +29,34 @@ namespace DiveDeep.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> EmptyCart()
+        public async Task<IActionResult> Index()
         {
+            string userId = _userManager.GetUserId(User);
+
             using var httpClient = _httpClientFactory.CreateClient("Api");
 
             try
             {
-                httpClient.PostAsync("WebApiCarts", null);
+                List<CartItem> response = await httpClient.GetFromJsonAsync<List<CartItem>>($"WebApiCarts/{userId}");
+                return View(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EmptyCart()
+        {
+            string userId = _userManager.GetUserId(User);
+
+            using var httpClient = _httpClientFactory.CreateClient("Api");
+
+            try
+            {
+                await httpClient.PostAsync($"WebApiCarts/{userId}", null);
             }
             catch (Exception ex)
             {
@@ -43,17 +64,6 @@ namespace DiveDeep.Controllers
             }
 
             return RedirectToAction("Index");
-        }
-
-        public async Task<IActionResult> Index()
-        {
-            string userId = _userManager.GetUserId(User);
-
-            List<CartItem> cartItems = (await _cartService.GetAllAsync())
-                .Where(c => c.ApplicationUserId == userId && c.BookingId == null)
-                .ToList();
-
-            return View(cartItems);
         }
 
         [HttpPost]
