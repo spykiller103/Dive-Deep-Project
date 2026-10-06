@@ -53,13 +53,8 @@ namespace DiveDeep.WebApiControllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RentAsync(
-            [FromQuery] int id,
-            string start,
-            string end,
-            string? size,
-            IFormCollection form,
-            string userId)
+        public async Task<IActionResult> RentAsync([FromQuery] int id, string start, string end, 
+            string? size,IFormCollection form, string userId)
         {
             Equipment equipmentToBeAdded =
                 await _equipmentRepository.GetByIdAsync(id);
