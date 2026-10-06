@@ -21,14 +21,11 @@ namespace DiveDeep.DTOs
         public EquipmentDTO? Equipment { get; set; }
 
         public int? BookingId { get; set; }
-        public Booking? Booking { get; set; } = null!;
 
         public List<CartItemEquipmentSize> EquipmentSizes { get; set; } = new List<CartItemEquipmentSize>();
 
 
         [Required]
         public string ApplicationUserId { get; set; }
-        [ValidateNever]
-        public ApplicationUser ApplicationUser { get; set; }
     }
 }

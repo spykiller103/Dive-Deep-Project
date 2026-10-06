@@ -1,4 +1,5 @@
-﻿@model DiveDeep.Models.CartItem
+﻿@using DiveDeep.DTOs;
+@model CartItemDTO;
 
 @{
     ViewData["Title"] = "Rediger leje";
@@ -44,6 +45,10 @@
           method="post">
 
         <input type="hidden" asp-for="CartItemId" />
+        <input type="hidden" asp-for="ApplicationUserId" />
+        <input type="hidden" asp-for="BookingId" />
+        <input type="hidden" asp-for="EquipmentId" />
+        <input type="hidden" asp-for="PackageId" />
 
         <input type="hidden"
                name="bookingId"

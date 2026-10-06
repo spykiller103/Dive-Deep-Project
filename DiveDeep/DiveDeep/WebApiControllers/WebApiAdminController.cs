@@ -1,5 +1,7 @@
-﻿using DiveDeep.Models;
+﻿using DiveDeep.DTOs;
+using DiveDeep.Models;
 using DiveDeep.Persistence;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiveDeep.WebApiControllers
@@ -103,8 +105,11 @@ namespace DiveDeep.WebApiControllers
         [HttpGet("booking")]
         public async Task<IActionResult> GetAllBookingsAsync()
         {
-            List<Booking> bookings = await _bookingRepository.GetAllAsync();
-            return Ok(bookings);
+            List<Booking>? bookings = await _bookingRepository.GetAllAsync();
+
+            List<BookingDTO> bookingDTOs = bookings.Adapt<List<BookingDTO>>();
+
+            return Ok(bookingDTOs);
         }
 
         [HttpDelete("booking/{id}")]
@@ -131,12 +136,15 @@ namespace DiveDeep.WebApiControllers
         [HttpGet("booking/{id}")]
         public async Task<IActionResult> EditBookingDetailsAsync(int id)
         {
-            Booking? booking = await _bookingRepository.GetByIdAsync(id);
-
+            var booking = await _bookingRepository.GetByIdAsync(id);
             if (booking == null)
+            {
                 return NotFound();
+            }
 
-            return Ok(booking);
+            BookingDTO bookingDTO = booking.Adapt<BookingDTO>();
+
+            return Ok(bookingDTO);
         }
 
         [HttpDelete("cartitem/{id}")]
@@ -174,11 +182,13 @@ namespace DiveDeep.WebApiControllers
                 return NotFound();
             }
 
-            return Ok(cartItem);
+            CartItemDTO cartItemDto = cartItem.Adapt<CartItemDTO>();
+
+            return Ok(cartItemDto);
         }
 
         [HttpPut("cartitem/{id}")]
-        public async Task<IActionResult> UpdateBookingCartItemAsync(int id, CartItem cartItem)
+        public async Task<IActionResult> UpdateBookingCartItemAsync(int id, CartItemDTO cartItemDto)
         {
             if (id <= 0)
             {
@@ -192,9 +202,10 @@ namespace DiveDeep.WebApiControllers
                 return NotFound();
             }
 
-            cartItem.CartItemId = id;
+            cartItemDto.Adapt(existingCartItem);
+            existingCartItem.CartItemId = id;
 
-            await _cartItemRepository.AdminUpdateCartItemAsync(cartItem);
+            await _cartItemRepository.AdminUpdateCartItemAsync(existingCartItem);
 
             return Ok();
         }

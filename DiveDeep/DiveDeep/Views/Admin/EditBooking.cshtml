@@ -1,4 +1,5 @@
-﻿@model List<Booking>
+﻿@using DiveDeep.DTOs
+@model List<BookingDTO>
 
 @{
     ViewData["Title"] = "Bookings";
@@ -22,7 +23,7 @@
 
         @foreach (var booking in Model)
         {
-            var cartItems = booking.CartItems ?? new List<CartItem>();
+            var cartItems = booking.CartItems ?? new List<CartItemDTO>();
 
             var totalPrice = cartItems.Sum(c =>
                 c.Package != null

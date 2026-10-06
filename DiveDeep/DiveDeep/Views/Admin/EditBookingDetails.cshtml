@@ -1,4 +1,5 @@
-﻿@model Booking
+﻿@using DiveDeep.DTOs
+@model BookingDTO
 
 @{
     ViewData["Title"] = $"Booking-{Model.BookingId}";
@@ -117,7 +118,7 @@ else
                     Rediger
                 </a>
                 <form asp-controller="Admin"
-                      asp-action="DeleteCartItems"
+                      asp-action="DeleteCartItem"
                       asp-route-id="@item.CartItemId"
                       asp-route-bookingId="@Model.BookingId"
                       method="post"

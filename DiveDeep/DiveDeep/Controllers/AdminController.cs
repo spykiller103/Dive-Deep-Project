@@ -1,4 +1,5 @@
-﻿using DiveDeep.Models;
+﻿using DiveDeep.DTOs;
+using DiveDeep.Models;
 using DiveDeep.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -136,8 +137,7 @@ namespace DiveDeep.Controllers
 
             try
             {
-                List<Booking>? bookings = await httpClient.GetFromJsonAsync<List<Booking>>($"WebApiAdmin/booking");
-
+                List<BookingDTO>? bookings = await httpClient.GetFromJsonAsync<List<BookingDTO>>("WebApiAdmin/booking");
                 return View(bookings);
             }
             catch (Exception ex)
@@ -171,8 +171,7 @@ namespace DiveDeep.Controllers
 
             try
             {
-                Booking booking = await httpClient.GetFromJsonAsync<Booking>($"WebApiAdmin/booking/{id}");
-
+                BookingDTO? booking = await httpClient.GetFromJsonAsync<BookingDTO>($"WebApiAdmin/booking/{id}");
                 return View(booking);
             }
             catch (Exception ex)
@@ -188,7 +187,7 @@ namespace DiveDeep.Controllers
 
             try
             {
-                await httpClient.DeleteAsync($"WebApiCarts/cartitem/{id}");
+                await httpClient.DeleteAsync($"WebApiAdmin/cartitem/{id}");
             }
             catch (Exception ex)
             {
@@ -204,7 +203,7 @@ namespace DiveDeep.Controllers
 
             try
             {
-                CartItem cartItem = await httpClient.GetFromJsonAsync<CartItem>($"WebApiCarts/cartitem/{id}");
+                CartItemDTO cartItem = await httpClient.GetFromJsonAsync<CartItemDTO>($"WebApiAdmin/cartitem/{id}");
 
                 ViewBag.BookingId = bookingId;
 
@@ -217,8 +216,13 @@ namespace DiveDeep.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateBookingCartItem(CartItem cartItem, int bookingId)
+        public async Task<IActionResult> UpdateBookingCartItem(CartItemDTO cartItem, int bookingId)
         {
+            if (cartItem.EndDate >= cartItem.StartDate)
+            {
+                cartItem.TotalDays = (cartItem.EndDate - cartItem.StartDate).Days + 1;
+            }
+
             if (!ModelState.IsValid)
             {
                 ViewBag.BookingId = bookingId;
@@ -229,7 +233,7 @@ namespace DiveDeep.Controllers
 
             try
             {
-                await httpClient.PutAsJsonAsync($"WebApiCarts/cartitem/{cartItem.CartItemId}", cartItem);
+                await httpClient.PutAsJsonAsync($"WebApiAdmin/cartitem/{cartItem.CartItemId}", cartItem);
             }
             catch (Exception ex)
             {
