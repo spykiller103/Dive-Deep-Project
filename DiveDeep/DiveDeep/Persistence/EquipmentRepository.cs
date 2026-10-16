@@ -36,7 +36,7 @@ namespace DiveDeep.Persistence
                     .ToListAsync();
             }
 
-            string equipmentCategory = category;
+            string equipmentCategory = category; 
 
             return await _context.Equipments
                 .Where(e => !string.IsNullOrEmpty(e.Category) &&
