@@ -1,4 +1,4 @@
-﻿using DiveDeep.Models;
+﻿using DiveDeepShared.Models;
 namespace DiveDeep.Persistence
 {
     public interface ICartItemRepository

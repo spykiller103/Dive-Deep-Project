@@ -1,8 +1,9 @@
-using DiveDeep.Data;
 using DiveDeep.Persistence;
+using DiveDeep.Data;
 using Microsoft.EntityFrameworkCore;
 using DiveDeep.Service;
 using Microsoft.AspNetCore.Identity;
+using DiveDeepShared.Models;
 namespace DiveDeep
 {
     public class Program
@@ -11,17 +12,17 @@ namespace DiveDeep
         {
             var builder = WebApplication.CreateBuilder(args);
 
-           
-            builder.Services.AddControllersWithViews();
-
             builder.Services.AddDbContext<DiveDeepContext>(options =>
-            { 
-                options.UseSqlServer(builder.Configuration.GetConnectionString("Default")); 
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
             });
 
-            builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<DiveDeepContext>();
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<DiveDeepContext>()
+                .AddDefaultTokenProviders()
+                .AddDefaultUI();
+
+            builder.Services.AddControllersWithViews();
 
             builder.Services.AddHttpClient();
             builder.Services.AddScoped<ICartItemRepository, CartItemRepository>();
@@ -36,11 +37,7 @@ namespace DiveDeep
             builder.Services.AddScoped<CartService>();
             builder.Services.AddScoped<PackageService>();
 
-            builder.Services.AddHttpClient("OpenMeteoWeather", client => { client.BaseAddress = new Uri("https://api.open-meteo.com/"); });
-            builder.Services.AddHttpClient("OpenMeteoGeocoding", client => { client.BaseAddress = new Uri("https://geocoding-api.open-meteo.com/"); });
-            builder.Services.AddHttpClient("OpenMeteoMarine", client => { client.BaseAddress = new Uri("https://marine-api.open-meteo.com/"); });
-            builder.Services.AddHttpClient("Api", client => { client.BaseAddress = new Uri("https://localhost:7272/api/"); });
-
+            builder.Services.AddHttpClient("Api", client => { client.BaseAddress = new Uri("https://localhost:7240/api/"); });
 
             var app = builder.Build();
 
@@ -52,18 +49,6 @@ namespace DiveDeep
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
-            }
-            using (var scope = app.Services.CreateScope())
-            {
-                UserManager<ApplicationUser> userManager = scope.ServiceProvider
-                    .GetRequiredService<UserManager<ApplicationUser>>();
-
-                var admin = await userManager.FindByEmailAsync("admin@company.com");
-
-                if (admin != null && !await userManager.IsInRoleAsync(admin, "Admin"))
-                {
-                    await userManager.AddToRoleAsync(admin, "Admin");
-                }
             }
 
             app.UseHttpsRedirection();

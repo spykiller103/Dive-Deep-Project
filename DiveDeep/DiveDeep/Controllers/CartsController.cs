@@ -1,9 +1,8 @@
 ﻿using Azure;
-using DiveDeep.Data;
-using DiveDeep.DTOs;
-using DiveDeep.Models;
+using DiveDeepShared.DTOs;
 using DiveDeep.Persistence;
 using DiveDeep.Service;
+using DiveDeepShared.Models;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

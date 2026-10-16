@@ -1,5 +1,5 @@
-﻿using DiveDeep.DTOs;
-using DiveDeep.Models;
+﻿using DiveDeepShared.DTOs;
+using DiveDeepShared.Models;
 using DiveDeep.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -56,7 +56,10 @@ namespace DiveDeep.Controllers
             }
 
             using var httpClient = _httpClientFactory.CreateClient("Api");
-
+            if (string.IsNullOrWhiteSpace(equipment.Image))
+            {
+                equipment.Image = "/Content/Images/Equipment/DefaultDivingEquipment.png";
+            }
             try
             {
                 await httpClient.PostAsJsonAsync("WebApiAdmin/equipment", equipment);

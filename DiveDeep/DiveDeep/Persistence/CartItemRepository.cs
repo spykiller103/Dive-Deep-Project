@@ -1,8 +1,8 @@
 ﻿using DiveDeep.Data;
-using DiveDeep.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using DiveDeepShared.Models;
 
 namespace DiveDeep.Persistence
 {

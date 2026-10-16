@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using DiveDeep.Data;
+using DiveDeepShared.Models;
 
 namespace DiveDeep.Areas.Identity.Pages.Account;
 

@@ -1,4 +1,4 @@
-﻿@model DiveDeep.Models.Equipment
+﻿@model DiveDeepShared.Models.Equipment
 
 @{
     ViewData["Title"] = "Opret udstyr";
@@ -13,7 +13,8 @@
     
     <form asp-controller="Admin"
           asp-action="CreateEquipment"
-          method="post">
+          method="post"
+         >
 
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -28,7 +29,7 @@
         <div class="mb-3">
             <label asp-for="Category" class="form-label">Kategori</label>
 
-            <select asp-for="Category" class="form-select">
+            <select asp-for="Category" id="categorySelect" class="form-select">
                 <option value="">Vælg kategori</option>
                 <option value="BCD">BCD</option>
                 <option value="Dykkerdragt">Dykkerdragter</option>
@@ -54,11 +55,43 @@
 
         <!-- Billede -->
         <div class="mb-3">
-            <label asp-for="Image" class="form-label">Billede</label>
+            <label asp-for="Image" class="form-label">Vælg billede</label>
 
-            <input asp-for="Image"
-                   class="form-control"
-                   placeholder="Indtast billedets URL" />
+            <select asp-for="Image" id="imageSelect" class="form-select">
+                <option value="">Vælg først kategori</option>
+
+             
+                <option value="/Content/Images/Equipment/BCD/GlideBCD.png" data-category="BCD">Glide BCD</option>
+                <option value="/Content/Images/Equipment/BCD/HydrosPro.png" data-category="BCD">Hydros Pro</option>
+                <option value="/Content/Images/Equipment/BCD/Modular.png" data-category="BCD">Modular</option>
+                <option value="/Content/Images/Equipment/BCD/NavigatorLite.png" data-category="BCD">Navigator Lite</option>
+
+             
+                <option value="/Content/Images/Equipment/Divingsuits/Drysuits/D7Evo.png" data-category="Dykkerdragt">D7 Evo (Drysuit)</option>
+                <option value="/Content/Images/Equipment/Divingsuits/Drysuits/ELitePlus.png" data-category="Dykkerdragt">ELite Plus (Drysuit)</option>
+                <option value="/Content/Images/Equipment/Divingsuits/Drysuits/Exodry4.png" data-category="Dykkerdragt">Exodry 4 (Drysuit)</option>
+
+                <option value="/Content/Images/Equipment/Divingsuits/Wetsuits/Definition.png" data-category="Dykkerdragt">Definition (Wetsuit)</option>
+                <option value="/Content/Images/Equipment/Divingsuits/Wetsuits/Havfrue.png" data-category="Dykkerdragt">Havfrue (Wetsuit)</option>
+                <option value="/Content/Images/Equipment/Divingsuits/Wetsuits/ProteusF.png" data-category="Dykkerdragt">Proteus F (Wetsuit)</option>
+                <option value="/Content/Images/Equipment/Divingsuits/Wetsuits/ProteusM.png" data-category="Dykkerdragt">Proteus M (Wetsuit)</option>
+                <option value="/Content/Images/Equipment/Divingsuits/Wetsuits/W5.png" data-category="Dykkerdragt">W5 (Wetsuit)</option>
+
+               
+                <option value="/Content/Images/Equipment/Masks/CrystalVu.png" data-category="Maske/Snorkel">CrystalVu</option>
+                <option value="/Content/Images/Equipment/Masks/DMask.png" data-category="Maske/Snorkel">DMask</option>
+                <option value="/Content/Images/Equipment/Masks/Element.png" data-category="Maske/Snorkel">Element</option>
+                <option value="/Content/Images/Equipment/Masks/Ghost.png" data-category="Maske/Snorkel">Ghost</option>
+                <option value="/Content/Images/Equipment/Masks/Scout.png" data-category="Maske/Snorkel">Scout</option>
+                <option value="/Content/Images/Equipment/Masks/ScoutEnchance.png" data-category="Maske/Snorkel">ScoutEnchance</option>
+                <option value="/Content/Images/Equipment/Masks/SpectraMini.png" data-category="Maske/Snorkel">SpectraMini</option>
+
+                <option value="/Content/Images/Equipment/Regulator/MK17.png" data-category="Regulatorsæt">MK17</option>
+                <option value="/Content/Images/Equipment/Regulator/MK25EVO.png" data-category="Regulatorsæt">MK25EVO</option>
+                <option value="/Content/Images/Equipment/Regulator/MK25EVObt.png" data-category="Regulatorsæt">MK25EVObt</option>
+
+                <option value="/Content/Images/Equipment/Tanks/Tank.png" data-category="Tanke">Tank</option>
+            </select>
 
             <span asp-validation-for="Image" class="text-danger"></span>
         </div>
@@ -115,3 +148,30 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+<script>
+    document.getElementById('categorySelect').addEventListener('change', function () {
+        var selectedCategory = this.value;
+        var imageSelect = document.getElementById('imageSelect');
+        var options = imageSelect.querySelectorAll('option');
+
+        // Nulstil valget i billed-dropdownen
+        imageSelect.value = "";
+
+        options.forEach(function (option) {
+            // Sørg for at "Vælg først kategori" altid er synlig
+            if (option.value === "") {
+                option.style.display = "block";
+                return;
+            }
+
+            var category = option.getAttribute('data-category');
+
+            // Vis kun option hvis den matcher den valgte kategori
+            if (category === selectedCategory) {
+                option.style.display = "block";
+            } else {
+                option.style.display = "none";
+            }
+        });
+    });
+</script>

@@ -1,5 +1,5 @@
 ﻿using DiveDeep.Data;
-using DiveDeep.Models;
+using DiveDeepShared.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

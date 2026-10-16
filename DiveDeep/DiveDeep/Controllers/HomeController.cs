@@ -1,4 +1,4 @@
-using DiveDeep.Models;
+using DiveDeepShared.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

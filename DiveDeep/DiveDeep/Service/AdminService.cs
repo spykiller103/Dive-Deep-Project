@@ -1,5 +1,6 @@
-﻿using DiveDeep.Models;
+﻿using DiveDeepShared.Models;
 using DiveDeep.Persistence;
+
 
 namespace DiveDeep.Service
 {

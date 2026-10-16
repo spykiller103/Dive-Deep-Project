@@ -1,5 +1,5 @@
 ﻿using Azure;
-using DiveDeep.Models;
+using DiveDeepShared.Models;
 using DiveDeep.Service;
 using System.Text.Json;
 using System.Globalization;
