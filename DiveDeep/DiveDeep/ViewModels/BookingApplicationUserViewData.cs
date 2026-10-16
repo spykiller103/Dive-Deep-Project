@@ -1,5 +1,4 @@
-﻿using DiveDeep.Data;
-using DiveDeepShared.Models;
+﻿using DiveDeepShared.Models;
 
 namespace DiveDeep.ViewModels
 {

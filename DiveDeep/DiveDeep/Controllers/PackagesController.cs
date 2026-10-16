@@ -1,5 +1,4 @@
-﻿using DiveDeep.Data;
-using DiveDeepShared.Models;
+﻿using DiveDeepShared.Models;
 using DiveDeep.Persistence;
 using DiveDeep.Service;
 using Microsoft.AspNetCore.Authorization;

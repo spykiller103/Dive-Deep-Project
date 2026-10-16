@@ -1,7 +1,9 @@
 using DiveDeep.Persistence;
+using DiveDeep.Data;
 using Microsoft.EntityFrameworkCore;
 using DiveDeep.Service;
 using Microsoft.AspNetCore.Identity;
+using DiveDeepShared.Models;
 namespace DiveDeep
 {
     public class Program
@@ -10,7 +12,16 @@ namespace DiveDeep
         {
             var builder = WebApplication.CreateBuilder(args);
 
-           
+            builder.Services.AddDbContext<DiveDeepContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+            });
+
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<DiveDeepContext>()
+                .AddDefaultTokenProviders()
+                .AddDefaultUI();
+
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddHttpClient();

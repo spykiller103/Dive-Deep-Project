@@ -1,5 +1,6 @@
 
 using DiveDeep.Data;
+using DiveDeepShared.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
@@ -38,7 +39,7 @@ namespace WebAPI
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
-            builder.Services.AddIdentityCore<IdentityUser>()
+            builder.Services.AddIdentityCore<ApplicationUser>()
                 .AddEntityFrameworkStores<DiveDeepContext>()
                 .AddApiEndpoints();
 
@@ -61,7 +62,7 @@ namespace WebAPI
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.MapIdentityApi<IdentityUser>();
+            app.MapIdentityApi<ApplicationUser>();
 
             app.MapControllers();
 

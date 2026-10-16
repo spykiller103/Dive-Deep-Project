@@ -1,5 +1,4 @@
 ﻿using Azure;
-using DiveDeep.Data;
 using DiveDeepShared.DTOs;
 using DiveDeep.Persistence;
 using DiveDeep.Service;
