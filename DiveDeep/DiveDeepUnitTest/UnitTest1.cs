@@ -1,9 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.EntityFrameworkCore;
-using DiveDeep.Models;
+using DiveDeepShared.Models;
 using DiveDeep.Persistence;
 using DiveDeep.Service;
 using DiveDeep.Data;
+using DiveDeepShared.Models;
 
 namespace DiveDeepUnitTest
 {

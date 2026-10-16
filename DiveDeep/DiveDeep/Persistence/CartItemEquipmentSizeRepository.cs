@@ -1,5 +1,5 @@
 using DiveDeep.Data;
-using DiveDeep.Models;
+using DiveDeepShared.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiveDeep.Persistence

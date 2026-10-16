@@ -1,4 +1,3 @@
-using DiveDeep.Data;
 using DiveDeep.Persistence;
 using Microsoft.EntityFrameworkCore;
 using DiveDeep.Service;
@@ -14,15 +13,6 @@ namespace DiveDeep
            
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddDbContext<DiveDeepContext>(options =>
-            { 
-                options.UseSqlServer(builder.Configuration.GetConnectionString("Default")); 
-            });
-
-            builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<DiveDeepContext>();
-
             builder.Services.AddHttpClient();
             builder.Services.AddScoped<ICartItemRepository, CartItemRepository>();
             builder.Services.AddScoped<IEquipmentRepository, EquipmentRepository>();
@@ -36,11 +26,6 @@ namespace DiveDeep
             builder.Services.AddScoped<CartService>();
             builder.Services.AddScoped<PackageService>();
 
-            builder.Services.AddHttpClient("OpenMeteoWeather", client => { client.BaseAddress = new Uri("https://api.open-meteo.com/"); });
-            builder.Services.AddHttpClient("OpenMeteoGeocoding", client => { client.BaseAddress = new Uri("https://geocoding-api.open-meteo.com/"); });
-            builder.Services.AddHttpClient("OpenMeteoMarine", client => { client.BaseAddress = new Uri("https://marine-api.open-meteo.com/"); });
-            builder.Services.AddHttpClient("Api", client => { client.BaseAddress = new Uri("https://localhost:7272/api/"); });
-
 
             var app = builder.Build();
 
@@ -52,18 +37,6 @@ namespace DiveDeep
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
-            }
-            using (var scope = app.Services.CreateScope())
-            {
-                UserManager<ApplicationUser> userManager = scope.ServiceProvider
-                    .GetRequiredService<UserManager<ApplicationUser>>();
-
-                var admin = await userManager.FindByEmailAsync("admin@company.com");
-
-                if (admin != null && !await userManager.IsInRoleAsync(admin, "Admin"))
-                {
-                    await userManager.AddToRoleAsync(admin, "Admin");
-                }
             }
 
             app.UseHttpsRedirection();

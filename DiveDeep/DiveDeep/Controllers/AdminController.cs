@@ -1,5 +1,5 @@
-﻿using DiveDeep.DTOs;
-using DiveDeep.Models;
+﻿using DiveDeepShared.DTOs;
+using DiveDeepShared.Models;
 using DiveDeep.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

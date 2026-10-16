@@ -1,5 +1,5 @@
-﻿using DiveDeep.DTOs;
-using DiveDeep.Models;
+﻿using DiveDeepShared.DTOs;
+using DiveDeepShared.Models;
 using DiveDeep.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;

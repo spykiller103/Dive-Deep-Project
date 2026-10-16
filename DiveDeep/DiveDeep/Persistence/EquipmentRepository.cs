@@ -1,4 +1,4 @@
-﻿using DiveDeep.Models;
+﻿using DiveDeepShared.Models;
 using DiveDeep.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

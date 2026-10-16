@@ -1,4 +1,6 @@
 <Solution>
   <Project Path="DiveDeep/DiveDeep.csproj" />
+  <Project Path="DiveDeepShared/DiveDeepShared.csproj" Id="bf7dfb65-d9fe-4999-8321-abbab13c55ab" />
   <Project Path="DiveDeepUnitTest/DiveDeepUnitTest.csproj" Id="bf798a35-2d25-45bd-a405-1171b6528f2c" />
+  <Project Path="WebAPI/WebAPI.csproj" Id="82e6ec36-0431-43a5-9df4-dce51e68bcbb" />
 </Solution>
