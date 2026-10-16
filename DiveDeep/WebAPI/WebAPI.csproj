@@ -25,10 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DiveDeepShared\DiveDeepShared.csproj" />
     <ProjectReference Include="..\DiveDeep\DiveDeep.csproj" />
   </ItemGroup>

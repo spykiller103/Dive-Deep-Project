@@ -37,6 +37,7 @@ namespace DiveDeep
             builder.Services.AddScoped<CartService>();
             builder.Services.AddScoped<PackageService>();
 
+            builder.Services.AddHttpClient("Api", client => { client.BaseAddress = new Uri("https://localhost:7240/api/"); });
 
             var app = builder.Build();
 
