@@ -1,4 +1,4 @@
-namespace DiveDeep.Services
+namespace DiveDeep.Service
 {
     // Holder på det bearer token, som API'et returnerer ved login.
     // Tokenet ligger kun i hukommelsen og forsvinder ved genindlæsning af siden.

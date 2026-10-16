@@ -1,4 +1,4 @@
-namespace DiveDeep.Services
+namespace DiveDeep.Service
 {
     // Svaret fra Identity API'ets /login endpoint.
     public class AccessTokenResponse
