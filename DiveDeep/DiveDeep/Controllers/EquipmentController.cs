@@ -31,7 +31,7 @@ namespace DiveDeep.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? category)
         {
             using var httpClient = _httpClientFactory.CreateClient("Api");
 
@@ -39,8 +39,19 @@ namespace DiveDeep.Controllers
             {
                 List<Equipment> response = await httpClient.GetFromJsonAsync<List<Equipment>>("WebApiEquipment");
 
+
+                if (!string.IsNullOrWhiteSpace(category))
+                {
+                    response = response
+                        .Where(e => e.Category.Equals(
+                            category,
+                            StringComparison.OrdinalIgnoreCase))
+                        .ToList();
+                }
+
                 return View(response);
             }
+
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
@@ -65,7 +76,7 @@ namespace DiveDeep.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Rent(int id, string start, string end, 
+        public async Task<IActionResult> Rent(int id, string start, string end,
             string? size, IFormCollection form)
         {
             string userId = _userManager.GetUserId(User);
